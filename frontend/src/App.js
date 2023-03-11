@@ -13,10 +13,12 @@ function App() {
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/product-list" element={<ProductListPage />} />
-        <Route path="/product-details" element={<ProductDetailsPage />} />
+        <Route path="/product-details/:id" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        {/* All other routes! */}
+        <Route path="*" element="Page not found: error 404" />
       </Routes>
     </BrowserRouter>
 
