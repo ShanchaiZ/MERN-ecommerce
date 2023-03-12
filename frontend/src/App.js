@@ -6,6 +6,14 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CartPage from "./pages/CartPage";
 
+// User Pages:
+import UserProfilePage from "./pages/user/UserProfilePage";
+import UserOrdersPage from "./pages/user/UserOrdersPage";
+import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
+import UserOrderDetailsPage from "./pages/user/UserOrderDetailsPage";
+
+
+
 
 function App() {
   return (
@@ -19,6 +27,11 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         {/* All other routes! */}
         <Route path="*" element="Page not found: error 404" />
+        {/* User Pages that Require Login*/}
+        <Route path="/user" element={<UserProfilePage />} />
+        <Route path="/user/my-orders" element={<UserOrdersPage />} />
+        <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
+        <Route path="/user/order-details" element={<UserOrderDetailsPage />} />
       </Routes>
     </BrowserRouter>
 
