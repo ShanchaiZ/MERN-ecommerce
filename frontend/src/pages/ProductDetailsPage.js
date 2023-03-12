@@ -5,6 +5,6 @@ const ProductDetailsPage = () => {
     console.log(id);
 
     return <p>This is the ProductDetailsPage!</p>
-}
+};
 
 export default ProductDetailsPage;
