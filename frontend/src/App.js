@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Components:
+import HeaderComponent from "./components/HeaderComponent";
+import FooterComponent from "./components/FooterComponent";
+
+// Public Pages:
 import HomePage from "./pages/HomePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductListPage from "./pages/ProductListPage";
@@ -6,14 +12,14 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CartPage from "./pages/CartPage";
 
-// Protected User Pages:
+// User Protected Pages:
 import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
 import UserProfilePage from "./pages/user/UserProfilePage";
 import UserOrdersPage from "./pages/user/UserOrdersPage";
 import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
 import UserOrderDetailsPage from "./pages/user/UserOrderDetailsPage";
 
-// Protected Admin Pages:
+// Admin Protected Pages:
 import AdminUsersPage from "./pages/admin/AdminUsersPage";
 import AdminEditUserPage from "./pages/admin/AdminEditUserPage";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
@@ -28,6 +34,7 @@ import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
 function App() {
   return (
     <BrowserRouter>
+      <HeaderComponent />
       <Routes>
         {/* Public Routes: */}
         <Route path="/home" element={<HomePage />} />
@@ -58,6 +65,7 @@ function App() {
           <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
         </Route>
       </Routes>
+      <FooterComponent />
     </BrowserRouter>
 
   );
