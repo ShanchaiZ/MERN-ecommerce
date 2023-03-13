@@ -1,8 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Components:
+//Public Components:
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
+
+// User Component (Component accessible by Users):
+import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
 
 // Public Pages:
 import HomePage from "./pages/HomePage";
@@ -36,22 +39,25 @@ function App() {
     <BrowserRouter>
       <HeaderComponent />
       <Routes>
-        {/* Public Routes: */}
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/product-list" element={<ProductListPage />} />
-        <Route path="/product-details/:id" element={<ProductDetailsPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        {/* All other routes! */}
-        <Route path="*" element="Page not found: error 404" />
-        {/* User Protected Routes: */}
-        <Route element={<ProtectedRoutesComponent admin={false} />}>
-          <Route path="/user" element={<UserProfilePage />} />
-          <Route path="/user/my-orders" element={<UserOrdersPage />} />
-          <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
-          <Route path="/user/order-details" element={<UserOrderDetailsPage />} />
+        <Route element={<RoutesWithUserChatComponent />}>
+          {/* Public Routes: */}
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/product-list" element={<ProductListPage />} />
+          <Route path="/product-details/:id" element={<ProductDetailsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          {/* All other routes! */}
+          <Route path="*" element="Page not found: error 404" />
+          {/* User Protected Routes: */}
+          <Route element={<ProtectedRoutesComponent admin={false} />}>
+            <Route path="/user" element={<UserProfilePage />} />
+            <Route path="/user/my-orders" element={<UserOrdersPage />} />
+            <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
+            <Route path="/user/order-details" element={<UserOrderDetailsPage />} />
+          </Route>
         </Route>
+
         {/* Admin Protected Routes: */}
         <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/admin/users" element={<AdminUsersPage />} />
