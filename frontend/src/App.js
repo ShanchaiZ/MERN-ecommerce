@@ -49,13 +49,14 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           {/* All other routes! */}
           <Route path="*" element="Page not found: error 404" />
-          {/* User Protected Routes: */}
-          <Route element={<ProtectedRoutesComponent admin={false} />}>
-            <Route path="/user" element={<UserProfilePage />} />
-            <Route path="/user/my-orders" element={<UserOrdersPage />} />
-            <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
-            <Route path="/user/order-details" element={<UserOrderDetailsPage />} />
-          </Route>
+        </Route>
+
+        {/* User Protected Routes: */}
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
+          <Route path="/user" element={<UserProfilePage />} />
+          <Route path="/user/my-orders" element={<UserOrdersPage />} />
+          <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
+          <Route path="/user/order-details" element={<UserOrderDetailsPage />} />
         </Route>
 
         {/* Admin Protected Routes: */}
