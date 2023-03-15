@@ -25,7 +25,7 @@ const HeaderComponent = () => {
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    {/* 1st part NavBar SearchBar with Product Categories */}
+                    {/* 1st part NavBar: SearchBar with Product Categories */}
                     <Nav className="me-auto">
                         <InputGroup>
                             {/* DropDown Button for Product Categories */}
@@ -33,7 +33,6 @@ const HeaderComponent = () => {
                                 <Dropdown.Item>Electronics</Dropdown.Item>
                                 <Dropdown.Item>Cars</Dropdown.Item>
                                 <Dropdown.Item>Books</Dropdown.Item>
-
                             </DropdownButton>
                             {/* Search Bar for Product */}
                             <Form.Control type="text" placeholder="Search Products Here ..." />
@@ -43,7 +42,8 @@ const HeaderComponent = () => {
                             </Button>
                         </InputGroup>
                     </Nav>
-                    {/* 2nd part NavBar Cart Pricing */}
+
+                    {/* 2nd part NavBar: Admin, User Login/Registration and Cart */}
                     <Nav>
                         <LinkContainer to="/admin/orders">
                             <Nav.Link>
@@ -51,20 +51,32 @@ const HeaderComponent = () => {
                                 <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
                             </Nav.Link>
                         </LinkContainer>
-
-                        <Nav.Link href="#pricing">
-                            {/* Pill Badge Notification */}
-                            <Badge pill bg="danger">3</Badge>
-                            Cart
-                        </Nav.Link>
+                        {/* User Dropdown Options */}
                         <NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
                             <NavDropdown.Item eventKey="/user/my-orders" as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
                             <NavDropdown.Item eventKey="/user" as={Link} to="/user">My Profile</NavDropdown.Item>
                             <NavDropdown.Item>Logout</NavDropdown.Item>
-
                         </NavDropdown>
-                    </Nav>
 
+                        {/* Link to Login */}
+                        <LinkContainer to="/login">
+                            <Nav.Link>Login</Nav.Link>
+                        </LinkContainer>
+
+                        {/* Link to Registration */}
+                        <LinkContainer to="/register">
+                            <Nav.Link>Register</Nav.Link>
+                        </LinkContainer>
+
+                        {/* Link to Cart */}
+                        <LinkContainer to="/cart">
+                            <Nav.Link>
+                                {/* Pill Badge Notification */}
+                                <Badge pill bg="danger">3</Badge>
+                                Cart
+                            </Nav.Link>
+                        </LinkContainer>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
