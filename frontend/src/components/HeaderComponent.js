@@ -58,15 +58,10 @@ const HeaderComponent = () => {
                             Cart
                         </Nav.Link>
                         <NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
+                            <NavDropdown.Item eventKey="/user/my-orders" as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
+                            <NavDropdown.Item eventKey="/user" as={Link} to="/user">My Profile</NavDropdown.Item>
+                            <NavDropdown.Item>Logout</NavDropdown.Item>
+
                         </NavDropdown>
                     </Nav>
 
