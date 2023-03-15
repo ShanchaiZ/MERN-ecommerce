@@ -13,6 +13,7 @@ import {
     from "react-bootstrap";
 
 import { LinkContainer } from "react-router-bootstrap"; //Used to link containers to different routes
+import { Link } from "react-router-dom"; //Link as a JS object
 
 const HeaderComponent = () => {
     return (
@@ -44,15 +45,20 @@ const HeaderComponent = () => {
                     </Nav>
                     {/* 2nd part NavBar Cart Pricing */}
                     <Nav>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <LinkContainer to="/admin/orders">
+                            <Nav.Link>
+                                Admin
+                                <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+                            </Nav.Link>
+                        </LinkContainer>
+
                         <Nav.Link href="#pricing">
                             {/* Pill Badge Notification */}
                             <Badge pill bg="danger">3</Badge>
                             Cart
                         </Nav.Link>
-                        <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
                             </NavDropdown.Item>
