@@ -35,9 +35,11 @@ const HeaderComponent = () => {
 
                             </DropdownButton>
                             {/* Search Bar for Product */}
-                            <Form.Control type="text" placeholder="Normal text" />
+                            <Form.Control type="text" placeholder="Search Products Here ..." />
                             {/* Search Button */}
-                            <Button variant="warning">Warning</Button>
+                            <Button variant="warning">
+                                <i className="bi bi-search text-dark"></i>
+                            </Button>
                         </InputGroup>
                     </Nav>
                     {/* 2nd part NavBar Cart Pricing */}
