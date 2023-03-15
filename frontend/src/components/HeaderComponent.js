@@ -73,7 +73,8 @@ const HeaderComponent = () => {
                             <Nav.Link>
                                 {/* Pill Badge Notification */}
                                 <Badge pill bg="danger">3</Badge>
-                                Cart
+                                <i className="bi bi-cart4"></i>
+                                <span className="ms-1">Cart</span>
                             </Nav.Link>
                         </LinkContainer>
                     </Nav>
