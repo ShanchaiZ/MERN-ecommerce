@@ -12,22 +12,27 @@ import {
 }
     from "react-bootstrap";
 
+import { LinkContainer } from "react-router-bootstrap"; //Used to link containers to different routes
+
 const HeaderComponent = () => {
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <LinkContainer to="/home">
+                    <Navbar.Brand href="#home">Shoptimize</Navbar.Brand>
+                </LinkContainer>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    {/* 1st part NavBar SearchBar with Product Categores */}
+                    {/* 1st part NavBar SearchBar with Product Categories */}
                     <Nav className="me-auto">
                         <InputGroup>
                             {/* DropDown Button for Product Categories */}
-                            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            <DropdownButton id="dropdown-basic-button" title="All">
+                                <Dropdown.Item>Electronics</Dropdown.Item>
+                                <Dropdown.Item>Cars</Dropdown.Item>
+                                <Dropdown.Item>Books</Dropdown.Item>
+
                             </DropdownButton>
                             {/* Search Bar for Product */}
                             <Form.Control type="text" placeholder="Normal text" />
