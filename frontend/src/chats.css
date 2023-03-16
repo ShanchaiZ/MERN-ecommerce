@@ -1,3 +1,4 @@
+/* Chat Popup Styling */
 .chat-btn {
     position: fixed; /* it will always stay at that position on the page */
     right: 14px;
@@ -15,6 +16,19 @@
     align-items: center;
 }
 
+/* Chat Popup by default */
 .chat-btn .close {
     display: none;
+}
+
+
+/* Chat Popup When checked: */
+#check:checked ~ .chat-btn i{
+    display: block;
+}
+#check:checked ~ .chat-btn .comment{
+    display: none;
+}
+#check{
+    display: none !important;
 }
