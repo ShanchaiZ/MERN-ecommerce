@@ -2,7 +2,7 @@ import { Card, Button } from "react-bootstrap"
 
 const CategoryCardComponent = () => {
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card>
             <Card.Img crossOrigin="anonymous" variant="top" src="/images/electronic-category.jpg" />
             <Card.Body>
                 <Card.Title>Card Title</Card.Title>

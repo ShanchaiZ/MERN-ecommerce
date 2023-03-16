@@ -1,6 +1,6 @@
 import ProductCarouselComponent from "../components/ProductCarouselComponent";
 import CategoryCardComponent from "../components/CategoryCardComponent";
-import { Row } from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 
 const HomePage = () => {
     // Simulating a database once we have a db connected in the future below:
@@ -9,6 +9,7 @@ const HomePage = () => {
         "Monitors",
         "Games",
         "Software",
+        "Electronics",
         "Books",
         "Videos",
         "Computers"
@@ -17,11 +18,13 @@ const HomePage = () => {
     return (
         <>
             <ProductCarouselComponent />
-            <Row xs={1} md={2} className="g-4">
-                {categories.map(() => (
-                    <CategoryCardComponent />
-                ))}
-            </Row>
+            <Container>
+                <Row xs={1} md={2} className="g-4 mt-3">
+                    {categories.map(() => (
+                        <CategoryCardComponent />
+                    ))}
+                </Row>
+            </Container>
         </>
     );
 };
