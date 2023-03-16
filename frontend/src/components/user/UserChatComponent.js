@@ -1,3 +1,5 @@
+import "../../chats.css";
+
 const UserChatComponent = () => {
     return (
         <>

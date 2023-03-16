@@ -1,0 +1,20 @@
+.chat-btn {
+    position: fixed; /* it will always stay at that position on the page */
+    right: 14px;
+    bottom: 30px;
+    cursor: pointer;
+    background-color: blue;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    color: white;
+    font-size: 22px;
+    z-index: 2; /* it will always stay on top of everything*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-btn .close {
+    display: none;
+}
