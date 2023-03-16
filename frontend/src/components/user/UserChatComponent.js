@@ -15,9 +15,16 @@ const UserChatComponent = () => {
                 </div>
                 {/* Chatbox Field to Enter Message */}
                 <div className="chat-form">
+                    {/* Chat History */}
                     <div className="cht-msg">
-                        <p>Chat History</p>
+                        <p>
+                            <b>You wrote:</b> This is a test Message!!
+                        </p>
+                        <p className="bg-primary p-3 ms-4 text-light rounded-pill">
+                            <b>Admin Response:</b> Support Not Available! Please try again!
+                        </p>
                     </div>
+                    {/* Chatbot Text Area */}
                     <textarea id="clientChatMsg" className="form-control" placeholder="Enter Your Message Here!"></textarea>
                     {/* Chat Submit Button */}
                     <button className="btn btn-primary btn-block">Submit</button>
