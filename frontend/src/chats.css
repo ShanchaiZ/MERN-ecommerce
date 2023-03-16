@@ -21,7 +21,6 @@
     display: none;
 }
 
-
 /* Chat Popup When checked: */
 #check:checked ~ .chat-btn i{
     display: block;
@@ -31,4 +30,23 @@
 }
 #check{
     display: none !important;
+}
+
+/* Chat Wrapper and Header */
+.chat-wrapper{
+    opacity: 0; /* By default; Cannot see chat Header */
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    z-index: 2;
+    width: 300px;
+    transition: all 0.4s;
+}
+
+.chat-header{
+    background-color: blue;
+    padding: 13px;
+    margin-bottom: 10px;
+    border-radius: 5px 5px 0px 0px; 
+    color: white;
 }
