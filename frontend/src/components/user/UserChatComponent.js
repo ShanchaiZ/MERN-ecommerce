@@ -1,8 +1,12 @@
 const UserChatComponent = () => {
     return (
         <>
-            <i className="bi bi-chat-dots"></i>
-            <i className="bi bi-x-circle"></i>
+            <input type="checkbox" id="check" />
+            <label className="chat-btn" htmlFor="check">
+                <i className="bi bi-chat-dots"></i>
+                <i className="bi bi-x-circle"></i>
+            </label>
+
         </>
     )
 };
