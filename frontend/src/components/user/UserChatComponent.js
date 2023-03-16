@@ -17,6 +17,10 @@ const UserChatComponent = () => {
                 <div className="chat-form">
                     {/* Chat History */}
                     <div className="cht-msg">
+                        {/* JSX function that console logs the array of ids */}
+                        {Array.from({ length: 20 }).map((_, id) => {
+                            console.log(id);
+                        })};
                         <p>
                             <b>You wrote:</b> This is a test Message!!
                         </p>
