@@ -1,11 +1,13 @@
-import {Carousel} from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 
 const ProductCarouselComponent = () => {
     return (
         <Carousel>
             <Carousel.Item className="carousel-img">
                 <img
+                    crossOrigin="anonymous"
                     className="d-block w-100"
+                    style={{ height: "300px", objectFit:"cover" }}
                     src="/images/carousel/carousel-1.png"
                     alt="First slide"
                 />
@@ -17,6 +19,7 @@ const ProductCarouselComponent = () => {
             <Carousel.Item className="carousel-img">
                 <img
                     className="d-block w-100"
+                    style={{ height: "300px", objectFit:"cover" }}
                     src="/images/carousel/carousel-2.png"
                     alt="Second slide"
                 />
@@ -29,6 +32,7 @@ const ProductCarouselComponent = () => {
             <Carousel.Item className="carousel-img">
                 <img
                     className="d-block w-100"
+                    style={{ height: "300px", objectFit:"cover" }}
                     src="/images/carousel/carousel-3.png"
                     alt="Third slide"
                 />
