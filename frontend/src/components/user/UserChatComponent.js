@@ -18,18 +18,16 @@ const UserChatComponent = () => {
                     {/* Chat History */}
                     <div className="cht-msg">
                         {/* JSX function that console logs the array of ids */}
-                        {Array.from({ length: 20 }).map((_, id) => {
-                            return <>
-                                <div>
-                                    <p>
-                                        <b>You wrote:</b> This is a test Message!!
-                                    </p>
-                                    <p className="bg-primary p-3 ms-4 text-light rounded-pill">
-                                        <b>Admin Response:</b> Support Not Available! Please try again!
-                                    </p>
-                                </div>
-                            </>
-                        })};
+                        {Array.from({ length: 20 }).map((_, id) => (
+                            <div>
+                                <p>
+                                    <b>You wrote:</b> This is a test Message!!
+                                </p>
+                                <p className="bg-primary p-3 ms-4 text-light rounded-pill">
+                                    <b>Admin Response:</b> Support Not Available! Please try again!
+                                </p>
+                            </div>
+                        ))};
                     </div>
                     {/* Chatbot Text Area */}
                     <textarea id="clientChatMsg" className="form-control" placeholder="Enter Your Message Here!"></textarea>
