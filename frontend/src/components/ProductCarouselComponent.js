@@ -35,8 +35,10 @@ const ProductCarouselComponent = () => {
                     alt="Second slide"
                 />
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <LinkContainer style={cursorP} to="/product-details">
+                        <h3>Bestseller In Books Category</h3>
+                    </LinkContainer>
+                    <p>Picture of Dorian Gray - Oscar Wilde; in mint condition</p>
                 </Carousel.Caption>
             </Carousel.Item>
 
@@ -49,13 +51,13 @@ const ProductCarouselComponent = () => {
                     src="/images/carousel/carousel-3.png"
                     alt="Third slide"
                 />
-
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                    </p>
+                    <LinkContainer style={cursorP} to="/product-details">
+                        <h3>Bestseller in Cameras</h3>
+                    </LinkContainer>
+                    <p>4k HD Video Camcorder with YouTube Upload </p>
                 </Carousel.Caption>
+
             </Carousel.Item>
         </Carousel>
     );
