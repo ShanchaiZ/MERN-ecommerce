@@ -33,6 +33,10 @@
 }
 
 /* Chat Wrapper and Header */
+#check:checked ~ .chat-wrapper{
+    opacity: 1;
+}
+
 .chat-wrapper{
     opacity: 0; /* By default; Cannot see chat Header */
     position: fixed;
