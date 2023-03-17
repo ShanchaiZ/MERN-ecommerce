@@ -1,6 +1,7 @@
 /* Chat Popup Styling */
 .chat-btn {
-    position: fixed; /* it will always stay at that position on the page */
+    position: fixed;
+    /* position:fixed always makes this element stay at that position on the page */
     right: 14px;
     bottom: 30px;
     cursor: pointer;
@@ -10,7 +11,8 @@
     height: 50px;
     color: white;
     font-size: 22px;
-    z-index: 2; /* it will always stay on top of everything*/
+    /* z-index makes this element always stay on top of everything*/
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,23 +24,26 @@
 }
 
 /* Chat Popup When checked: */
-#check:checked ~ .chat-btn i{
+#check:checked~.chat-btn i {
     display: block;
 }
-#check:checked ~ .chat-btn .comment{
+
+#check:checked~.chat-btn .comment {
     display: none;
 }
-#check{
+
+#check {
     display: none !important;
 }
 
 /* ChatBox Styling*/
-#check:checked ~ .chat-wrapper{
+#check:checked~.chat-wrapper {
     opacity: 1;
 }
 
-.chat-wrapper{
-    opacity: 0; /* By default; Cannot see chat Header */
+.chat-wrapper {
+    /* By default; Cannot see chat Header => opacity = 0*/
+    opacity: 0;
     position: fixed;
     right: 20px;
     bottom: 100px;
@@ -49,11 +54,11 @@
     border-radius: 5px;
 }
 
-.chat-header{
+.chat-header {
     background-color: blue;
     padding: 13px;
     margin-bottom: 10px;
-    border-radius: 5px 5px 0px 0px; 
+    border-radius: 5px 5px 0px 0px;
     color: white;
 }
 
@@ -67,6 +72,14 @@
     margin-bottom: 10px;
 }
 
-.chat-form textarea{
+.chat-form textarea {
     resize: none;
+}
+
+/* Chat Message History */
+.cht-msg {
+    font-size: small;
+    max-height: 300px;
+    overflow: auto;
+
 }
