@@ -1,5 +1,16 @@
+import PaginationComponent from "../components/PaginationComponent";
+import SortOptionsComponent from "../components/SortOptionsComponent";
+import ProductForListComponent from "../components/ProductForListComponent";
+
 const ProductListPage = () => {
-    return <p>This is the ProductListPage!</p>
+    return (
+        <>
+            <ProductForListComponent />
+            <SortOptionsComponent />
+            <PaginationComponent />
+        </>
+
+    )
 };
 
 export default ProductListPage;
