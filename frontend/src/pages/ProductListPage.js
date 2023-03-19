@@ -1,8 +1,11 @@
 import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
+
+// Page Components:
 import PaginationComponent from "../components/PaginationComponent";
 import SortOptionsComponent from "../components/SortOptionsComponent";
 import ProductForListComponent from "../components/ProductForListComponent";
 
+//Product Query Results Filtering Components:
 import AttributesFilterComponent from "../components/filterQueryResultOptions/AttributesFilterComponent";
 import CategoryFilterComponent from "../components/filterQueryResultOptions/CategoryFilterComponent";
 import PriceFilterComponent from "../components/filterQueryResultOptions/PriceFilterComponent";
@@ -14,35 +17,28 @@ const ProductListPage = () => {
         <Container fluid>
             <Row>
                 <Col md={3}>
+                    {/* Product Filter Query Features */}
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                        <ListGroup.Item>{<SortOptionsComponent />}</ListGroup.Item>
+                        <ListGroup.Item>{<PriceFilterComponent />}</ListGroup.Item>
+                        <ListGroup.Item>{<RatingFilterComponent />}</ListGroup.Item>
+                        <ListGroup.Item>{<CategoryFilterComponent />}</ListGroup.Item>
+                        <ListGroup.Item>{<AttributesFilterComponent />}</ListGroup.Item>
+                        {/* Filter Buttons */}
+                        <ListGroup.Item>
+                            <Button variant="primary">Primary</Button>
+                            <Button variant="danger">Danger</Button>
+                        </ListGroup.Item>
                     </ListGroup>
-                    {/* Buttons */}
-                    <ListGroup.Item>
-                        <Button variant="primary">Primary</Button>
-                        <Button variant="danger">Danger</Button>
-                    </ListGroup.Item>
+                </Col>
+                {/* Main Product Listing */}
+                <Col md={9}>
+                    <ProductForListComponent />
+                    <PaginationComponent />
                 </Col>
             </Row>
         </Container>
-
-
     );
 };
 
 export default ProductListPage;
-
-{/* <>
-<AttributesFilterComponent />
-<CategoryFilterComponent />
-<PriceFilterComponent />
-<RatingFilterComponent />
-
-<ProductForListComponent />
-<SortOptionsComponent />
-<PaginationComponent />
-</> */}
