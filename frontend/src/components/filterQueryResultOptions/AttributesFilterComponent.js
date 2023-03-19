@@ -1,7 +1,14 @@
-
+import { Form } from "react-bootstrap";
 
 const AttributesFilterComponent = () => {
-    return <p>This is the AttributesFilterComponent</p>
+    return (
+        <>
+            <Form.Label>Color</Form.Label>
+            <Form.Check type="checkbox" id="default-checkbox" label="red" />
+            <Form.Check type="checkbox" id="default-checkbox" label="yellow" />
+            <Form.Check type="checkbox" id="default-checkbox" label="green" />
+        </>
+    );
 };
 
 export default AttributesFilterComponent;
