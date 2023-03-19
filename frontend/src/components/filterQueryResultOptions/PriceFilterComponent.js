@@ -1,8 +1,12 @@
-
-
+import { Form } from "react-bootstrap";
 
 const PriceFilterComponent = () => {
-    return <p>This is the PriceFilterComponent</p>
+    return (
+        <>
+            <Form.Label>Price no greater than:</Form.Label>
+            <Form.Range />
+        </>
+    );
 };
 
 export default PriceFilterComponent;
