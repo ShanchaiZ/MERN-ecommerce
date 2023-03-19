@@ -1,3 +1,4 @@
+import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
 import PaginationComponent from "../components/PaginationComponent";
 import SortOptionsComponent from "../components/SortOptionsComponent";
 import ProductForListComponent from "../components/ProductForListComponent";
@@ -10,18 +11,38 @@ import RatingFilterComponent from "../components/filterQueryResultOptions/Rating
 
 const ProductListPage = () => {
     return (
-        <>
-            <AttributesFilterComponent />
-            <CategoryFilterComponent />
-            <PriceFilterComponent />
-            <RatingFilterComponent />
+        <Container>
+            <Row>
+                <Col>
+                    <ListGroup>
+                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                    </ListGroup>
+                    {/* Buttons */}
+                    <ListGroup.Item>
+                        <Button variant="primary">Primary</Button>
+                        <Button variant="danger">Danger</Button>
+                    </ListGroup.Item>
+                </Col>
+            </Row>
+        </Container>
 
-            <ProductForListComponent />
-            <SortOptionsComponent />
-            <PaginationComponent />
-        </>
 
-    )
+    );
 };
 
 export default ProductListPage;
+
+{/* <>
+<AttributesFilterComponent />
+<CategoryFilterComponent />
+<PriceFilterComponent />
+<RatingFilterComponent />
+
+<ProductForListComponent />
+<SortOptionsComponent />
+<PaginationComponent />
+</> */}
