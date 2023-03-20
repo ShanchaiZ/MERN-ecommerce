@@ -20,7 +20,7 @@ const UserChatComponent = () => {
                     <div className="cht-msg">
                         {/* JSX function that logs chat history between User and Admin */}
                         {Array.from({ length: 20 }).map((_, id) => (
-                            <div>
+                            <div key={id}>
                                 <p>
                                     <b>You wrote:</b> This is a test Message!!
                                 </p>
