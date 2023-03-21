@@ -2,24 +2,19 @@ import { Form } from "react-bootstrap";
 
 const CategoryFilterComponent = () => {
     return (
-        <Form>
-            {['checkbox', 'radio'].map((type) => (
-                <div key={`default-${type}`} className="mb-3">
-                    <Form.Check
-                        type={type}
-                        id={`default-${type}`}
-                        label={`default ${type}`}
-                    />
-
-                    <Form.Check
-                        disabled
-                        type={type}
-                        label={`disabled ${type}`}
-                        id={`disabled-default-${type}`}
-                    />
-                </div>
-            ))}
-        </Form>
+        <>
+            <span className="fw-bold">Category</span>
+            <Form>
+                {Array.from({ length: 5 }).map((_, idx) => (
+                    <div key={idx}>
+                        <Form.Check type="checkbox" id={`check-api2-${idx}`}>
+                            <Form.Check.Input type="checkbox" isValid />
+                            <Form.Check.Label style={{ cursor: "pointer" }}>Category - {idx}</Form.Check.Label>
+                        </Form.Check>
+                    </div>
+                ))}
+            </Form>
+        </>
     );
 };
 
