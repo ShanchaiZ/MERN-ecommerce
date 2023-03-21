@@ -5,7 +5,7 @@ import { Rating } from "react-simple-star-rating";
 const RatingFilterComponent = () => {
     return (
         <>
-            <span className="fw-Bold"><b>Rating</b></span>
+            <span className="fw-bold">Rating</span>
             {Array.from({ length: 5 }).map((_, idx) => (
                 <Fragment key={idx}>
                     <Form.Check type="checkbox" id={`check-api-${idx}`}>
