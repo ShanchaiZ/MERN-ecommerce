@@ -19,7 +19,8 @@ const ProductListPage = () => {
                 <Col md={3}>
                     {/* Product Filter Query Features */}
                     <ListGroup variant="flush">
-                        <ListGroup.Item>{<SortOptionsComponent />}</ListGroup.Item>
+                        <ListGroup.Item className="mb-3 mt-3">{<SortOptionsComponent />}</ListGroup.Item>
+                        Filter: <br />
                         <ListGroup.Item>{<PriceFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<RatingFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<CategoryFilterComponent />}</ListGroup.Item>
