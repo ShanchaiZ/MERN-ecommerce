@@ -33,7 +33,9 @@ const ProductListPage = () => {
                 </Col>
                 {/* Main Product Listing */}
                 <Col md={9}>
-                    <ProductForListComponent />
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                        <ProductForListComponent key={idx} />
+                    ))};
                     <PaginationComponent />
                 </Col>
             </Row>
