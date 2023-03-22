@@ -1,5 +1,5 @@
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { RatingView } from "react-simple-star-rating";
+import { Rating } from "react-simple-star-rating";
 
 const ProductForListComponent = () => {
     return (
@@ -12,10 +12,12 @@ const ProductForListComponent = () => {
                 {/* Media Query for large Screens = Image desc takes 7 columns so it appears to the right */}
                 <Col lg={7}>
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
+                        <Card.Title>Enter Product Name Here</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
+                            Product Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Card.Text>
+                        <Card.Text>
+                            <Rating readonly size={20} initialValue={5} /> (5)
                         </Card.Text>
                         <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
