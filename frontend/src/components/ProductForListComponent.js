@@ -1,5 +1,6 @@
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
+import { LinkContainer } from "react-router-bootstrap";
 
 const ProductForListComponent = () => {
     return (
@@ -19,7 +20,12 @@ const ProductForListComponent = () => {
                         <Card.Text>
                             <Rating readonly size={20} initialValue={5} /> (5)
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Card.Text className="h4">
+                            $333 {" "}
+                            <LinkContainer to="/product-details">
+                                <Button variant="danger">View Product</Button>
+                            </LinkContainer>
+                        </Card.Text>
                     </Card.Body>
                 </Col>
             </Row>
