@@ -6,7 +6,7 @@ const ProductForListComponent = ({ images, idx }) => {
     return (
         <Card style={{ marginTop: "30px", marginBottom: "50px" }}>
             <Row>
-                {/* Media Query for large Screens = Image takes 5 columns */}         
+                {/* Media Query for large Screens = Image takes 5 columns */}
                 <Col lg={5}>
                     <Card.Img variant="top" src={"/images/category/" + images[idx] + "-category.jpg"} />
                 </Col>
