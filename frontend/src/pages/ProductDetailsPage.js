@@ -53,7 +53,7 @@ const ProductDetailsPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        {/* Reviews Here */}
+                        {/* Display All Reviews Here */}
                         <Col className="mt-5">
                             <h5>Reviews</h5>
                             <ListGroup variant="flush">
@@ -68,6 +68,31 @@ const ProductDetailsPage = () => {
                     <hr />
                     Submit Review Form
                     <Alert variant="danger">Login to Write a Review</Alert>
+
+                    {/* Review Form */}
+                    <Form>
+                        {/* Email Addresss */}
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="name@example.com" />
+                        </Form.Group>
+                        {/* Text Area to Write Review */}
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Example textarea</Form.Label>
+                            <Form.Control as="textarea" rows={3} />
+                        </Form.Group>
+                        {/* Submission */}
+                        <Form.Group>
+                            <Form.Select aria-label="Default select example">
+                                <option>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Form>
                 </Col>
             </Row>
         </Container>
