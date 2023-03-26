@@ -1,4 +1,5 @@
-import { Row, Col, Container, Image } from "react-bootstrap";
+import { Row, Col, Container, Image, ListGroup, Form, Button } from "react-bootstrap";
+import { Rating } from "react-simple-star-rating";
 import AddedToCartMessageComponent from "../components/AddedToCartMessageComponent";
 
 
@@ -17,8 +18,39 @@ const ProductDetailsPage = () => {
 
                 <Col md={8}>
                     <Row>
-                        <Col md={8}>product name, price, description, and rating</Col>
-                        <Col md={4}>Product status, quantity/ Add to Cart</Col>
+                        <Col md={8}>
+                            {/* Product name, Price, Description, and Rating Here */}
+                            <ListGroup variant="flush">
+                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                                <ListGroup.Item>Morbi leo risus
+                                    <Rating readonly size={20} initialValue={4} /> (5)
+                                </ListGroup.Item>
+                                <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            </ListGroup>
+                        </Col>
+                        <Col md={4}>
+                            {/* Product status, quantity/ Add to Cart */}
+                            <ListGroup>
+                                {/* Product Quantity */}
+                                <ListGroup.Item>
+                                    <Form.Select size="lg" aria-label="Default select example">
+                                        <option>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </Form.Select>
+                                </ListGroup.Item>
+                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                                <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                                {/* Add to Cart */}
+                                <ListGroup.Item>
+                                    <Button variant="danger">Add to Cart</Button>
+                                </ListGroup.Item>
+                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            </ListGroup>
+                        </Col>
                     </Row>
                     <Row>
                         <Col className="mt-5">
