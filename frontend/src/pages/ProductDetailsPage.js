@@ -1,4 +1,4 @@
-import { Row, Col, Container, Image, ListGroup, Form, Button } from "react-bootstrap";
+import { Row, Col, Container, Image, ListGroup, Form, Button, Alert } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import AddedToCartMessageComponent from "../components/AddedToCartMessageComponent";
 
@@ -53,12 +53,21 @@ const ProductDetailsPage = () => {
                         </Col>
                     </Row>
                     <Row>
+                        {/* Reviews Here */}
                         <Col className="mt-5">
                             <h5>Reviews</h5>
+                            <ListGroup variant="flush">
+                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                                <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                                <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            </ListGroup>
                         </Col>
                     </Row>
                     <hr />
                     Submit Review Form
+                    <Alert variant="danger">Login to Write a Review</Alert>
                 </Col>
             </Row>
         </Container>
