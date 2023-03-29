@@ -61,11 +61,9 @@ const ProductDetailsPage = () => {
                         <Col className="mt-5">
                             <h5>Reviews</h5>
                             <ListGroup variant="flush">
-                                <ListGroup.Item>Reviewer 1: Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Reviewer 2: Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Reviewer 3: Morbi leo risus</ListGroup.Item>
-                                <ListGroup.Item>Reviewer 4: Porta ac consectetur ac</ListGroup.Item>
-                                <ListGroup.Item>Reviewer 5: Vestibulum at eros</ListGroup.Item>
+                                {Array.from({ length: 10 }).map((item, idx) => (
+                                    <ListGroup.Item key={idx}>Reviewer 1: Cras justo odio</ListGroup.Item>
+                                ))}
                             </ListGroup>
                         </Col>
                     </Row>
