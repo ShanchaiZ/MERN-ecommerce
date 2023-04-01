@@ -9,11 +9,20 @@ import { useEffect } from "react";
 
 const ProductDetailsPage = () => {
     useEffect(() => {
+        //Zoomed effects configuration:
+        var options = {
+            width: 400, // width of the source image (optional)
+            zoomWidth: 500, //width of the zoomed image. Zoomed image height equals source image height (optional)
+            // fillContainer: true,
+            // zoomPosition: "bottom", //the position of the zoomed image
+            scale: 1.5, //Zoom scale. if not provided, scale is calculated as natural image size / image size, provided in params (optional if zoomWidth param is provided)
+            offset: { vertical: 0, horizontal: 10 } //Zoomed image offset displayed offset the original hover
+        };
         // The Zoomed Effects on Images:
-        new ImageZoom(document.getElementById("first"));
-        new ImageZoom(document.getElementById("second"));
-        new ImageZoom(document.getElementById("third"));
-        new ImageZoom(document.getElementById("fourth"));
+        new ImageZoom(document.getElementById("first"), options);
+        new ImageZoom(document.getElementById("second"), options);
+        new ImageZoom(document.getElementById("third"), options);
+        new ImageZoom(document.getElementById("fourth"), options);
     })
     return (
         <Container>
