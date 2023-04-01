@@ -10,10 +10,25 @@ const ProductDetailsPage = () => {
             <Row className="mt-5">
                 <Col md={4}>
                     {/* Product Images Here */}
-                    <Image fluid src="/images/category/tablets-category.jpg" />
-                    <Image fluid src="/images/category/games-category.jpg" />
-                    <Image fluid src="/images/category/books-category.jpg" />
-                    <Image fluid src="/images/category/computers-category.jpg" />
+                    <div id="first">
+                        <Image fluid src="/images/category/tablets-category.jpg" />
+                    </div>
+                    <br />
+
+                    <div id="second">
+                        <Image fluid src="/images/category/games-category.jpg" />
+                    </div>
+                    <br />
+
+                    <div id="third">
+                        <Image fluid src="/images/category/books-category.jpg" />
+                    </div>
+                    <br />
+
+                    <div id="fourth">
+                        <Image fluid src="/images/category/computers-category.jpg" />
+                    </div>
+                    <br />
                 </Col>
 
                 <Col md={8}>
