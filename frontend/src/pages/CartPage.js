@@ -9,9 +9,11 @@ const CartPage = () => {
                 {/* Shopping Cart Items: */}
                 <Col md={8}>
                     <h1>Shopping Cart</h1>
-                    {Array.from({ length: 3 }).map((item, idx) => (
-                        <CartItemComponent key={idx} />
-                    ))}
+                    <ListGroup variant="flush">
+                        {Array.from({ length: 3 }).map((item, idx) => (
+                            <CartItemComponent key={idx} />
+                        ))}
+                    </ListGroup>
                     <Alert variant="info">Your Cart is Empty!</Alert>
                 </Col>
 
