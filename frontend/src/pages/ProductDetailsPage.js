@@ -3,15 +3,26 @@ import { Rating } from "react-simple-star-rating";
 import AddedToCartMessageComponent from "../components/AddedToCartMessageComponent";
 
 
+// Image Display when Mouse Hover Effect:
+import ImageZoom from "js-image-zoom";
+import { useEffect } from "react";
+
 const ProductDetailsPage = () => {
+    useEffect(() => {
+        // The Zoomed Effects on Images:
+        new ImageZoom(document.getElementById("first"));
+        new ImageZoom(document.getElementById("second"));
+        new ImageZoom(document.getElementById("third"));
+        new ImageZoom(document.getElementById("fourth"));
+    })
     return (
         <Container>
             {<AddedToCartMessageComponent />}
             <Row className="mt-5">
-                <Col md={4}>
+                <Col style={{ zIndex: 1 }} md={4}>
                     {/* Product Images Here */}
                     <div id="first">
-                        <Image fluid src="/images/category/tablets-category.jpg" />
+                        <Image crossOrigin="anonymous" fluid src="/images/category/tablets-category.jpg" />
                     </div>
                     <br />
 
