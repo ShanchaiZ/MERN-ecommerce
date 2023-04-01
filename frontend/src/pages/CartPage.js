@@ -1,5 +1,6 @@
 import { Row, Col, Container, Alert, ListGroup, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import CartItemComponent from "../components/CartItemComponent";
 
 const CartPage = () => {
     return (
@@ -8,14 +9,12 @@ const CartPage = () => {
                 {/* Shopping Cart Items: */}
                 <Col md={8}>
                     <h1>Shopping Cart</h1>
-                    {Array.from({ length: 3 }).map((item) => (
-                        <>
-                            CartItemComponent <br />
-                        </>
+                    {Array.from({ length: 3 }).map((item, idx) => (
+                        <CartItemComponent key={idx} />
                     ))}
                     <Alert variant="info">Your Cart is Empty!</Alert>
                 </Col>
-                
+
                 {/* Price Subtotal and Checkout: */}
                 <Col md={4}>
                     <ListGroup>
