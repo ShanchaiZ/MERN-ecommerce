@@ -22,23 +22,36 @@ const RegisterPage = () => {
                     <h1>Register</h1>
                     {/* Client Side Form Validation from React Bootstrap Validation */}
                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                        {/* First Name Field */}
+                        <Form.Group className="mb-3" controlId="validationCustom01">
+                            <Form.Label>Your First Name</Form.Label>
+                            <Form.Control
+                                required
+                                type="text"
+                                placeholder="First name"
+                                name="name"
+                            />
+                            <Form.Control.Feedback type="invalid">Please Enter Your First Name</Form.Control.Feedback>
+                        </Form.Group>
 
-                            <Form.Group controlId="validationCustom01">
-                                <Form.Label>First name</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="First name"
-                                    defaultValue="Mark"
-                                />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                            </Form.Group>
+                        {/* Last Name Field */}
+                        <Form.Group className="mb-3" controlId="formBasicLastName">
+                            <Form.Label>Your Last Name</Form.Label>
+                            <Form.Control
+                                required
+                                type="text"
+                                placeholder="Last name"
+                                name="lastName"
+                            />
+                            <Form.Control.Feedback type="invalid">Please Enter Your Last Name</Form.Control.Feedback>
+                        </Form.Group>
+
 
                         <Button type="submit">Submit form</Button>
                     </Form>
                 </Col>
             </Row>
-            
+
         </Container>
     )
 };
