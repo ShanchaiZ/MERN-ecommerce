@@ -1,4 +1,5 @@
 import { Container, Row, Col, Form, InputGroup, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const RegisterPage = () => {
@@ -46,8 +47,53 @@ const RegisterPage = () => {
                             <Form.Control.Feedback type="invalid">Please Enter Your Last Name</Form.Control.Feedback>
                         </Form.Group>
 
+                        {/* Email Address Field */}
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control
+                                required
+                                type="email"
+                                placeholder="Email Address"
+                                name="email"
+                            />
+                            <Form.Control.Feedback type="invalid">Please Enter A Valid Email Address</Form.Control.Feedback>
+                        </Form.Group>
 
-                        <Button type="submit">Submit form</Button>
+                        {/* Password Field */}
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                required
+                                type="password"
+                                placeholder="Enter Your Password Here"
+                                name="password"
+                                minLength={8}
+                            />
+                            <Form.Control.Feedback type="invalid">Please Enter A Valid Password</Form.Control.Feedback>
+                        </Form.Group>
+
+                        {/* Repeat Password Field */}
+                        <Form.Group className="mb-3" controlId="formBasicPasswordRepeat">
+                            <Form.Label>Repeat Password</Form.Label>
+                            <Form.Control
+                                required
+                                type="password"
+                                placeholder="Repeat your Password"
+                                name="confirmPassword"
+                                minLength={8}
+                            />
+                            <Form.Control.Feedback type="invalid">Please Repeat Your Password. Both Passwords Should Match!</Form.Control.Feedback>
+                        </Form.Group>
+
+                        {/* User has Account Already*/}
+                        <Row className="pb-2">
+                            <Col>
+                                Do you have already have an account?
+                                <Link to={"/login"}> Login </Link> here!
+                            </Col>
+                        </Row>
+
+                        <Button type="submit">Submit</Button>
                     </Form>
                 </Col>
             </Row>
