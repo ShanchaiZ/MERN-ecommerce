@@ -3,6 +3,18 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const RegisterPage = () => {
+
+    // Password Matching Function:
+    const onChange = () => {
+        const password = document.querySelector("input[name=password]");
+        const confirm = document.querySelector("input[name=confirmPassword]");
+        if(confirm.value === password.value){
+            confirm.setCustomValidity("")
+        } else {
+            confirm.setCustomValidity("Passwords do not match!");
+        }
+    }
+
     // Form Functions Defined:
     const [validated, setValidated] = useState(false);
 
@@ -68,6 +80,7 @@ const RegisterPage = () => {
                                 placeholder="Enter Your Password Here"
                                 name="password"
                                 minLength={8}
+                                onChange={onChange}
                             />
                             <Form.Text className="text-muted">A Password Should Have at least 8 characters!</Form.Text>
                             <Form.Control.Feedback type="invalid">Please Enter A Valid Password</Form.Control.Feedback>
@@ -82,6 +95,7 @@ const RegisterPage = () => {
                                 placeholder="Repeat your Password"
                                 name="confirmPassword"
                                 minLength={8}
+                                onChange={onChange}
                             />
                             <Form.Control.Feedback type="invalid">Please Repeat Your Password. Both Passwords Should Match!</Form.Control.Feedback>
                         </Form.Group>
