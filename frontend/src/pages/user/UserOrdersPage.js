@@ -1,4 +1,5 @@
 import { Row, Col, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 const UserOrdersPage = () => {
@@ -10,29 +11,28 @@ const UserOrdersPage = () => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
+                            {/* TABLE HEADERS */}
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Delivered</th>
+                            <th>Order Details</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {/* TABLE BODY CONTENT */}
                         <tr>
                             <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colSpan={2}>Larry the Bird</td>
-                            <td>@twitter</td>
+                            <td>Olive Branch</td>
+                            <td>01-10-2023</td>
+                            <td>$567</td>
+                            <td>
+                                <i className="bi bi-check-lg text-success"></i>
+                            </td>
+                            <td>
+                                <Link to="/user/order-details">Go to Order</Link>
+                            </td>
                         </tr>
                     </tbody>
                 </Table>
