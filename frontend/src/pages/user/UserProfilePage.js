@@ -68,6 +68,66 @@ const UserProfilePage = () => {
                             <Form.Text className="text-muted">If you want to change your email, remove account and create a new one with a new email address</Form.Text>
                         </Form.Group>
 
+                        {/* Phone Number Field */}
+                        <Form.Group className="mb-3" controlId="formBasicPhone">
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your phone number"
+                                defaultValue=""
+                            />
+                        </Form.Group>
+
+                        {/* Address Field */}
+                        <Form.Group className="mb-3" controlId="formBasicAddress">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your house number and street name"
+                                defaultValue=""
+                            />
+                        </Form.Group>
+
+                        {/* City Field */}
+                        <Form.Group className="mb-3" controlId="formBasicCity">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your city"
+                                defaultValue=""
+                            />
+                        </Form.Group>
+
+                        {/* State Field */}
+                        <Form.Group className="mb-3" controlId="formBasicState">
+                            <Form.Label>State</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your State"
+                                defaultValue=""
+                            />
+                        </Form.Group>
+
+                        {/* Country Field */}
+                        <Form.Group className="mb-3" controlId="formBasicCountry">
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your country"
+                                defaultValue=""
+                            />
+                        </Form.Group>
+
+                        {/* Postal Code Field */}
+                        <Form.Group className="mb-3" controlId="formBasicZip">
+                            <Form.Label>Postal Code</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your Postal Code"
+                                defaultValue=""
+                            />
+                        </Form.Group>
+
                         {/* Password Field */}
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
@@ -98,12 +158,10 @@ const UserProfilePage = () => {
                         </Form.Group>
 
                         {/* Submit Button */}
-                        <Button type="submit">
-                            Submit
-                        </Button>
-
+                        <Button variant="primary" type="submit">Update</Button>
+                        
                         <Alert show={true} variant="danger">A User with that Email already exists!</Alert>
-                        <Alert show={true} variant="success">Successfully Created A User!</Alert>
+                        <Alert show={true} variant="info">Successfully Updated User Information!</Alert>
                     </Form>
                 </Col>
             </Row>
