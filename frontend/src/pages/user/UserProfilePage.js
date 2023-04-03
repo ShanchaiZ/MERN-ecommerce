@@ -7,7 +7,7 @@ const UserProfilePage = () => {
     const onChange = () => {
         const password = document.querySelector("input[name=password]");
         const confirm = document.querySelector("input[name=confirmPassword]");
-        if(confirm.value === password.value){
+        if (confirm.value === password.value) {
             confirm.setCustomValidity("")
         } else {
             confirm.setCustomValidity("Passwords do not match!");
@@ -40,7 +40,7 @@ const UserProfilePage = () => {
                             <Form.Control
                                 required
                                 type="text"
-                                placeholder="First name"
+                                defaultValue="John"
                                 name="name"
                             />
                             <Form.Control.Feedback type="invalid">Please Enter Your First Name</Form.Control.Feedback>
@@ -52,7 +52,7 @@ const UserProfilePage = () => {
                             <Form.Control
                                 required
                                 type="text"
-                                placeholder="Last name"
+                                defaultValue="Doe"
                                 name="lastName"
                             />
                             <Form.Control.Feedback type="invalid">Please Enter Your Last Name</Form.Control.Feedback>
@@ -62,12 +62,10 @@ const UserProfilePage = () => {
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
-                                required
-                                type="email"
-                                placeholder="Email Address"
-                                name="email"
+                                disabled
+                                value="john@doe.com"
                             />
-                            <Form.Control.Feedback type="invalid">Please Enter A Valid Email Address</Form.Control.Feedback>
+                            <Form.Text className="text-muted">If you want to change your email, remove account and create a new one with a new email address</Form.Text>
                         </Form.Group>
 
                         {/* Password Field */}
@@ -99,7 +97,7 @@ const UserProfilePage = () => {
                             <Form.Control.Feedback type="invalid">Please Repeat Your Password. Both Passwords Should Match!</Form.Control.Feedback>
                         </Form.Group>
 
-                        {/* Submit Button with Spinner */}
+                        {/* Submit Button */}
                         <Button type="submit">
                             Submit
                         </Button>
