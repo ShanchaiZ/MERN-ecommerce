@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, InputGroup, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -69,12 +69,13 @@ const RegisterPage = () => {
                                 name="password"
                                 minLength={8}
                             />
+                            <Form.Text className="text-muted">A Password Should Have at least 8 characters!</Form.Text>
                             <Form.Control.Feedback type="invalid">Please Enter A Valid Password</Form.Control.Feedback>
                         </Form.Group>
 
                         {/* Repeat Password Field */}
                         <Form.Group className="mb-3" controlId="formBasicPasswordRepeat">
-                            <Form.Label>Repeat Password</Form.Label>
+                            <Form.Label>Confirm Password</Form.Label>
                             <Form.Control
                                 required
                                 type="password"
@@ -93,7 +94,20 @@ const RegisterPage = () => {
                             </Col>
                         </Row>
 
-                        <Button type="submit">Submit</Button>
+                        {/* Submit Button with Spinner */}
+                        <Button type="submit">
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                            Submit
+                        </Button>
+
+                        <Alert show={true} variant="danger">A User with that Email already exists!</Alert>
+                        <Alert show={true} variant="success">Successfully Created A User!</Alert>
                     </Form>
                 </Col>
             </Row>
