@@ -6,8 +6,15 @@ const UserOrderDetailsPage = () => {
             <Row className="mt-4">
                 <h1>Order Details</h1>
                 <Col md={8}>
-                    <h2>Shipping</h2>
-                    <h2>Payment method</h2>
+                    <br />
+                    <Row>
+                        <Col md={6}>
+                            <h2>Shipping</h2>
+                        </Col>
+                        <Col md={6}>
+                            <h2>Payment method</h2>
+                        </Col>
+                    </Row>
                 </Col>
                 <Col md={4}>
                     <h3>Order Summary</h3>
