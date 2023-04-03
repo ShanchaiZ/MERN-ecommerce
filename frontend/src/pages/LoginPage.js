@@ -48,16 +48,24 @@ const LoginPage = () => {
                             <Form.Control.Feedback type="invalid">Please Enter A Valid Password</Form.Control.Feedback>
                         </Form.Group>
 
-                        {/* User has Account Already*/}
+                        {/* Persistent Login */}
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                            <Form.Check
+                                type="checkbox"
+                                name="doNotLogout"
+                                label="Do Not Logout"
+                            />
+                        </Form.Group>
+
+                        {/* No Account: Redirect to Register*/}
                         <Row className="pb-2">
                             <Col>
-                                Do you have already have an account?
-                                <Link to={"/login"}> Login </Link> here!
+                                Create an New Account by <Link to={"/register"}> Registering</Link> here!
                             </Col>
                         </Row>
 
                         {/* Submit Button with Spinner */}
-                        <Button type="submit">
+                        <Button variant="primary" type="submit">
                             <Spinner
                                 as="span"
                                 animation="border"
@@ -65,11 +73,10 @@ const LoginPage = () => {
                                 role="status"
                                 aria-hidden="true"
                             />
-                            Submit
+                            Login
                         </Button>
 
-                        <Alert show={true} variant="danger">A User with that Email already exists!</Alert>
-                        <Alert show={true} variant="success">Successfully Created A User!</Alert>
+                        <Alert show={true} variant="danger">Please enter the correct login credentials!</Alert>
                     </Form>
                 </Col>
             </Row>

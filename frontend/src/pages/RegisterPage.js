@@ -103,8 +103,7 @@ const RegisterPage = () => {
                         {/* User has Account Already*/}
                         <Row className="pb-2">
                             <Col>
-                                Do you have already have an account?
-                                <Link to={"/login"}> Login </Link> here!
+                                Do you already have an account? <Link to={"/login"}>Login</Link> here!
                             </Col>
                         </Row>
 
