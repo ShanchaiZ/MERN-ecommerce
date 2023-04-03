@@ -21,25 +21,25 @@ const UserOrdersPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* TABLE BODY CONTENT */}
-                        <tr>
-                            <td>1</td>
-                            <td>Olive Branch</td>
-                            <td>01-10-2023</td>
-                            <td>$567</td>
-                            <td>
-                                <i className="bi bi-check-lg text-success"></i>
-                            </td>
-                            <td>
-                                <Link to="/user/order-details">Go to Order</Link>
-                            </td>
-                        </tr>
+                        {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map((item, idx) => (
+                            < tr key={idx}>
+                                <td>{idx + 1}</td>
+                                <td>Lois Price</td>
+                                <td>01-10-2023</td>
+                                <td>$567</td>
+                                <td>
+                                    <i className={item}></i>
+                                </td>
+                                <td>
+                                    <Link to="/user/order-details">Go to Order</Link>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
 
-
             </Col>
-        </Row>
+        </Row >
     )
 };
 
