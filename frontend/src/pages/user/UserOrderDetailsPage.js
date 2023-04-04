@@ -1,4 +1,5 @@
-import { Container, Row, Col, Form, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Alert, ListGroup } from "react-bootstrap";
+import CartItemComponent from "../../components/CartItemComponent";
 
 const UserOrderDetailsPage = () => {
     return (
@@ -34,7 +35,13 @@ const UserOrderDetailsPage = () => {
                         </Row>
                     </Row>
                     <br />
-
+                    {/* Product Order Items: */}
+                    <h2>Order Items</h2>
+                    <ListGroup variant="flush">
+                        {Array.from({ length: 3 }).map((item, idx) => (
+                            <CartItemComponent key={idx}/>
+                        ))}
+                    </ListGroup>
                 </Col>
                 <Col md={4}>
                     <h3>Order Summary</h3>
