@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, Alert, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import CartItemComponent from "../../components/CartItemComponent";
 
 const UserOrderDetailsPage = () => {
@@ -35,16 +35,42 @@ const UserOrderDetailsPage = () => {
                         </Row>
                     </Row>
                     <br />
-                    {/* Product Order Items: */}
+
+                    {/* Product Order Items */}
                     <h2>Order Items</h2>
                     <ListGroup variant="flush">
                         {Array.from({ length: 3 }).map((item, idx) => (
-                            <CartItemComponent key={idx}/>
+                            <CartItemComponent key={idx} />
                         ))}
                     </ListGroup>
                 </Col>
+
                 <Col md={4}>
-                    <h3>Order Summary</h3>
+                    {/* Order Summary Section */}
+                    <ListGroup>
+                        <ListGroupItem>
+                            <h3>Order Summary</h3>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            Price of Item (after tax): <span className="fw-bold">$987</span>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            Shipping: <span className="fw-bold">Included</span>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            Tax: <span className="fw-bold">Included</span>
+                        </ListGroupItem>
+                        <ListGroupItem className="text-danger">
+                            Total Price: <span className="fw-bold">$1234</span>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            <div className="d-grid">
+                                <Button size="lg" variant="success" type="Button">
+                                    Pay for the Order
+                                </Button>
+                            </div>
+                        </ListGroupItem>
+                    </ListGroup>
                 </Col>
             </Row>
         </Container>
