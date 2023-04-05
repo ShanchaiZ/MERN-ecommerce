@@ -19,9 +19,9 @@ const UserOrderDetailsPage = () => {
                         {/* Payment Method */}
                         <Col md={6}>
                             <h2>Payment method</h2>
-                            <Form.Select disabled={false}>
+                            <Form.Select disabled={true}>
                                 <option value="pp">PayPal</option>
-                                <option value="cod">Cash on Deliery (delivery may be delayed)</option>
+                                <option value="cod">Cash on Delivery (delivery may be delayed)</option>
                             </Form.Select>
                         </Col>
                         {/* Deliver Alerts */}
