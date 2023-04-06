@@ -1,14 +1,29 @@
-import { Nav } from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const AdminLinksComponent = () => {
     return (
-        <LinkContainer to="/admin/orders">
+        <Navbar bg="light" variant="light">
             <Nav className="flex-column">
-                <Nav.Link>Orders</Nav.Link>
+                <LinkContainer to="/admin/orders">
+                    <Nav.Link>Orders</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/admin/products">
+                    <Nav.Link>Products</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/admin/users">
+                    <Nav.Link>Users</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/admin/chats">
+                    <Nav.Link>Chats</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/admin/analytics">
+                    <Nav.Link>Analytics</Nav.Link>
+                </LinkContainer>
+                <Nav.Link>Logout</Nav.Link>
             </Nav>
-        </LinkContainer>
-    )
-}
+        </Navbar>
+    );
+};
 
 export default AdminLinksComponent;
