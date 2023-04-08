@@ -33,7 +33,7 @@ const AdminProductsPage = () => {
                         {[
                             { name: "Toshiba", price: "$420", category: "TV" },
                             { name: "LG", price: "$999", category: "Tablet" },
-                            { name: "Lenovo", price: "$1520", category: "Computer"},
+                            { name: "Lenovo", price: "$1520", category: "Computer" },
                         ].map((item, idx) => (
                             <tr key={idx}>
                                 <td>{idx + 1}</td>
@@ -41,7 +41,11 @@ const AdminProductsPage = () => {
                                 <td>{item.price}</td>
                                 <td>{item.category}</td>
                                 <td>
-                                    <i className="bi bi-pencil-square"></i>
+                                    <LinkContainer to="/admin/edit-product">
+                                        <Button className="btn-sm">
+                                            <i className="bi bi-pencil-square"></i>
+                                        </Button>
+                                    </LinkContainer>
                                 </td>
                                 <td>PayPal</td>
                                 <td>
