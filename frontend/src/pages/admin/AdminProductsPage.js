@@ -3,6 +3,13 @@ import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../components/admin/AdminLinksComponent";
 
 
+//Product Deletion Handler Alert:
+const deleteHandler = () => {
+    if (window.confirm("Are you sure?")) {
+        alert("Product Deleted!")
+    }
+}
+
 const AdminProductsPage = () => {
     return (
         <Row className="m-5">
@@ -40,15 +47,17 @@ const AdminProductsPage = () => {
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.category}</td>
+                                {/* Table Edit/ Delete buttons */}
                                 <td>
                                     <LinkContainer to="/admin/edit-product">
                                         <Button className="btn-sm">
                                             <i className="bi bi-pencil-square"></i>
                                         </Button>
                                     </LinkContainer>
-                                </td>
-                                <td>PayPal</td>
-                                <td>
+                                    {" / "}
+                                    <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
+                                        <i className="bi bi-x-circle"></i>
+                                    </Button>
                                 </td>
                             </tr>
                         ))}
