@@ -23,23 +23,25 @@ const AdminProductsPage = () => {
                         <tr>
                             {/* TABLE HEADERS */}
                             <th>#</th>
-                            <th>User</th>
-                            <th>Date</th>
-                            <th>Total</th>
-                            <th>Delivered</th>
-                            <th>Payment Method</th>
-                            <th>Order Details</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map((item, idx) => (
-                            < tr key={idx}>
+                        {[
+                            { name: "Toshiba", price: "$420", category: "TV" },
+                            { name: "LG", price: "$999", category: "Tablet" },
+                            { name: "Lenovo", price: "$1520", category: "Computer"},
+                        ].map((item, idx) => (
+                            <tr key={idx}>
                                 <td>{idx + 1}</td>
-                                <td>Lois Price</td>
-                                <td>01-10-2023</td>
-                                <td>$567</td>
+                                <td>{item.name}</td>
+                                <td>{item.price}</td>
+                                <td>{item.category}</td>
                                 <td>
-                                    <i className={item}></i>
+                                    <i className="bi bi-pencil-square"></i>
                                 </td>
                                 <td>PayPal</td>
                                 <td>
