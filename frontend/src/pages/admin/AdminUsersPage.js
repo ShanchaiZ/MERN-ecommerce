@@ -2,6 +2,11 @@ import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../components/admin/AdminLinksComponent";
 
+const deleteHandler = () => {
+    if (window.confirm("Are you sure?")) {
+        alert("User Deleted!");
+    }
+}
 
 const AdminUsersPage = () => {
     return (
@@ -42,7 +47,7 @@ const AdminUsersPage = () => {
                                         </Button>
                                     </LinkContainer>
                                     {" / "}
-                                    <Button variant="danger" className="btn-sm">
+                                    <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
                                         <i className="bi bi-x-circle"></i>
                                     </Button>
                                 </td>
