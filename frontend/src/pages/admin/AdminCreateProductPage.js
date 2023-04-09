@@ -17,10 +17,6 @@ const AdminCreateProductPage = () => {
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
-                {/* Go Back to Admin Products button */}
-                <Col md={1}>
-                    <Link to="/admin/products" className="btn btn-info my-3">Go Back </Link>
-                </Col>
                 {/* Create a New Product Form*/}
                 <Col md={6}>
                     <h1>Create a New Product</h1>
@@ -62,6 +58,10 @@ const AdminCreateProductPage = () => {
                         </Form.Group>
                         <Button variant="primary" type="submit">Create</Button>
                     </Form>
+                </Col>
+                {/* Go Back to Admin Products button */}
+                <Col md={1}>
+                    <Link to="/admin/products" className="btn btn-info my-3">Go Back </Link>
                 </Col>
             </Row>
         </Container>
