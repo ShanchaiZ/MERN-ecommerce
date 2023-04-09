@@ -134,16 +134,19 @@ const AdminEditProductPage = () => {
                                 <Col style={{ position: "relative" }} xs={3}>
                                     <Image src="/images/category/books-category.jpg" fluid />
                                     <i style={onHover} className="bi bi-x-circle text-danger"></i>
-                                    <Image src="/images/category/videos-category.jpg" fluid />
-                                    <Image src="/images/category/computers-category.jpg" fluid />
                                 </Col>
-                                <Col>
-
+                                <Col style={{ position: "relative" }} xs={3}>
+                                    <Image src="/images/category/videos-category.jpg" fluid />
+                                    <i style={onHover} className="bi bi-x-circle text-danger"></i>
+                                </Col>
+                                <Col style={{ position: "relative" }} xs={3}>
+                                    <Image src="/images/category/computers-category.jpg" fluid />
+                                    <i style={onHover} className="bi bi-x-circle text-danger"></i>
                                 </Col>
                             </Row>
                             <Form.Control type="file" multiple required />
                         </Form.Group>
-                        <Button variant="primary" type="submit">Create</Button>
+                        <Button variant="primary" type="submit">Update</Button>
                     </Form>
                 </Col>
                 {/* Go Back to Admin Products button */}
