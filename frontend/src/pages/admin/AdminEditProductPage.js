@@ -2,6 +2,14 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert, Image } f
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+const onHover = {
+    cursor: "pointer",
+    position: "absolute",
+    right: "3px",
+    top: "-15px",
+    transform: "scale(1.5)",
+}
+
 const AdminEditProductPage = () => {
     const [validated, setValidated] = useState(false);
     // Function: validation function when submit button is clicked
@@ -123,8 +131,9 @@ const AdminEditProductPage = () => {
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
                             <Row>
-                                <Col xs={3}>
+                                <Col style={{ position: "relative" }} xs={3}>
                                     <Image src="/images/category/books-category.jpg" fluid />
+                                    <i style={onHover} className="bi bi-x-circle text-danger"></i>
                                     <Image src="/images/category/videos-category.jpg" fluid />
                                     <Image src="/images/category/computers-category.jpg" fluid />
                                 </Col>
