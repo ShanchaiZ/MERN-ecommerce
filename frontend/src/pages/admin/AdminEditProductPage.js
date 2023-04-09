@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, CloseButton, Table, Alert, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -24,28 +24,27 @@ const AdminEditProductPage = () => {
                         {/* Name of Product */}
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name of Product</Form.Label>
-                            <Form.Control name="name" type="text" required />
+                            <Form.Control name="name" type="text" required defaultValue="Toshiba" />
                         </Form.Group>
                         {/* Product Description */}
                         <Form.Group className="mb-3" controlId="description">
                             <Form.Label>Product Description</Form.Label>
-                            <Form.Control name="description" as="textarea" rows={3} required />
+                            <Form.Control name="description" as="textarea" rows={3} required defaultValue="Product Description: Price is tough 2 beat!" />
                         </Form.Group>
                         {/* Product Quantity in Stock */}
                         <Form.Group className="mb-3" controlId="formBasicCount">
                             <Form.Label>Number of Product in Stock</Form.Label>
-                            <Form.Control name="count" type="number" required />
+                            <Form.Control name="count" type="number" required defaultValue="3" />
                         </Form.Group>
                         {/* Product Price */}
                         <Form.Group className="mb-3" controlId="formBasicPrice">
                             <Form.Label>Price</Form.Label>
-                            <Form.Control name="price" type="text" required />
+                            <Form.Control name="price" type="text" required defaultValue="44.44" />
                         </Form.Group>
                         {/* Product Category Dropdown */}
                         <Form.Group className="mb-3" controlId="formBasicCategory">
                             <Form.Label>
                                 Category
-                                <CloseButton />(<small>remove selected</small>)
                             </Form.Label>
                             <Form.Select aria-label="productCategory">
                                 <option>Choose Category</option>
@@ -55,11 +54,6 @@ const AdminEditProductPage = () => {
                             </Form.Select>
                         </Form.Group>
 
-                        {/* Add New Catagory */}
-                        <Form.Group className="mb-3" controlId="formBasicNewCategory">
-                            <Form.Label>or Create A New Category (for example: Computers/Intel/Home Appliances) {" "}</Form.Label>
-                            <Form.Control name="newCategory" type="text" />
-                        </Form.Group>
                         <Row className="mt-5">
                             {/* Choose Category subdivision: Attribute  */}
                             <Col md={6}>
@@ -128,6 +122,16 @@ const AdminEditProductPage = () => {
                         {/* Product Image Upload */}
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
+                            <Row>
+                                <Col xs={3}>
+                                    <Image src="/images/category/books-category.jpg" fluid />
+                                    <Image src="/images/category/videos-category.jpg" fluid />
+                                    <Image src="/images/category/computers-category.jpg" fluid />
+                                </Col>
+                                <Col>
+
+                                </Col>
+                            </Row>
                             <Form.Control type="file" multiple required />
                         </Form.Group>
                         <Button variant="primary" type="submit">Create</Button>
