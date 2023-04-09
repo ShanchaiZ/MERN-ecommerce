@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -43,7 +43,10 @@ const AdminCreateProductPage = () => {
                         </Form.Group>
                         {/* Product Category Dropdown */}
                         <Form.Group className="mb-3" controlId="formBasicCategory">
-                            <Form.Label>Category</Form.Label>
+                            <Form.Label>
+                                Category
+                                <CloseButton />(<small>remove selected</small>)
+                            </Form.Label>
                             <Form.Select aria-label="productCategory">
                                 <option>Choose Category</option>
                                 <option value="1">Books</option>
@@ -51,6 +54,40 @@ const AdminCreateProductPage = () => {
                                 <option value="3">Games</option>
                             </Form.Select>
                         </Form.Group>
+
+                        {/* Add New Catagory */}
+                        <Form.Group className="mb-3" controlId="formBasicNewCategory">
+                            <Form.Label>or Create A New Category (for example: Computers/Intel/Home Appliances) {" "}</Form.Label>
+                            <Form.Control name="newCategory" type="text" />
+                        </Form.Group>
+                        <Row className="mt-5">
+                            {/* Choose Category subdivision: Attribute  */}
+                            <Col md={6}>
+                                <Form.Group className="mb-3" controlId="formBasicAttributes">
+                                    <Form.Label>Choose Attribute and Set Values</Form.Label>
+                                    <Form.Select name="atrrKey" aria-label="productCategory">
+                                        <option>Choose Attribute</option>
+                                        <option value="color">Color</option>
+                                        <option value="shape">Shape</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                            {/* Choose Category subdivision: Attribute Value  */}
+                            <Col md={6}>
+                                <Form.Group className="mb-3" controlId="formBasicAttributeValue">
+                                    <Form.Label>Attribute Value</Form.Label>
+                                    <Form.Select name="atrrKey" aria-label="productCategory">
+                                        <option>Choose Attribute Value</option>
+                                        <option value="1">Red</option>
+                                        <option value="2">Yellow</option>
+                                        <option value="3">Green</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+
+                        
+
                         {/* Product Image Upload */}
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
