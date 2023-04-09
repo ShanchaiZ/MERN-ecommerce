@@ -86,8 +86,45 @@ const AdminCreateProductPage = () => {
                             </Col>
                         </Row>
 
-                        
+                        {/* Table for Displaying Attribute, Value and Deletion */}
+                        <Row>
+                            <Table hover>
+                                <thead>
+                                    <tr>
+                                        <th>Attribute</th>
+                                        <th>Value</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>attr key</td>
+                                        <td>attr value</td>
+                                        <td>
+                                            <CloseButton />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Row>
 
+                        {/* Create new Attribute and Attribute Value */}
+                        <Row>
+                            <Col md={6}>
+                                <Form.Group className="mb-3" controlId="formBasicNewAttribute">
+                                    <Form.Label>Create New Attribute</Form.Label>
+                                    <Form.Control disabled={false} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
+                                    <Form.Label>Attribute Value</Form.Label>
+                                    <Form.Control disabled={false} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Alert variant="primary">After typing attribute key and value, please enter on one of the fields</Alert>
+                        
                         {/* Product Image Upload */}
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
