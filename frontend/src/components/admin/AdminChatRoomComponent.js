@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Toast } from "react-bootstrap";
 
 const AdminChatRoomComponent = () => {
@@ -8,12 +9,18 @@ const AdminChatRoomComponent = () => {
                     <strong className="me-auto">Chat with John Doe</strong>
                 </Toast.Header>
                 <Toast.Body>
-                    <p className="bg-primary p-3 ms-4 text-light rounded-pill">
-                        <b>User Wrote:</b> This is a chat message!
-                    </p>
-                    <p>
-                        <b>Admin Wrote:</b> Understood! Have a great day!
-                    </p>
+
+                    {Array.from({ length: 20 }).map((_, idx) => (
+                        <Fragment key={idx}>
+                            <p className="bg-primary p-3 ms-4 text-light rounded-pill">
+                                <b>User Wrote:</b> This is a chat message!
+                            </p>
+                            <p>
+                                <b>Admin Wrote:</b> Understood! Have a great day!
+                            </p>
+                        </Fragment>
+                    ))}
+                    
                 </Toast.Body>
 
             </Toast>
