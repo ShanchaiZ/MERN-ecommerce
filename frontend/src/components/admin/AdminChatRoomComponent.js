@@ -1,10 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Toast, Form, Button } from "react-bootstrap";
 
 const AdminChatRoomComponent = () => {
+
+    // Toast Dismissible Function:
+    const [toast1, closeToast1] = useState(true);
+    const close1 = () => closeToast1(false)
+
     return (
         <>
-            <Toast className="ms-4 mb-5">
+            <Toast show={toast1} onClose={close1} className="ms-4 mb-5">
                 <Toast.Header>
                     <strong className="me-auto">Chat with John Doe</strong>
                 </Toast.Header>
