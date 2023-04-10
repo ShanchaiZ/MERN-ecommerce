@@ -28,7 +28,7 @@ const CartItemComponent = () => {
                 </Col>
                 {/* Delete Item from Cart */}
                 <Col md={3}>
-                    <Button type="button" variant="secondary" onClick={() => window.confirm("Are you sure?")}><i class="bi bi-trash"></i></Button>
+                    <Button type="button" variant="secondary" onClick={() => window.confirm("Are you sure?")}><i className="bi bi-trash"></i></Button>
                 </Col>
             </Row>
         </ListGroup.Item>
