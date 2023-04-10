@@ -17,32 +17,37 @@ const AdminEditUserPage = () => {
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
-                {/* Edit Product Form*/}
+                {/* Edit User Form*/}
                 <Col md={6}>
                     <h1>Edit A User</h1>
                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        {/* Name of Product */}
-                        <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Label>Name of Product</Form.Label>
-                            <Form.Control name="name" type="text" required defaultValue="Toshiba" />
+                        {/* User First Name*/}
+                        <Form.Group className="mb-3" controlId="formBasicFirstName">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control name="name" type="text" required defaultValue="John" />
                         </Form.Group>
-                        {/* Product Description */}
-                        <Form.Group className="mb-3" controlId="description">
-                            <Form.Label>Product Description</Form.Label>
-                            <Form.Control name="description" as="textarea" rows={3} required defaultValue="Product Description: Price is tough 2 beat!" />
+                        {/* User Last Name */}
+                        <Form.Group className="mb-3" controlId="formBasicLastName">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control name="lastName" type="text" required defaultValue="Doe" />
                         </Form.Group>
-                        {/* Product Quantity in Stock */}
-                        <Form.Group className="mb-3" controlId="formBasicCount">
-                            <Form.Label>Number of Product in Stock</Form.Label>
-                            <Form.Control name="count" type="number" required defaultValue="3" />
+                        {/* User Email */}
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control name="email" type="email" required defaultValue="john@doe.com" />
                         </Form.Group>
-                        
-                        <Button variant="primary" type="submit">Update</Button>
+
+                        {/* Is User an Admin? */}
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                        <Form.Check name="isAdmin" type="checkbox" label="is admin" />
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit">Update User</Button>
                     </Form>
                 </Col>
-                {/* Go Back to Admin Products button */}
-                <Col md={1}>
-                    <Link to="/admin/products" className="btn btn-info my-3">Go Back </Link>
+                {/* Go Back to Admin Users Page */}
+                <Col md={2}>
+                    <Link to="/admin/users" className="btn btn-info my-3">Go Back</Link>
                 </Col>
             </Row>
         </Container>
