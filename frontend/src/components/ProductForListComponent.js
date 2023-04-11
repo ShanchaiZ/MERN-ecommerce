@@ -8,7 +8,7 @@ const ProductForListComponent = ({ images, idx }) => {
             <Row>
                 {/* Media Query for large Screens = Image takes 5 columns */}
                 <Col lg={5}>
-                    <Card.Img variant="top" src={"/images/category/" + images[idx] + "-category.jpg"} />
+                    <Card.Img crossOrigin="anonymous" variant="top" src={"/images/category/" + images[idx] + "-category.jpg"} />
                 </Col>
                 {/* Media Query for large Screens = Image desc takes 7 columns so it appears to the right */}
                 <Col lg={7}>
