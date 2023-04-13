@@ -23,13 +23,13 @@ app.get("/", (req, res) => {
 app.get("/a", (req, res, next) => {
     setTimeout(() => {
         try {
-            aconsole.log("async Code!!")
+            console.log("async Code!!")
         } catch (error) {
             next(error);
         }
 
     }, 2000);
-    // res.send("Hello World");
+    res.send("Hello World");
 })
 
 //Example of the routing path:
