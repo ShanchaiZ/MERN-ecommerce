@@ -15,16 +15,19 @@ app.use("/api", apiRoutes);
 //=====================================================================
 app.get("/", (req, res) => {
     console.log("synchronous code!");
-    throw new Error("Error Occured!");
+    // throw new Error("Error Occured!");
     res.send("Hello Shoppers!!");
 });
 
 //Async error example:
 app.get("/a", (req, res, next) => {
     setTimeout(() => {
-        console.log("Async Code");
-        throw new Error("Error Occured!!!");
-        next();
+        try {
+            aconsole.log("async Code!!")
+        } catch (error) {
+            next(error);
+        }
+
     }, 2000);
     // res.send("Hello World");
 })
@@ -33,6 +36,22 @@ app.get("/a", (req, res, next) => {
 // app.get("/api/products", (req, res) => {
 //     res.send("handling products routes")
 // })
+
+
+// Error Handler in console:
+app.use((error, req, res, next) =>{
+    console.error(error)
+    next(error);
+})
+
+// Error Handler displayed in WebBrowser:
+app.use((error,req,res,next) =>{
+    res.status(500).json ({
+        message: error.message,
+        stack: error.stack
+    })
+});
+
 
 // App is listening on port:
 //======================================================================
