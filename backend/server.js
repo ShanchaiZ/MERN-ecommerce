@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
 });
 
 
+//Example of the routing path:
+// app.get("/api/products", (req, res) => {
+//     res.send("handling products routes")
+// })
 
 // App is listening on port:
 //======================================================================
