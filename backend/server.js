@@ -7,16 +7,27 @@ const apiRoutes = require("./routes/apiRoutes");
 
 // Middleware:
 //====================================================================
-app.use("/api" , apiRoutes);
+app.use("/api", apiRoutes);
 
 
 
 //Routes:
 //=====================================================================
 app.get("/", (req, res) => {
-    res.send("Hello Shoppers!!")
+    console.log("synchronous code!");
+    throw new Error("Error Occured!");
+    res.send("Hello Shoppers!!");
 });
 
+//Async error example:
+app.get("/a", (req, res, next) => {
+    setTimeout(() => {
+        console.log("Async Code");
+        throw new Error("Error Occured!!!");
+        next();
+    }, 2000);
+    // res.send("Hello World");
+})
 
 //Example of the routing path:
 // app.get("/api/products", (req, res) => {
