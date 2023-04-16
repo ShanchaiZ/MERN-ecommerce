@@ -19,22 +19,7 @@ app.use("/api", apiRoutes);
 //Routes:
 //=====================================================================
 app.get("/", async (req, res, next) => {
-    // Example to see if product model is being created and saved in the database for testing:
-    const Product = require("./models/ProductModel");
-    try {
-        const product = new Product;
-        product.name = "Apple";
-        const productSaved = await product.save();
-        console.log(productSaved === product);
-        //find a product:
-        const products = await Product.find();
-        console.log(products.length);
-        res.send("Product created " + product._id);
-    } catch (err) {
-        console.log(err);
-        next(err);
-    }
-    // res.send("Hello Shoppers!!");
+    res.send("Hello Shoppers!!");
 });
 
 //Example of the routing path:
