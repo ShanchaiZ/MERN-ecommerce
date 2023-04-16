@@ -1,4 +1,9 @@
 const mongoose = require("mongoose");
+const Review = require("./ReviewModel");
+const imageSchema = mongoose.Schema({
+    path: { type: String, required: true }
+});
+
 
 const productSchema = mongoose.Schema({
     name: {
@@ -37,14 +42,19 @@ const productSchema = mongoose.Schema({
         //a product in a category can be further classified by -> [{key:"color", value: "red"}, {key: "size", value: "1 TB"}]
         { key: { type: String }, value: { type: String } }
     ],
-    images: [],
-    reviews: []
+    images: [imageSchema],
+    reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: Review,
+        }
+    ]
 }, {
     timestamps: true,
 })
 
 
-productSchema.index();
+productSchema.index(); //this index method is used to make unique property work in the name
 
 const Product = mongoose.model("Product", productSchema);
 
