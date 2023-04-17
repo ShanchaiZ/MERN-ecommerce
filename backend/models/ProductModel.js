@@ -53,9 +53,15 @@ const productSchema = mongoose.Schema({
     timestamps: true,
 })
 
-
-productSchema.index(); //this index method is used to make unique property work in the name
-
+// Product Model Creation:
 const Product = mongoose.model("Product", productSchema);
+
+// Creating Index to query for products faster:
+productSchema.index({ name: "text", description: "text" }, { name: "TextIndex" }); //this compound index method is used to make unique property work in the name
+productSchema.index({ "attrs.key": 1, "attrs.value": 1 }); //This index is used to sort attributes key and values in ascending order
+// productSchema.index({ name : -1 }); // This single field index is used to sort index in descending order (hence minus sign)
+// productSchema.index({ category: 1 }); // This single field index is used to find product only by category  
+// productSchema.index({ name: 1 }); // This single field index is used to find product only by name
+
 
 module.exports = Product;
