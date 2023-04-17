@@ -22,6 +22,9 @@ const categorySchema = mongoose.Schema({
 });
 
 
+// Category Index:
+categorySchema.index({description: 1}); //mongoDB will categorize the description in ascending order
+
 // Category Model Creation:
 const Category = mongoose.model("Category", categorySchema);
 
