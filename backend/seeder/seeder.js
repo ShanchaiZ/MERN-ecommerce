@@ -6,6 +6,7 @@ const Category = require("../models/CategoryModel");
 
 const importData = async () => {
     try {
+        // Category.collection.dropIndexes();
         await Category.collection.deleteMany({});
         await Category.collection.insertMany(categoryData);
         console.log("Data Seeding is Successful!");
