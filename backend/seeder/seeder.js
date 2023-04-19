@@ -5,12 +5,14 @@ connectDB();
 const categoryData = require("./categories");
 const productData = require("./products");
 const reviewData = require("./reviews");
+const userData = require("./users");
 
 
 // Imported the Seeder Models:
 const Category = require("../models/CategoryModel");
 const Product = require("../models/ProductModel");
 const Review = require("../models/ReviewModel");
+const User = require("../models/UserModel");
 
 
 const importData = async () => {
@@ -19,15 +21,17 @@ const importData = async () => {
         // await Category.collection.dropIndexes();
         // await Product.collection.dropIndexes();
         // await Review.collection.dropIndexes();
+        // await User.collection.dropIndexes();
 
         // Delete Seeder Collections:
         await Category.collection.deleteMany({});
         await Product.collection.deleteMany({});
         await Review.collection.deleteMany({});
+        await User.collection.deleteMany({});
 
         // Create Seeder Collection:
         await Category.insertMany(categoryData);
-        
+
         const reviews = await Review.insertMany(reviewData);
         const sampleProducts = productData.map((product) => {
             reviews.map((review) =>{
@@ -37,6 +41,7 @@ const importData = async () => {
         });
 
         await Product.insertMany(sampleProducts);
+        await User.insertMany(userData);
 
         console.log("Data Seeding is Successful!");
         process.exit();
