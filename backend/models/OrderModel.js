@@ -15,7 +15,7 @@ const orderSchema = mongoose.Schema({
     },
     cartItems: [
         {
-            name: { String, required: true },
+            name: { type: String, required: true },
             price: { type: Number, required: true },
             image: { path: { type: String, required: true } },
             // Quantity of products in cart and number

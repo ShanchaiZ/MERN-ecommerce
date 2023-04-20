@@ -6,7 +6,7 @@ const categoryData = require("./categories");
 const productData = require("./products");
 const reviewData = require("./reviews");
 const userData = require("./users");
-// const orderData = require("./orders");
+const orderData = require("./orders");
 
 
 // Imported the Seeder Models:
@@ -14,7 +14,7 @@ const Category = require("../models/CategoryModel");
 const Product = require("../models/ProductModel");
 const Review = require("../models/ReviewModel");
 const User = require("../models/UserModel");
-// const Order = require("../models/OrderModel");
+const Order = require("../models/OrderModel");
 
 
 const importData = async () => {
@@ -31,7 +31,7 @@ const importData = async () => {
         await Product.collection.deleteMany({});
         await Review.collection.deleteMany({});
         await User.collection.deleteMany({});
-        // await Order.collection.deleteMany({});
+        await Order.collection.deleteMany({});
 
         // Create Seeder Collection:
         await Category.insertMany(categoryData);
@@ -46,7 +46,7 @@ const importData = async () => {
 
         await Product.insertMany(sampleProducts);
         await User.insertMany(userData);
-        // await Order.insertMany(orderData);
+        await Order.insertMany(orderData);
 
         console.log("Data Seeding is Successful!");
         process.exit();
