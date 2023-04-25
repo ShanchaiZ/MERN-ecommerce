@@ -12,6 +12,8 @@ connectDB();
 
 // Middleware:
 //====================================================================
+app.use(express.json()); //used to parse json object for express to read from each request
+
 app.use("/api", apiRoutes);
 
 
