@@ -15,12 +15,20 @@ const getCategories = async (req, res, next) => {
 //POST Request: Create a new Category
 const newCategory = async (req, res, next) => {
     try {
-        // res.send(!!req.body); //1 exclamation mark = turns the req.body into a boolean value (which is TRUE).  2 exclamation marks = gives the opposite the value of !req.body which is FALSE.
         const { category } = req.body;
         if (!category) {
-            throw new Error("category input required!")
+            res.status(400).send("category input required!"); // Error 400 status = user related errors.
         } else {
-            res.send(category);
+            const categoryExists = await Category.findOne({ name: category });
+            if (categoryExists) {
+                res.status(400).send("Category already Exists!");
+            } else {
+                const categoryCreated = await Category.create({
+                    name: category
+
+                })
+                res.status(201).send({ categoryCreated: categoryCreated }) //201 status = successful user request with new resource creation 
+            }
         }
     } catch (err) {
         next(err);
