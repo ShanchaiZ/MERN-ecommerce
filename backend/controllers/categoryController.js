@@ -5,8 +5,8 @@ const Category = require("../models/CategoryModel");
 // GET Request: Find all categories
 const getCategories = async (req, res, next) => {
     try {
-        const cagetories = await Category.find({}).sort({ name: "asc" }).orFail();
-        res.json(cagetories);
+        const categories = await Category.find({}).sort({ name: "asc" }).orFail();
+        res.json(categories);
     } catch (error) {
         next(error);
     }
@@ -52,4 +52,21 @@ const deleteCategory = async (req, res, next) => {
     }
 }
 
-module.exports = { getCategories, newCategory, deleteCategory };
+
+// POST Request: Saving an Attribute after creating a category
+const saveAttr = async (req, res, next) => {
+    const { key, val, categoryChosen } = req.body;
+    if (!key || !val || !categoryChosen) {
+        return res.status(400).send("All inputs are required!")
+    } else {
+        try {
+
+        } catch (error) {
+            next(error);
+        }
+
+    }
+}
+
+
+module.exports = { getCategories, newCategory, deleteCategory, saveAttr };
