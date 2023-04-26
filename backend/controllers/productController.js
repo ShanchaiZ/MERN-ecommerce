@@ -3,8 +3,17 @@ const recordsPerPage = require("../config/pagination");
 
 const getProducts = async (req, res, next) => {
     try {
+
+        // Variable used to for Filtering Products:
+        let query = {};
+        if (req.query.price) {
+            query = { price: { $lte: Number(req.query.price) } }
+        }
+
+
+        // Variable used for Pagination and Sorting Products:
         const pageNum = Number(req.query.pageNum) || 1; //number inputted by user or by default set to 1.
-        const totalProducts = await Product.countDocuments({}); //provides a total count of all products in a database.
+
 
         // Dynamic Sorting of Product by other fields instead of static ascending order:
         let sort = {};
@@ -15,9 +24,9 @@ const getProducts = async (req, res, next) => {
             console.log(sort);
         }
 
-        const products = await Product
 
-            .find({}) //finds all products in the db hence the empty {}
+        const totalProducts = await Product.countDocuments(query); //provides a total count of all products in a database.
+        const products = await Product.find(query) //finds all products in the db hence the empty {}
             .sort(sort)//instead of static "asc" string to sort in name in ascending order, 1 also works(Note: -1 = descending order). 
             .limit(recordsPerPage) //limits the amount of product results that can be displayed; used for pagination
             .skip(recordsPerPage * (pageNum - 1)); //skips over the number of records in the argument and displays results after the skipped number indicated by recordsPerPage
