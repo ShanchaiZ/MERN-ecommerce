@@ -1,4 +1,5 @@
 // Imported Model:
+const { json } = require("express");
 const Category = require("../models/CategoryModel");
 const { set } = require("../routes/apiRoutes");
 
@@ -61,20 +62,20 @@ const saveAttr = async (req, res, next) => {
         return res.status(400).send("All inputs are required!")
     } else {
         try {
-            const category = categoryChosen.split("/")[0]
+            const category = categoryChosen.split("/")[0];
             const categoryExists = await Category.findOne({ name: category }).orFail();
 
-            if (categoryExists.attr.length > 0) {
+            if (categoryExists.attrs.length > 0) {
                 // if key exists in the database, then add a value to the key
                 var keyDoesNotExistInDatabase = true;
                 categoryExists.attrs.map((item, idx) => {
                     if (item.key === key) {
                         keyDoesNotExistInDatabase = false;
+                        var copyAttributesValues = [...categoryExists.attrs[idx].value];
+                        copyAttributesValues.push(val);
+                        var newAttributeValues = [... new Set(copyAttributesValues)] //Set ensure unique values are being recorded in attributes' value array
+                        categoryExists.attrs[idx].value = newAttributeValues;
                     }
-                    var copyAttributesValues = [...categoryExists.attrs[idx].value];
-                    copyAttributesValues.push(val);
-                    var newAttributeValues = [... new Set(copyAttributesValues)] //Set ensure unique values are being recorded in attributes' value array
-                    categoryExists.attrs[idx].value = newAttributeValues;
                 })
 
                 if (keyDoesNotExistInDatabase) {
@@ -84,8 +85,11 @@ const saveAttr = async (req, res, next) => {
                 // push to the attributes array as per CategoryModel
                 categoryExists.attrs.push({ key: key, value: [val] });
             }
+
             // save the newly created attributes in the database:
-            
+            await categoryExists.save();
+            let cat = await Category.find({}).sort({ name: "asc" });
+            return res.status(201).json({ categoriesUpdated: cat });
         } catch (error) {
             next(error);
         }
