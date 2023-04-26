@@ -6,8 +6,14 @@ const getProducts = async (req, res, next) => {
 
         // Variable used to for Filtering Products:
         let query = {};
+        // Filtering for Price:
         if (req.query.price) {
             query = { price: { $lte: Number(req.query.price) } }
+        }
+
+        // Filtering for Rating:
+        if (req.query.rating) {
+            query = { rating: { $in: req.query.rating.split(",") } }
         }
 
 
