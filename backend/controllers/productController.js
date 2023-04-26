@@ -3,8 +3,8 @@ const recordsPerPage = require("../config/pagination");
 
 const getProducts = async (req, res, next) => {
     try {
-        const pageNum = Number(req.query.pageNum) || 1
-        // res.json({pageNum});
+        const pageNum = Number(req.query.pageNum) || 1; //number inputted by user or by default set to 1.
+        const totalProducts = await Product.countDocuments({}); //provides a total count of all products in a database.
 
         const products = await Product
 
@@ -13,7 +13,11 @@ const getProducts = async (req, res, next) => {
             .limit(recordsPerPage) //limits the amount of product results that can be displayed; used for pagination
             .skip(recordsPerPage * (pageNum - 1)); //skips over the number of records in the argument and displays results after the skipped number indicated by recordsPerPage
 
-        res.json({ products });
+        res.json({
+            products,
+            pageNum,
+            paginationLinksNumber: Math.ceil(totalProducts / recordsPerPage) // Take the upper limit of number of all the products in a database and divide by the recordsPerPage number which results in number of product links that can be displayed on a page.
+        });
     } catch (error) {
         next(error)
     }
