@@ -60,7 +60,20 @@ const saveAttr = async (req, res, next) => {
         return res.status(400).send("All inputs are required!")
     } else {
         try {
+            const category = categoryChosen.split("/")[0]
+            const categoryExists = await Category.findOne({ name: category }).orFail();
 
+            if (categoryExists.attr.length > 0) {
+                // if key exists in the database, then add a value to the key
+                var keyDoesNotExistInDatabase = true;
+
+                if (keyDoesNotExistInDatabase) {
+                    categoryExists.attrs.push({ key: key, value: [val] }); // if keyDoesNotExistInDatabase is true then push the new key in the attribute array
+                }
+            } else {
+                // push to the attributes array as per CategoryModel
+                categoryExists.attrs.push({ key: key, value: [val] });
+            }
         } catch (error) {
             next(error);
         }
