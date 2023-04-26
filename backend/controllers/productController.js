@@ -6,10 +6,19 @@ const getProducts = async (req, res, next) => {
         const pageNum = Number(req.query.pageNum) || 1; //number inputted by user or by default set to 1.
         const totalProducts = await Product.countDocuments({}); //provides a total count of all products in a database.
 
+        // Dynamic Sorting of Product by other fields instead of static ascending order:
+        let sort = {};
+        const sortOption = req.query.sort || "";
+        if (sortOption) {
+            let sortOpt = sortOption.split("_");
+            sort = { [sortOpt[0]]: Number(sortOpt[1]) };
+            console.log(sort);
+        }
+
         const products = await Product
 
             .find({}) //finds all products in the db hence the empty {}
-            .sort({ name: 1 })//instead of "asc" string to sort in name in ascending order, 1 also works! Note: -1 = descending order
+            .sort(sort)//instead of static "asc" string to sort in name in ascending order, 1 also works(Note: -1 = descending order). 
             .limit(recordsPerPage) //limits the amount of product results that can be displayed; used for pagination
             .skip(recordsPerPage * (pageNum - 1)); //skips over the number of records in the argument and displays results after the skipped number indicated by recordsPerPage
 
