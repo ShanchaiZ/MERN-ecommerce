@@ -1,5 +1,6 @@
 // Imported Model:
 const Category = require("../models/CategoryModel");
+const { set } = require("../routes/apiRoutes");
 
 
 // GET Request: Find all categories
@@ -66,6 +67,15 @@ const saveAttr = async (req, res, next) => {
             if (categoryExists.attr.length > 0) {
                 // if key exists in the database, then add a value to the key
                 var keyDoesNotExistInDatabase = true;
+                categoryExists.attrs.map((item, idx) => {
+                    if (item.key === key) {
+                        keyDoesNotExistInDatabase = false;
+                    }
+                    var copyAttributesValues = [...categoryExists.attrs[idx].value];
+                    copyAttributesValues.push(val);
+                    var newAttributeValues = [... new Set(copyAttributesValues)] //Set ensure unique values are being recorded in attributes' value array
+                    categoryExists.attrs[idx].value = newAttributeValues;
+                })
 
                 if (keyDoesNotExistInDatabase) {
                     categoryExists.attrs.push({ key: key, value: [val] }); // if keyDoesNotExistInDatabase is true then push the new key in the attribute array
@@ -74,6 +84,8 @@ const saveAttr = async (req, res, next) => {
                 // push to the attributes array as per CategoryModel
                 categoryExists.attrs.push({ key: key, value: [val] });
             }
+            // save the newly created attributes in the database:
+            
         } catch (error) {
             next(error);
         }
