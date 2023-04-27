@@ -22,11 +22,21 @@ const getProducts = async (req, res, next) => {
             RatingQueryCondition = { rating: { $in: req.query.rating.split(",") } }
         }
 
+        // Variable used for searching Products:
+        let categoryQueryCondition = {}
+        const categoryName = req.params.categoryName || "";
+        if (categoryName) {
+            queryCondition = true;
+            let a = categoryName.replaceAll(",", "/");
+            var regEx = new RegExp("^" + a); // this expression created forward slashes with regExp in the slash => /^a/ and carrot sign => begining of string
+            categoryQueryCondition = { category: regEx }
+        }
+
         // If there is a Query to filter requests:..
         if (queryCondition) {
             //... then Combining the Price AND rating Operator:
             query = {
-                $and: [priceQueryCondition, RatingQueryCondition]
+                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition]
             }
         }
 
