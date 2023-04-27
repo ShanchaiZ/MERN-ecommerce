@@ -6,14 +6,28 @@ const getProducts = async (req, res, next) => {
 
         // Variable used to for Filtering Products:
         let query = {};
+        let queryCondition = false;
+
         // Filtering for Price:
+        let priceQueryCondition = {};
         if (req.query.price) {
-            query = { price: { $lte: Number(req.query.price) } }
+            queryCondition = true;
+            priceQueryCondition = { price: { $lte: Number(req.query.price) } }
         }
 
         // Filtering for Rating:
+        let RatingQueryCondition = {};
         if (req.query.rating) {
-            query = { rating: { $in: req.query.rating.split(",") } }
+            queryCondition = true;
+            RatingQueryCondition = { rating: { $in: req.query.rating.split(",") } }
+        }
+
+        // If there is a Query to filter requests:..
+        if (queryCondition) {
+            //... then Combining the Price AND rating Operator:
+            query = {
+                $and: [priceQueryCondition, RatingQueryCondition]
+            }
         }
 
 
