@@ -43,6 +43,16 @@ const getProducts = async (req, res, next) => {
             }
         }
 
+
+        // Logic used to Get Product by Filtering Through Attribute on page:
+        let attrsQueryCondition = [];
+        if (req.query.attrs) {
+            // In attrs array, RAM = key and 1TB = value. RAM-1TB-2TB-3TB, color-blue-red
+            // [RAM-1TB-2TB-3TB, color-blue-red]
+            attrsQueryCondition = req.query.attrs.split(",");
+
+        }
+
         // If there is a Query to filter requests:..
         if (queryCondition) {
             //... then Combining the Price AND rating Operator:
