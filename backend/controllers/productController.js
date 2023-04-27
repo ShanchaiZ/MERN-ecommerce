@@ -49,7 +49,19 @@ const getProducts = async (req, res, next) => {
         if (req.query.attrs) {
             // In attrs array, RAM = key and 1TB = value. RAM-1TB-2TB-3TB, color-blue-red
             // [RAM-1TB-2TB-3TB, color-blue-red]
-            attrsQueryCondition = req.query.attrs.split(",");
+            attrsQueryCondition = req.query.attrs.split(",").reduce((acc, item) => {
+                if (item) {
+                    let a = item.split("-"); //OUTPUT: 2 attributes arrays of key and values of [ 'RAM', '1TB', '2TB', '3TB' ] and [ ' color', 'blue', 'red' ]
+                    let values = [...a];// Same output of 2 attributes arrays of key and values of [ 'RAM', '1TB', '2TB', '3TB' ] and [ ' color', 'blue', 'red' ]
+                    values.shift(); // removes first item in each array. left with ['1TB', '2TB', '3TB' ] and [ 'blue', 'red' ]
+                    let a1 = {
+                        attrs: { $eleMatch: { key: a[0], value: { $in: values } } } //makes it so we only want products that only have those attributes
+                    }
+                    acc.push(a1); //initially the accumulator 'acc' is empty => .push a1 onto it and need to return for .reduce to work
+                    console.dir(acc, { depth: null });
+                    return acc;
+                } else return acc;
+            }, [])
 
         }
 
