@@ -22,7 +22,7 @@ const getProducts = async (req, res, next) => {
             RatingQueryCondition = { rating: { $in: req.query.rating.split(",") } }
         }
 
-        // Variable used for searching Products:
+        // Logic used to Get Product from Specific Category using Search Bar:
         let categoryQueryCondition = {}
         const categoryName = req.params.categoryName || "";
         if (categoryName) {
@@ -30,6 +30,17 @@ const getProducts = async (req, res, next) => {
             let a = categoryName.replaceAll(",", "/");
             var regEx = new RegExp("^" + a); // this expression created forward slashes with regExp in the slash => /^a/ and carrot sign => begining of string
             categoryQueryCondition = { category: regEx }
+        }
+
+        // Logic used to Get Product from Specific Category using the filtering feature on page:
+        if (req.query.category) {
+            queryCondition = true;
+            let a = req.query.category.split(",").map((item) => {
+                if (item) return regEx = new RegExp("^" + item);
+            })
+            categoryQueryCondition = {
+                category: { $in: a }
+            }
         }
 
         // If there is a Query to filter requests:..
