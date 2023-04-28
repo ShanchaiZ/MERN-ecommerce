@@ -55,21 +55,22 @@ const getProducts = async (req, res, next) => {
                     let values = [...a];// Same output of 2 attributes arrays of key and values of [ 'RAM', '1TB', '2TB', '3TB' ] and [ ' color', 'blue', 'red' ]
                     values.shift(); // removes first item in each array. left with ['1TB', '2TB', '3TB' ] and [ 'blue', 'red' ]
                     let a1 = {
-                        attrs: { $eleMatch: { key: a[0], value: { $in: values } } } //makes it so we only want products that only have those attributes
+                        attrs: { $elemMatch: { key: a[0], value: { $in: values } } } //makes it so we only want products that only have those attributes
                     }
                     acc.push(a1); //initially the accumulator 'acc' is empty => .push a1 onto it and need to return for .reduce to work
-                    console.dir(acc, { depth: null });
+                    // console.dir(acc, { depth: null });
                     return acc;
                 } else return acc;
-            }, [])
-
+            }, []);
+            // console.dir(attrsQueryCondition, { depth: null });
+            queryCondition = true;
         }
 
         // If there is a Query to filter requests:..
         if (queryCondition) {
             //... then Combining the Price AND rating Operator:
             query = {
-                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition]
+                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition, ...attrsQueryCondition]
             }
         }
 
