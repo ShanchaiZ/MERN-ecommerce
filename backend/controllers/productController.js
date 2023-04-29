@@ -66,28 +66,6 @@ const getProducts = async (req, res, next) => {
             queryCondition = true;
         }
 
-        // Logic used Get Products by Searching in Search Bar:
-        const searchQuery = req.params.searchQuery || "";
-        let searchQueryCondition = {};
-        let select = {};
-        if (searchQuery) {
-            queryCondition = true;
-            searchQueryCondition = { $text: { $search: searchQuery } }
-            select = {
-                score: { $meta: "textScore" } // this represents the accuracy of search results!
-            }
-            // sort = { score: { $meta: "textScore" } } // this allows sorting in descending order through search result accuracy
-        }
-
-        // If there is a Query to filter requests:..
-        if (queryCondition) {
-            //... then Combining the Price AND rating Operator:
-            query = {
-                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition, searchQueryCondition, ...attrsQueryCondition]
-            }
-        }
-
-
         // Variable used for Pagination and Sorting Products:
         const pageNum = Number(req.query.pageNum) || 1; //number inputted by user or by default set to 1.
 
@@ -99,6 +77,27 @@ const getProducts = async (req, res, next) => {
             let sortOpt = sortOption.split("_");
             sort = { [sortOpt[0]]: Number(sortOpt[1]) };
             console.log(sort);
+        }
+
+        // Logic used Get Products by Searching in Search Bar:
+        const searchQuery = req.params.searchQuery || "";
+        let searchQueryCondition = {};
+        let select = {};
+        if (searchQuery) {
+            queryCondition = true;
+            searchQueryCondition = { $text: { $search: searchQuery } }
+            select = {
+                score: { $meta: "textScore" } // this represents the accuracy of search results!
+            }
+            sort = { score: { $meta: "textScore" } } // this allows sorting in descending order through search result accuracy
+        }
+
+        // If there is a Query to filter requests:..
+        if (queryCondition) {
+            //... then Combining the Price AND rating Operator:
+            query = {
+                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition, searchQueryCondition, ...attrsQueryCondition]
+            }
         }
 
 
