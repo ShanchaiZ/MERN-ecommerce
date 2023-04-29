@@ -69,9 +69,14 @@ const getProducts = async (req, res, next) => {
         // Logic used Get Products by Searching in Search Bar:
         const searchQuery = req.params.searchQuery || "";
         let searchQueryCondition = {};
+        let select = {};
         if (searchQuery) {
             queryCondition = true;
             searchQueryCondition = { $text: { $search: searchQuery } }
+            select = {
+                score: { $meta: "textScore" } // this represents the accuracy of search results!
+            }
+            // sort = { score: { $meta: "textScore" } } // this allows sorting in descending order through search result accuracy
         }
 
         // If there is a Query to filter requests:..
@@ -97,13 +102,13 @@ const getProducts = async (req, res, next) => {
         }
 
 
-
-
+        // Main Database Queries for finding products:
         const totalProducts = await Product.countDocuments(query); //provides a total count of all products in a database.
         const products = await Product.find(query) //finds all products in the db hence the empty {}
             .sort(sort)//instead of static "asc" string to sort in name in ascending order, 1 also works(Note: -1 = descending order). 
             .limit(recordsPerPage) //limits the amount of product results that can be displayed; used for pagination
-            .skip(recordsPerPage * (pageNum - 1)); //skips over the number of records in the argument and displays results after the skipped number indicated by recordsPerPage
+            .skip(recordsPerPage * (pageNum - 1)) //skips over the number of records in the argument and displays results after the skipped number indicated by recordsPerPage
+            .select(select)//select is used to exclude fields from results.
 
         res.json({
             products,
