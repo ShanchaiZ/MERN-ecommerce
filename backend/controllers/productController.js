@@ -66,11 +66,19 @@ const getProducts = async (req, res, next) => {
             queryCondition = true;
         }
 
+        // Logic used Get Products by Searching in Search Bar:
+        const searchQuery = req.params.searchQuery || "";
+        let searchQueryCondition = {};
+        if (searchQuery) {
+            queryCondition = true;
+            searchQueryCondition = { $text: { $search: searchQuery } }
+        }
+
         // If there is a Query to filter requests:..
         if (queryCondition) {
             //... then Combining the Price AND rating Operator:
             query = {
-                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition, ...attrsQueryCondition]
+                $and: [priceQueryCondition, RatingQueryCondition, categoryQueryCondition, searchQueryCondition, ...attrsQueryCondition]
             }
         }
 
@@ -87,6 +95,8 @@ const getProducts = async (req, res, next) => {
             sort = { [sortOpt[0]]: Number(sortOpt[1]) };
             console.log(sort);
         }
+
+
 
 
         const totalProducts = await Product.countDocuments(query); //provides a total count of all products in a database.
