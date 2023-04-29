@@ -66,6 +66,7 @@ const getProducts = async (req, res, next) => {
             queryCondition = true;
         }
 
+
         // Variable used for Pagination and Sorting Products:
         const pageNum = Number(req.query.pageNum) || 1; //number inputted by user or by default set to 1.
 
@@ -119,4 +120,15 @@ const getProducts = async (req, res, next) => {
     }
 };
 
-module.exports = getProducts;
+
+// Get Product AND its associated Reviews by ID:
+const getProductbyId = async (req, res, next) => {
+    try {
+        const product = await Product.findById(req.params.id).populate("reviews").orFail();
+        res.json(product);
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = { getProducts, getProductbyId };
