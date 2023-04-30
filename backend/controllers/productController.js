@@ -148,7 +148,10 @@ const getBestsellers = async (req, res, next) => {
 }
 
 
-//Getting Products from Adminstrator:
+// Admin:
+// ==================================================================================================
+
+//Getting Products from Admin:
 const adminGetProducts = async (req, res, next) => {
     try {
         const products = await Product.find({}) //find all products
@@ -161,4 +164,16 @@ const adminGetProducts = async (req, res, next) => {
 }
 
 
-module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts };
+// Deleting Products by Admin:
+const adminDeleteProducts = async (req, res, next) => {
+    try {
+        const product = await Product.findById(req.params.id).orFail();
+        await product.remove;
+        res.json({message: "product removed"});
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts };
