@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts } = require("../controllers/productController");
+const { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct } = require("../controllers/productController");
 
 
 // USER ROUTES:
@@ -35,6 +35,8 @@ router.get("/admin", adminGetProducts);
 router.delete("/admin/:id", adminDeleteProducts);
 
 
+// POST Route: Creating Product in the Admin Form:
+router.post("/admin", adminCreateProduct);
 
 
 module.exports = router;

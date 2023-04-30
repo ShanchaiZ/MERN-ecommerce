@@ -169,11 +169,37 @@ const adminDeleteProducts = async (req, res, next) => {
     try {
         const product = await Product.findById(req.params.id).orFail();
         await product.remove;
-        res.json({message: "product removed"});
+        res.json({ message: "product removed" });
     } catch (error) {
         next(error)
     }
 }
 
 
-module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts };
+// Create a New Product by Admin:
+const adminCreateProduct = async (req, res, next) => {
+    try {
+        const product = new Product();
+        const { name, description, count, price, category, attributesTable } = req.body;
+        product.name = name;
+        product.description = description;
+        product.count = count;
+        product.price = price;
+        product.category = category;
+        if (attributesTable.length > 0) {
+            attributesTable.map((item) => {
+                product.attrs.push(item)
+            })
+        }
+        await product.save();
+
+        res.json({
+            message: "product created",
+            productId: product._id
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct };
