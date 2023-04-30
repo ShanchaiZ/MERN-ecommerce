@@ -147,4 +147,18 @@ const getBestsellers = async (req, res, next) => {
     }
 }
 
-module.exports = { getProducts, getProductbyId, getBestsellers };
+
+//Getting Products from Adminstrator:
+const adminGetProducts = async (req, res, next) => {
+    try {
+        const products = await Product.find({}) //find all products
+            .sort({ category: 1 }) //Sort the Category in ascending order
+            .select("name price category"); //only show selected fields
+        return res.json(products);
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts };
