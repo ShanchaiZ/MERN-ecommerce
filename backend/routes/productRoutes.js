@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getProducts, getProductbyId } = require("../controllers/productController");
+const { getProducts, getProductbyId, getBestsellers } = require("../controllers/productController");
 
 
 // GET Route: Using Search Bar to search for Particular Category:
@@ -15,6 +15,9 @@ router.get("/search/:searchQuery", getProducts);
 
 // GET Route: all Products:
 router.get("/", getProducts);
+
+// GET Route: the bestsellers in the banner:
+router.get("/bestsellers", getBestsellers);
 
 //GET route: Get Product details by ID:
 router.get("/:id", getProductbyId);

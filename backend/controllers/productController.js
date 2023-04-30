@@ -131,4 +131,9 @@ const getProductbyId = async (req, res, next) => {
     }
 }
 
-module.exports = { getProducts, getProductbyId };
+// Get Bestsellers Product:
+const getBestsellers = async (req, res, next) => {
+    res.send("This is best selling products!")
+}
+
+module.exports = { getProducts, getProductbyId, getBestsellers };
