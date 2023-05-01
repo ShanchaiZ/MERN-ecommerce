@@ -230,6 +230,16 @@ const adminUpdateProduct = async (req, res, next) => {
     }
 }
 
+// POST Route: Uploading Images when Creating new Product:
+const adminUpload = async (req, res, next) => {
+    try {
+        if (!req.files || !!req.files.images === false) {
+            return res.status(400).send("No files were uploaded!")
 
+        }
+    } catch (error) {
+        next(error)
+    }
+}
 
-module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct };
+module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct, adminUpload };

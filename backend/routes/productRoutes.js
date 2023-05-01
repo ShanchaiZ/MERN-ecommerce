@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct } = require("../controllers/productController");
+const { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct, adminUpload } = require("../controllers/productController");
 
 
 // USER ROUTES:
@@ -41,5 +41,8 @@ router.put("/admin/:id", adminUpdateProduct);
 // POST Route: Creating Product in the Admin Form:
 router.post("/admin", adminCreateProduct);
 
+
+// POST Route: Uploading Images when Creating new Product:
+router.post("/admin/upload", adminUpload);
 
 module.exports = router;
