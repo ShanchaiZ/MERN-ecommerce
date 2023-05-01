@@ -202,4 +202,34 @@ const adminCreateProduct = async (req, res, next) => {
     }
 }
 
-module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct };
+// Update a New Product by Admin (similar to Create a product):
+const adminUpdateProduct = async (req, res, next) => {
+    try {
+        const product = await Product.findById(req.params.id).orFail();
+        const { name, description, count, price, category, attributesTable } = req.body;
+        product.name = name || product.name; //if there is no new name, then use name value.
+        product.description = description || product.description;
+        product.count = count || product.count;
+        product.price = price || product.price;
+        product.category = category || product.category;
+        if (attributesTable.length > 0) {
+            product.attrs = [];
+            attributesTable.map((item) => {
+                product.attrs.push(item)
+            })
+        } else {
+            product.attrs = [];
+        }
+        await product.save();
+
+        res.json({
+            message: "product updated"
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+
+module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct };
