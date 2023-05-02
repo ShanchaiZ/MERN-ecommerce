@@ -1,5 +1,6 @@
 //Installed Dependencies:
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const app = express();
 const port = 3001;
 
@@ -13,10 +14,9 @@ connectDB();
 // Middleware:
 //====================================================================
 app.use(express.json()); //used to parse json object for express to read from each request
+app.use(fileUpload()); //used for uploading files
 
 app.use("/api", apiRoutes);
-
-
 
 //Routes:
 //=====================================================================

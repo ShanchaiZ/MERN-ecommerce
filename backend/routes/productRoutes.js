@@ -37,12 +37,11 @@ router.delete("/admin/:id", adminDeleteProducts);
 // PUT Route: Update a Product by the Admin:
 router.put("/admin/:id", adminUpdateProduct);
 
+// POST Route: Uploading Images when Creating new Product:
+router.post("/admin/upload", adminUpload);
 
 // POST Route: Creating Product in the Admin Form:
 router.post("/admin", adminCreateProduct);
 
-
-// POST Route: Uploading Images when Creating new Product:
-router.post("/admin/upload", adminUpload);
 
 module.exports = router;
