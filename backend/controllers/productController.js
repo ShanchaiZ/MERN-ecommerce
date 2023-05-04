@@ -247,6 +247,7 @@ const adminUpload = async (req, res, next) => {
 
         //specify where the uploaded images is saved in server
         const path = require("path");
+        const { v4: uuidv4 } = require("uuid");
 
         let imagesTable = [];
         // If there is multiple image upload:
@@ -257,10 +258,10 @@ const adminUpload = async (req, res, next) => {
         }
 
         for (let image of imagesTable) {
-            console.log(image);
             console.log(path.extname(image.name));
+            console.log(uuidv4());
         }
-        res.send("Thank you for uploading " + req.files.images.length + " images!");
+        res.send("Thank you for uploading your images!");
 
     } catch (error) {
         next(error)
