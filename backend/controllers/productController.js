@@ -250,6 +250,9 @@ const adminUpload = async (req, res, next) => {
         const { v4: uuidv4 } = require("uuid");
         const uploadDirectory = path.resolve(__dirname, "../../frontend", "public", "images", "products");
 
+        // find the product that user wants to update for image upload:
+        let product = await Product.findById(req.query.productId).orFail();
+
         let imagesTable = [];
         // If there is multiple image upload:
         if (Array.isArray(req.files.images)) {
@@ -259,13 +262,17 @@ const adminUpload = async (req, res, next) => {
         }
 
         for (let image of imagesTable) {
-            var uploadPath = uploadDirectory + "/" + uuidv4() + path.extname(image.name);
+            var fileName = uuidv4() + path.extname(image.name);
+            var uploadPath = uploadDirectory + "/" + fileName;
+            // attach the image to the product at upload:
+            product.images.push({ path: "/images/products/" + fileName });
             image.mv(uploadPath, function (err) {
                 if (err) {
                     return res.status(500).send(err)
                 }
             })
         }
+        await product.save();
         return res.send("Thank you for uploading your images!");
 
     } catch (error) {
