@@ -241,16 +241,27 @@ const adminUpload = async (req, res, next) => {
 
         // Image Validation imported from Utils:
         const validateResult = imageValidate(req.files.images);
-        if (validateResult.error){
+        if (validateResult.error) {
             return res.status(400).send(validateResult.error);
         }
 
+        //specify where the uploaded images is saved in server
+        const path = require("path");
+
+        let imagesTable = [];
         // If there is multiple image upload:
         if (Array.isArray(req.files.images)) {
-            res.send("Thank you for uploading " + req.files.images.length + " images!");
+            imagesTable = req.files.images;
         } else {
-            res.send("Thank you for your image upload!");
+            imagesTable.push(req.files.images)
         }
+
+        for (let image of imagesTable) {
+            console.log(image);
+            console.log(path.extname(image.name));
+        }
+        res.send("Thank you for uploading " + req.files.images.length + " images!");
+
     } catch (error) {
         next(error)
     }
