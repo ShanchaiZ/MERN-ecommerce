@@ -20,8 +20,7 @@ const imageValidate = (images) => {
         if (!mimetype) return { error: "Incorrect file extension (should be jpg, jpeg, or png)" }
     }
 
-
-    return { error: false }
+    return { error: false } //means there is no errors!
 }
 
 
