@@ -1,6 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct, adminUpload } = require("../controllers/productController");
+const {
+    getProducts,
+    getProductbyId,
+    getBestsellers,
+    adminGetProducts,
+    adminDeleteProducts,
+    adminCreateProduct,
+    adminUpdateProduct,
+    adminUpload,
+    adminDeleteProductImage
+} = require("../controllers/productController");
 
 
 // USER ROUTES:
@@ -33,6 +43,9 @@ router.get("/admin", adminGetProducts);
 
 // Delete Route: Deleting Products by the Admin:
 router.delete("/admin/:id", adminDeleteProducts);
+
+// Delete Route: Deleting Product Image by the Admin:
+router.delete("/admin/image/:imagePath/:productId", adminDeleteProductImage);
 
 // PUT Route: Update a Product by the Admin:
 router.put("/admin/:id", adminUpdateProduct);

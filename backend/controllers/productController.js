@@ -280,4 +280,16 @@ const adminUpload = async (req, res, next) => {
     }
 }
 
-module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct, adminUpload };
+
+// Delete Route: Deleting Product Image by the Admin:
+const adminDeleteProductImage = async (req, res, next) => {
+    const imagePath = decodeURIComponent(req.params.imagePath);
+
+    const path = require("path");
+    const finalPath = path.resolve("../frontend/public") + imagePath
+    console.log(finalPath);
+
+    return res.end();
+}
+
+module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct, adminUpload, adminDeleteProductImage };
