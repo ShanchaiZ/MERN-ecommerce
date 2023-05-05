@@ -283,13 +283,28 @@ const adminUpload = async (req, res, next) => {
 
 // Delete Route: Deleting Product Image by the Admin:
 const adminDeleteProductImage = async (req, res, next) => {
-    const imagePath = decodeURIComponent(req.params.imagePath);
 
-    const path = require("path");
-    const finalPath = path.resolve("../frontend/public") + imagePath
-    console.log(finalPath);
+    try {
+        const imagePath = decodeURIComponent(req.params.imagePath);
 
-    return res.end();
+        const path = require("path");
+        const finalPath = path.resolve("../frontend/public") + imagePath
+
+        const fs = require("fs");
+        fs.unlink(finalPath, (error) => {
+            if (error) {
+                res.status(500).send(error);
+            }
+        })
+
+        // Finding the product and updating it by removing its path pull operator:
+        await Product.findOneAndUpdate({ _id: req.params.productId }, { $pull: { images: { path: imagePath } } }).orFail();
+        return res.end();
+
+    } catch (error) {
+        next(error);
+    }
+
 }
 
 module.exports = { getProducts, getProductbyId, getBestsellers, adminGetProducts, adminDeleteProducts, adminCreateProduct, adminUpdateProduct, adminUpload, adminDeleteProductImage };
