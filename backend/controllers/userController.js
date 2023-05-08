@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const { hashPassword } = require("../utils/hashPassword");
+const generateAuthToken = require("../utils/generateAuthToken");
 
 
 // Find all Users:
@@ -33,9 +34,11 @@ const registerUser = async (req, res, next) => {
                 password: hashedPassword
             });
 
-            // After User Registration (Cookie, Server Status and Response):
+            // After User Registration 
+            // (Cookie (imported the jwt auth function with necessary user data as its function arguments), 
+            // Server Status and Response):
             res
-                .cookie("access_token", "dummy access token", {
+                .cookie("access_token", generateAuthToken(user._id, user.name, user.lastName, user.email, user.isAdmin), {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                     sameSite: "strict"
