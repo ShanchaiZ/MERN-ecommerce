@@ -2,6 +2,7 @@ const User = require("../models/UserModel");
 const { hashPassword } = require("../utils/hashPassword");
 
 
+// Find all Users:
 const getUsers = async (req, res, next) => {
     try {
         const users = await User.find({}).select("-password");
@@ -11,6 +12,8 @@ const getUsers = async (req, res, next) => {
     }
 };
 
+
+// Create a New User:
 const registerUser = async (req, res, next) => {
     try {
         const { name, lastName, email, password } = req.body;
@@ -20,7 +23,7 @@ const registerUser = async (req, res, next) => {
 
         const userExists = await User.findOne({ email });
         if (userExists) {
-            return res.status(400).json({ error: "user exists" });
+            return res.status(400).send("user exists");
         } else {
             const hashedPassword = hashPassword(password);
             const user = await User.create({
@@ -29,7 +32,17 @@ const registerUser = async (req, res, next) => {
                 email: email.toLowerCase(),
                 password: hashedPassword
             });
-            res.status(201).send(user);
+            res.status(201)
+                .json({
+                    success: "User Created",
+                    userCreated: {
+                        _id: user._id,
+                        name: user.name,
+                        lastName: user.lastName,
+                        email: user.email,
+                        isAdmin: user.isAdmin
+                    },
+                });
         }
 
     } catch (error) {
