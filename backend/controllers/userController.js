@@ -1,7 +1,13 @@
+const User = require("../models/UserModel");
 
 
-const getUsers = (req, res) => {
-    res.send("Handling User Routes! for example: get all Users on this app!");
+const getUsers = async (req, res, next) => {
+    try {
+        const users = await User.find({}).select("-password");
+        return res.json(users);
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports = getUsers;
