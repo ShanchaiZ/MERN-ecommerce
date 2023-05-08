@@ -32,7 +32,15 @@ const registerUser = async (req, res, next) => {
                 email: email.toLowerCase(),
                 password: hashedPassword
             });
-            res.status(201)
+
+            // After User Registration (Cookie, Server Status and Response):
+            res
+                .cookie("access_token", "dummy access token", {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: "strict"
+                })
+                .status(201)
                 .json({
                     success: "User Created",
                     userCreated: {
