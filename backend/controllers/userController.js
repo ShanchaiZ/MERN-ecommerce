@@ -59,6 +59,19 @@ const registerUser = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
+
+
+// User Login:
+const loginUser = async (req, res, next) => {
+    try {
+        const { email, password, doNotLogout } = req.body;
+        if (!(email && password)) {
+            return res.status(400).send("All fields are required")
+        }
+    } catch (error) {
+        next(error);
+    }
 }
 
-module.exports = { getUsers, registerUser };
+module.exports = { getUsers, registerUser, loginUser };
