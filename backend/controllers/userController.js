@@ -1,5 +1,5 @@
 const User = require("../models/UserModel");
-const { hashPassword } = require("../utils/hashPassword");
+const { hashPassword, comparePasswords } = require("../utils/hashPassword");
 const generateAuthToken = require("../utils/generateAuthToken");
 
 
@@ -78,9 +78,9 @@ const loginUser = async (req, res, next) => {
             return res.status(400).send("All fields are required")
         }
 
-        // If User with same email:
+        // If User with same email and matching passwords:
         const user = await User.findOne({ email });
-        if (user) { //compare the passwords later. At the moment only compare emails and provide user with cookie for successful login
+        if (user && comparePasswords(password, user.password)) {
             let cookieParams = {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
