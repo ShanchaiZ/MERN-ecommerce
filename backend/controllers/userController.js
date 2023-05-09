@@ -38,11 +38,19 @@ const registerUser = async (req, res, next) => {
             // (Cookie (imported the jwt auth function with necessary user data as its function arguments), 
             // Server Status and Response):
             res
-                .cookie("access_token", generateAuthToken(user._id, user.name, user.lastName, user.email, user.isAdmin), {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === "production",
-                    sameSite: "strict"
-                })
+                .cookie("access_token",
+                    generateAuthToken(
+                        user._id,
+                        user.name,
+                        user.lastName,
+                        user.email,
+                        user.isAdmin
+                    ),
+                    {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === "production",
+                        sameSite: "strict"
+                    })
                 .status(201)
                 .json({
                     success: "User Created",
@@ -69,9 +77,46 @@ const loginUser = async (req, res, next) => {
         if (!(email && password)) {
             return res.status(400).send("All fields are required")
         }
+
+        // If User with same email:
+        const user = await User.findOne({ email });
+        if (user) { //compare the passwords later. At the moment only compare emails and provide user with cookie for successful login
+            let cookieParams = {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "strict"
+            };
+
+            if (doNotLogout) {
+                cookieParams = { ...cookieParams, maxAge: 1000 * 60 * 60 * 24 * 7 }; //where 1000ms = 1sec
+            }
+            return res
+                .cookie("access_token",
+                    generateAuthToken(
+                        user._id,
+                        user.name,
+                        user.lastName,
+                        user.email,
+                        user.isAdmin
+                    ),
+                    cookieParams)
+                .json({
+                    success: "User Logged in",
+                    userLoggedIn: {
+                        _id: user._id,
+                        name: user.name,
+                        lastName: user.lastName,
+                        email: user.email,
+                        isAdmin: user.isAdmin,
+                        doNotLogout
+                    }
+                });
+        } else {
+            return res.status(401).send("Incorrect Credentials");
+        }
     } catch (error) {
         next(error);
     }
-}
+};
 
 module.exports = { getUsers, registerUser, loginUser };
