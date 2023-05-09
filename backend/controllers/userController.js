@@ -87,6 +87,7 @@ const loginUser = async (req, res, next) => {
                 sameSite: "strict"
             };
 
+            // If Do not logout is selected by user in the front end:
             if (doNotLogout) {
                 cookieParams = { ...cookieParams, maxAge: 1000 * 60 * 60 * 24 * 7 }; //where 1000ms = 1sec
             }
