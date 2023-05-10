@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getUsers, registerUser, loginUser } = require("../controllers/userController");
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
+const { getUsers, registerUser, loginUser, updateUserProfile } = require("../controllers/userController");
 
 
 // USER ROUTES:
@@ -12,8 +13,20 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 
+// User Logged in Routes:
+// ===================================================================================================
+// Middleware: Verify if user is logged in:
+router.use(verifyIsLoggedIn);
+
+// PUT Route: Update User Profile:
+router.put("/profile", updateUserProfile);
+
+
 // ADMIN ROUTES:
 // ===================================================================================================
+// Middleware: Verify if user is logged in AS AN ADMIN to use Admin routes:
+router.use(verifyIsAdmin);
+
 // GET Route: Find all users:
 router.get("/", getUsers);
 

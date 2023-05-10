@@ -120,4 +120,15 @@ const loginUser = async (req, res, next) => {
     }
 };
 
-module.exports = { getUsers, registerUser, loginUser };
+
+// Update User profile data:
+const updateUserProfile = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id).orFail();
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile };
