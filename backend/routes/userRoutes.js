@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUsers, registerUser, loginUser, updateUserProfile } = require("../controllers/userController");
+const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile } = require("../controllers/userController");
 
 
 // USER ROUTES:
@@ -21,6 +21,8 @@ router.use(verifyIsLoggedIn);
 // PUT Route: Update User Profile:
 router.put("/profile", updateUserProfile);
 
+// GET Route: Fetching User Profile for updating:
+router.get("/profile/:id", getUserProfile);
 
 // ADMIN PROTECTED ROUTES:
 // ===================================================================================================

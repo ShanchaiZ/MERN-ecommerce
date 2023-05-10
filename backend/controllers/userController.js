@@ -158,4 +158,14 @@ const updateUserProfile = async (req, res, next) => {
     }
 };
 
-module.exports = { getUsers, registerUser, loginUser, updateUserProfile };
+// Fetching User data from Database:
+const getUserProfile = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id).orFail();
+        return res.send(user);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile };
