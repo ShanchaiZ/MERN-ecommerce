@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 
+
+// Verify if User is Logged in:
 const verifyIsLoggedIn = (req, res, next) => {
     try {
         // Is there a Token?:
@@ -22,4 +24,14 @@ const verifyIsLoggedIn = (req, res, next) => {
     }
 };
 
-module.exports = { verifyIsLoggedIn };
+
+// Verify is User is as an ADMIN:
+const verifyIsAdmin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next();
+    } else {
+        return res.status(401).send("Unauthorized Access. Admin required");
+    }
+}
+
+module.exports = { verifyIsLoggedIn, verifyIsAdmin };

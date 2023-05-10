@@ -15,7 +15,7 @@ const {
 
 // MIDDLEWARE:
 // ===================================================================================================
-const { verifyIsLoggedIn } = require("../middleware/verifyAuthToken");
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
 
 
 // USER ROUTES:
@@ -45,6 +45,9 @@ router.get("/get-one/:id", getProductbyId);
 
 // Middleware: to verify if user is logged in:
 router.use(verifyIsLoggedIn);
+
+// Middleware: to verify if user is logged in AS AN ADMIN:
+router.use(verifyIsAdmin);
 
 // GET Route: Getting Product by Admin: 
 router.get("/admin", adminGetProducts);
