@@ -1,10 +1,29 @@
+// Dependencies and Variables:
+// ====================================================================================================
 const express = require("express");
 const router = express.Router();
 const { getCategories, newCategory, deleteCategory, saveAttr } = require("../controllers/categoryController");
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
 
+
+// ROUTES:
+// ===================================================================================================
 //GET ROUTE: Find all Categories:
 router.get("/", getCategories);
 
+
+
+// MIDDLEWARE:
+// ===================================================================================================
+//Verify if user is logged in:
+router.use(verifyIsLoggedIn);
+
+//Verify if user is logged in AS AN ADMIN:
+router.use(verifyIsAdmin);
+
+
+// PROTECTED ROUTES:
+//===================================================================================================
 // POST ROUTE: Create a New Category:
 router.post("/", newCategory);
 

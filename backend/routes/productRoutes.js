@@ -1,3 +1,5 @@
+// Dependencies and Variables:
+// ====================================================================================================
 const express = require("express");
 const router = express.Router();
 const {
@@ -12,9 +14,6 @@ const {
     adminDeleteProductImage
 } = require("../controllers/productController");
 
-
-// MIDDLEWARE:
-// ===================================================================================================
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
 
 
@@ -40,15 +39,16 @@ router.get("/bestsellers", getBestsellers);
 router.get("/get-one/:id", getProductbyId);
 
 
-// ADMIN ROUTES:
+// MIDDLEWARES:
 // ===================================================================================================
-
-// Middleware: to verify if user is logged in:
+// Verify if user is logged in:
 router.use(verifyIsLoggedIn);
 
-// Middleware: to verify if user is logged in AS AN ADMIN:
+// Verify if user is logged in AS AN ADMIN:
 router.use(verifyIsAdmin);
 
+//PROTECTED ADMIN ROUTES:
+// ===================================================================================================
 // GET Route: Getting Product by Admin: 
 router.get("/admin", adminGetProducts);
 
