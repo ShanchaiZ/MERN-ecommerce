@@ -43,7 +43,7 @@ router.get("/get-one/:id", getProductbyId);
 // ADMIN ROUTES:
 // ===================================================================================================
 
-// Middleware: to verify if user is logged in as admin to have access to admin routes:
+// Middleware: to verify if user is logged in:
 router.use(verifyIsLoggedIn);
 
 // GET Route: Getting Product by Admin: 

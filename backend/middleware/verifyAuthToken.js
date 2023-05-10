@@ -12,13 +12,11 @@ const verifyIsLoggedIn = (req, res, next) => {
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
             req.user = decoded;
-            return next();
+            next();
         } catch (error) {
             return res.status(401).send("Unauthorized Access. Invalid Token");
         }
 
-
-        next();
     } catch (error) {
         next(error);
     }
