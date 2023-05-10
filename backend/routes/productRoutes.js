@@ -13,6 +13,11 @@ const {
 } = require("../controllers/productController");
 
 
+// MIDDLEWARE:
+// ===================================================================================================
+const { verifyIsLoggedIn } = require("../middleware/verifyAuthToken");
+
+
 // USER ROUTES:
 // ===================================================================================================
 
@@ -37,6 +42,9 @@ router.get("/get-one/:id", getProductbyId);
 
 // ADMIN ROUTES:
 // ===================================================================================================
+
+// Middleware: to verify if user is logged in as admin to have access to admin routes:
+router.use(verifyIsLoggedIn);
 
 // GET Route: Getting Product by Admin: 
 router.get("/admin", adminGetProducts);
