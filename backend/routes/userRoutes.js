@@ -13,7 +13,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 
-// User Logged in Routes:
+// User Logged in Routes Protected:
 // ===================================================================================================
 // Middleware: Verify if user is logged in:
 router.use(verifyIsLoggedIn);
@@ -22,7 +22,7 @@ router.use(verifyIsLoggedIn);
 router.put("/profile", updateUserProfile);
 
 
-// ADMIN ROUTES:
+// ADMIN PROTECTED ROUTES:
 // ===================================================================================================
 // Middleware: Verify if user is logged in AS AN ADMIN to use Admin routes:
 router.use(verifyIsAdmin);

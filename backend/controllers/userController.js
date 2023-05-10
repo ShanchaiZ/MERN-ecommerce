@@ -137,9 +137,25 @@ const updateUserProfile = async (req, res, next) => {
         user.city = req.body.city;
         user.state = req.body.state;
 
+        // User Profile password Update:
+        if (req.body.password !== user.password) {
+            user.password = hashPassword(req.body.password);
+        }
+        // User Profile Updated for save in db:
+        await user.save();
+        return res.json({
+            success: "User Profile Updated",
+            userUpdated: {
+                _id: user._id,
+                name: user.name,
+                lastName: user.lastName,
+                email: user.email,
+                isAdmin: user.isAdmin,
+            }
+        });
     } catch (error) {
         next(error);
     }
-}
+};
 
 module.exports = { getUsers, registerUser, loginUser, updateUserProfile };
