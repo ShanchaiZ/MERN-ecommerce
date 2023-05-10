@@ -1,6 +1,7 @@
 //Installed Dependencies:
 const express = require("express");
 const fileUpload = require("express-fileupload");
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3001;
 
@@ -14,6 +15,7 @@ connectDB();
 // Middleware:
 //====================================================================
 app.use(express.json()); //used to parse json object for express to read from each request
+app.use(cookieParser()); //used to parse cookies for authentication and session logins
 app.use(fileUpload()); //used for uploading files
 
 app.use("/api", apiRoutes);

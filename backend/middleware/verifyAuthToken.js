@@ -2,7 +2,8 @@
 
 const verifyIsLoggedIn = (req, res, next) => {
     try {
-        console.log("Admin middleware here!");
+        const token = req.cookies.access_token;
+        console.log(token);
         next();
     } catch (error) {
         next(error);
