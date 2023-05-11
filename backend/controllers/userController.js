@@ -193,7 +193,12 @@ const writeReview = async (req, res, next) => {
         ]);
 
         const product = await Product.findById(req.params.productId).populate("reviews");
-        // res.send(product);
+
+        // If Product Already Reviewed:
+        const alreadyReviewed = product.reviews.find((r) => r.user._id.toString() === req.user._id.toString());
+        if (alreadyReviewed){
+            return res.status(400).send("Product already reviewed!");
+        }
 
         //Once a product is found in database with that ID:
         let prc = [...product.reviews];
@@ -204,7 +209,7 @@ const writeReview = async (req, res, next) => {
         if (product.reviews.length === 1) {
             product.rating = Number(rating);
             product.reviewsNumber = 1;
-            // otherwise there is already a review for this product:
+            // Otherwise, there is already a review for this product:
         } else {
             product.reviewsNumber = product.reviews.length;
             // used to calculate the average rating:
