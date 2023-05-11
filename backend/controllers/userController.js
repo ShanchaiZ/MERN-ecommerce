@@ -173,6 +173,10 @@ const getUserProfile = async (req, res, next) => {
 // Create a Review for a Product:
 const writeReview = async (req, res, next) => {
     try {
+
+        // To ensure BOTH database operations (Create  and Save) are completed/failed in sync:
+        const session = await Review.startSession();
+
         // get comment, rating from request. body:
         const { comment, rating } = req.body;
         // validate request:
@@ -183,6 +187,9 @@ const writeReview = async (req, res, next) => {
         const ObjectId = require("mongodb").ObjectId;
         let reviewId = new ObjectId();
 
+
+        session.startTransaction(); //First database transaction: Create a Review
+
         await Review.create([
             {
                 _id: reviewId,
@@ -190,13 +197,15 @@ const writeReview = async (req, res, next) => {
                 rating: Number(rating),
                 user: { _id: req.user._id, name: req.user.name + " " + req.user.lastName },
             }
-        ]);
+        ], { session: session });
 
-        const product = await Product.findById(req.params.productId).populate("reviews");
+        const product = await Product.findById(req.params.productId).populate("reviews").session(session);
 
         // If Product Already Reviewed:
         const alreadyReviewed = product.reviews.find((r) => r.user._id.toString() === req.user._id.toString());
-        if (alreadyReviewed){
+        if (alreadyReviewed) {
+            await session.abortTransaction(); // if a review is already created, no need to write again in db and...
+            session.endSession(); //...therefore end the session but if event is successfully completed then...
             return res.status(400).send("Product already reviewed!");
         }
 
@@ -215,10 +224,15 @@ const writeReview = async (req, res, next) => {
             // used to calculate the average rating:
             product.rating = prc.map((item) => Number(item.rating)).reduce((sum, item) => sum + item, 0) / product.reviews.length;
         }
-        await product.save();
+        await product.save(); //Second database transaction: Save Review in Database
+
+        //...If we successfully created and wrote in the database then:
+        await session.commitTransaction(); // ENSURES BOTH database operations are performed
+        session.endSession(); //Session and database transaction completed
 
         return res.send("Review created!");
     } catch (error) {
+        await session.abortTransaction(); //Abort database operations if any error to prevent desync database operations
         next(error);
     }
 }
