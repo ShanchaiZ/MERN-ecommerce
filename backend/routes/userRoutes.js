@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser } = require("../controllers/userController");
+const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser, deleteUser } = require("../controllers/userController");
 
 
 // USER ROUTES:
@@ -35,10 +35,14 @@ router.use(verifyIsAdmin);
 // GET Route: Find all users:
 router.get("/", getUsers);
 
-//GET Route: Get User Data for editing:
+//GET Route: Get User Data for editing by Admin:
 router.get("/:id", getUser);
 
-// PUT Route: Updating a User:
+// PUT Route: Updating a User by admin:
 router.put("/:id", updateUser);
+
+// DELETE Route: deleting a User by admin:
+router.delete("/:id", deleteUser);
+
 
 module.exports = router;

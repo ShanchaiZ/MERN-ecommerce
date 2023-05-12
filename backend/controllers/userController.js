@@ -264,4 +264,17 @@ const updateUser = async (req, res, next) => {
     }
 }
 
-module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser };
+// Delete a User by Admin:
+const deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id).orFail();
+        await user.deleteOne();
+        return res.send("User removed!!");
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser, deleteUser };
