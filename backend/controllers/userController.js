@@ -237,4 +237,15 @@ const writeReview = async (req, res, next) => {
     }
 }
 
-module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview };
+// Fetching User Data for editing by Admin:
+const getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id).select("name lastName email isAdmin").orFail();
+        return res.send(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser };

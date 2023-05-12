@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview } = require("../controllers/userController");
+const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser } = require("../controllers/userController");
 
 
 // USER ROUTES:
@@ -34,5 +34,8 @@ router.use(verifyIsAdmin);
 
 // GET Route: Find all users:
 router.get("/", getUsers);
+
+//GET Route: Get User Data for editing:
+router.get("/:id", getUser);
 
 module.exports = router;
