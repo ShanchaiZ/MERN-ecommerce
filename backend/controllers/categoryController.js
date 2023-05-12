@@ -46,7 +46,7 @@ const deleteCategory = async (req, res, next) => {
             const categoryExists = await Category.findOne({
                 name: decodeURIComponent(req.params.category)
             }).orFail()
-            await categoryExists.remove;
+            await categoryExists.deleteOne();
             res.json({ categoryDeleted: true });
         }
     } catch (error) {
