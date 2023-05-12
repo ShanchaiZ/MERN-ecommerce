@@ -170,7 +170,7 @@ const adminGetProducts = async (req, res, next) => {
 const adminDeleteProducts = async (req, res, next) => {
     try {
         const product = await Product.findById(req.params.id).orFail();
-        await product.remove;
+        await product.deleteOne();
         res.json({ message: "product removed" });
     } catch (error) {
         next(error)
