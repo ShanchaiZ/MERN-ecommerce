@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser } = require("../controllers/userController");
+const { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser } = require("../controllers/userController");
 
 
 // USER ROUTES:
@@ -37,5 +37,8 @@ router.get("/", getUsers);
 
 //GET Route: Get User Data for editing:
 router.get("/:id", getUser);
+
+// PUT Route: Updating a User:
+router.put("/:id", updateUser);
 
 module.exports = router;

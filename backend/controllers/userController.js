@@ -247,5 +247,21 @@ const getUser = async (req, res, next) => {
     }
 }
 
+// Updating a User details by Admin:
+const updateUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id).orFail();
+        user.name = req.body.name || user.name;
+        user.lastName = req.body.lastName || user.lastName;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin || user.isAdmin;
 
-module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser };
+        await user.save();
+
+        res.send("User profile updated");
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser };
