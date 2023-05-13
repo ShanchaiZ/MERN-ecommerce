@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUserOrders, getOrder, createOrder, updateOrderToPaid } = require("../controllers/orderController");
+const { getUserOrders, getOrder, createOrder, updateOrderToPaid, updateOrderToDelivered } = require("../controllers/orderController");
 
 
 // USER PROTECTED ROUTES:
@@ -26,6 +26,7 @@ router.put("/paid/:id", updateOrderToPaid);
 // Verify if user is logged in AS AN ADMIN:
 router.use(verifyIsAdmin);
 
-
+// PUT Route: Update Order to be delivered (Marked by Admin):
+router.put("/delivered/:id", updateOrderToDelivered);
 
 module.exports = router;
