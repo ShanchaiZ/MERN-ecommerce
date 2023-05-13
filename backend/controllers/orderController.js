@@ -93,6 +93,17 @@ const updateOrderToDelivered = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
 
-module.exports = { getUserOrders, getOrder, createOrder, updateOrderToPaid, updateOrderToDelivered };
+
+// Fetching Orders from all Users by Admin:
+const getOrders = async (req, res, next) => {
+    try {
+        const orders = await Order.find({}).populate("user", "-password").sort({ paymentMethod: "desc" });
+        res.send(orders);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getUserOrders, getOrder, createOrder, updateOrderToPaid, updateOrderToDelivered, getOrders };
