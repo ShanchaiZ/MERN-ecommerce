@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUserOrders, getOrder, createOrder } = require("../controllers/orderController");
+const { getUserOrders, getOrder, createOrder, updateOrderToPaid } = require("../controllers/orderController");
 
 
 // USER PROTECTED ROUTES:
@@ -17,6 +17,9 @@ router.get("/user/:id", getOrder);
 
 // POST Route: Create/Save an Order in database:
 router.post("/", createOrder);
+
+// PUT Route: Update Order to be paid:
+router.put("/paid/:id", updateOrderToPaid);
 
 //PROTECTED ADMIN ROUTES:
 // ===================================================================================================

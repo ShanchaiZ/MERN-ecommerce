@@ -67,4 +67,18 @@ const createOrder = async (req, res, next) => {
 };
 
 
-module.exports = { getUserOrders, getOrder, createOrder };
+// Update an Order (To be paid):
+const updateOrderToPaid = async (req, res, next) => {
+    try {
+        const order = await Order.findById(req.params.id).orFail();
+        order.isPaid = true;
+        order.paidAt = Date.now();
+
+        const updatedOrder = await order.save();
+        res.send(updatedOrder);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getUserOrders, getOrder, createOrder, updateOrderToPaid };
