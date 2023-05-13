@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
-const { getUserOrders, getOrder } = require("../controllers/orderController");
+const { getUserOrders, getOrder, createOrder } = require("../controllers/orderController");
 
 
 // USER PROTECTED ROUTES:
@@ -14,6 +14,9 @@ router.get("/", getUserOrders);
 
 // GET Route: User Fetches their orders:
 router.get("/user/:id", getOrder);
+
+// POST Route: Create/Save an Order in database:
+router.post("/", createOrder);
 
 //PROTECTED ADMIN ROUTES:
 // ===================================================================================================

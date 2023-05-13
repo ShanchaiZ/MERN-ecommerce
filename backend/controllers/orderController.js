@@ -23,4 +23,18 @@ const getOrder = async (req, res, next) => {
 }
 
 
-module.exports = {getUserOrders, getOrder};
+// Create an Order:
+const createOrder = async (req, res, next) => {
+    try {
+        const { cartItems, orderTotal, paymentMethod } = req.body;
+        if (!cartItems || !orderTotal || !paymentMethod) {
+            return res.status(400).send("All fields are required!");
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
+module.exports = { getUserOrders, getOrder, createOrder };
