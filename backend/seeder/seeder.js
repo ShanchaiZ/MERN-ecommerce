@@ -33,23 +33,33 @@ const importData = async () => {
         await User.collection.deleteMany({});
         await Order.collection.deleteMany({});
 
-        // Create Seeder Collection:
-        await Category.insertMany(categoryData);
 
-        const reviews = await Review.insertMany(reviewData);
-        const sampleProducts = productData.map((product) => {
-            reviews.map((review) =>{
-                product.reviews.push(review._id)
-            })
-            return {...product}
-        });
+        //Used to Seed Data...:
+        if (process.argv[2] !== "-d") {
+            // Create Seeder Collection:
+            await Category.insertMany(categoryData);
 
-        await Product.insertMany(sampleProducts);
-        await User.insertMany(userData);
-        await Order.insertMany(orderData);
+            const reviews = await Review.insertMany(reviewData);
+            const sampleProducts = productData.map((product) => {
+                reviews.map((review) => {
+                    product.reviews.push(review._id)
+                })
+                return { ...product }
+            });
 
-        console.log("Data Seeding is Successful!");
-        process.exit();
+            await Product.insertMany(sampleProducts);
+            await User.insertMany(userData);
+            await Order.insertMany(orderData);
+
+            console.log("Seeder Data is Imported Successfully!");
+            process.exit();
+            return
+        } else {
+            // ...Otherwise Delete Seed Data:
+            console.log("Seeder Data is Deleted Successfully!");
+            process.exit();
+        }
+
     } catch (error) {
         console.log("Data Seeding Error:", error)
     }
