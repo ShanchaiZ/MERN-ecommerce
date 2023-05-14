@@ -26,26 +26,26 @@ app.get("/", async (req, res, next) => {
     res.send("Hello Shoppers!!");
 });
 
-//Example of the routing path:
-// app.get("/api/products", (req, res) => {
-//     res.send("handling products routes")
-// })
-
-
 
 // Error Handler in console:
 // ===================================================================
 app.use((error, req, res, next) => {
-    console.error(error)
+    if (process.env.NODE_ENV === "development") {
+        console.error(error);
+    }
     next(error);
 })
 
 // Error Handler displayed in WebBrowser:
 app.use((error, req, res, next) => {
-    res.status(500).json({
-        message: error.message,
-        stack: error.stack
-    })
+    if (process.env.NODE_ENV == 'development') {
+        res.status(500).json({
+            message: error.message,
+            stack: error.stack
+        });
+    } else {
+        res.status(500).json({ message: error.message });
+    }
 });
 
 
