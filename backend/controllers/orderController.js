@@ -106,4 +106,27 @@ const getOrders = async (req, res, next) => {
     }
 };
 
-module.exports = { getUserOrders, getOrder, createOrder, updateOrderToPaid, updateOrderToDelivered, getOrders };
+// Fetching Orders from a particular Date by Admin:
+const getOrderForAnalysis = async (req, res, next) => {
+    try {
+        // set the start and end dates in this format where (0, 0, 0, 0) corresponds to (hours, minutes, seconds, milliseconds):
+        const start = new Date(req.params.date);
+        start.setHours(0, 0, 0, 0); 
+        const end = new Date(req.params.date);
+        end.setHours(23, 59, 59, 999);
+
+        // Searching order criteria:
+        const order = await Order.find({
+            createdAt: {
+                $gte: start,
+                $lte: end
+            }
+        }).sort({ createdAt: "asc" });
+        res.send(order);
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getUserOrders, getOrder, createOrder, updateOrderToPaid, updateOrderToDelivered, getOrders, getOrderForAnalysis };
