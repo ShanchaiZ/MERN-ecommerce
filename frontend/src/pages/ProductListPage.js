@@ -11,8 +11,11 @@ import CategoryFilterComponent from "../components/filterQueryResultOptions/Cate
 import PriceFilterComponent from "../components/filterQueryResultOptions/PriceFilterComponent";
 import RatingFilterComponent from "../components/filterQueryResultOptions/RatingFilterComponent";
 
+// Connect Frontend to Backend using AXIOS, Promise based HTTP client for the browser and node.js:
+import axios from "axios";
 
 const ProductListPage = () => {
+    axios.get("/api/products").then((res) => console.log(res));
     return (
         <Container fluid>
             <Row>
@@ -26,7 +29,7 @@ const ProductListPage = () => {
                         <ListGroup.Item>{<AttributesFilterComponent />}</ListGroup.Item>
                         {/* Filter Buttons */}
                         <ListGroup.Item>
-                            <Button variant="primary">Filter</Button>
+                            <Button variant="primary">Filter</Button> {" "}
                             <Button variant="danger">Reset Filter</Button>
                         </ListGroup.Item>
                     </ListGroup>
