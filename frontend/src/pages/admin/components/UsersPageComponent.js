@@ -6,22 +6,19 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 // Testing out React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
-const UsersPageComponent = () => {
+const UsersPageComponent = ({ fetchUsers }) => {
 
     // ==========================Testing out React UseState Hooks:=============================
-    const [counter, setCounter] = useState(0);
+    const [users, setUsers] = useState([]);
 
     const deleteHandler = () => {
-        setCounter(counter + 1);
-        // if (window.confirm("Are you sure?")) {
-        //     alert("User Deleted!");
-        // }
+        if (window.confirm("Are you sure?")) {
+            alert("User Deleted!");
+        }
     }
 
-    useEffect(()=>{
-        console.log("useEffect called");
-        setCounter(counter + 1);
-        return () => console.log("clean up the effect!")
+    useEffect(() => {
+        fetchUsers().then(res => setUsers(res));
     }, []);
 
     // ==========================Testing out REACT useState Effect =============================
@@ -32,8 +29,8 @@ const UsersPageComponent = () => {
             </Col>
 
             <Col md={10}>
-                <h1>User List {counter}</h1>
-                {console.log("HTML RENDERED!")}
+                <h1>User List </h1>
+                {console.log(users)}
                 {/* Bootstrap Tables */}
                 <Table striped bordered hover responsive>
                     <thead>
