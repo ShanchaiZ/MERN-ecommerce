@@ -21,8 +21,8 @@ const UsersPageComponent = ({ fetchUsers }) => {
         const abctrl = new AbortController();
         fetchUsers(abctrl)
             .then(res => setUsers(res))
-            .catch(error => console.log(error));
-        // .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data)); implement?
+            .catch(error => console.log({ error: error.message }));
+        // .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
         return () => abctrl.abort();
     }, []);
 
@@ -35,7 +35,6 @@ const UsersPageComponent = ({ fetchUsers }) => {
 
             <Col md={10}>
                 <h1>User List </h1>
-                {console.log(users)}
                 {/* Bootstrap Tables */}
                 <Table striped bordered hover responsive>
                     <thead>
@@ -50,17 +49,17 @@ const UsersPageComponent = ({ fetchUsers }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map((item, idx) => (
+                        {users.map((user, idx) => (
                             < tr key={idx}>
                                 <td>{idx + 1}</td>
-                                <td>Lois</td>
-                                <td>Price</td>
-                                <td>$Lois@Price.com</td>
+                                <td>{user.name}</td>
+                                <td>{user.lastName}</td>
+                                <td>{user.email}</td>
                                 <td>
-                                    <i className={item}></i>
+                                    {user.isAdmin ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
                                 </td>
                                 <td>
-                                    <LinkContainer to="/admin/edit-users">
+                                    <LinkContainer to={`/admin/edit-users/${user._id}`}>
                                         <Button className="btn-sm">
                                             <i className="bi bi-pencil-square"></i>
                                         </Button>
