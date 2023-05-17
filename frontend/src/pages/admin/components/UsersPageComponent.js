@@ -19,7 +19,10 @@ const UsersPageComponent = ({ fetchUsers }) => {
 
     useEffect(() => {
         const abctrl = new AbortController();
-        fetchUsers(abctrl).then(res => setUsers(res));
+        fetchUsers(abctrl)
+            .then(res => setUsers(res))
+            .catch(error => console.log(error));
+        // .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data)); implement?
         return () => abctrl.abort();
     }, []);
 
