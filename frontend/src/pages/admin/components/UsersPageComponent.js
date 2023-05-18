@@ -3,20 +3,25 @@ import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
 
-// Testing out React useState/useEffect Hooks:
+// React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
 const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
 
-    // ==========================Testing out React UseState Hooks:=============================
-    const [users, setUsers] = useState([]);
+    // Initial State of the React Hooks
+    const [users, setUsers] = useState([]); // Initially set to empty array of users
+    const [userDeleted, setUserDeleted] = useState(false); //Initially set to false because no one getting deleted.
 
     const deleteHandler = async (userId) => {
         if (window.confirm("Are you sure?")) {
             const data = await deleteUser(userId);
+            if (data === "User removed") {
+                setUserDeleted(!userDeleted);
+            }
         }
     }
 
+    //React UseEffect after browser load:
     useEffect(() => {
         const abctrl = new AbortController();
         fetchUsers(abctrl)
@@ -24,9 +29,8 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
             .catch(error => console.log({ error: error.message }));
         // .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
         return () => abctrl.abort();
-    }, []);
+    }, [userDeleted]);
 
-    // ==========================Testing out REACT useState Effect =============================
     return (
         <Row className="m-5">
             <Col md={2}>
