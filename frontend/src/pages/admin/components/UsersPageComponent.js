@@ -6,14 +6,14 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 // Testing out React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
-const UsersPageComponent = ({ fetchUsers }) => {
+const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
 
     // ==========================Testing out React UseState Hooks:=============================
     const [users, setUsers] = useState([]);
 
-    const deleteHandler = () => {
+    const deleteHandler = async (userId) => {
         if (window.confirm("Are you sure?")) {
-            alert("User Deleted!");
+            const data = await deleteUser(userId);
         }
     }
 
@@ -65,7 +65,7 @@ const UsersPageComponent = ({ fetchUsers }) => {
                                         </Button>
                                     </LinkContainer>
                                     {" / "}
-                                    <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
+                                    <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(user._id)}>
                                         <i className="bi bi-x-circle"></i>
                                     </Button>
                                 </td>

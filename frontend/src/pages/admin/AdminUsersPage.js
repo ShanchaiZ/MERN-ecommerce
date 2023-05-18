@@ -9,8 +9,14 @@ const fetchUsers = async (abctrl) => {
     return data;
 }
 
+// DELETE request: Delete A User from Database:
+const deleteUser = async (userId) => {
+    const { data } = await axios.delete(`/api/users/${userId}`)
+    return data;
+}
+
 const AdminUsersPage = () => {
-    return <UsersPageComponent fetchUsers={fetchUsers} />
+    return <UsersPageComponent fetchUsers={fetchUsers} deleteUser={deleteUser} />
 };
 
 export default AdminUsersPage;
