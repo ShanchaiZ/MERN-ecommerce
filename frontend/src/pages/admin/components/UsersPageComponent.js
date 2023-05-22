@@ -29,7 +29,7 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
             .catch(error => console.log({ error: error.message }));
         // .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
         return () => abctrl.abort();
-    }, [userDeleted]);
+    }, [fetchUsers, userDeleted]);
 
     return (
         <Row className="m-5">
