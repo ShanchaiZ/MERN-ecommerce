@@ -6,26 +6,34 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 // React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
-//Product Deletion Handler Alert:
-const deleteHandler = () => {
-    if (window.confirm("Are you sure?")) {
-        alert("Product Deleted!")
-    }
-}
 
-const ProductsPageComponent = ({ fetchProducts }) => {
+
+const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
 
     // Initial State of the React Hooks
     const [products, setProducts] = useState([]);  // Initially set to empty array of products
+    const [productDeleted, setProductDeleted] = useState(false); //Initially set to not Delete Product
+
+
+    //Product Deletion Handler Alert:
+    const deleteHandler = async (productId) => {
+        if (window.confirm("Are you sure?")) {
+            const data = await deleteProduct(productId);
+            if (data.message === "product removed") {
+                setProductDeleted(!productDeleted);
+            }
+        }
+    }
 
     useEffect(() => {
         const abctrl = new AbortController();
         fetchProducts(abctrl)
             .then((res) => setProducts(res))
-            .catch(error => console.log({ error: error.message }));
-        // .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+            .catch((er) => setProducts([
+                { name: er.response.data.message ? er.response.data.message : er.response.data }
+            ]));
         return () => abctrl.abort();
-    }, [fetchProducts])
+    }, [fetchProducts, productDeleted])
 
 
     return (
@@ -68,7 +76,7 @@ const ProductsPageComponent = ({ fetchProducts }) => {
                                         </Button>
                                     </LinkContainer>
                                     {" / "}
-                                    <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
+                                    <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(item._id)}>
                                         <i className="bi bi-x-circle"></i>
                                     </Button>
                                 </td>
