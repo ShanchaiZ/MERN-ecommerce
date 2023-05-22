@@ -3,6 +3,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
 
+// React useState/useEffect Hooks:
+import { useState, useEffect } from "react";
+
 //Product Deletion Handler Alert:
 const deleteHandler = () => {
     if (window.confirm("Are you sure?")) {
@@ -10,7 +13,7 @@ const deleteHandler = () => {
     }
 }
 
-const ProductsPageComponent = () => {
+const ProductsPageComponent = ({ fetchProducts }) => {
     return (
         <Row className="m-5">
             <Col md={2}>
