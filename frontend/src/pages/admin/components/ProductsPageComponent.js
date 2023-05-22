@@ -23,7 +23,7 @@ const ProductsPageComponent = ({ fetchProducts }) => {
         fetchProducts(abctrl)
             .then((res) => setProducts(res))
             .catch(error => console.log({ error: error.message }));
-            // .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+        // .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
         return () => abctrl.abort();
     }, [fetchProducts])
 
@@ -54,11 +54,7 @@ const ProductsPageComponent = ({ fetchProducts }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {[
-                            { name: "Toshiba", price: "$420", category: "TV" },
-                            { name: "LG", price: "$999", category: "Tablet" },
-                            { name: "Lenovo", price: "$1520", category: "Computer" },
-                        ].map((item, idx) => (
+                        {products.map((item, idx) => (
                             <tr key={idx}>
                                 <td>{idx + 1}</td>
                                 <td>{item.name}</td>
@@ -66,7 +62,7 @@ const ProductsPageComponent = ({ fetchProducts }) => {
                                 <td>{item.category}</td>
                                 {/* Table Edit/ Delete buttons */}
                                 <td>
-                                    <LinkContainer to="/admin/edit-product">
+                                    <LinkContainer to={`/admin/edit-product/${item._id}`}>
                                         <Button className="btn-sm">
                                             <i className="bi bi-pencil-square"></i>
                                         </Button>
