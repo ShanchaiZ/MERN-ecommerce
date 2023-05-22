@@ -14,6 +14,20 @@ const deleteHandler = () => {
 }
 
 const ProductsPageComponent = ({ fetchProducts }) => {
+
+    // Initial State of the React Hooks
+    const [products, setProducts] = useState([]);  // Initially set to empty array of products
+
+    useEffect(() => {
+        const abctrl = new AbortController();
+        fetchProducts(abctrl)
+            .then((res) => setProducts(res))
+            .catch(error => console.log({ error: error.message }));
+            // .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+        return () => abctrl.abort();
+    }, [fetchProducts])
+
+
     return (
         <Row className="m-5">
             <Col md={2}>
