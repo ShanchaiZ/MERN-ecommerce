@@ -10,15 +10,14 @@ const OrdersPageComponent = ({ getOrders }) => {
     // Initial State of the React Hooks
     const [orders, setOrders] = useState([]); // Initially set to empty array of products
 
-    
+
     //React UseEffect after browser load:
     useEffect(() => {
         getOrders()
             .then((orders) => setOrders(orders))
             .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
-    }, [])
-    console.log(orders);
-
+    }, [getOrders])
+    
     return (
         <Row className="m-5">
             <Col md={2}>
@@ -42,18 +41,24 @@ const OrdersPageComponent = ({ getOrders }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map((item, idx) => (
+                        {orders.map((order, idx) => (
                             < tr key={idx}>
                                 <td>{idx + 1}</td>
-                                <td>Lois Price</td>
-                                <td>01-10-2023</td>
-                                <td>$567</td>
                                 <td>
-                                    <i className={item}></i>
+                                    {order.user !== null ? (
+                                        <>
+                                            {order.user.name} {order.user.lastName}
+                                        </>
+                                    ) : null}
                                 </td>
-                                <td>PayPal</td>
+                                <td>{order.createdAt.substring(0, 10)}</td>
+                                <td>{order.orderTotal.cartSubtotal}</td>
                                 <td>
-                                    <Link to="/admin/order-details">Go to Order</Link>
+                                    {order.isDelivered ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
+                                </td>
+                                <td>{order.paymentMethod}</td>
+                                <td>
+                                    <Link to={`/admin/order-details/${order._id}`}>Go to Order</Link>
                                 </td>
                             </tr>
                         ))}
