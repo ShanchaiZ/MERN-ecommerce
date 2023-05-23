@@ -1,5 +1,6 @@
 import ProductsPageComponent from "./components/ProductsPageComponent";
 
+// Axios used to make API Calls:
 import axios from "axios";
 
 // Get Products from database:
