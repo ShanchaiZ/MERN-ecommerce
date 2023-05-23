@@ -2,8 +2,23 @@ import { Row, Col, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
+// React useState/useEffect Hooks:
+import { useState, useEffect } from "react";
 
-const OrdersPageComponent = () => {
+const OrdersPageComponent = ({ getOrders }) => {
+
+    // Initial State of the React Hooks
+    const [orders, setOrders] = useState([]); // Initially set to empty array of products
+
+    
+    //React UseEffect after browser load:
+    useEffect(() => {
+        getOrders()
+            .then((orders) => setOrders(orders))
+            .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+    }, [])
+    console.log(orders);
+
     return (
         <Row className="m-5">
             <Col md={2}>
