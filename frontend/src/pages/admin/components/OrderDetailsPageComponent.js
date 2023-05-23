@@ -1,7 +1,18 @@
 import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import CartItemComponent from "../../../components/CartItemComponent";
 
-const OrderDetailsPageComponent = () => {
+import { useParams } from "react-router-dom";// {useParams} is used to read dynamic parameter /:id
+import { useEffect } from "react";
+
+const OrderDetailsPageComponent = ({ getOrder }) => {
+
+    const { id } = useParams();
+    useEffect(() => {
+        getOrder(id)
+            .then((items) => console.log(items))
+            .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+    }, [])
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -19,7 +30,7 @@ const OrderDetailsPageComponent = () => {
                         {/* Payment Method */}
                         <Col md={6}>
                             <h2>Payment method</h2>
-                            <Form.Select disabled={true}> 
+                            <Form.Select disabled={true}>
                                 <option value="pp">PayPal</option>
                                 <option value="cod">Cash on Delivery (delivery may be delayed)</option>
                             </Form.Select>
