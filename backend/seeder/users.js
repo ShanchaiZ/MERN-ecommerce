@@ -10,7 +10,7 @@ const users = [
         isAdmin: true
     },
     {
-        _id: ObjectId("646d16cf5e6b9d9477660ec2"),
+        _id: new ObjectId("646d16cf5e6b9d9477660ec2"),
         name: "John",
         lastName: "Doe",
         email: "john@doe.com",
