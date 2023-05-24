@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const OrderDetailsPageComponent = ({ getOrder }) => {
     const { id } = useParams();
 
-    // Initial State of the React Hooks:
+    // Initial State of the data fields using React Hooks:
     const [userInfo, setUserInfo] = useState({}); // Initially set to empty object
 
     useEffect(() => {
@@ -28,9 +28,9 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                         {/* Shipping Information */}
                         <Col md={6}>
                             <h2>Shipping</h2>
-                            <b>Name</b>: John Doe <br />
-                            <b>Address</b>: 123 Fake Street, New York City, NY 09876 <br />
-                            <b>Phone Number:</b>: (123) 456-7890 <br />
+                            <b>Name</b>: {userInfo.name} {userInfo.lastName} <br />
+                            <b>Address</b>:{userInfo.address}{userInfo.city}{userInfo.state}{userInfo.zipCode}<br />
+                            <b>Phone Number:</b>: {userInfo.phoneNumber} <br />
                         </Col>
                         {/* Payment Method */}
                         <Col md={6}>
