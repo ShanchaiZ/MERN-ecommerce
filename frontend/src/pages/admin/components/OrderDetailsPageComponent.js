@@ -2,14 +2,19 @@ import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } fr
 import CartItemComponent from "../../../components/CartItemComponent";
 
 import { useParams } from "react-router-dom";// {useParams} is used to read dynamic parameter /:id
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const OrderDetailsPageComponent = ({ getOrder }) => {
-
     const { id } = useParams();
+
+    // Initial State of the React Hooks:
+    const [userInfo, setUserInfo] = useState({}); // Initially set to empty object
+
     useEffect(() => {
         getOrder(id)
-            .then((items) => console.log(items))
+            .then((order) => {
+                setUserInfo(order.user);
+            })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
     }, [])
 
