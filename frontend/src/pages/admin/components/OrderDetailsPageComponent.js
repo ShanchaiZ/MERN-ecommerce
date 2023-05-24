@@ -9,11 +9,27 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
 
     // Initial State of the data fields using React Hooks:
     const [userInfo, setUserInfo] = useState({}); // Initially set to empty object
+    const [paymentMethod, setPaymentMethod] = useState(""); // Initially set to empty field
+    const [isPaid, setIsPaid] = useState(false); //Initallly set to NOT paid
+    const [isDelivered, setIsDelivered] = useState(false); //Initallly set to NOT Delivered
+    const [cartSubtotal, setCartSubtotal] = useState(0); //Initallly set to $0 
+    const [buttonDisabled, setButtonDisabled] = useState(false); //Initallly set to clickable button but disabled if order is paid and delivered
+    const [orderButtonMessage, setOrderButtonMessage] = useState("Mark as delivered"); //Initallly set the button to "mark as delivered" text 
 
+
+    //React UseEffect after browser load:
     useEffect(() => {
         getOrder(id)
             .then((order) => {
                 setUserInfo(order.user);
+                setPaymentMethod(order.paymentMethod);
+                order.isPaid ? setIsPaid(order.paidAt) : setIsPaid(false);
+                order.isDelivered ? setIsDelivered(order.deliveredAt) : setIsDelivered(false);
+                setCartSubtotal(order.orderTotal.cartSubtotal);
+                if (order.isDelivered) {
+                    setOrderButtonMessage("Order is Completed");
+                    setButtonDisabled(true);
+                }
             })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
     }, [])
