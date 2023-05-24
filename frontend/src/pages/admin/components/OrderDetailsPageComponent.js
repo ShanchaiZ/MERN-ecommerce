@@ -32,7 +32,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                 }
             })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
-    }, [])
+    }, [isDelivered, id])
 
     return (
         <Container fluid>
@@ -46,7 +46,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                             <h2>Shipping</h2>
                             <b>Name</b>: {userInfo.name} {userInfo.lastName} <br />
                             <b>Address</b>:{userInfo.address}{userInfo.city}{userInfo.state}{userInfo.zipCode}<br />
-                            <b>Phone Number:</b>: {userInfo.phoneNumber} <br />
+                            <b>Phone Number</b>: {userInfo.phoneNumber} <br />
                         </Col>
                         {/* Payment Method */}
                         <Col md={6}>
