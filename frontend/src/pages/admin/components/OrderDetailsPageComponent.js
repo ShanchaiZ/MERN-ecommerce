@@ -14,7 +14,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
     const [isDelivered, setIsDelivered] = useState(false); //Initallly set to NOT Delivered
     const [cartSubtotal, setCartSubtotal] = useState(0); //Initallly set to $0 
     const [buttonDisabled, setButtonDisabled] = useState(false); //Initallly set to clickable button but disabled if order is paid and delivered
-    const [orderButtonMessage, setOrderButtonMessage] = useState("Mark as delivered"); //Initallly set the button to "mark as delivered" text 
+    const [orderButtonMessage, setOrderButtonMessage] = useState("Mark as Delivered"); //Initallly set the button to "mark as delivered" text 
 
 
     //React UseEffect after browser load:
@@ -51,7 +51,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                         {/* Payment Method */}
                         <Col md={6}>
                             <h2>Payment method</h2>
-                            <Form.Select disabled={true}>
+                            <Form.Select value={paymentMethod} disabled={true}>
                                 <option value="pp">PayPal</option>
                                 <option value="cod">Cash on Delivery (delivery may be delayed)</option>
                             </Form.Select>
@@ -59,10 +59,14 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                         {/* Deliver Alerts */}
                         <Row>
                             <Col>
-                                <Alert className="mt-3" variant="danger">Product Not Delivered</Alert>
+                                <Alert className="mt-3" variant={isDelivered ? "success" : "danger"}>
+                                    {isDelivered ? <>Delivered at {isDelivered}</> : <>Product Not Delivered</>}
+                                </Alert>
                             </Col>
                             <Col>
-                                <Alert className="mt-3" variant="success">Paid on 03-10-2023</Alert>
+                                <Alert className="mt-3" variant={isPaid ? "success" : "danger"}>
+                                    {isPaid ? <>Product Paid on {isPaid}</> : <>Not Paid Yet. Pending Payment</>}
+                                </Alert>
                             </Col>
                         </Row>
                     </Row>
@@ -84,7 +88,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                             <h3>Order Summary</h3>
                         </ListGroupItem>
                         <ListGroupItem>
-                            Price of Item (after tax): <span className="fw-bold">$987</span>
+                            Price of Item (after tax): <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroupItem>
                         <ListGroupItem>
                             Shipping: <span className="fw-bold">Included</span>
@@ -93,12 +97,12 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                             Tax: <span className="fw-bold">Included</span>
                         </ListGroupItem>
                         <ListGroupItem className="text-danger">
-                            Total Price: <span className="fw-bold">$1234</span>
+                            Total Price: <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
-                                <Button size="lg" variant="success" type="Button">
-                                    Mark as Delivered
+                                <Button size="lg" disabled={buttonDisabled} variant="success" type="Button">
+                                    {orderButtonMessage}
                                 </Button>
                             </div>
                         </ListGroupItem>
