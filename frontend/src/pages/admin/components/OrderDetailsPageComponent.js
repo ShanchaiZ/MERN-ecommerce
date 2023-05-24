@@ -15,7 +15,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
     const [cartSubtotal, setCartSubtotal] = useState(0); //Initallly set to $0 
     const [buttonDisabled, setButtonDisabled] = useState(false); //Initallly set to clickable button but disabled if order is paid and delivered
     const [orderButtonMessage, setOrderButtonMessage] = useState("Mark as Delivered"); //Initallly set the button to "mark as delivered" text 
-
+    const [cartItems, setCartItems] = useState([]);
 
     //React UseEffect after browser load:
     useEffect(() => {
@@ -30,9 +30,10 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                     setOrderButtonMessage("Order is Completed");
                     setButtonDisabled(true);
                 }
+                setCartItems(order.cartItems);
             })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
-    }, [isDelivered, id])
+    }, [getOrder, isDelivered, id])
 
     return (
         <Container fluid>
@@ -75,8 +76,8 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                     {/* Product Order Items */}
                     <h2>Order Items</h2>
                     <ListGroup variant="flush">
-                        {Array.from({ length: 3 }).map((item, idx) => (
-                            <CartItemComponent key={idx} />
+                        {cartItems.map((item, idx) => (
+                            <CartItemComponent key={idx} item={item} orderCreated={true} />
                         ))}
                     </ListGroup>
                 </Col>

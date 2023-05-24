@@ -23,7 +23,7 @@ const orders = Array.from({ length: 20 }).map((_, idx) => {
                 name: "Product Name",
                 price: 25,
                 image: { path: "/images/category/monitors-category.jpg" },
-                quantity: 33,
+                quantity: 3,
                 count: 12
             }
         ],
