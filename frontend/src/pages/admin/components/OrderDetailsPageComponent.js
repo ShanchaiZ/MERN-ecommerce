@@ -4,7 +4,7 @@ import CartItemComponent from "../../../components/CartItemComponent";
 import { useParams } from "react-router-dom";// {useParams} is used to read dynamic parameter /:id
 import { useState, useEffect } from "react";
 
-const OrderDetailsPageComponent = ({ getOrder }) => {
+const OrderDetailsPageComponent = ({ getOrder, markAsDelivered }) => {
     const { id } = useParams();
 
     // Initial State of the data fields using React Hooks:
@@ -15,7 +15,7 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
     const [cartSubtotal, setCartSubtotal] = useState(0); //Initallly set to $0 
     const [buttonDisabled, setButtonDisabled] = useState(false); //Initallly set to clickable button but disabled if order is paid and delivered
     const [orderButtonMessage, setOrderButtonMessage] = useState("Mark as Delivered"); //Initallly set the button to "mark as delivered" text 
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState([]); //Initally set to empty array of cart items.
 
     //React UseEffect after browser load:
     useEffect(() => {
@@ -102,7 +102,19 @@ const OrderDetailsPageComponent = ({ getOrder }) => {
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
-                                <Button size="lg" disabled={buttonDisabled} variant="success" type="Button">
+                                <Button
+                                    size="lg"
+                                    // After button is clicked:
+                                    onClick={() => markAsDelivered(id)
+                                        .then((res) => {
+                                            if (res) {
+                                                setIsDelivered(true);
+                                            }
+                                        }).catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data))
+                                    }
+                                    disabled={buttonDisabled}
+                                    variant="danger"
+                                    type="Button">
                                     {orderButtonMessage}
                                 </Button>
                             </div>
