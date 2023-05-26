@@ -1,5 +1,9 @@
 import { legacy_createStore as createStore } from "redux";
 
-const store = createStore();
+const counterReducer = () => {
+
+}
+
+const store = createStore(counterReducer);
 
 export default store;
