@@ -21,6 +21,7 @@
     "react-simple-star-rating": "^5.1.7",
     "recharts": "^2.5.0",
     "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
