@@ -81,7 +81,7 @@ const loginUser = async (req, res, next) => {
         }
 
         // If User with same email and matching passwords:
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).orFail();
         if (user && comparePasswords(password, user.password)) {
             let cookieParams = {
                 httpOnly: true,
