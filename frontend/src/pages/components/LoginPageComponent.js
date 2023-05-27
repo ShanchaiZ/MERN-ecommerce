@@ -1,11 +1,13 @@
 import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPageComponent = ({ loginUserApiRequest }) => {
     // Form Functions Defined:
     const [validated, setValidated] = useState(false); //initially no validation
     const [loginUserResponseState, setLoginUserResponseState] = useState({ success: "", error: "", loading: false }); //initial state when user visits a page
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -22,6 +24,14 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
             loginUserApiRequest(email, password, doNotLogout)
                 .then((res) => {
                     setLoginUserResponseState({ success: res.success, loading: false, error: "" })
+
+                    // If successful login then redirect to:
+                    if (res.success === "User Logged in" && !res.userLoggedIn.isAdmin) {
+                        navigate("/user", { replace: true });
+                    } else {
+                        navigate("/admin/orders", { replace: true });
+                    }
+
                 })
                 .catch((er) => setLoginUserResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data }));
         }
