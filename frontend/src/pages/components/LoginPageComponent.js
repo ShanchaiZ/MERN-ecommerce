@@ -2,15 +2,24 @@ import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstr
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const LoginPageComponent = () => {
+const LoginPageComponent = ({ loginUserApiRequest }) => {
     // Form Functions Defined:
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+
+        const form = event.currentTarget.elements;
+
+        const email = form.email.value;
+        const password = form.password.value;
+        const doNotLogout = form.doNotLogout.checked;
+
+        if (event.currentTarget.checkValidity() === true && email && password) {
+            loginUserApiRequest(email, password, doNotLogout)
+                .then((res) => console.log(res))
+                .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
         }
 
         setValidated(true);
