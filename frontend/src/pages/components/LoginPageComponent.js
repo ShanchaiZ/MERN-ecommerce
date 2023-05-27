@@ -5,9 +5,7 @@ import { useState } from "react";
 const LoginPageComponent = ({ loginUserApiRequest }) => {
     // Form Functions Defined:
     const [validated, setValidated] = useState(false); //initially no validation
-    const [loginUserResponseState, setLoginUserResponseState] = useState({
-        success: "", error: "", loading: false
-    }); //initial state when user visits a page
+    const [loginUserResponseState, setLoginUserResponseState] = useState({ success: "", error: "", loading: false }); //initial state when user visits a page
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,9 +18,12 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
         const doNotLogout = form.doNotLogout.checked;
 
         if (event.currentTarget.checkValidity() === true && email && password) {
+            setLoginUserResponseState({ loading: true });
             loginUserApiRequest(email, password, doNotLogout)
-                .then((res) => console.log(res))
-                .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+                .then((res) => {
+                    setLoginUserResponseState({ success: res.success, loading: false, error: "" })
+                })
+                .catch((er) => setLoginUserResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data }));
         }
 
         setValidated(true);
@@ -78,13 +79,15 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
 
                         {/* Submit Button with Spinner */}
                         <Button variant="primary" type="submit">
-                            <Spinner
-                                as="span"
-                                animation="border"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                            />
+                            {loginUserResponseState && loginUserResponseState.loading === true ? (
+                                <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />
+                            ) : ("")}
                             Login
                         </Button>
 
