@@ -1,26 +1,17 @@
-import { legacy_createStore as createStore } from "redux";
+import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-
+import thunk from "redux-thunk";
 
 // Reducer: are functions in Redux are used in changing a state:
-const counterReducer = (state = { value: 0 }, action) => {
-    switch (action.type) {
-        case "ADD":
-            return { value: state.value + 1 + action.someValue };
-        default:
-            return state;
-    }
-}
+import { counterReducer } from "./reducers/cartReducers";
+
+const reducer = combineReducers({
+    cart: counterReducer
+})
 
 
-const store = createStore(counterReducer, { value: 0 }, composeWithDevTools());
-
-
-// Store.dispatch: used to call the actions that CHANGES the global state:
-store.dispatch({
-    type: "ADD",
-    someValue: 10
-});
+const middleware = [thunk];
+const store = createStore(reducer, { cart: { value: 0 } }, composeWithDevTools(applyMiddleware(...middleware)));
 
 
 export default store;

@@ -7,10 +7,15 @@ import AddedToCartMessageComponent from "../components/AddedToCartMessageCompone
 import ImageZoom from "js-image-zoom";
 import { useEffect } from "react";
 
-const ProductDetailsPage = () => {
+// Redux:
+import { useDispatch } from "react-redux"; // Calling Actions done by Dispatch
+import { addToCart } from "../redux/actions/cartActions"; //Caling the Action of adding to cart 
 
-    const addToCartHandler = () =>{
-        
+const ProductDetailsPage = () => {
+    const dispatch = useDispatch();
+
+    const addToCartHandler = () => {
+        dispatch(addToCart());
     }
 
     useEffect(() => {
