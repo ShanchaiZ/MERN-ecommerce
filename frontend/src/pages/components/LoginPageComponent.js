@@ -4,7 +4,10 @@ import { useState } from "react";
 
 const LoginPageComponent = ({ loginUserApiRequest }) => {
     // Form Functions Defined:
-    const [validated, setValidated] = useState(false);
+    const [validated, setValidated] = useState(false); //initially no validation
+    const [loginUserResponseState, setLoginUserResponseState] = useState({
+        success: "", error: "", loading: false
+    }); //initial state when user visits a page
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -85,7 +88,9 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
                             Login
                         </Button>
 
-                        <Alert show={true} variant="danger">Please enter the correct login credentials!</Alert>
+                        <Alert show={loginUserResponseState && loginUserResponseState.error === "Incorrect Credentials"} variant="danger">
+                            Please enter the correct login credentials!
+                        </Alert>
                     </Form>
                 </Col>
             </Row>
