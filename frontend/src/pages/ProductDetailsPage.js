@@ -8,6 +8,11 @@ import ImageZoom from "js-image-zoom";
 import { useEffect } from "react";
 
 const ProductDetailsPage = () => {
+
+    const addToCartHandler = () =>{
+        
+    }
+
     useEffect(() => {
         //Zoomed effects configuration:
         var options = {
@@ -86,7 +91,7 @@ const ProductDetailsPage = () => {
 
                                 {/* Add to Cart */}
                                 <ListGroup.Item>
-                                    <Button variant="danger">Add to Cart</Button>
+                                    <Button onClick={addToCartHandler} variant="danger">Add to Cart</Button>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
