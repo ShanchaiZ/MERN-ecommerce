@@ -8,7 +8,7 @@ import ImageZoom from "js-image-zoom";
 import { useEffect } from "react";
 
 // Redux:
-import { useDispatch } from "react-redux"; // Calling Actions done by Dispatch
+import { useDispatch, useSelector } from "react-redux"; // Calling Actions done by Dispatch
 import { addToCart } from "../redux/actions/cartActions"; //Caling the Action of adding to cart 
 
 const ProductDetailsPage = () => {
@@ -17,6 +17,8 @@ const ProductDetailsPage = () => {
     const addToCartHandler = () => {
         dispatch(addToCart());
     }
+
+    const products = useSelector((state) => state.cart.value);
 
     useEffect(() => {
         //Zoomed effects configuration:
@@ -66,7 +68,7 @@ const ProductDetailsPage = () => {
                         <Col md={8}>
                             {/* Product name, Price, Description, and Rating Here */}
                             <ListGroup variant="flush">
-                                <ListGroup.Item><h1>Product Name</h1></ListGroup.Item>
+                                <ListGroup.Item><h1>Product Name {products}</h1></ListGroup.Item>
                                 <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
                                 <ListGroup.Item>Morbi leo risus
                                     <Rating readonly size={20} initialValue={4} /> (5)
