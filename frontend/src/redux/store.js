@@ -12,8 +12,18 @@ const reducer = combineReducers({
 })
 
 
+// DEFAULT INITAL STATE: is set to these properties as below:
+const INITIAL_STATE = {
+    cart: {
+        value: 0,
+    },
+    userRegisterLogin: {
+        userInfo: "user data example"
+    }
+}
+
 const middleware = [thunk];
-const store = createStore(reducer, { cart: { value: 0 } }, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(reducer, INITIAL_STATE, composeWithDevTools(applyMiddleware(...middleware)));
 
 
 export default store;
