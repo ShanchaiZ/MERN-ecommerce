@@ -4,8 +4,8 @@ import LoginPageComponent from "./components/LoginPageComponent";
 import axios from "axios";
 
 // Action: is called using 'dispatch' keyword:
-import { useDispatch } from "react-redux";
-import { setReduxUserState } from "../redux/actions/userActions";
+import { useDispatch } from "react-redux"; //for calling all actions 
+import { setReduxUserState } from "../redux/actions/userActions"; // the actual action for Saving User info as a Redux Global State
 
 
 const loginUserApiRequest = async (email, password, doNotLogout) => {

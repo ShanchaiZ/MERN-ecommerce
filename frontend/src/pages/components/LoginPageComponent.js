@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstr
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const LoginPageComponent = ({ loginUserApiRequest }) => {
+const LoginPageComponent = ({ loginUserApiRequest, reduxDispatch, setReduxUserState }) => {
     // Form Functions Defined:
     const [validated, setValidated] = useState(false); //initially no validation
     const [loginUserResponseState, setLoginUserResponseState] = useState({ success: "", error: "", loading: false }); //initial state when user visits a page
@@ -24,6 +24,11 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
             loginUserApiRequest(email, password, doNotLogout)
                 .then((res) => {
                     setLoginUserResponseState({ success: res.success, loading: false, error: "" })
+
+                    // After logging in, properties in user.info are globally stored
+                    if (res.userLoggedIn) {
+                        reduxDispatch(setReduxUserState(res.userLoggedIn));
+                    }
 
                     // If successful login then redirect to:
                     if (res.success === "User Logged in" && !res.userLoggedIn.isAdmin) {
