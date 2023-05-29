@@ -9,7 +9,13 @@ import { setReduxUserState } from "../redux/actions/userActions"; // the actual 
 
 
 const loginUserApiRequest = async (email, password, doNotLogout) => {
-    const { data } = await axios.post("/api/users/login", { email, password, doNotLogout })
+    const { data } = await axios.post("/api/users/login", { email, password, doNotLogout });
+    // Persistent User info Storage (when doNotLogout checkbox is checked):
+    if (data.userLoggedIn.doNotLogout) {
+        localStorage.setItem("userInfo", JSON.stringify(data.userLoggedIn));
+    } else {
+        sessionStorage.setItem("userInfo", JSON.stringify(data.userLoggedIn));
+    }
     return data;
 
 };

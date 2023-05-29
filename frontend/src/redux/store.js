@@ -17,9 +17,7 @@ const INITIAL_STATE = {
     cart: {
         value: 0,
     },
-    userRegisterLogin: {
-        userInfo: "user data example"
-    }
+    userRegisterLogin: { userInfo: "user data example" }
 }
 
 const middleware = [thunk];
