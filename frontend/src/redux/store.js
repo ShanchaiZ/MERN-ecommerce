@@ -12,12 +12,19 @@ const reducer = combineReducers({
 })
 
 
+// Access/Read the data saved in Local Storage:
+const userInfoInLocalStorage = localStorage.getItem("userInfo") //If user.info is available from LocalStorage...
+? JSON.parse(localStorage.getItem("userInfo")) //Then, parse the user from local storage data...
+: sessionStorage.getItem("userInfo") //otherwise, check session Storage for user.info...
+? JSON.parse(sessionStorage.getItem("userInfo")) //..and parse the user.info from session storage data.
+: {} //ELSE, leave empty object
+
 // DEFAULT INITAL STATE: is set to these properties as below:
 const INITIAL_STATE = {
     cart: {
         value: 0,
     },
-    userRegisterLogin: { userInfo: "user data example" }
+    userRegisterLogin: { userInfo: userInfoInLocalStorage }
 }
 
 const middleware = [thunk];
