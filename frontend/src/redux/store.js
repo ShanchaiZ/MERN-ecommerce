@@ -3,10 +3,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 // Reducer: are functions in Redux are used in changing a state:
-import { counterReducer } from "./reducers/cartReducers";
+import { counterReducer } from "./reducers/cartReducers"; //Used in incrementing items in a cart
+import { userRegisterLoginReducer } from "./reducers/userReducers"; //Used in displaying User Name when successful login
 
 const reducer = combineReducers({
-    cart: counterReducer
+    cart: counterReducer,
+    userRegisterLogin: userRegisterLoginReducer
 })
 
 
