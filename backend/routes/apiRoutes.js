@@ -8,8 +8,15 @@ const categoryRoutes = require("./categoryRoutes");
 const userRoutes = require("./userRoutes");
 const orderRoutes = require("./orderRoutes");
 
-// Session Cookies for Authorized Access to Routes:
 const jwt = require("jsonwebtoken");
+
+// Logout FUnction:
+app.get("/logout" , (req, res) => {
+    return res.clearCookie("access_token").send("access token cleared")
+});
+
+
+// Session Cookies for Authorized Access to Routes:
 app.get("/get-token", (req, res) => {
 
     try {
