@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 
 // Verify if User is Logged in:
 const verifyIsLoggedIn = (req, res, next) => {
-    next();
-    return // to do: remove later
+
     try {
         // Is there a Token?:
         const token = req.cookies.access_token;
@@ -29,8 +28,7 @@ const verifyIsLoggedIn = (req, res, next) => {
 
 // Verify is User is as an ADMIN:
 const verifyIsAdmin = (req, res, next) => {
-    next();
-    return // to do: remove later
+
     if (req.user && req.user.isAdmin) {
         next();
     } else {
