@@ -6,6 +6,10 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 // React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
+import { useDispatch } from "react-redux"; //Used to Call Redux Actions
+import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
+
+
 const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
 
     // Initial State of the React Hooks

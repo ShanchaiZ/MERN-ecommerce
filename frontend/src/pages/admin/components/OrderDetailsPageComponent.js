@@ -4,6 +4,9 @@ import CartItemComponent from "../../../components/CartItemComponent";
 import { useParams } from "react-router-dom";// {useParams} is used to read dynamic parameter /:id
 import { useState, useEffect } from "react";
 
+import { useDispatch } from "react-redux"; //Used to Call Redux Actions
+import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
+
 const OrderDetailsPageComponent = ({ getOrder, markAsDelivered }) => {
     const { id } = useParams();
 
