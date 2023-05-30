@@ -32,9 +32,9 @@ const LoginPageComponent = ({ loginUserApiRequest, reduxDispatch, setReduxUserSt
 
                     // If successful login then redirect to:
                     if (res.success === "User Logged in" && !res.userLoggedIn.isAdmin) {
-                        navigate("/user", { replace: true });
+                        window.location.href = "/user";
                     } else {
-                        navigate("/admin/orders", { replace: true });
+                        window.location.href = "/admin/orders";
                     }
 
                 })
