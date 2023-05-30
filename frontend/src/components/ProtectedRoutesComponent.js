@@ -8,7 +8,17 @@ import LoginPage from "../pages/LoginPage";
 
 const ProtectedRoutesComponent = ({ admin }) => {
 
-    const [isAuth, setIsAuth] = useState();
+    const [isAuth, setIsAuth] = useState(); //Initially Authentication is set to an object.
+
+    // After successful Login, directed to api/get-token for cookie then continue to using the appropiate authorized routes:
+    useEffect(() => {
+        axios.get("/api/get-token").then(function (data) {
+            if (data.data.token) {
+                setIsAuth(data.data.token);
+            }
+            return isAuth;
+        })
+    }, [isAuth])
 
     // User Not Logged in, Redirect to Loginpage:
     if (isAuth === undefined) return <LoginPage />
