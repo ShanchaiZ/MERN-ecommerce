@@ -15,7 +15,14 @@ import {
 import { LinkContainer } from "react-router-bootstrap"; //Used to link containers to different routes
 import { Link } from "react-router-dom"; //Link as a JS object
 
+// Redux Logout:
+import { useDispatch } from "react-redux"; //Used to call Redux actions
+import { logout } from "../redux/actions/userActions"; //Used to call defined logout actions:
+
 const HeaderComponent = () => {
+
+    const dispatch = useDispatch();
+
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -55,7 +62,7 @@ const HeaderComponent = () => {
                         <NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
                             <NavDropdown.Item eventKey="/user/my-orders" as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
                             <NavDropdown.Item eventKey="/user" as={Link} to="/user">My Profile</NavDropdown.Item>
-                            <NavDropdown.Item>Logout</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
                         </NavDropdown>
 
                         {/* Link to Login */}
