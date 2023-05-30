@@ -6,15 +6,16 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 // React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
-import { useDispatch } from "react-redux"; //Used to Call Redux Actions
-import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
+// // Used to Logout on Error
+// import { useDispatch } from "react-redux"; //Used to Call Redux Actions
+// import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
 
 const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
 
     // Initial State of the React Hooks
     const [products, setProducts] = useState([]);  // Initially set to empty array of products
     const [productDeleted, setProductDeleted] = useState(false); //Initially set to not Delete Product
-
+    // const dispatch = useDispatch();
 
     //Product Deletion Handler Alert:
     const deleteHandler = async (productId) => {
@@ -30,9 +31,12 @@ const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
         const abctrl = new AbortController();
         fetchProducts(abctrl)
             .then((res) => setProducts(res))
-            .catch((er) => setProducts([
-                { name: er.response.data.message ? er.response.data.message : er.response.data }
-            ]));
+            .catch((er) =>
+                // dispatch(logout())
+                setProducts([
+                    { name: er.response.data.message ? er.response.data.message : er.response.data }
+                ])
+            );
         return () => abctrl.abort();
     }, [fetchProducts, productDeleted])
 

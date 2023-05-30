@@ -5,22 +5,26 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 // React useState/useEffect Hooks:
 import { useState, useEffect } from "react";
 
-import { useDispatch } from "react-redux"; //Used to Call Redux Actions
-import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
+// // Used to Logout on Error:
+// import { useDispatch } from "react-redux"; //Used to Call Redux Actions
+// import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
 
 const OrdersPageComponent = ({ getOrders }) => {
 
     // Initial State of the React Hooks
     const [orders, setOrders] = useState([]); // Initially set to empty array of products
-
+    // const dispatch = useDispatch();
 
     //React UseEffect after browser load:
     useEffect(() => {
         getOrders()
             .then((orders) => setOrders(orders))
-            .catch(er => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+            .catch((er) =>
+                // dispatch(logout())
+                console.log(er.response.data.message ? er.response.data.message : er.response.data)
+            );
     }, [getOrders])
-    
+
     return (
         <Row className="m-5">
             <Col md={2}>

@@ -4,11 +4,13 @@ import CartItemComponent from "../../../components/CartItemComponent";
 import { useParams } from "react-router-dom";// {useParams} is used to read dynamic parameter /:id
 import { useState, useEffect } from "react";
 
-import { useDispatch } from "react-redux"; //Used to Call Redux Actions
-import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
+// // Used to Logout on Error:
+// import { useDispatch } from "react-redux"; //Used to Call Redux Actions
+// import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
 
 const OrderDetailsPageComponent = ({ getOrder, markAsDelivered }) => {
     const { id } = useParams();
+    // const dispatch = useDispatch();
 
     // Initial State of the data fields using React Hooks:
     const [userInfo, setUserInfo] = useState({}); // Initially set to empty object
@@ -35,7 +37,10 @@ const OrderDetailsPageComponent = ({ getOrder, markAsDelivered }) => {
                 }
                 setCartItems(order.cartItems);
             })
-            .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+            .catch((er) =>
+                // dispatch(logout())
+                console.log(er.response.data.message ? er.response.data.message : er.response.data)
+            );
     }, [getOrder, isDelivered, id])
 
     return (
