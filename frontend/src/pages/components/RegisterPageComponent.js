@@ -136,8 +136,9 @@ const RegisterPageComponent = ({ registerUserApiRequest, reduxDispatch, setRedux
                             Submit
                         </Button>
 
-                        <Alert show={true} variant="danger">A User with that Email already exists!</Alert>
-                        <Alert show={true} variant="success">Successfully Created A User!</Alert>
+                        {/* Alerts based on User State Response */}
+                        <Alert show={registerUserResponseState && registerUserResponseState.error === "User Exists"} variant="danger">A User with that Email already exists!</Alert>
+                        <Alert show={registerUserResponseState && registerUserResponseState.success === "User Created"} variant="success">Successfully Created A User!</Alert>
                     </Form>
                 </Col>
             </Row>

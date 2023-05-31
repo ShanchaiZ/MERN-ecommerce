@@ -26,7 +26,7 @@ const registerUser = async (req, res, next) => {
 
         const userExists = await User.findOne({ email });
         if (userExists) {
-            return res.status(400).send("user exists");
+            return res.status(400).send("User Exists");
         } else {
             const hashedPassword = hashPassword(password);
             const user = await User.create({
