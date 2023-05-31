@@ -2,13 +2,13 @@ import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstr
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const RegisterPageComponent = () => {
+const RegisterPageComponent = ({ registerUserApiRequest }) => {
 
     // Password Matching Function:
     const onChange = () => {
         const password = document.querySelector("input[name=password]");
         const confirm = document.querySelector("input[name=confirmPassword]");
-        if(confirm.value === password.value){
+        if (confirm.value === password.value) {
             confirm.setCustomValidity("")
         } else {
             confirm.setCustomValidity("Passwords do not match!");
@@ -19,10 +19,22 @@ const RegisterPageComponent = () => {
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+        // Read all the field values in the form for registration submission:
+        const form = event.currentTarget.elements;
+        const name = form.name.value;
+        const lastName = form.lastName.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        // If all the form elements exist and pass validation:
+        if (event.currentTarget.checkValidity() === true && name && lastName && email && password) {
+            registerUserApiRequest(name, lastName, email, password)
+                .then((res) => console.log(res))
+                .catch((er) =>
+                    console.log({ error: er.response.data.message ? er.response.data.message : er.response.data })
+                );
         }
 
         setValidated(true);
