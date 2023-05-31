@@ -33,7 +33,11 @@ const RegisterPageComponent = ({ registerUserApiRequest, reduxDispatch, setRedux
         if (event.currentTarget.checkValidity() === true && name && lastName && email && password) {
             setRegisterUserResponseState({ loading: true });
             registerUserApiRequest(name, lastName, email, password)
-                .then((res) => console.log(res))
+                .then((data) => {
+                    setRegisterUserResponseState({ success: data.success, loading: false });
+                    reduxDispatch(setReduxUserState(data.userCreated));
+                    sessionStorage.setItem("userInfo", JSON.stringify(data.userCreated));
+                })
                 .catch((er) =>
                     console.log({ error: er.response.data.message ? er.response.data.message : er.response.data })
                 );
