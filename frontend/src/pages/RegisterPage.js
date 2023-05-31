@@ -10,6 +10,12 @@ import { setReduxUserState } from "../redux/actions/userActions"; //User will su
 // Post: Register/Create a new User using user property
 const registerUserApiRequest = async (name, lastName, email, password) => {
     const { data } = await axios.post("/api/users/register", { name, lastName, email, password });
+    // Once User Successfully created, create a session storage with userinfo and redirect to /user
+    sessionStorage.setItem("userInfo", JSON.stringify(data.userCreated));
+    if (data.success === "User Created") {
+        window.location.href = "/user";
+    }
+
     return data;
 }
 
