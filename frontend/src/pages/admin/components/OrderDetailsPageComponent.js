@@ -38,7 +38,7 @@ const OrderDetailsPageComponent = ({ getOrder, markAsDelivered }) => {
                 setCartItems(order.cartItems);
             })
             .catch((er) =>
-                // dispatch(logout())
+                // dispatch(logout()) // to do: Logout on Error. fix the error
                 console.log(er.response.data.message ? er.response.data.message : er.response.data)
             );
     }, [getOrder, isDelivered, id])

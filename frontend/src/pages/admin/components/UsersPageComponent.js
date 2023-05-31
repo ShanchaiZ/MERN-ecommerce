@@ -34,7 +34,7 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
         fetchUsers(abctrl)
             .then(res => setUsers(res))
             .catch((er) =>
-                // dispatch(logout())
+                // dispatch(logout()) // to do: Logout on Error. fix the error
                 console.log(er.response.data.message ? er.response.data.message : er.response.data)
             );
         return () => abctrl.abort();

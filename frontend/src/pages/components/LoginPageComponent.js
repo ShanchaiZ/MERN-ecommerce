@@ -1,5 +1,6 @@
 import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { useNavigate  } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPageComponent = ({ loginUserApiRequest, reduxDispatch, setReduxUserState }) => {
@@ -7,7 +8,7 @@ const LoginPageComponent = ({ loginUserApiRequest, reduxDispatch, setReduxUserSt
     const [validated, setValidated] = useState(false); //initially no validation
     const [loginUserResponseState, setLoginUserResponseState] = useState({ success: "", error: "", loading: false }); //initial state when user visits a page
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();

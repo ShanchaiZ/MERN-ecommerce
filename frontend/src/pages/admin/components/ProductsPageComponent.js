@@ -32,7 +32,7 @@ const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
         fetchProducts(abctrl)
             .then((res) => setProducts(res))
             .catch((er) =>
-                // dispatch(logout())
+                // dispatch(logout()) // to do: Logout on Error. fix the error
                 setProducts([
                     { name: er.response.data.message ? er.response.data.message : er.response.data }
                 ])

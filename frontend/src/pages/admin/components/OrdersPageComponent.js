@@ -20,7 +20,7 @@ const OrdersPageComponent = ({ getOrders }) => {
         getOrders()
             .then((orders) => setOrders(orders))
             .catch((er) =>
-                // dispatch(logout())
+                // dispatch(logout()) // to do: Logout on Error. fix the error
                 console.log(er.response.data.message ? er.response.data.message : er.response.data)
             );
     }, [getOrders])
