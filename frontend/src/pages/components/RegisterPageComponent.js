@@ -30,16 +30,19 @@ const RegisterPageComponent = ({ registerUserApiRequest, reduxDispatch, setRedux
         const password = form.password.value;
 
         // If all the form elements exist and pass validation:
-        if (event.currentTarget.checkValidity() === true && name && lastName && email && password) {
+        if (event.currentTarget.checkValidity() === true && name && lastName && email && password && form.password.value === form.confirmPassword.value) {
             setRegisterUserResponseState({ loading: true });
             registerUserApiRequest(name, lastName, email, password)
                 .then((data) => {
                     setRegisterUserResponseState({ success: data.success, loading: false });
                     reduxDispatch(setReduxUserState(data.userCreated));
                     sessionStorage.setItem("userInfo", JSON.stringify(data.userCreated));
+                    if (data.success === "User Created") {
+                        window.location.href = "/user";
+                    }
                 })
                 .catch((er) =>
-                    console.log({ error: er.response.data.message ? er.response.data.message : er.response.data })
+                    setRegisterUserResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })
                 );
         }
 
@@ -127,13 +130,9 @@ const RegisterPageComponent = ({ registerUserApiRequest, reduxDispatch, setRedux
 
                         {/* Submit Button with Spinner */}
                         <Button type="submit">
-                            <Spinner
-                                as="span"
-                                animation="border"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                            />
+                            {registerUserResponseState && registerUserResponseState.loading === true ? (
+                                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                            ) : ("")}
                             Submit
                         </Button>
 
