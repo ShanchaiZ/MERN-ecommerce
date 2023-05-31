@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstr
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const RegisterPageComponent = ({ registerUserApiRequest }) => {
+const RegisterPageComponent = ({ registerUserApiRequest, reduxDispatch, setReduxUserState }) => {
 
     // Password Matching Function:
     const onChange = () => {
@@ -15,8 +15,9 @@ const RegisterPageComponent = ({ registerUserApiRequest }) => {
         }
     }
 
-    // Form Functions Defined:
+    // Initial State of the Registration fields using React Hooks:
     const [validated, setValidated] = useState(false);
+    const [registerUserResponseState, setRegisterUserResponseState] = useState({ success: "", error: "", loading: false });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,6 +31,7 @@ const RegisterPageComponent = ({ registerUserApiRequest }) => {
 
         // If all the form elements exist and pass validation:
         if (event.currentTarget.checkValidity() === true && name && lastName && email && password) {
+            setRegisterUserResponseState({ loading: true });
             registerUserApiRequest(name, lastName, email, password)
                 .then((res) => console.log(res))
                 .catch((er) =>
