@@ -23,7 +23,7 @@ const HeaderComponent = () => {
 
     const dispatch = useDispatch();
     const { userInfo } = useSelector((state) => state.userRegisterLogin);
-    
+
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -53,28 +53,38 @@ const HeaderComponent = () => {
 
                     {/* 2nd part NavBar: Admin, User Login/Registration and Cart */}
                     <Nav>
-                        <LinkContainer to="/admin/orders">
-                            <Nav.Link>
-                                Admin
-                                <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
-                            </Nav.Link>
-                        </LinkContainer>
-                        {/* User Dropdown Options */}
-                        <NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
-                            <NavDropdown.Item eventKey="/user/my-orders" as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
-                            <NavDropdown.Item eventKey="/user" as={Link} to="/user">My Profile</NavDropdown.Item>
-                            <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
-                        </NavDropdown>
+                        {/* If User is an Admin, Show /admin links in header:... */}
+                        {userInfo.isAdmin ? (
+                            <LinkContainer to="/admin/orders">
+                                <Nav.Link>
+                                    Admin
+                                    <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+                                </Nav.Link>
+                            </LinkContainer>
 
-                        {/* Link to Login */}
-                        <LinkContainer to="/login">
-                            <Nav.Link>Login</Nav.Link>
-                        </LinkContainer>
+                            //... Otherwise, show name of regular user and links in header...:
+                        ) : userInfo.name && !userInfo.isAdmin ? (
 
-                        {/* Link to Registration */}
-                        <LinkContainer to="/register">
-                            <Nav.Link>Register</Nav.Link>
-                        </LinkContainer>
+                            // User Dropdown Options:
+                            < NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
+                                <NavDropdown.Item eventKey="/user/my-orders" as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="/user" as={Link} to="/user">My Profile</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
+                            </NavDropdown>
+                        ) : (
+                            // ... Otherwise, redirect header to login and register links.
+                            <>
+                                {/* Link to Login */}
+                                <LinkContainer to="/login">
+                                    <Nav.Link>Login</Nav.Link>
+                                </LinkContainer>
+
+                                {/* Link to Registration */}
+                                <LinkContainer to="/register">
+                                    <Nav.Link>Register</Nav.Link>
+                                </LinkContainer>
+                            </>
+                        )}
 
                         {/* Link to Cart */}
                         <LinkContainer to="/cart">
@@ -88,7 +98,7 @@ const HeaderComponent = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     );
 };
 
