@@ -66,7 +66,7 @@ const HeaderComponent = () => {
                         ) : userInfo.name && !userInfo.isAdmin ? (
 
                             // User Dropdown Options:
-                            < NavDropdown title="JohnDoe" id="collasible-nav-dropdown">
+                            < NavDropdown title={`${userInfo.name} ${userInfo.lastName}`} id="collasible-nav-dropdown">
                                 <NavDropdown.Item eventKey="/user/my-orders" as={Link} to="/user/my-orders">My Orders</NavDropdown.Item>
                                 <NavDropdown.Item eventKey="/user" as={Link} to="/user">My Profile</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
