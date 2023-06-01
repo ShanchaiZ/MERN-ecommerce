@@ -16,13 +16,14 @@ import { LinkContainer } from "react-router-bootstrap"; //Used to link container
 import { Link } from "react-router-dom"; //Link as a JS object
 
 // Redux Logout:
-import { useDispatch } from "react-redux"; //Used to call Redux actions
+import { useDispatch, useSelector } from "react-redux"; //Used to call Redux actions
 import { logout } from "../redux/actions/userActions"; //Used to call defined logout actions:
 
 const HeaderComponent = () => {
 
     const dispatch = useDispatch();
-
+    const { userInfo } = useSelector((state) => state.userRegisterLogin);
+    
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
