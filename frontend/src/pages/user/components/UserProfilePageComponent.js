@@ -4,7 +4,8 @@ import { useState } from "react";
 const UserProfilePageComponent = ({ updateUserApiRequest }) => {
 
     // Initial State of the Registration fields using React Hooks:
-    const [validated, setValidated] = useState(false);
+    const [validated, setValidated] = useState(false); //Initially the validation state is false => not validated
+    const [updateUserResponseState, setUpdateUserResponseState] = useState({ success: "", error: "" }); //inital state of user update alerts are empty strings
 
     // Password Matching Function:
     const onChange = () => {
@@ -36,7 +37,12 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
 
         if (event.currentTarget.checkValidity() === true && form.password.value === form.confirmPassword.value) {
             updateUserApiRequest(name, lastName, phoneNumber, address, country, zipCode, city, state, password)
-                .then(data => { console.log(data) });
+                .then(data => {
+                    setUpdateUserResponseState({ success: data.success, error: "" })
+                })
+                .catch((er) =>
+                    setUpdateUserResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })
+                );
         }
 
         setValidated(true);
@@ -181,8 +187,12 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                         {/* Submit Button */}
                         <Button variant="primary" type="submit">Update</Button>
 
-                        <Alert show={true} variant="danger">A User with that Email already exists!</Alert>
-                        <Alert show={true} variant="info">Successfully Updated User Information!</Alert>
+                        <Alert show={updateUserResponseState && updateUserResponseState.error !== ""} variant="danger">
+                            A Error has occurred!
+                        </Alert>
+                        <Alert show={updateUserResponseState && updateUserResponseState.success === "User Profile Updated"} variant="info">
+                            Successfully Updated User Profile!
+                        </Alert>
                     </Form>
                 </Col>
             </Row>
