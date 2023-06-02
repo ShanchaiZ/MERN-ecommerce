@@ -1,7 +1,10 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
 
-const UserProfilePageComponent = ({updateUserApiRequest}) => {
+const UserProfilePageComponent = ({ updateUserApiRequest }) => {
+
+    // Initial State of the Registration fields using React Hooks:
+    const [validated, setValidated] = useState(false);
 
     // Password Matching Function:
     const onChange = () => {
@@ -14,14 +17,26 @@ const UserProfilePageComponent = ({updateUserApiRequest}) => {
         }
     }
 
-    // Form Functions Defined:
-    const [validated, setValidated] = useState(false);
-
+    // Submit Form Handler button:
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+        // Read all the field values in the form for Profile Update form submission:
+        const form = event.currentTarget.elements;
+        const name = form.name.value;
+        const lastName = form.lastName.value;
+        const phoneNumber = form.phoneNumber.value;
+        const address = form.address.value;
+        const country = form.country.value;
+        const zipCode = form.zipCode.value;
+        const city = form.city.value;
+        const state = form.state.value;
+        const password = form.password.value;
+
+
+        if (event.currentTarget.checkValidity() === true && form.password.value === form.confirmPassword.value) {
+            updateUserApiRequest(name, lastName, phoneNumber, address, country, zipCode, city, state, password)
+                .then(data => { console.log(data) });
         }
 
         setValidated(true);
@@ -159,7 +174,7 @@ const UserProfilePageComponent = ({updateUserApiRequest}) => {
 
                         {/* Submit Button */}
                         <Button variant="primary" type="submit">Update</Button>
-                        
+
                         <Alert show={true} variant="danger">A User with that Email already exists!</Alert>
                         <Alert show={true} variant="info">Successfully Updated User Information!</Alert>
                     </Form>
