@@ -6,15 +6,16 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
     // Initial State of the Registration fields using React Hooks:
     const [validated, setValidated] = useState(false); //Initially the validation state is false => not validated
     const [updateUserResponseState, setUpdateUserResponseState] = useState({ success: "", error: "" }); //inital state of user update alerts are empty strings
+    const [passwordsMatchState, setPasswordsMatchState] = useState(true); //Inital State of password matching is they are always matching (the empty string)
 
     // Password Matching Function:
     const onChange = () => {
         const password = document.querySelector("input[name=password]");
-        const confirm = document.querySelector("input[name=confirmPassword]");
-        if (confirm.value === password.value) {
-            confirm.setCustomValidity("")
+        const confirmPassword = document.querySelector("input[name=confirmPassword]");
+        if (confirmPassword.value === password.value) {
+            setPasswordsMatchState(true);
         } else {
-            confirm.setCustomValidity("Passwords do not match!");
+            setPasswordsMatchState(false);
         }
     }
 
@@ -165,6 +166,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 name="password"
                                 minLength={8}
                                 onChange={onChange}
+                                isInvalid={!passwordsMatchState}
                             />
                             <Form.Text className="text-muted">A Password Should Have at least 8 characters!</Form.Text>
                             <Form.Control.Feedback type="invalid">Please Enter A Valid Password</Form.Control.Feedback>
@@ -180,6 +182,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 name="confirmPassword"
                                 minLength={8}
                                 onChange={onChange}
+                                isValid={!passwordsMatchState}
                             />
                             <Form.Control.Feedback type="invalid">Please Repeat Your Password. Both Passwords Should Match!</Form.Control.Feedback>
                         </Form.Group>
