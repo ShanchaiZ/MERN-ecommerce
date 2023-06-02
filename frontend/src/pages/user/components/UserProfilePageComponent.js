@@ -90,6 +90,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 type="text"
                                 placeholder="Enter your phone number"
                                 defaultValue=""
+                                name="phoneNumber"
                             />
                         </Form.Group>
 
@@ -100,6 +101,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 type="text"
                                 placeholder="Enter your house number and street name"
                                 defaultValue=""
+                                name="address"
                             />
                         </Form.Group>
 
@@ -110,6 +112,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 type="text"
                                 placeholder="Enter your city"
                                 defaultValue=""
+                                name="city"
                             />
                         </Form.Group>
 
@@ -120,6 +123,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 type="text"
                                 placeholder="Enter your State"
                                 defaultValue=""
+                                name="state"
                             />
                         </Form.Group>
 
@@ -130,6 +134,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 type="text"
                                 placeholder="Enter your country"
                                 defaultValue=""
+                                name="country"
                             />
                         </Form.Group>
 
@@ -140,6 +145,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                                 type="text"
                                 placeholder="Enter your Postal Code"
                                 defaultValue=""
+                                name="zipCode"
                             />
                         </Form.Group>
 
