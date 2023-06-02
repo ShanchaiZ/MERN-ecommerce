@@ -1,7 +1,7 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
 
-const UserProfilePageComponent = () => {
+const UserProfilePageComponent = ({updateUserApiRequest}) => {
 
     // Password Matching Function:
     const onChange = () => {
