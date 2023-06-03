@@ -1,13 +1,14 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-const UserProfilePageComponent = ({ updateUserApiRequest, fetchUser, userInfo }) => {
+const UserProfilePageComponent = ({ updateUserApiRequest, fetchUser, userInfoFromRedux, setReduxUserState, reduxDispatch, localStorage, sessionStorage }) => {
 
     // Initial State of the Registration fields using React Hooks:
     const [validated, setValidated] = useState(false); //Initially the validation state is false => not validated
     const [updateUserResponseState, setUpdateUserResponseState] = useState({ success: "", error: "" }); //inital state of user update alerts are empty strings
     const [passwordsMatchState, setPasswordsMatchState] = useState(true); //Inital State of password matching is they are always matching (the empty string)
     const [user, setUser] = useState({}); // Initial State of User is empty object
+    const userInfo = userInfoFromRedux;
 
 
     //React UseEffect after browser load:
@@ -48,7 +49,13 @@ const UserProfilePageComponent = ({ updateUserApiRequest, fetchUser, userInfo })
         if (event.currentTarget.checkValidity() === true && form.password.value === form.confirmPassword.value) {
             updateUserApiRequest(name, lastName, phoneNumber, address, country, zipCode, city, state, password)
                 .then(data => {
-                    setUpdateUserResponseState({ success: data.success, error: "" })
+                    setUpdateUserResponseState({ success: data.success, error: "" });
+                    reduxDispatch(setReduxUserState({ doNotLogout: userInfo.doNotLogout, ...data.userUpdated }));
+                    if (userInfo.doNotLogout) {
+                        localStorage.setItem("userInfo", JSON.stringify({ doNotLogout: true, ...data.userUpdated }))
+                    } else {
+                        sessionStorage.setItem("userInfo", JSON.stringify({ doNotLogout: false, ...data.userUpdated }))
+                    }
                 })
                 .catch((er) =>
                     setUpdateUserResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })
