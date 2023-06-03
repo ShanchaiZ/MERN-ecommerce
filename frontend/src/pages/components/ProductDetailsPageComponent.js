@@ -5,16 +5,22 @@ import AddedToCartMessageComponent from "../../components/AddedToCartMessageComp
 
 // Image Display when Mouse Hover Effect:
 import ImageZoom from "js-image-zoom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";//Used to read id from url parameter 
 
-const ProductDetailsPageComponent = ({addToCartHandler, products}) => {
+const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch }) => {
 
     const { id } = useParams();
-    console.log(id);
 
-    
+    // Initial State of React:
+    const [quantity, setQuantity] = useState(1); //Initally quantity of product to add to cart is one.
+
+    const addToCartHandler = () => {
+        reduxDispatch(addToCartReduxAction(id, quantity));
+    }
+
+
     useEffect(() => {
         //Zoomed effects configuration:
         var options = {
@@ -63,7 +69,7 @@ const ProductDetailsPageComponent = ({addToCartHandler, products}) => {
                         <Col md={8}>
                             {/* Product name, Price, Description, and Rating Here */}
                             <ListGroup variant="flush">
-                                <ListGroup.Item><h1>Product Name {products}</h1></ListGroup.Item>
+                                <ListGroup.Item><h1>Product Name</h1></ListGroup.Item>
                                 <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
                                 <ListGroup.Item>Morbi leo risus
                                     <Rating readonly size={20} initialValue={4} /> (5)
@@ -82,11 +88,11 @@ const ProductDetailsPageComponent = ({addToCartHandler, products}) => {
                                     <ListGroup.Item>Status: in stock</ListGroup.Item>
                                     <ListGroup.Item>Price: <span className="fw-bold">$123</span> </ListGroup.Item>
                                     <ListGroup.Item> Quantity:
-                                        <Form.Select size="lg" aria-label="Default select example">
-                                            <option>1</option>
-                                            <option value="1">2</option>
-                                            <option value="2">3</option>
-                                            <option value="3">4</option>
+                                        <Form.Select value={quantity} onChange={e => setQuantity(e.target.value)} size="lg" aria-label="Default select example">
+                                            <option>Choose:</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
                                         </Form.Select>
                                     </ListGroup.Item>
                                 </ListGroup.Item>
