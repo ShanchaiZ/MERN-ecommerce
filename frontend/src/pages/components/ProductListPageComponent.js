@@ -54,7 +54,7 @@ const ProductListPageComponent = ({ getProducts }) => {
                             description={product.description}
                             price={product.price}
                             rating={product.rating}
-                            reviewNumber={product.reviewsNumber}
+                            reviewsNumber={product.reviewsNumber}
                             productId={product._id}
                         />
                     ))};
