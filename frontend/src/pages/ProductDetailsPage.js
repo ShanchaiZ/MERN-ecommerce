@@ -10,9 +10,13 @@ import { useEffect } from "react";
 // Redux:
 import { useDispatch, useSelector } from "react-redux"; // Calling Actions done by Dispatch
 import { addToCart } from "../redux/actions/cartActions"; //Caling the Action of adding to cart 
+import { useParams } from "react-router-dom";//Used to read id from url parameter 
 
 const ProductDetailsPage = () => {
     const dispatch = useDispatch();
+
+    const { id } = useParams();
+    console.log(id);
 
     const addToCartHandler = () => {
         dispatch(addToCart());
