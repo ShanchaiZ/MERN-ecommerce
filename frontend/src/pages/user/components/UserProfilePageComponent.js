@@ -1,12 +1,21 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const UserProfilePageComponent = ({ updateUserApiRequest }) => {
+const UserProfilePageComponent = ({ updateUserApiRequest, fetchUser, userInfo }) => {
 
     // Initial State of the Registration fields using React Hooks:
     const [validated, setValidated] = useState(false); //Initially the validation state is false => not validated
     const [updateUserResponseState, setUpdateUserResponseState] = useState({ success: "", error: "" }); //inital state of user update alerts are empty strings
     const [passwordsMatchState, setPasswordsMatchState] = useState(true); //Inital State of password matching is they are always matching (the empty string)
+    const [user, setUser] = useState({}); // Initial State of User is empty object
+
+
+    //React UseEffect after browser load:
+    useEffect(() => {
+        fetchUser(userInfo._id)
+            .then((data) => setUser(data))
+            .catch((er) => console.log(er));
+    }, [fetchUser, userInfo._id])
 
     // Password Matching Function:
     const onChange = () => {
@@ -62,7 +71,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 required
                                 type="text"
-                                defaultValue="John"
+                                defaultValue={user.name}
                                 name="name"
                             />
                             <Form.Control.Feedback type="invalid">Please Enter Your First Name</Form.Control.Feedback>
@@ -74,7 +83,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 required
                                 type="text"
-                                defaultValue="Doe"
+                                defaultValue={user.lastName}
                                 name="lastName"
                             />
                             <Form.Control.Feedback type="invalid">Please Enter Your Last Name</Form.Control.Feedback>
@@ -85,7 +94,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 disabled
-                                value="john@doe.com"
+                                value={user.email}
                             />
                             <Form.Text className="text-muted">If you want to change your email, remove account and create a new one with a new email address</Form.Text>
                         </Form.Group>
@@ -96,7 +105,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your phone number"
-                                defaultValue=""
+                                defaultValue={user.phoneNumber}
                                 name="phoneNumber"
                             />
                         </Form.Group>
@@ -107,7 +116,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your house number and street name"
-                                defaultValue=""
+                                defaultValue={user.address}
                                 name="address"
                             />
                         </Form.Group>
@@ -118,7 +127,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your city"
-                                defaultValue=""
+                                defaultValue={user.city}
                                 name="city"
                             />
                         </Form.Group>
@@ -129,7 +138,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your State"
-                                defaultValue=""
+                                defaultValue={user.state}
                                 name="state"
                             />
                         </Form.Group>
@@ -140,7 +149,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your country"
-                                defaultValue=""
+                                defaultValue={user.country}
                                 name="country"
                             />
                         </Form.Group>
@@ -151,7 +160,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your Postal Code"
-                                defaultValue=""
+                                defaultValue={user.zipCode}
                                 name="zipCode"
                             />
                         </Form.Group>
