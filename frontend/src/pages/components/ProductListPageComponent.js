@@ -12,8 +12,13 @@ import PriceFilterComponent from "../../components/filterQueryResultOptions/Pric
 import RatingFilterComponent from "../../components/filterQueryResultOptions/RatingFilterComponent";
 
 
+import { useEffect } from "react";
 
-const ProductListPageComponent = () => {
+const ProductListPageComponent = ({ getProducts }) => {
+
+    useEffect(() => {
+        getProducts().then(products => console.log(products));
+    }, [])
 
     return (
         <Container fluid>
