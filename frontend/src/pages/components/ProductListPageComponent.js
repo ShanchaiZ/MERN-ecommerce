@@ -12,12 +12,18 @@ import PriceFilterComponent from "../../components/filterQueryResultOptions/Pric
 import RatingFilterComponent from "../../components/filterQueryResultOptions/RatingFilterComponent";
 
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const ProductListPageComponent = ({ getProducts }) => {
 
+    // Initial State of the data fields using React Hooks:
+    const [products, setProducts] = useState([]); //Initially there will be no products rendered (" the empty array")
+
+
     useEffect(() => {
-        getProducts().then(products => console.log(products));
+        getProducts()
+            .then(products => setProducts(products.products))
+            .catch((er) => console.log(er));
     }, [])
 
     return (
@@ -40,9 +46,17 @@ const ProductListPageComponent = ({ getProducts }) => {
                 </Col>
                 {/* Main Product Listing */}
                 <Col md={9}>
-                    {Array.from({ length: 5 }).map((_, idx) => (
-                        <ProductForListComponent key={idx}
-                            images={["tablets", "monitors", "games", "software", "electronics", "books", "videos", "computers"]} idx={idx} />
+                    {products.map((product) => (
+                        <ProductForListComponent
+                            key={product._id}
+                            images={product.images}
+                            name={product.name}
+                            description={product.description}
+                            price={product.price}
+                            rating={product.rating}
+                            reviewNumber={product.reviewsNumber}
+                            productId={product._id}
+                        />
                     ))};
                     <PaginationComponent />
                 </Col>
