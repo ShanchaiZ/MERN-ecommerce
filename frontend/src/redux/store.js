@@ -14,15 +14,17 @@ const reducer = combineReducers({
 
 // Access/Read the data saved in Local Storage:
 const userInfoInLocalStorage = localStorage.getItem("userInfo") //If user.info is available from LocalStorage...
-? JSON.parse(localStorage.getItem("userInfo")) //Then, parse the user from local storage data...
-: sessionStorage.getItem("userInfo") //otherwise, check session Storage for user.info...
-? JSON.parse(sessionStorage.getItem("userInfo")) //..and parse the user.info from session storage data.
-: {} //ELSE, leave empty object
+    ? JSON.parse(localStorage.getItem("userInfo")) //Then, parse the user from local storage data...
+    : sessionStorage.getItem("userInfo") //otherwise, check session Storage for user.info...
+        ? JSON.parse(sessionStorage.getItem("userInfo")) //..and parse the user.info from session storage data.
+        : {} //ELSE, leave empty object
 
 // DEFAULT INITAL STATE: is set to these properties as below:
 const INITIAL_STATE = {
     cart: {
-
+        cartItems: [],
+        itemsCount: 0,
+        cartSubtotal: 0
     },
     userRegisterLogin: { userInfo: userInfoInLocalStorage }
 }
