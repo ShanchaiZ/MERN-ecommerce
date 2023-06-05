@@ -2,7 +2,9 @@ import { Row, Col, Container, Alert, ListGroup, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import CartItemComponent from "../../components/CartItemComponent";
 
-const CartPageComponent = () => {
+const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }) => {
+    console.log(cartItems);
+    
     return (
         <Container fluid>
             <Row className="mt-4">
