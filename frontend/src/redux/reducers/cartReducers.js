@@ -17,6 +17,7 @@ export const cartReducer = (state = CART_INITIAL_STATE, action) => {
 
             const currentState = { ...state }; //Make a copy of state to be changed
 
+            // If there is products found in Redux state:
             if (productAlreadyExistsInState) {
                 currentState.itemsCount = 0;
                 currentState.cartSubtotal = 0;
@@ -32,8 +33,12 @@ export const cartReducer = (state = CART_INITIAL_STATE, action) => {
                     }
                     return x.productID === productAlreadyExistsInState.productID ? productBeingAddedToCart : x;
                 });
+            // Otherwise, If there is NO products in Redux State:
             } else {
-
+                currentState.itemsCount += Number(productBeingAddedToCart.quantity);
+                const sum = Number(productBeingAddedToCart.quantity) * Number(productBeingAddedToCart.price);
+                currentState.cartSubtotal += sum;
+                currentState.cartItems = [...state.cartItems, productBeingAddedToCart];
             }
 
             return currentState;
