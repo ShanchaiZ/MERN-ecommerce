@@ -15,9 +15,11 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch }) =>
 
     // Initial State of React:
     const [quantity, setQuantity] = useState(1); //Initally quantity of product to add to cart is one.
+    const [showCartMessage, setShowCartmessage] = useState(false); //Initially dont show the Cart messages.
 
     const addToCartHandler = () => {
         reduxDispatch(addToCartReduxAction(id, quantity));
+        setShowCartmessage(true);
     }
 
 
@@ -39,7 +41,10 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch }) =>
     })
     return (
         <Container>
-            {<AddedToCartMessageComponent />}
+            {<AddedToCartMessageComponent
+                showCartMessage={showCartMessage}
+                setShowCartmessage={setShowCartmessage}
+            />}
             <Row className="mt-5">
                 <Col style={{ zIndex: 1 }} md={4}>
                     {/* Product Images Here */}
