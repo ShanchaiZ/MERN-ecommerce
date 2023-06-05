@@ -24,6 +24,8 @@ const HeaderComponent = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector((state) => state.userRegisterLogin);
 
+    const itemsCount = useSelector((state) => state.cart.itemsCount);
+
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -90,7 +92,9 @@ const HeaderComponent = () => {
                         <LinkContainer to="/cart">
                             <Nav.Link>
                                 {/* Pill Badge Notification */}
-                                <Badge pill bg="danger">3</Badge>
+                                <Badge pill bg="danger">
+                                    {itemsCount === 0 ? "" : itemsCount}
+                                </Badge>
                                 <i className="bi bi-cart4"></i>
                                 <span className="ms-1">Cart</span>
                             </Nav.Link>
