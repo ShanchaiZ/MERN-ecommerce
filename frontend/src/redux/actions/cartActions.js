@@ -3,7 +3,7 @@ import * as actionTypes from "../constants/cartConstants";
 import axios from "axios";
 
 // Store.dispatch: used to call the actions that CHANGES the global state:
-export const addToCart = (productId, quantity) => async (dispatch) => {
+export const addToCart = (productId, quantity) => async (dispatch, getState) => {
 
     // Api call to fetch product id of a product when add to cart action is called:
     const { data } = await axios.get(`/api/products/get-one/${productId}`);
@@ -19,4 +19,8 @@ export const addToCart = (productId, quantity) => async (dispatch) => {
             quantity,
         },
     })
+
+    //Action of Saving cart data to local storage for persistent memory:
+    localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+
 }
