@@ -7,8 +7,8 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 import { useState, useEffect } from "react";
 
 // Used to Logout On Error:
-// import { useDispatch } from "react-redux"; //Used to Call Redux Actions
-// import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
+import { useDispatch } from "react-redux"; //Used to Call Redux Actions
+import { logout } from "../../../redux/actions/userActions"; //Used call Logout Action
 
 
 const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
@@ -16,7 +16,7 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
     // Initial State of the React Hooks
     const [users, setUsers] = useState([]); // Initially set to empty array of users
     const [userDeleted, setUserDeleted] = useState(false); //Initially set to false because no one getting deleted.
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
     const deleteHandler = async (userId) => {
@@ -33,10 +33,11 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
         const abctrl = new AbortController();
         fetchUsers(abctrl)
             .then(res => setUsers(res))
-            .catch((er) =>
+            .catch((er) => {
+                if (er.code !== "ERR_CANCELED") dispatch(logout())
                 // dispatch(logout()) // to do: Logout on Error. fix the error
-                console.log(er.response.data.message ? er.response.data.message : er.response.data)
-            );
+                // console.log(er.response.data.message ? er.response.data.message : er.response.data)
+            });
         return () => abctrl.abort();
     }, [fetchUsers, userDeleted]);
 
