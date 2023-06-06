@@ -14,28 +14,33 @@ const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }
                 {/* Shopping Cart Items: */}
                 <Col md={8}>
                     <h1>Shopping Cart</h1>
-                    <ListGroup variant="flush">
-                        {cartItems.map((item, idx) => (
-                            <CartItemComponent
-                                // Added a temporary Js object as item component:
-                                item={item} key={idx} changeCount={changeCount} />
-                        ))}
-                    </ListGroup>
-                    <Alert variant="info">Your Cart is Empty!</Alert>
+                    {/* Cart Item Message visibility: If Cart is empty, show message... */}
+                    {cartItems.length === 0 ? (
+                        <Alert variant="info">Your Cart is Empty!</Alert>
+                    ) : (
+                        // OtherWise, show cart items...:
+                        <ListGroup variant="flush">
+                            {cartItems.map((item, idx) => (
+                                <CartItemComponent
+                                    // Items in a Cart:
+                                    item={item} key={idx} changeCount={changeCount} />
+                            ))}
+                        </ListGroup>
+                    )}
                 </Col>
 
                 {/* Price Subtotal and Checkout: */}
                 <Col md={4}>
                     <ListGroup>
                         <ListGroup.Item>
-                            <h3>Subtotal (2 Items)</h3>
+                            <h3>Subtotal ({cartItems.length} {cartItems.length === 1 ? "Product" : "Products"} Items)</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            Price: <span className="fw-bold">$333</span>
+                            Price: <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <LinkContainer to="/user/cart-details">
-                                <Button type="button">Proceed to Checkout</Button>
+                                <Button disabled={cartSubtotal === 0} type="button">Proceed to Checkout</Button>
                             </LinkContainer>
                         </ListGroup.Item>
                     </ListGroup>
