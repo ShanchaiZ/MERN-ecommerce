@@ -33,7 +33,7 @@ const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }
                 <Col md={4}>
                     <ListGroup>
                         <ListGroup.Item>
-                            <h3>Subtotal ({cartItems.length} {cartItems.length === 1 ? "Product" : "Products"} Items)</h3>
+                            <h3>Subtotal ({cartItems.length} {cartItems.length === 1 ? "Product" : "Products"})</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             Price: <span className="fw-bold">${cartSubtotal}</span>
