@@ -16,7 +16,7 @@ const updateUserApiRequest = async (name, lastName, phoneNumber, address, countr
 
 // Fetching User Data for Easier Profile Update:
 const fetchUser = async (id) => {
-    const { data } = await axios.get("/api/user/profile/" + id);
+    const { data } = await axios.get("/api/users/profile/" + id);
     return data;
 }
 
