@@ -3,8 +3,11 @@ import { LinkContainer } from "react-router-bootstrap";
 import CartItemComponent from "../../components/CartItemComponent";
 
 const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }) => {
-    console.log(cartItems);
-    
+
+    const changeCount = (productID, count) => {
+        reduxDispatch(addToCart(productID, count));
+    }
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -12,11 +15,10 @@ const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }
                 <Col md={8}>
                     <h1>Shopping Cart</h1>
                     <ListGroup variant="flush">
-                        {Array.from({ length: 3 }).map((item, idx) => (
+                        {cartItems.map((item, idx) => (
                             <CartItemComponent
                                 // Added a temporary Js object as item component:
-                                item={{ image: { path: "/images/category/monitors-category.jpg" }, name: "Product Name", price: 25, quantity: 3, count: 12 }}
-                                key={idx} />
+                                item={item} key={idx} changeCount={changeCount} />
                         ))}
                     </ListGroup>
                     <Alert variant="info">Your Cart is Empty!</Alert>
