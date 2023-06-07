@@ -8,6 +8,14 @@ const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }
         reduxDispatch(addToCart(productID, count));
     }
 
+    const removeFromCartHandler = (productID, quantity, price) => {
+        if (window.confirm("Are you sure?")) {
+            console.log(productID);
+            console.log(quantity);
+            console.log(price);
+        }
+    }
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -23,7 +31,7 @@ const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }
                             {cartItems.map((item, idx) => (
                                 <CartItemComponent
                                     // Items in a Cart:
-                                    item={item} key={idx} changeCount={changeCount} />
+                                    item={item} key={idx} changeCount={changeCount} removeFromCartHandler={removeFromCartHandler} />
                             ))}
                         </ListGroup>
                     )}
