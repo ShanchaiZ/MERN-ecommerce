@@ -1,4 +1,4 @@
-import { ListGroup, Row, Col, Image, Form, Button } from "react-bootstrap";
+import { ListGroup, Row, Col, Image, Form } from "react-bootstrap";
 import RemoveFromCartComponent from "./RemoveFromCartComponent";
 
 const CartItemComponent = ({ item, removeFromCartHandler = false, orderCreated = false, changeCount = false }) => {

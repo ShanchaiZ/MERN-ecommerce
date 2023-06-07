@@ -2,17 +2,16 @@ import { Row, Col, Container, Alert, ListGroup, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import CartItemComponent from "../../components/CartItemComponent";
 
-const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, reduxDispatch }) => {
+const CartPageComponent = ({ addToCart, cartItems, cartSubtotal, removeFromCart, reduxDispatch }) => {
 
     const changeCount = (productID, count) => {
         reduxDispatch(addToCart(productID, count));
     }
 
+    //Function for Removing Items from Cart with ProductID, quantity and price: 
     const removeFromCartHandler = (productID, quantity, price) => {
         if (window.confirm("Are you sure?")) {
-            console.log(productID);
-            console.log(quantity);
-            console.log(price);
+            reduxDispatch(removeFromCart(productID, quantity, price));
         }
     }
 

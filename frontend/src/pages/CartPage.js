@@ -1,7 +1,7 @@
 import CartPageComponent from "./components/CartPageComponent";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../redux/actions/cartActions";
+import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
 
 const CartPage = () => {
@@ -14,6 +14,7 @@ const CartPage = () => {
 
     return <CartPageComponent
         addToCart={addToCart}
+        removeFromCart={removeFromCart}
         cartItems={cartItems}
         cartSubtotal={cartSubtotal}
         reduxDispatch={reduxDispatch}
