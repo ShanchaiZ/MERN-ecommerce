@@ -1,7 +1,7 @@
 import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import CartItemComponent from "../../../components/CartItemComponent";
 
-const UserCartDetailsPageComponent = () => {
+const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal }) => {
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -39,10 +39,10 @@ const UserCartDetailsPageComponent = () => {
                     {/* Product Order Items */}
                     <h2>Order Items</h2>
                     <ListGroup variant="flush">
-                        {Array.from({ length: 3 }).map((item, idx) => (
+                        {cartItems.map((item, idx) => (
                             <CartItemComponent
                                 // Added a temporary Js object as item component:
-                                item={{ image: { path: "/images/category/monitors-category.jpg" }, name: "Product Name", price: 25, quantity: 3, count: 12 }}
+                                item={item}
                                 key={idx} />
                         ))}
                     </ListGroup>
@@ -55,7 +55,7 @@ const UserCartDetailsPageComponent = () => {
                             <h3>Order Summary</h3>
                         </ListGroupItem>
                         <ListGroupItem>
-                            Price of Item (after tax): <span className="fw-bold">$987</span>
+                            Price of Item (after tax): <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroupItem>
                         <ListGroupItem>
                             Shipping: <span className="fw-bold">Included</span>
@@ -64,7 +64,7 @@ const UserCartDetailsPageComponent = () => {
                             Tax: <span className="fw-bold">Included</span>
                         </ListGroupItem>
                         <ListGroupItem className="text-danger">
-                            Total Price: <span className="fw-bold">$1234</span>
+                            Total Price: <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
