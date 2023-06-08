@@ -1,6 +1,7 @@
 import UserCartDetailsPageComponent from "./components/UserCartDetailsPageComponent";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/actions/cartActions";
 
 const UserCartDetailsPage = () => {
 
@@ -8,7 +9,16 @@ const UserCartDetailsPage = () => {
     const itemsCount = useSelector((state) => state.cart.itemsCount);
     const cartSubtotal = useSelector((state) => state.cart.cartSubtotal);
 
-    return <UserCartDetailsPageComponent cartItems={cartItems} itemsCount={itemsCount} cartSubtotal={cartSubtotal} />
+    const reduxDispatch = useDispatch();
+
+    return <UserCartDetailsPageComponent
+        cartItems={cartItems}
+        itemsCount={itemsCount}
+        cartSubtotal={cartSubtotal}
+        reduxDispatch={reduxDispatch}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+    />
 };
 
 export default UserCartDetailsPage;
