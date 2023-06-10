@@ -1,7 +1,12 @@
 import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import CartItemComponent from "../../../components/CartItemComponent";
 
+import { useEffect, useState } from "react";
+
 const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, addToCart, removeFromCart, userInfo, reduxDispatch, getUser }) => {
+
+    //Initial Local State Hook:
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
     // Changing item count in cart:
     const changeCount = (productID, count) => {
@@ -15,7 +20,16 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
         }
     }
 
-    getUser().then(res => console.log(res));
+    // Disable button after reload:
+    useEffect(() => {
+        getUser()
+            .then((data) => {
+                if (!data.address || !data.city || !data.country || !data.zipCode || !data.state || !data.phoneNumber) {
+                    setButtonDisabled(true);
+                }
+            })
+            .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
+    }, [userInfo._id])
 
     return (
         <Container fluid>
@@ -85,7 +99,7 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
-                                <Button size="lg" variant="success" type="Button">
+                                <Button size="lg" variant="success" type="Button" disabled={buttonDisabled}>
                                     Pay for the Order
                                 </Button>
                             </div>
