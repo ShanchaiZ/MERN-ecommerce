@@ -2,14 +2,20 @@ import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } fr
 import CartItemComponent from "../../../components/CartItemComponent";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, addToCart, removeFromCart, userInfo, reduxDispatch, getUser }) => {
+const UserCartDetailsPageComponent = ({
+    cartItems, itemsCount, cartSubtotal, addToCart, removeFromCart, userInfo, reduxDispatch, getUser, createOrder
+}) => {
 
     //Initial Local State Hook:
     const [buttonDisabled, setButtonDisabled] = useState(false); //Intially set to Do not disable pay order button
     const [userAddress, setUserAddress] = useState(false); // Initially set to No Address on page
     const [missingAddress, setMissingAddress] = useState(""); //Initially set to empty string
     const [paymentMethod, setPaymentMethod] = useState("pp");//Initially set to 'pp' = paypal payment method
+
+    const navigate = useNavigate(); //used to navigate to selected page
+
 
     // Changing item count in cart:
     const changeCount = (productID, count) => {
@@ -68,7 +74,14 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
             }),
             paymentMethod: paymentMethod,
         }
-        console.log(orderData);
+        // Order is saved in database:
+        createOrder(orderData)
+            .then(data => {
+                if (data) {
+                    navigate("/user/order-details/" + data._id);
+                }
+            })
+            .catch((er) => console.log(er));
     }
 
     // Payment Method Selection to dynamically save to db:
