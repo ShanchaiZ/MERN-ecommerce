@@ -9,6 +9,7 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
     const [buttonDisabled, setButtonDisabled] = useState(false); //Intially set to Do not disable pay order button
     const [userAddress, setUserAddress] = useState(false); // Initially set to No Address on page
     const [missingAddress, setMissingAddress] = useState(""); //Initially set to empty string
+    const [paymentMethod, setPaymentMethod] = useState("pp");//Initially set to 'pp' = paypal payment method
 
     // Changing item count in cart:
     const changeCount = (productID, count) => {
@@ -64,9 +65,15 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                     quantity: item.quantity,
                     count: item.count
                 }
-            })
+            }),
+            paymentMethod: paymentMethod,
         }
         console.log(orderData);
+    }
+
+    // Payment Method Selection to dynamically save to db:
+    const choosePayment = (e) => {
+        setPaymentMethod(e.target.value);
     }
 
 
@@ -87,7 +94,7 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                         {/* Payment Method */}
                         <Col md={6}>
                             <h2>Payment method</h2>
-                            <Form.Select>
+                            <Form.Select onChange={choosePayment}>
                                 <option value="pp">PayPal</option>
                                 <option value="cod">Cash on Delivery (delivery may be delayed)</option>
                             </Form.Select>
