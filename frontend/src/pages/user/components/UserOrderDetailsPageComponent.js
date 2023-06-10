@@ -1,7 +1,7 @@
 import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import CartItemComponent from "../../../components/CartItemComponent";
 
-const UserOrderDetailsPageComponent = () => {
+const UserOrderDetailsPageComponent = ({ userInfo }) => {
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -12,7 +12,7 @@ const UserOrderDetailsPageComponent = () => {
                         {/* Shipping Information */}
                         <Col md={6}>
                             <h2>Shipping</h2>
-                            <b>Name</b>: John Doe <br />
+                            <b>Name</b>: {userInfo.name} {userInfo.lastName}<br />
                             <b>Address</b>: 123 Fake Street, New York City, NY 09876 <br />
                             <b>Phone Number:</b>: (123) 456-7890 <br />
                         </Col>
