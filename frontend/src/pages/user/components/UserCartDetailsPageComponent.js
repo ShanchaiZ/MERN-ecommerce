@@ -7,7 +7,8 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
 
     //Initial Local State Hook:
     const [buttonDisabled, setButtonDisabled] = useState(false); //Intially set to Do not disable pay order button
-    const [userAddress, setUserAddress] = useState(false); // Initially set to 
+    const [userAddress, setUserAddress] = useState(false); // Initially set to No Address on page
+    const [missingAddress, setMissingAddress] = useState(""); //Initially set to empty string
 
     // Changing item count in cart:
     const changeCount = (productID, count) => {
@@ -27,6 +28,7 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
             .then((data) => {
                 if (!data.address || !data.city || !data.country || !data.zipCode || !data.state || !data.phoneNumber) {
                     setButtonDisabled(true);
+                    setMissingAddress("In order to complete the order, please fill out your profile with correct address, city, etc.")
                 } else {
                     // if user data validation is sucessful:
                     setUserAddress({
@@ -36,7 +38,8 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                         zipCode: data.zipCode,
                         state: data.state,
                         phoneNumber: data.phoneNumber
-                    });
+                    })
+                    setMissingAddress(false);
                 }
             })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
@@ -67,7 +70,7 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                         {/* Deliver Alerts */}
                         <Row>
                             <Col>
-                                <Alert className="mt-3" variant="danger">Product Not Delivered. Please Complete Your Profile With Correct Information (address, city, etc).</Alert>
+                                <Alert className="mt-3" variant="danger">Product Not Delivered. {missingAddress}</Alert>
                             </Col>
                             <Col>
                                 <Alert className="mt-3" variant="success">Outstanding Balance in Cart</Alert>
