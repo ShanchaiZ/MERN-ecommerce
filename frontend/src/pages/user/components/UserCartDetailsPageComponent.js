@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, addToCart, removeFromCart, userInfo, reduxDispatch, getUser }) => {
 
     //Initial Local State Hook:
-    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(false); //Intially set to Do not disable pay order button
+    const [userAddress, setUserAddress] = useState(false); // Initially set to 
 
     // Changing item count in cart:
     const changeCount = (productID, count) => {
@@ -26,6 +27,16 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
             .then((data) => {
                 if (!data.address || !data.city || !data.country || !data.zipCode || !data.state || !data.phoneNumber) {
                     setButtonDisabled(true);
+                } else {
+                    // if user data validation is sucessful:
+                    setUserAddress({
+                        address: data.address,
+                        city: data.city,
+                        country: data.country,
+                        zipCode: data.zipCode,
+                        state: data.state,
+                        phoneNumber: data.phoneNumber
+                    });
                 }
             })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
@@ -42,8 +53,8 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                         <Col md={6}>
                             <h2>Shipping</h2>
                             <b>Name</b>: {userInfo.name} {userInfo.lastName} <br />
-                            <b>Address</b>: 123 Fake Street, New York City, NY 09876 <br />
-                            <b>Phone Number:</b>: (123) 456-7890 <br />
+                            <b>Address</b>: {userAddress.address}, {userAddress.city} {userAddress.state}, {userAddress.zipCode}<br />
+                            <b>Phone Number</b>: {userAddress.phoneNumber}<br />
                         </Col>
                         {/* Payment Method */}
                         <Col md={6}>
