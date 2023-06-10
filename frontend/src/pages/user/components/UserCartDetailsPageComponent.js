@@ -45,6 +45,31 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
     }, [userInfo._id])
 
+
+    // Order Handler:
+    const orderHandler = () => {
+        const orderData = {
+            orderTotal: {
+                itemsCount: itemsCount,
+                cartSubtotal: cartSubtotal
+            },
+            cartItems: cartItems.map(item => {
+                return {
+                    productID: item.productID,
+                    name: item.name,
+                    price: item.price,
+                    image: {
+                        path: item.image ? (item.image.path ?? null) : null
+                    },
+                    quantity: item.quantity,
+                    count: item.count
+                }
+            })
+        }
+        console.log(orderData);
+    }
+
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -113,8 +138,8 @@ const UserCartDetailsPageComponent = ({ cartItems, itemsCount, cartSubtotal, add
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
-                                <Button size="lg" variant="success" type="Button" disabled={buttonDisabled}>
-                                    Pay for the Order
+                                <Button size="lg" onClick={orderHandler} variant="success" type="Button" disabled={buttonDisabled}>
+                                    Place Order
                                 </Button>
                             </div>
                         </ListGroupItem>
