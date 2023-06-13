@@ -10,6 +10,15 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
 
     //Initial Local React State hooks 
     const [userAddress, setUserAddress] = useState({}); //initally an empty object
+    const [paymentMethod, setPaymentMethod] = useState(""); //initially an empty string
+    const [isPaid, setIsPaid] = useState(false); //initially order is not paid = false
+    const [orderButtonMessage, setOrderButtonMessage] = useState(""); //initally message on the order button will be emptry string
+    const [cartItems, setCartItems] = useState([]); //initially page starts with an empty cart array
+    const [cartSubtotal, setCartSubtotal] = useState(0); // initially set to 0 as there is nothing in cart.
+    const [isDelivered, setIsDelivered] = useState(false); //initially order is not delivered = false
+    const [buttonDisabled, setButtonDisabled] = useState(false); // initially button is not disabled
+
+    
     const { id } = useParams();
 
     // useEffect after page render to dynamically update User Address and phonenumber:
