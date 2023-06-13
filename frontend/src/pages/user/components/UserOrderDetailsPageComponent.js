@@ -1,7 +1,30 @@
 import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import CartItemComponent from "../../../components/CartItemComponent";
 
-const UserOrderDetailsPageComponent = ({ userInfo }) => {
+import { useEffect, useState } from "react";
+
+const UserOrderDetailsPageComponent = ({ userInfo, getUser }) => {
+
+    //Initial Local React State hooks 
+    const [userAddress, setUserAddress] = useState({}); //initally an empty object
+
+    // useEffect after page render:
+    useEffect(() => {
+        getUser()
+            .then(data => {
+                setUserAddress({
+                    address: data.address,
+                    city: data.city,
+                    country: data.count,
+                    zipCode: data.zipCode,
+                    state: data.state,
+                    phoneNumber: data.phoneNumber
+                });
+            })
+            .catch((err) => console.log(err));
+    }, [])
+
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -13,8 +36,8 @@ const UserOrderDetailsPageComponent = ({ userInfo }) => {
                         <Col md={6}>
                             <h2>Shipping</h2>
                             <b>Name</b>: {userInfo.name} {userInfo.lastName}<br />
-                            <b>Address</b>: 123 Fake Street, New York City, NY 09876 <br />
-                            <b>Phone Number:</b>: (123) 456-7890 <br />
+                            <b>Address</b>: {userAddress.address} {userAddress.city}, {userAddress.state} {userAddress.zipCode} <br />
+                            <b>Phone Number:</b>: {userAddress.phoneNumber} <br />
                         </Col>
                         {/* Payment Method */}
                         <Col md={6}>
