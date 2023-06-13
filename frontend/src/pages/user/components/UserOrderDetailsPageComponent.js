@@ -69,7 +69,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
         if (paymentMethod === "pp") {
             setOrderButtonMessage("To Pay for your order, select one of the buttons below:");
             if (!isPaid){
-                //to do: add paypal script for actions
+                //to do: install paypal for payment method, with script and methods
             }
         } else {
             setOrderButtonMessage("Your order is placed! Thank you!")
