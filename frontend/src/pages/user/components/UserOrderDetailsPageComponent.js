@@ -62,6 +62,20 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
     }, [])
 
 
+    // OrderHandler Button:
+    const OrderHandler = () => {
+        setButtonDisabled(true); //disable button after clicking
+        if (paymentMethod === "pp") {
+            setOrderButtonMessage("To Pay for your order, select one of the buttons below:");
+            if (!isPaid){
+                //to do: add paypal script for actions
+            }
+        } else {
+            setOrderButtonMessage("Your order is placed! Thank you!")
+        }
+    }
+
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -132,7 +146,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
-                                <Button size="lg" variant="success" type="Button" disabled={buttonDisabled}>
+                                <Button size="lg" onClick={OrderHandler} variant="success" type="Button" disabled={buttonDisabled}>
                                     {orderButtonMessage}
                                 </Button>
                             </div>
