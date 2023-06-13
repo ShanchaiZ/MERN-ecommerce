@@ -51,7 +51,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                     setButtonDisabled(true);
                 } else {
                     if (data.paymentMethod === "pp") {
-                        setOrderButtonMessage("Pay for your order");
+                        setOrderButtonMessage("Pay for the order");
                     } else if (data.paymentMethod === "cod") {
                         setButtonDisabled(true);
                         setOrderButtonMessage("Wait for your order. Pay upon delivery");
@@ -61,7 +61,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
             .catch((err) => console.log(err));
     }, [])
 
-    
+
     return (
         <Container fluid>
             <Row className="mt-4">
@@ -79,7 +79,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                         {/* Payment Method */}
                         <Col md={6}>
                             <h2>Payment method</h2>
-                            <Form.Select disabled={true}>
+                            <Form.Select value={paymentMethod} disabled={true}>
                                 <option value="pp">PayPal</option>
                                 <option value="cod">Cash on Delivery (delivery may be delayed)</option>
                             </Form.Select>
@@ -87,10 +87,14 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                         {/* Deliver Alerts */}
                         <Row>
                             <Col>
-                                <Alert className="mt-3" variant="danger">Product Not Delivered</Alert>
+                                <Alert className="mt-3" variant={isDelivered ? "success" : "danger"}>
+                                    {isDelivered ? <>Delivered at: {isDelivered}</> : <>Product Not Delivered</>}
+                                </Alert>
                             </Col>
                             <Col>
-                                <Alert className="mt-3" variant="success">Paid on 03-10-2023</Alert>
+                                <Alert className="mt-3" variant={isPaid ? "success" : "danger"}>
+                                    {isPaid ? <>Paid on: {isPaid}</> : <>Outstanding Balance in Cart</>}
+                                </Alert>
                             </Col>
                         </Row>
                     </Row>
@@ -115,7 +119,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                             <h3>Order Summary</h3>
                         </ListGroupItem>
                         <ListGroupItem>
-                            Price of Item (after tax): <span className="fw-bold">$987</span>
+                            Price of Item (after tax): <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroupItem>
                         <ListGroupItem>
                             Shipping: <span className="fw-bold">Included</span>
@@ -124,12 +128,12 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                             Tax: <span className="fw-bold">Included</span>
                         </ListGroupItem>
                         <ListGroupItem className="text-danger">
-                            Total Price: <span className="fw-bold">$1234</span>
+                            Total Price: <span className="fw-bold">${cartSubtotal}</span>
                         </ListGroupItem>
                         <ListGroupItem>
                             <div className="d-grid">
-                                <Button size="lg" variant="success" type="Button">
-                                    Pay for the Order
+                                <Button size="lg" variant="success" type="Button" disabled={buttonDisabled}>
+                                    {orderButtonMessage}
                                 </Button>
                             </div>
                         </ListGroupItem>
