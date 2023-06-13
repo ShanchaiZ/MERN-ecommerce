@@ -18,7 +18,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
     const [isDelivered, setIsDelivered] = useState(false); //initially order is not delivered = false
     const [buttonDisabled, setButtonDisabled] = useState(false); // initially button is not disabled
 
-    
+
     const { id } = useParams();
 
     // useEffect after page render to dynamically update User Address and phonenumber:
@@ -41,11 +41,27 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
     useEffect(() => {
         getOrder(id)
             .then(data => {
-                console.log(data);
+                setPaymentMethod(data.paymentMethod);
+                setCartItems(data.cartItems);
+                setCartSubtotal(data.orderTotal.cartSubtotal);
+                data.isDelivered ? setIsDelivered(data.deliveredAt) : setIsDelivered(false); //find isDelivered and setIsDelivered to the time of Delivery, otherwise set to false.
+                data.isPaid ? setIsPaid(data.paidAt) : setIsPaid(false); //find IsPad and set IsPad to the time of paid, otherwise set to false.
+                if (data.isPaid) {
+                    setOrderButtonMessage("Your order is completed!");
+                    setButtonDisabled(true);
+                } else {
+                    if (data.paymentMethod === "pp") {
+                        setOrderButtonMessage("Pay for your order");
+                    } else if (data.paymentMethod === "cod") {
+                        setButtonDisabled(true);
+                        setOrderButtonMessage("Wait for your order. Pay upon delivery");
+                    }
+                }
             })
             .catch((err) => console.log(err));
     }, [])
 
+    
     return (
         <Container fluid>
             <Row className="mt-4">
