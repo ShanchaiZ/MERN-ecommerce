@@ -103,11 +103,11 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
                     {/* Product Order Items */}
                     <h2>Order Items</h2>
                     <ListGroup variant="flush">
-                        {Array.from({ length: 3 }).map((item, idx) => (
+                        {cartItems.map((item, idx) => (
                             <CartItemComponent
-                                // Added a temporary Js object as item component:
-                                item={{ image: { path: "/images/category/monitors-category.jpg" }, name: "Product Name", price: 25, quantity: 3, count: 12 }}
-                                key={idx} />
+                                item={item}
+                                key={idx}
+                                orderCreated={true} />
                         ))}
                     </ListGroup>
                 </Col>
