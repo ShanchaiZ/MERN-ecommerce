@@ -3,12 +3,16 @@ import CartItemComponent from "../../../components/CartItemComponent";
 
 import { useEffect, useState } from "react";
 
-const UserOrderDetailsPageComponent = ({ userInfo, getUser }) => {
+import { useParams, userParams } from "react-router-dom";
+
+
+const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
 
     //Initial Local React State hooks 
     const [userAddress, setUserAddress] = useState({}); //initally an empty object
+    const { id } = useParams();
 
-    // useEffect after page render:
+    // useEffect after page render to dynamically update User Address and phonenumber:
     useEffect(() => {
         getUser()
             .then(data => {
@@ -24,6 +28,14 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser }) => {
             .catch((err) => console.log(err));
     }, [])
 
+    // Dynamically update the cart items on the page:
+    useEffect(() => {
+        getOrder(id)
+            .then(data => {
+                console.log(data);
+            })
+            .catch((err) => console.log(err));
+    }, [])
 
     return (
         <Container fluid>
