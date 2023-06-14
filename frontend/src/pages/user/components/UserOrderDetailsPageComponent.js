@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder }) => {
+const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript }) => {
 
     //Initial Local React State hooks 
     const [userAddress, setUserAddress] = useState({}); //initally an empty object

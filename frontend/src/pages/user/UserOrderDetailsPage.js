@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 
 import axios from "axios";
 
+// Imported PayPal as payment method:
+import { loadScript } from "@paypal/paypal-js";
+
+
 // Get Order from Database and dynamically show on this page:
 const getOrder = async (orderId) => {
     const { data } = await axios.get("/api/orders/user/" + orderId);
@@ -19,7 +23,7 @@ const UserOrderDetailsPage = () => {
     }
 
 
-    return <UserOrderDetailsPageComponent userInfo={userInfo} getUser={getUser} getOrder={getOrder} />
+    return <UserOrderDetailsPageComponent userInfo={userInfo} getUser={getUser} getOrder={getOrder} loadScript={loadScript} />
 };
 
 export default UserOrderDetailsPage;
