@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Alert, ListGroup, ListGroupItem, Button } fr
 import CartItemComponent from "../../../components/CartItemComponent";
 
 // Used for local State changes:
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
@@ -19,6 +19,8 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript
     const [isDelivered, setIsDelivered] = useState(false); //initially order is not delivered = false
     const [buttonDisabled, setButtonDisabled] = useState(false); // initially button is not disabled
 
+    const paypalContainer = useRef(); //Special React Object that allows values to persist between renders
+    console.log(paypalContainer);
 
     const { id } = useParams();
 
@@ -73,7 +75,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript
                     "client-id": "AQHnpVz64-l3AuEusvofl0Wpkc2u_sLVsGxAisEkTQAueVQR9F0q9sUlWqyLv8qb6uZ6NNY3K0hj7LIm"
                 })
                     .then(paypal => {
-                        console.log(paypal);
+                        paypal.Buttons({}).render("#paypal-container-element");
                     })
                     .catch(err => {
                         console.error("failed to load PayPal js SDK script", err);
@@ -158,6 +160,10 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript
                                 <Button size="lg" onClick={OrderHandler} variant="success" type="Button" disabled={buttonDisabled}>
                                     {orderButtonMessage}
                                 </Button>
+                            </div>
+                            {/* Paypal Payment Buttons: */}
+                            <div style={{ position: "relative", zIndex: 1 }}>
+                                <div ref={paypalContainer} id="paypal-container-element"></div>
                             </div>
                         </ListGroupItem>
                     </ListGroup>
