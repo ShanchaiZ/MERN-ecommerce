@@ -68,8 +68,16 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript
         setButtonDisabled(true); //disable button after clicking
         if (paymentMethod === "pp") {
             setOrderButtonMessage("To Pay for your order, select one of the buttons below:");
-            if (!isPaid){
-                //to do: install paypal for payment method, with script and methods
+            if (!isPaid) {
+                loadScript({
+                    "client-id": "AQHnpVz64-l3AuEusvofl0Wpkc2u_sLVsGxAisEkTQAueVQR9F0q9sUlWqyLv8qb6uZ6NNY3K0hj7LIm"
+                })
+                    .then(paypal => {
+                        console.log(paypal);
+                    })
+                    .catch(err => {
+                        console.error("failed to load PayPal js SDK script", err);
+                    })
             }
         } else {
             setOrderButtonMessage("Your order is placed! Thank you!")
