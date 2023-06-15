@@ -22,12 +22,37 @@ const loadPayPalScript = () => {
     })
         .then(paypal => {
             paypal
-                .Buttons({})
+                .Buttons({
+                    createOrder: createPayPalOrderHandler,
+                    onCancel: onCancelHandler,
+                    onApprove: onApproveHandler,
+                    onError: onErrorHandler
+                })
                 .render("#paypal-container-element");
         })
         .catch(err => {
             console.error("failed to load PayPal js SDK script", err);
         });
+}
+
+// Paypal Methods: CreateOrder Handler
+const createPayPalOrderHandler = function () {
+    console.log("createPayPalOrderHandler");
+}
+
+// Paypal Methods: Cancel Order Handler
+const onCancelHandler = function () {
+    console.log("Cancel Order Payment");
+}
+
+// Paypal Methods: Order Approved Handler
+const onApproveHandler = function () {
+    console.log("Order Through Purchase Approved!");
+}
+
+// Paypal Methods: Payment Error Handler:
+const onErrorHandler = function (err) {
+    console.log("Paypal error");
 }
 
 
