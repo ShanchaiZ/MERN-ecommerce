@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript }) => {
+const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadPayPalScript }) => {
 
     //Initial Local React State hooks 
     const [userAddress, setUserAddress] = useState({}); //initally an empty object
@@ -71,15 +71,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadScript
         if (paymentMethod === "pp") {
             setOrderButtonMessage("To Pay for your order, select one of the buttons below:");
             if (!isPaid) {
-                loadScript({
-                    "client-id": "AQHnpVz64-l3AuEusvofl0Wpkc2u_sLVsGxAisEkTQAueVQR9F0q9sUlWqyLv8qb6uZ6NNY3K0hj7LIm"
-                })
-                    .then(paypal => {
-                        paypal.Buttons({}).render("#paypal-container-element");
-                    })
-                    .catch(err => {
-                        console.error("failed to load PayPal js SDK script", err);
-                    })
+                loadPayPalScript();
             }
         } else {
             setOrderButtonMessage("Your order is placed! Thank you!")
