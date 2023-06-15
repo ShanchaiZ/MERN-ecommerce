@@ -16,23 +16,28 @@ const getOrder = async (orderId) => {
 
 
 // PayPal Buttons Rendering when Paypal payment selected:
-const loadPayPalScript = () => {
+const loadPayPalScript = (cartSubtotal, cartItems) => {
     loadScript({
         "client-id": "AQHnpVz64-l3AuEusvofl0Wpkc2u_sLVsGxAisEkTQAueVQR9F0q9sUlWqyLv8qb6uZ6NNY3K0hj7LIm"
     })
         .then(paypal => {
             paypal
-                .Buttons({
-                    createOrder: createPayPalOrderHandler,
-                    onCancel: onCancelHandler,
-                    onApprove: onApproveHandler,
-                    onError: onErrorHandler
-                })
+                .Buttons(buttons(cartSubtotal, cartItems))
                 .render("#paypal-container-element");
         })
         .catch(err => {
             console.error("failed to load PayPal js SDK script", err);
         });
+}
+
+//Custom paypal buttons methods:
+const buttons = (cartSubtotal, cartItems) => {
+    return {
+        createOrder: createPayPalOrderHandler,
+        onCancel: onCancelHandler,
+        onApprove: onApproveHandler,
+        onError: onErrorHandler
+    }
 }
 
 // Paypal Methods: CreateOrder Handler
