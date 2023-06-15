@@ -3,7 +3,7 @@ const products = [
         name: "Toshiba Laptop",
         description: "Laptop product 1 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
         count: 5,
-        price: 100,
+        price: 5,
         category: "Computers/Laptop/Toshiba",
         images: [
             { path: "/images/category/computers-category.jpg" },
@@ -20,8 +20,8 @@ const products = [
     {
         name: "Picture of Dorian Gray",
         description: "Book 2 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
-        count: 2,
-        price: 25.25,
+        count: 5,
+        price: 2,
         category: "Books",
         images: [
             { path: "/images/category/books-category.jpg" },

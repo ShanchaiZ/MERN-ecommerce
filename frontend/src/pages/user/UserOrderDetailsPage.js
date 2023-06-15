@@ -33,7 +33,34 @@ const loadPayPalScript = (cartSubtotal, cartItems) => {
 //Custom paypal buttons methods:
 const buttons = (cartSubtotal, cartItems) => {
     return {
-        createOrder: createPayPalOrderHandler,
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [
+                    {
+                        amount: {
+                            value: cartSubtotal,
+                            breakdown: {
+                                item_total: {
+                                    currency_code: "USD",
+                                    value: cartSubtotal,
+
+                                }
+                            }
+                        },
+                        items: cartItems.map(product => {
+                            return {
+                                name: product.name,
+                                unit_amount: {
+                                    currency_code: "USD",
+                                    value: product.price,
+                                },
+                                quantity: product.quantity
+                            }
+                        })
+                    }
+                ]
+            })
+        },
         onCancel: onCancelHandler,
         onApprove: onApproveHandler,
         onError: onErrorHandler
@@ -41,9 +68,9 @@ const buttons = (cartSubtotal, cartItems) => {
 }
 
 // Paypal Methods: CreateOrder Handler
-const createPayPalOrderHandler = function () {
-    console.log("createPayPalOrderHandler");
-}
+// const createPayPalOrderHandler = function () {
+//     console.log("createPayPalOrderHandler");
+// }
 
 // Paypal Methods: Cancel Order Handler
 const onCancelHandler = function () {
