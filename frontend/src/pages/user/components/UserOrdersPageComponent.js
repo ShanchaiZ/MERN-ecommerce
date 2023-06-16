@@ -2,7 +2,8 @@ import { Row, Col, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
-const UserOrdersPageComponent = () => {
+const UserOrdersPageComponent = ({ getOrders }) => {
+    getOrders().then(orders => console.log(orders));
     return (
         <Row className="m-5">
             <Col md={12}>
