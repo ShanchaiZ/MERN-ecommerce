@@ -16,13 +16,13 @@ const getOrder = async (orderId) => {
 
 
 // PayPal Buttons Rendering when Paypal payment selected:
-const loadPayPalScript = (cartSubtotal, cartItems) => {
+const loadPayPalScript = (cartSubtotal, cartItems, orderId, updateStateAfterOrder) => {
     loadScript({
         "client-id": "AQHnpVz64-l3AuEusvofl0Wpkc2u_sLVsGxAisEkTQAueVQR9F0q9sUlWqyLv8qb6uZ6NNY3K0hj7LIm"
     })
         .then(paypal => {
             paypal
-                .Buttons(buttons(cartSubtotal, cartItems))
+                .Buttons(buttons(cartSubtotal, cartItems, orderId, updateStateAfterOrder))
                 .render("#paypal-container-element");
         })
         .catch(err => {
@@ -31,7 +31,7 @@ const loadPayPalScript = (cartSubtotal, cartItems) => {
 }
 
 //Custom paypal buttons methods:
-const buttons = (cartSubtotal, cartItems) => {
+const buttons = (cartSubtotal, cartItems, orderId, updateStateAfterOrder) => {
     return {
         createOrder: function (data, actions) {
             return actions.order.create({
@@ -66,8 +66,14 @@ const buttons = (cartSubtotal, cartItems) => {
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (orderData) {
                 var transaction = orderData.purchase_units[0].payments.captures[0];
-                if (transaction.status === "COMPLETED" && Number(transaction.amount.value) === Number(cartSubtotal)){
-                    console.log("update order in database");
+                if (transaction.status === "COMPLETED" && Number(transaction.amount.value) === Number(cartSubtotal)) {
+                    updateOrder(orderId)
+                        .then(data => {
+                            if (data.isPaid) {
+                                updateStateAfterOrder(data.paidAt);
+                            }
+                        })
+                        .catch((er) => console.log(er));
                 }
             })
         },
@@ -79,7 +85,7 @@ const buttons = (cartSubtotal, cartItems) => {
 // const createPayPalOrderHandler = function () {
 //     console.log("createPayPalOrderHandler");
 // }
-// instead of using CreateOrder Handler, a direct function is embedded in the orderCreate
+// instead of using CreateOrder Handler, a direct function is embedded in the orderCreate method
 
 // Paypal Methods: Cancel Order Handler
 const onCancelHandler = function () {
@@ -87,13 +93,20 @@ const onCancelHandler = function () {
 }
 
 // Paypal Methods: Order Approved Handler
-const onApproveHandler = function () {
-    console.log("Order Through Purchase Approved!");
-}
+// const onApproveHandler = function () {
+//     console.log("Order Through Purchase Approved!");
+// }
+// instead of using onApprove Handler, a direct function is embedded in the onApprove method
 
 // Paypal Methods: Payment Error Handler:
 const onErrorHandler = function (err) {
     console.log("Paypal error");
+}
+
+
+const updateOrder = async (orderId) => {
+    const { data } = await axios.put("/api/orders/paid/" + orderId);
+    return data;
 }
 
 

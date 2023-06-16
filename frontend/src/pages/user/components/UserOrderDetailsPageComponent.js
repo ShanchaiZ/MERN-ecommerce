@@ -71,7 +71,7 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadPayPal
         if (paymentMethod === "pp") {
             setOrderButtonMessage("To Pay for your order, select one of the buttons below:");
             if (!isPaid) {
-                loadPayPalScript(cartSubtotal, cartItems);
+                loadPayPalScript(cartSubtotal, cartItems, id, updateStateAfterOrder);
             }
         } else {
             setOrderButtonMessage("Your order is placed! Thank you!")
