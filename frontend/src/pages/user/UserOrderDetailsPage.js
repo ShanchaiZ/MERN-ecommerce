@@ -103,7 +103,7 @@ const onErrorHandler = function (err) {
     console.log("Paypal error");
 }
 
-
+// PUT method: update order using orderId:
 const updateOrder = async (orderId) => {
     const { data } = await axios.put("/api/orders/paid/" + orderId);
     return data;
