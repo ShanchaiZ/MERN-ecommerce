@@ -62,7 +62,12 @@ const buttons = (cartSubtotal, cartItems) => {
             })
         },
         onCancel: onCancelHandler,
-        onApprove: onApproveHandler,
+        
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+                console.log(orderData);
+            })
+        },
         onError: onErrorHandler
     }
 }
@@ -71,6 +76,7 @@ const buttons = (cartSubtotal, cartItems) => {
 // const createPayPalOrderHandler = function () {
 //     console.log("createPayPalOrderHandler");
 // }
+// instead of using CreateOrder Handler, a direct function is embedded in the orderCreate
 
 // Paypal Methods: Cancel Order Handler
 const onCancelHandler = function () {
