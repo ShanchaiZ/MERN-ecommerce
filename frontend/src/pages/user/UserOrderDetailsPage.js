@@ -62,10 +62,13 @@ const buttons = (cartSubtotal, cartItems) => {
             })
         },
         onCancel: onCancelHandler,
-        
+
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (orderData) {
-                console.log(orderData);
+                var transaction = orderData.purchase_units[0].payments.captures[0];
+                if (transaction.status === "COMPLETED" && Number(transaction.amount.value) === Number(cartSubtotal)){
+                    console.log("update order in database");
+                }
             })
         },
         onError: onErrorHandler
