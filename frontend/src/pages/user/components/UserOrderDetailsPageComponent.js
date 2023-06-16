@@ -78,6 +78,14 @@ const UserOrderDetailsPageComponent = ({ userInfo, getUser, getOrder, loadPayPal
         }
     }
 
+    // Update State after Order:
+    const updateStateAfterOrder = (paidAt) => {
+        setOrderButtonMessage("Thank you for your payment!");
+        setIsPaid(paidAt);
+        setButtonDisabled(true);
+        paypalContainer.current.style = "display: none";
+    }
+
 
     return (
         <Container fluid>
