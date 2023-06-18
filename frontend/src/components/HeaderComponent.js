@@ -19,12 +19,21 @@ import { Link } from "react-router-dom"; //Link as a JS object
 import { useDispatch, useSelector } from "react-redux"; //Used to call Redux actions
 import { logout } from "../redux/actions/userActions"; //Used to call defined logout actions:
 
+import { useEffect } from "react";
+import { getCategories } from "../redux/actions/categoriesAction";
+
 const HeaderComponent = () => {
 
     const dispatch = useDispatch();
     const { userInfo } = useSelector((state) => state.userRegisterLogin);
 
     const itemsCount = useSelector((state) => state.cart.itemsCount);
+
+    // Fetching all Categories for the header dropdown:
+    useEffect(() => {
+        dispatch(getCategories());
+    }, [dispatch])
+
 
     return (
         // NavBar from Bootstrap Docs
