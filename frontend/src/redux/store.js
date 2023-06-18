@@ -5,10 +5,12 @@ import thunk from "redux-thunk";
 // Reducer: are functions in Redux are used in changing a state:
 import { cartReducer } from "./reducers/cartReducers"; //Used in incrementing items in a cart
 import { userRegisterLoginReducer } from "./reducers/userReducers"; //Used in displaying User Name when successful login
+import { getCategoriesReducer } from "./reducers/categoryReducers";// Used to fetch Categories for the state
 
 const reducer = combineReducers({
     cart: cartReducer,
-    userRegisterLogin: userRegisterLoginReducer
+    userRegisterLogin: userRegisterLoginReducer,
+    getCategories: getCategoriesReducer
 })
 
 // CartItems in Local Storage: 
