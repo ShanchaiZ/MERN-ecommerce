@@ -2,9 +2,6 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert, Image } f
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import { useSelector } from "react-redux";
-
-
 const onHover = {
     cursor: "pointer",
     position: "absolute",
@@ -13,13 +10,8 @@ const onHover = {
     transform: "scale(1.5)",
 }
 
-const EditProductPageComponent = () => {
+const EditProductPageComponent = ({ categories }) => {
     const [validated, setValidated] = useState(false);
-
-    //Fetch Categories from Redux state for categories dropdown:
-    const { categories } = useSelector((state) => state.getCategories);
-    console.log(categories);
-
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -65,9 +57,11 @@ const EditProductPageComponent = () => {
                             </Form.Label>
                             <Form.Select aria-label="productCategory">
                                 <option>Choose Category</option>
-                                <option value="1">Books</option>
-                                <option value="2">Laptop</option>
-                                <option value="3">Games</option>
+                                {categories.map((category, idx) => (
+                                    <option key={idx} value={category.name}>
+                                        {category.name}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
 
