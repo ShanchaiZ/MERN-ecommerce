@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form, Button, CloseButton, Table, Alert, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -118,31 +118,36 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             </Form.Select>
                         </Form.Group>
 
-                        <Row className="mt-5">
-                            {/* Choose Category subdivision: Attribute  */}
-                            <Col md={6}>
-                                <Form.Group className="mb-3" controlId="formBasicAttributes">
-                                    <Form.Label>Choose Attribute and Set Values</Form.Label>
-                                    <Form.Select name="atrrKey" aria-label="productCategory">
-                                        <option>Choose Attribute</option>
-                                        <option value="color">Color</option>
-                                        <option value="shape">Shape</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                            {/* Choose Category subdivision: Attribute Value  */}
-                            <Col md={6}>
-                                <Form.Group className="mb-3" controlId="formBasicAttributeValue">
-                                    <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Select name="atrrKey" aria-label="productCategory">
-                                        <option>Choose Attribute Value</option>
-                                        <option value="1">Red</option>
-                                        <option value="2">Yellow</option>
-                                        <option value="3">Green</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                        {attributesFromDb.length > 0 && (
+                            <Row className="mt-5">
+                                {/* Choose Category subdivision: Attribute  */}
+                                <Col md={6}>
+                                    <Form.Group className="mb-3" controlId="formBasicAttributes">
+                                        <Form.Label>Choose Attribute and Set Values</Form.Label>
+                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                            <option>Choose Attribute</option>
+                                            <option value="color">Color</option>
+                                            <option value="shape">Shape</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                {/* Choose Category subdivision: Attribute Value  */}
+                                <Col md={6}>
+                                    <Form.Group className="mb-3" controlId="formBasicAttributeValue">
+                                        <Form.Label>Attribute Value</Form.Label>
+                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                            <option>Choose Attribute Value</option>
+                                            {attributesFromDb.map((item, idx) => (
+                                                <Fragment key={idx}>
+                                                    <option value={item.key}>{item.key}</option>
+                                                </Fragment>
+                                            ))}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                        )}
 
                         {/* Table for Displaying Attribute, Value and Deletion */}
                         <Row>
