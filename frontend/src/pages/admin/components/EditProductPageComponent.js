@@ -27,10 +27,20 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+        const form = event.currentTarget.elements;
+
+        const formInputs = {
+            name: form.name.value,
+            description: form.description.value,
+            count: form.count.value,
+            price: form.price.value,
+            category: form.category.value,
+        }
+
+        if (event.currentTarget.checkValidity() === true) {
+            updateProductApiRequest(id, formInputs);
         }
         setValidated(true);
     };
