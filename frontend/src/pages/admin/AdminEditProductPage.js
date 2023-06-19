@@ -11,9 +11,10 @@ const fetchProduct = async (productId) => {
 }
 
 
-const updateProductApiRequest = (productId, formInputs) => {
-    console.log(productId);
-    console.log(formInputs);
+// Put method: Update Product fields in the edit form
+const updateProductApiRequest = async (productId, formInputs) => {
+    const { data } = await axios.put(`/api/products/admin/${productId}`, { ...formInputs });
+    return data;
 }
 
 
