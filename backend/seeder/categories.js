@@ -55,6 +55,9 @@ const categories = [
         description:
             "Games - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
         image: "/images/category/games-category.jpg",
+        attrs: [
+            { key: "Rating", value: ["E", "T", "M", "R"] }
+        ],
     },
     {
         name: "Monitors",

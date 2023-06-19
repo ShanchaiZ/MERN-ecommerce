@@ -32,7 +32,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                 while (valuesForAttrKeys.options.length) {
                     valuesForAttrKeys.remove(0);
                 }
-                valuesForAttrKeys.options.add(new Option("Choose attribute value"));
+                valuesForAttrKeys.options.add(new Option("Choose Attribute Value"));
                 selectedAttr.value.map(item => {
                     valuesForAttrKeys.add(new Option(item));
                     return "";
@@ -153,8 +153,12 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                             onChange={setValuesForAttrFromDbSelectForm}
                                         >
                                             <option>Choose Attribute</option>
-                                            <option value="RAM">RAM</option>
-                                            <option value="color">Color</option>
+                                            {attributesFromDb.map((item, idx) => (
+                                                <Fragment key={idx}>
+                                                    <option value={item.key}>{item.key}</option>
+                                                </Fragment>
+                                            ))}
+
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
@@ -164,11 +168,6 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                         <Form.Label>Attribute Value</Form.Label>
                                         <Form.Select name="atrrVal" aria-label="productCategory" ref={attrVal}>
                                             <option>Choose Attribute Value</option>
-                                            {attributesFromDb.map((item, idx) => (
-                                                <Fragment key={idx}>
-                                                    <option value={item.key}>{item.key}</option>
-                                                </Fragment>
-                                            ))}
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
