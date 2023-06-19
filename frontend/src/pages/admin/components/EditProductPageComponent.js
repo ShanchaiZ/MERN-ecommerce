@@ -18,6 +18,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
     const [product, setProduct] = useState({}); // Initially product is an empty object
     const [updateProductResponseState, setUpdateProductResponseState] = useState({ message: "", error: "" }); //Initially product responses will be empty strings
+    const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally attributes are set to an empty array
 
     const { id } = useParams();
 
@@ -54,6 +55,18 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         setValidated(true);
     };
 
+
+    //Display Main Category of the Edited Products:
+    useEffect(() => {
+        let categoryOfEditedProduct = categories.find((item) => item.name === product.category);
+        if (categoryOfEditedProduct) {
+            const mainCategoryOfEditedProduct = categoryOfEditedProduct.name.split("/")[0];
+            console.log(mainCategoryOfEditedProduct);
+        }
+    }, [product])
+
+
+
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
@@ -83,9 +96,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                         </Form.Group>
                         {/* Product Category Dropdown */}
                         <Form.Group className="mb-3" controlId="formBasicCategory">
-                            <Form.Label>
-                                Category
-                            </Form.Label>
+                            <Form.Label>Category</Form.Label>
                             <Form.Select required name="category" aria-label="productCategory">
                                 <option>Choose Category</option>
                                 {categories.map((category, idx) => {
