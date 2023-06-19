@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form, Button, CloseButton, Table, Alert, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,28 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [product, setProduct] = useState({}); // Initially product is an empty object
     const [updateProductResponseState, setUpdateProductResponseState] = useState({ message: "", error: "" }); //Initially product responses will be empty strings
     const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally attributes are set to an empty array
+
+    const attrKey = useRef(null);
+    const attrVal = useRef(null);
+
+    const setValuesForAttrFromDbSelectForm = (e) => {
+        if (e.target.value !== "Choose Attribute") {
+            var selectedAttr = attributesFromDb.find((item) => item.key === e.target.value);
+            let valuesForAttrKeys = attrVal.current;
+            if (selectedAttr && selectedAttr.value.length > 0) {
+                // clear all previous values to make space for new attribute values:
+                while (valuesForAttrKeys.options.length) {
+                    valuesForAttrKeys.remove(0);
+                }
+                valuesForAttrKeys.options.add(new Option("Choose attribute value"));
+                selectedAttr.value.map(item => {
+                    valuesForAttrKeys.add(new Option(item));
+                    return "";
+                })
+            }
+        }
+    }
+
 
     const { id } = useParams();
 
@@ -124,10 +146,15 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="formBasicAttributes">
                                         <Form.Label>Choose Attribute and Set Values</Form.Label>
-                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                        <Form.Select
+                                            name="atrrKey"
+                                            aria-label="productCategory"
+                                            ref={attrKey}
+                                            onChange={setValuesForAttrFromDbSelectForm}
+                                        >
                                             <option>Choose Attribute</option>
+                                            <option value="RAM">RAM</option>
                                             <option value="color">Color</option>
-                                            <option value="shape">Shape</option>
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
@@ -135,7 +162,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="formBasicAttributeValue">
                                         <Form.Label>Attribute Value</Form.Label>
-                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                        <Form.Select name="atrrVal" aria-label="productCategory" ref={attrVal}>
                                             <option>Choose Attribute Value</option>
                                             {attributesFromDb.map((item, idx) => (
                                                 <Fragment key={idx}>
