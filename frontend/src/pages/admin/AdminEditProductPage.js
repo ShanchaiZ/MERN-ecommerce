@@ -11,12 +11,18 @@ const fetchProduct = async (productId) => {
 }
 
 
+const updateProductApiRequest = (productId, formInputs) => {
+    console.log(productId);
+    console.log(formInputs);
+}
+
+
 const AdminEditProductPage = () => {
 
     //Fetch Categories from Redux state for categories dropdown:
     const { categories } = useSelector((state) => state.getCategories);
 
-    return <EditProductPageComponent categories={categories} fetchProduct={fetchProduct} />
+    return <EditProductPageComponent categories={categories} fetchProduct={fetchProduct} updateProductApiRequest={updateProductApiRequest} />
 };
 
 export default AdminEditProductPage;

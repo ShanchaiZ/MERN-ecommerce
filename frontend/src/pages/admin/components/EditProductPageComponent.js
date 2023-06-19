@@ -11,7 +11,7 @@ const onHover = {
     transform: "scale(1.5)",
 }
 
-const EditProductPageComponent = ({ categories, fetchProduct }) => {
+const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest }) => {
 
     // Initial Local React State:
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
@@ -158,7 +158,7 @@ const EditProductPageComponent = ({ categories, fetchProduct }) => {
                                         <i style={onHover} className="bi bi-x-circle text-danger"></i>
                                     </Col>
                                 ))}
-                                
+
                             </Row>
                             <Form.Control type="file" multiple required />
                         </Form.Group>
