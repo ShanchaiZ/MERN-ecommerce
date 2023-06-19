@@ -17,9 +17,10 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     // Initial Local React State:
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
     const [product, setProduct] = useState({}); // Initially product is an empty object
+    const [updateProductResponseState, setUpdateProductResponseState] = useState({ message: "", error: "" }); //Initially product responses will be empty strings
 
     const { id } = useParams();
-    
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,6 +41,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
             count: form.count.value,
             price: form.price.value,
             category: form.category.value,
+            attributesTable: []
         }
 
         if (event.currentTarget.checkValidity() === true) {
@@ -47,6 +49,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                 .then(data => {
                     if (data.message === "product updated") navigate("/admin/products")
                 })
+                .catch((er) => setUpdateProductResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data }));
         }
         setValidated(true);
     };
@@ -179,6 +182,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             <Form.Control type="file" multiple required />
                         </Form.Group>
                         <Button variant="primary" type="submit">Update</Button>
+                        {updateProductResponseState.error ?? ""}
                     </Form>
                 </Col>
                 {/* Go Back to Admin Products button */}
