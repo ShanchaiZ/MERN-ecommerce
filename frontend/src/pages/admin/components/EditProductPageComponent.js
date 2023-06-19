@@ -61,7 +61,12 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         let categoryOfEditedProduct = categories.find((item) => item.name === product.category);
         if (categoryOfEditedProduct) {
             const mainCategoryOfEditedProduct = categoryOfEditedProduct.name.split("/")[0];
-            console.log(mainCategoryOfEditedProduct);
+
+            // Fetch all the category data with respect to the product:
+            const mainCategoryOfEditedProductAllData = categories.find((categoryOfEditedProduct) => categoryOfEditedProduct.name === mainCategoryOfEditedProduct);
+            if (mainCategoryOfEditedProductAllData && mainCategoryOfEditedProductAllData.attrs.length > 0) {
+                setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
+            }
         }
     }, [product])
 
