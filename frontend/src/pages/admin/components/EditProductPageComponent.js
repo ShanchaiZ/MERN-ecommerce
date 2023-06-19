@@ -2,6 +2,7 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert, Image } f
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const onHover = {
     cursor: "pointer",
@@ -18,6 +19,8 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [product, setProduct] = useState({}); // Initially product is an empty object
 
     const { id } = useParams();
+    
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchProduct(id)
@@ -40,7 +43,10 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         }
 
         if (event.currentTarget.checkValidity() === true) {
-            updateProductApiRequest(id, formInputs);
+            updateProductApiRequest(id, formInputs)
+                .then(data => {
+                    if (data.message === "product updated") navigate("/admin/products")
+                })
         }
         setValidated(true);
     };
