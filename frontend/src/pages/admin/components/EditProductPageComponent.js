@@ -152,18 +152,13 @@ const EditProductPageComponent = ({ categories, fetchProduct }) => {
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
                             <Row>
-                                <Col style={{ position: "relative" }} xs={3}>
-                                    <Image crossOrigin="anonymous" src="/images/category/books-category.jpg" fluid />
-                                    <i style={onHover} className="bi bi-x-circle text-danger"></i>
-                                </Col>
-                                <Col style={{ position: "relative" }} xs={3}>
-                                    <Image src="/images/category/videos-category.jpg" fluid />
-                                    <i style={onHover} className="bi bi-x-circle text-danger"></i>
-                                </Col>
-                                <Col style={{ position: "relative" }} xs={3}>
-                                    <Image src="/images/category/computers-category.jpg" fluid />
-                                    <i style={onHover} className="bi bi-x-circle text-danger"></i>
-                                </Col>
+                                {product.images && product.images.map((image, idx) => (
+                                    <Col key={idx} style={{ position: "relative" }} xs={3}>
+                                        <Image crossOrigin="anonymous" src={image.path ?? null} fluid />
+                                        <i style={onHover} className="bi bi-x-circle text-danger"></i>
+                                    </Col>
+                                ))}
+                                
                             </Row>
                             <Form.Control type="file" multiple required />
                         </Form.Group>
