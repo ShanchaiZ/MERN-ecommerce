@@ -4,7 +4,7 @@ const products = [
         description: "Laptop product 1 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
         count: 5,
         price: 5,
-        category: "Computers/Laptop/Toshiba",
+        category: "Videos",
         images: [
             { path: "/images/category/computers-category.jpg" },
             { path: "/images/category/computers-category.jpg" },

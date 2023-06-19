@@ -12,14 +12,18 @@ const onHover = {
 }
 
 const EditProductPageComponent = ({ categories, fetchProduct }) => {
-    const [validated, setValidated] = useState(false);
+
+    // Initial Local React State:
+    const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
+    const [product, setProduct] = useState({}); // Initially product is an empty object
+
     const { id } = useParams();
 
     useEffect(() => {
         fetchProduct(id)
-            .then((product) => console.log(product))
+            .then((product) => setProduct(product))
             .catch((er) => console.log(er));
-    }, []);
+    }, [id]);
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -41,35 +45,41 @@ const EditProductPageComponent = ({ categories, fetchProduct }) => {
                         {/* Name of Product */}
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name of Product</Form.Label>
-                            <Form.Control name="name" type="text" required defaultValue="Toshiba" />
+                            <Form.Control name="name" type="text" required defaultValue={product.name} />
                         </Form.Group>
                         {/* Product Description */}
                         <Form.Group className="mb-3" controlId="description">
                             <Form.Label>Product Description</Form.Label>
-                            <Form.Control name="description" as="textarea" rows={3} required defaultValue="Product Description: Price is tough 2 beat!" />
+                            <Form.Control name="description" as="textarea" rows={3} required defaultValue={product.description} />
                         </Form.Group>
                         {/* Product Quantity in Stock */}
                         <Form.Group className="mb-3" controlId="formBasicCount">
                             <Form.Label>Number of Product in Stock</Form.Label>
-                            <Form.Control name="count" type="number" required defaultValue="3" />
+                            <Form.Control name="count" type="number" required defaultValue={product.count} />
                         </Form.Group>
                         {/* Product Price */}
                         <Form.Group className="mb-3" controlId="formBasicPrice">
                             <Form.Label>Price</Form.Label>
-                            <Form.Control name="price" type="text" required defaultValue="44.44" />
+                            <Form.Control name="price" type="text" required defaultValue={product.price} />
                         </Form.Group>
                         {/* Product Category Dropdown */}
                         <Form.Group className="mb-3" controlId="formBasicCategory">
                             <Form.Label>
                                 Category
                             </Form.Label>
-                            <Form.Select aria-label="productCategory">
+                            <Form.Select required name="category" aria-label="productCategory">
                                 <option>Choose Category</option>
-                                {categories.map((category, idx) => (
-                                    <option key={idx} value={category.name}>
-                                        {category.name}
-                                    </option>
-                                ))}
+                                {categories.map((category, idx) => {
+                                    return product.category === category.name ? (
+                                        <option selected key={idx} value={category.name}>
+                                            {category.name}
+                                        </option>
+                                    ) : (
+                                        <option key={idx} value={category.name}>
+                                            {category.name}
+                                        </option>
+                                    )
+                                })}
                             </Form.Select>
                         </Form.Group>
 
