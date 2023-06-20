@@ -135,6 +135,12 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         })
     }
 
+    // Function: Delete Attribute from Table:
+    const deleteAttribute = (key) => {
+        setAttributesTable((table) => table.filter((item) => item.key !== key));
+    }
+
+
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
@@ -233,7 +239,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                                 <td>{item.key}</td>
                                                 <td>{item.value}</td>
                                                 <td>
-                                                    <CloseButton />
+                                                    <CloseButton onClick={() => deleteAttribute(item.key)} />
                                                 </td>
                                             </tr>
                                         ))}
