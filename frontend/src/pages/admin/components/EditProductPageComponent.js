@@ -189,24 +189,28 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
 
                         {/* Table for Displaying Attribute, Value and Deletion */}
                         <Row>
-                            <Table hover>
-                                <thead>
-                                    <tr>
-                                        <th>Attribute</th>
-                                        <th>Value</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>attr key</td>
-                                        <td>attr value</td>
-                                        <td>
-                                            <CloseButton />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </Table>
+                            {attributesTable && attributesTable.length > 0 && (
+                                <Table hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Attribute</th>
+                                            <th>Value</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {attributesTable.map((item, idx) => (
+                                            <tr key={idx}>
+                                                <td>{item.key}</td>
+                                                <td>{item.value}</td>
+                                                <td>
+                                                    <CloseButton />
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            )}
                         </Row>
 
                         {/* Create new Attribute and Attribute Value */}
