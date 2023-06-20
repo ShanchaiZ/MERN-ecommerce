@@ -88,11 +88,21 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
             const mainCategoryOfEditedProductAllData = categories.find((categoryOfEditedProduct) => categoryOfEditedProduct.name === mainCategoryOfEditedProduct);
             if (mainCategoryOfEditedProductAllData && mainCategoryOfEditedProductAllData.attrs.length > 0) {
                 setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
+            } else {
+                setAttributesFromDb([]);
             }
         }
     }, [product])
 
 
+    // Change Category Handler:
+    const changeCategory = (e) => {
+        const highLevelCategory = e.target.value.split("/")[0];
+        const highLevelCategoryAllData = categories.find((cat) => cat.name === highLevelCategory);
+        if (highLevelCategoryAllData && highLevelCategoryAllData.attrs) {
+            setAttributesFromDb(highLevelCategoryAllData.attrs);
+        }
+    }
 
     return (
         <Container className="justified-content-md-content mt-5">
@@ -124,7 +134,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                         {/* Product Category Dropdown */}
                         <Form.Group className="mb-3" controlId="formBasicCategory">
                             <Form.Label>Category</Form.Label>
-                            <Form.Select required name="category" aria-label="productCategory">
+                            <Form.Select required name="category" aria-label="productCategory" onChange={changeCategory}>
                                 <option>Choose Category</option>
                                 {categories.map((category, idx) => {
                                     return product.category === category.name ? (
