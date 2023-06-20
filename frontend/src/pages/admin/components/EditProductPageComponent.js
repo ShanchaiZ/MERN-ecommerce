@@ -20,6 +20,9 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [updateProductResponseState, setUpdateProductResponseState] = useState({ message: "", error: "" }); //Initially product responses will be empty strings
     const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally attributes are set to an empty array // this is the attribute select list
     const [attributesTable, setAttributesTable] = useState({}); //initially the attributes table is an empty object // attributes for html table
+    const [categoryChosen, setCategoryChosen] = useState("Choose Category"); //Initally in Category dropdown Attribute is set to "Choose Category"
+
+
 
     const attrKey = useRef(null);
     const attrVal = useRef(null);
@@ -65,7 +68,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
             count: form.count.value,
             price: form.price.value,
             category: form.category.value,
-            attributesTable: []
+            attributesTable: attributesTable
         }
 
         if (event.currentTarget.checkValidity() === true) {
@@ -91,6 +94,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                 setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
             }
         }
+        setCategoryChosen(product.category);
         setAttributesTable(product.attrs);
     }, [product])
 
@@ -104,6 +108,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         } else {
             setAttributesFromDb([]);
         }
+        setCategoryChosen(e.target.value);
     }
 
     // Change Attributes Value Handler:
@@ -172,7 +177,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                         <Form.Group className="mb-3" controlId="formBasicCategory">
                             <Form.Label>Category</Form.Label>
                             <Form.Select required name="category" aria-label="productCategory" onChange={changeCategory}>
-                                <option>Choose Category</option>
+                                <option value="Choose Category">Choose Category</option>
                                 {categories.map((category, idx) => {
                                     return product.category === category.name ? (
                                         <option selected key={idx} value={category.name}>
@@ -253,13 +258,13 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                                     <Form.Label>Create New Attribute</Form.Label>
-                                    <Form.Control disabled={false} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control disabled={categoryChosen === "Choose Category"} required={true} placeholder="first choose or create category" name="newAttrKey" type="text" />
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
                                     <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Control disabled={false} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control disabled={categoryChosen === "Choose Category"} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
                                 </Form.Group>
                             </Col>
                         </Row>
