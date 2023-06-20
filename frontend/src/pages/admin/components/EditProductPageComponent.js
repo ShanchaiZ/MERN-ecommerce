@@ -21,6 +21,8 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally attributes are set to an empty array // this is the attribute select list
     const [attributesTable, setAttributesTable] = useState({}); //initially the attributes table is an empty object // attributes for html table
     const [categoryChosen, setCategoryChosen] = useState("Choose Category"); //Initally in Category dropdown Attribute is set to "Choose Category"
+    const [newAttrKey, setNewAttrKey] = useState(false);
+    const [newAttrValue, setNewAttrValue] = useState(false);
 
 
 
@@ -153,20 +155,26 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     // Function: Adding Attribute Key when "Enter" pressed
     const newAttrKeyHandler = (e) => {
         e.preventDefault();
-        if (e.keyCode && e.keyCode === 13) {
-            console.log("Add New Attribute!")
-        }
+        setNewAttrKey(e.target.value);
+        addNewAttributeManually(e);
     }
 
     // Function: Adding Attribute Value when "Enter" pressed
     const newAttrValueHandler = (e) => {
         e.preventDefault();
-        if (e.keyCode && e.keyCode === 13) {
-            console.log("Add New Attribute value!")
+        setNewAttrValue(e.target.value);
+        addNewAttributeManually(e);
+    }
+
+    // Function: Adding Attribute Key AND value when "Enter" Pressed
+    const addNewAttributeManually = (e) =>{
+        if(e.keyCode && e.keyCode === 13){
+            if (newAttrKey && newAttrValue) {
+                console.log("added a new attribute key AND value!")
+            }
         }
     }
 
-    
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
