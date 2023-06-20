@@ -89,8 +89,6 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
             const mainCategoryOfEditedProductAllData = categories.find((categoryOfEditedProduct) => categoryOfEditedProduct.name === mainCategoryOfEditedProduct);
             if (mainCategoryOfEditedProductAllData && mainCategoryOfEditedProductAllData.attrs.length > 0) {
                 setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
-            } else {
-                setAttributesFromDb([]);
             }
         }
         setAttributesTable(product.attrs);
@@ -103,6 +101,16 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         const highLevelCategoryAllData = categories.find((cat) => cat.name === highLevelCategory);
         if (highLevelCategoryAllData && highLevelCategoryAllData.attrs) {
             setAttributesFromDb(highLevelCategoryAllData.attrs);
+        } else {
+            setAttributesFromDb([]);
+        }
+    }
+
+    // Change Value Handler:
+    const attributeValueSelected = (e) => {
+        if (e.target.value !== "Choose Attribute Value") {
+            console.log(attrKey.current.value);
+            console.log(e.target.value);
         }
     }
 
@@ -178,7 +186,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="formBasicAttributeValue">
                                         <Form.Label>Attribute Value</Form.Label>
-                                        <Form.Select name="atrrVal" aria-label="productCategory" ref={attrVal}>
+                                        <Form.Select name="atrrVal" aria-label="productCategory" ref={attrVal} onChange={attributeValueSelected}>
                                             <option>Choose Attribute Value</option>
                                         </Form.Select>
                                     </Form.Group>
