@@ -18,7 +18,8 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
     const [product, setProduct] = useState({}); // Initially product is an empty object
     const [updateProductResponseState, setUpdateProductResponseState] = useState({ message: "", error: "" }); //Initially product responses will be empty strings
-    const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally attributes are set to an empty array
+    const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally attributes are set to an empty array // this is the attribute select list
+    const [attributesTable, setAttributesTable] = useState({}); //initially the attributes table is an empty object // attributes for html table
 
     const attrKey = useRef(null);
     const attrVal = useRef(null);
@@ -92,6 +93,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                 setAttributesFromDb([]);
             }
         }
+        setAttributesTable(product.attrs);
     }, [product])
 
 
