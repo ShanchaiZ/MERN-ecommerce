@@ -167,8 +167,8 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     }
 
     // Function: Adding Attribute Key AND value when "Enter" Pressed
-    const addNewAttributeManually = (e) =>{
-        if(e.keyCode && e.keyCode === 13){
+    const addNewAttributeManually = (e) => {
+        if (e.keyCode && e.keyCode === 13) {
             if (newAttrKey && newAttrValue) {
                 console.log("added a new attribute key AND value!")
             }
@@ -287,17 +287,19 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                                     <Form.Label>Create New Attribute</Form.Label>
-                                    <Form.Control disabled={categoryChosen === "Choose Category"} required={true} placeholder="first choose or create category" name="newAttrKey" type="text" onKeyUp={newAttrKeyHandler} />
+                                    <Form.Control disabled={categoryChosen === "Choose Category"} placeholder="first choose or create category" name="newAttrKey" type="text" onKeyUp={newAttrKeyHandler} required={newAttrValue} />
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
                                     <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Control disabled={categoryChosen === "Choose Category"} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" onKeyUp={newAttrValueHandler} />
+                                    <Form.Control disabled={categoryChosen === "Choose Category"} placeholder="first choose or create category" name="newAttrValue" type="text" onKeyUp={newAttrValueHandler} required={newAttrKey} />
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Alert variant="primary">After typing attribute key and value, please enter on one of the fields</Alert>
+                        <Alert show={newAttrKey && newAttrValue} variant="primary">
+                            After typing attribute key and value, please press "Enter" on one of the fields
+                        </Alert>
 
                         {/* Product Image Upload */}
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
