@@ -12,7 +12,7 @@ const onHover = {
     transform: "scale(1.5)",
 }
 
-const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest }) => {
+const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc }) => {
 
     // Initial Local React State:
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
@@ -171,6 +171,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const addNewAttributeManually = (e) => {
         if (e.keyCode && e.keyCode === 13) {
             if (newAttrKey && newAttrValue) {
+                reduxDispatch(saveAttributeToCatDoc(newAttrKey, newAttrValue, categoryChosen));
                 setAttributesTableWrapper(newAttrKey, newAttrValue);
                 e.target.value = "";
                 createNewAttrKey.current.value = "";
