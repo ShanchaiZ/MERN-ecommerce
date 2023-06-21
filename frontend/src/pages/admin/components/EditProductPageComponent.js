@@ -25,9 +25,10 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [newAttrValue, setNewAttrValue] = useState(false);
 
 
-
     const attrKey = useRef(null);
     const attrVal = useRef(null);
+    const createNewAttrKey = useRef(null);
+    const createNewAttrVal = useRef(null);
 
     const setValuesForAttrFromDbSelectForm = (e) => {
         if (e.target.value !== "Choose Attribute") {
@@ -170,7 +171,12 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const addNewAttributeManually = (e) => {
         if (e.keyCode && e.keyCode === 13) {
             if (newAttrKey && newAttrValue) {
-                console.log("added a new attribute key AND value!")
+                setAttributesTableWrapper(newAttrKey, newAttrValue);
+                e.target.value = "";
+                createNewAttrKey.current.value = "";
+                createNewAttrVal.current.value = "";
+                setNewAttrKey(false);
+                setNewAttrValue(false);
             }
         }
     }
@@ -287,13 +293,27 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                                     <Form.Label>Create New Attribute</Form.Label>
-                                    <Form.Control disabled={categoryChosen === "Choose Category"} placeholder="first choose or create category" name="newAttrKey" type="text" onKeyUp={newAttrKeyHandler} required={newAttrValue} />
+                                    <Form.Control
+                                        ref={createNewAttrKey}
+                                        disabled={categoryChosen === "Choose Category"}
+                                        placeholder="first choose or create category"
+                                        name="newAttrKey"
+                                        type="text"
+                                        onKeyUp={newAttrKeyHandler}
+                                        required={newAttrValue} />
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
                                     <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Control disabled={categoryChosen === "Choose Category"} placeholder="first choose or create category" name="newAttrValue" type="text" onKeyUp={newAttrValueHandler} required={newAttrKey} />
+                                    <Form.Control
+                                        ref={createNewAttrVal}
+                                        disabled={categoryChosen === "Choose Category"}
+                                        placeholder="first choose or create category"
+                                        name="newAttrValue"
+                                        type="text"
+                                        onKeyUp={newAttrValueHandler}
+                                        required={newAttrKey} />
                                 </Form.Group>
                             </Col>
                         </Row>
