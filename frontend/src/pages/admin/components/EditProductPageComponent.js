@@ -12,7 +12,7 @@ const onHover = {
     transform: "scale(1.5)",
 }
 
-const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc }) => {
+const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc, imageDeleteHandler }) => {
 
     // Initial Local React State:
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
@@ -23,6 +23,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [categoryChosen, setCategoryChosen] = useState("Choose Category"); //Initally in Category dropdown Attribute is set to "Choose Category"
     const [newAttrKey, setNewAttrKey] = useState(false);
     const [newAttrValue, setNewAttrValue] = useState(false);
+    const [imageRemoved, setImageRemoved] = useState(false);// Initially the image is not removed.
 
 
     const attrKey = useRef(null);
@@ -57,7 +58,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         fetchProduct(id)
             .then((product) => setProduct(product))
             .catch((er) => console.log(er));
-    }, [id]);
+    }, [id, imageRemoved]);
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -329,7 +330,9 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                 {product.images && product.images.map((image, idx) => (
                                     <Col key={idx} style={{ position: "relative" }} xs={3}>
                                         <Image crossOrigin="anonymous" src={image.path ?? null} fluid />
-                                        <i style={onHover} className="bi bi-x-circle text-danger"></i>
+                                        <i style={onHover}
+                                            onClick={() => imageDeleteHandler(image.path, id).then(data => setImageRemoved(!imageRemoved))}
+                                            className="bi bi-x-circle text-danger"></i>
                                     </Col>
                                 ))}
 
