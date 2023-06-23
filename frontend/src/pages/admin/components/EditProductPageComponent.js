@@ -340,7 +340,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             </Row>
 
                             {/* Image Upload attachment */}
-                            <Form.Control type="file" multiple onChange={e => {
+                            <Form.Control required type="file" multiple onChange={e => {
                                 setIsUploading("File upload in progress ... ");
                                 uploadHandler(e.target.files, id)
                                     .then(data => {
