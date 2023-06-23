@@ -21,14 +21,14 @@ const updateProductApiRequest = async (productId, formInputs) => {
     return data;
 }
 
-// Put method: Uploading images
+// POST method: Uploading images
 const uploadHandler = async (images, productId) => {
     const formData = new FormData();
 
     Array.from(images).forEach((image) => {
         formData.append("images", image);
     })
-    await axios.put("/api/products/admin/upload?productId=" + productId, formData);
+    await axios.post("/api/products/admin/upload?productId=" + productId, formData);
 }
 
 const AdminEditProductPage = () => {

@@ -12,7 +12,7 @@ const onHover = {
     transform: "scale(1.5)",
 }
 
-const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc, imageDeleteHandler }) => {
+const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc, imageDeleteHandler, uploadHandler }) => {
 
     // Initial Local React State:
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
@@ -24,6 +24,8 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const [newAttrKey, setNewAttrKey] = useState(false);
     const [newAttrValue, setNewAttrValue] = useState(false);
     const [imageRemoved, setImageRemoved] = useState(false);// Initially the image is not removed.
+    const [isUploading, setIsUploading] = useState(""); // Initially array of an image is empty.
+    const [imageUploaded, setImageUploaded] = useState(false);//Initally there is no image to upload.
 
 
     const attrKey = useRef(null);
@@ -58,7 +60,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         fetchProduct(id)
             .then((product) => setProduct(product))
             .catch((er) => console.log(er));
-    }, [id, imageRemoved]);
+    }, [id, imageRemoved, imageUploaded]);
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -335,9 +337,20 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                             className="bi bi-x-circle text-danger"></i>
                                     </Col>
                                 ))}
-
                             </Row>
-                            <Form.Control type="file" multiple required />
+
+                            {/* Image Upload attachment */}
+                            <Form.Control type="file" multiple onChange={e => {
+                                setIsUploading("File upload in progress ... ");
+                                uploadHandler(e.target.files, id)
+                                    .then(data => {
+                                        setIsUploading("File upload completed");
+                                        setImageUploaded(!imageUploaded);
+                                    })
+                                    .catch((er) => setIsUploading(er.response.data.message ? er.response.data.message : er.message.data));
+                            }} />
+                            {isUploading}
+                            
                         </Form.Group>
                         <Button variant="primary" type="submit">Update</Button>
                         {updateProductResponseState.error ?? ""}
