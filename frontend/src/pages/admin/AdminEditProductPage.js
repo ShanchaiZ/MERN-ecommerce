@@ -21,6 +21,15 @@ const updateProductApiRequest = async (productId, formInputs) => {
     return data;
 }
 
+// Put method: Uploading images
+const uploadHandler = async (images, productId) => {
+    const formData = new FormData();
+
+    Array.from(images).forEach((image) => {
+        formData.append("images", image);
+    })
+    await axios.put("/api/products/admin/upload?productId=" + productId, formData);
+}
 
 const AdminEditProductPage = () => {
 
@@ -31,7 +40,7 @@ const AdminEditProductPage = () => {
 
     //Function: Image Delete Handler:
     const imageDeleteHandler = async (imagePath, productId) => {
-        let encoded = encodeURIComponent(imagePath)
+        let encoded = encodeURIComponent(imagePath);
         await axios.delete(`/api/products/admin/image/${encoded}/${productId}`);
 
     }
@@ -44,6 +53,7 @@ const AdminEditProductPage = () => {
         reduxDispatch={reduxDispatch}
         saveAttributeToCatDoc={saveAttributeToCatDoc}
         imageDeleteHandler={imageDeleteHandler}
+        uploadHandler={uploadHandler}
     />
 };
 
