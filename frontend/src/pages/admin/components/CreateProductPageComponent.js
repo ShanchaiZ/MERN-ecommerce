@@ -3,13 +3,25 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const CreateProductPageComponent = () => {
+
     const [validated, setValidated] = useState(false);
+
+
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+        const form = event.currentTarget.elements;
+        const formInputs = {
+            name: form.name.value,
+            description: form.description.value,
+            count: form.count.value,
+            price: form.price.value,
+            category: form.category.value,
+            attributesTable: []
+        }
+        if (event.currentTarget.checkValidity() === true) {
+            console.log(formInputs);
         }
         setValidated(true);
     };
@@ -47,7 +59,7 @@ const CreateProductPageComponent = () => {
                                 Category
                                 <CloseButton />(<small>remove selected</small>)
                             </Form.Label>
-                            <Form.Select aria-label="productCategory">
+                            <Form.Select required name="category" aria-label="productCategory">
                                 <option>Choose Category</option>
                                 <option value="1">Books</option>
                                 <option value="2">Laptop</option>
