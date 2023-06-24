@@ -38,7 +38,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                     if (data.message === "product created") navigate("/admin/products");
                 })
                 .catch(er => {
-                    setCreateProductResponseState({error: er.response.data.message ? er.response.data.message : er.response.data })
+                    setCreateProductResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })
                 })
         }
         setValidated(true);

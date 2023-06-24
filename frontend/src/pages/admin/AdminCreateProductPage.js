@@ -11,7 +11,7 @@ const createProductApiRequest = async (formInputs) => {
 // Create a new Product that appends images to the newly created product:
 const uploadImagesApiRequest = async (images, productId) => {
     const formData = new FormData();
-    Array.form(images).forEach((image) => {
+    Array.from(images).forEach((image) => {
         formData.append("images", image);
     })
     await axios.post("/api/products/admin/upload?productId=" + productId, formData);
