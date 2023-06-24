@@ -1,5 +1,5 @@
 import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest }) => {
@@ -11,6 +11,8 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const [isCreating, setIsCreating] = useState("");
     const [createProductResponseState, setCreateProductResponseState] = useState({ message: "", error: "" })
 
+
+    const navigate = useNavigate();
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -28,7 +30,12 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         if (event.currentTarget.checkValidity() === true) {
             createProductApiRequest(formInputs)
                 .then(data => {
-                    console.log(data);
+                    if (images) {
+                        uploadImagesApiRequest(images, data.productId)
+                            .then(res => { })
+                            .catch((er) => setIsCreating(er.response.data.message ? er.response.data.message : er.response.data))
+                    }
+                    if (data.message === "product created") navigate("/admin/products");
                 })
                 .catch(er => {
                     console.log(er.response.data.message ? er.response.data.message : er.response.data);
