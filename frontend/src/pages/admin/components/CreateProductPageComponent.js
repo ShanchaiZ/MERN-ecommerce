@@ -8,6 +8,8 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const [validated, setValidated] = useState(false);
     const [attributesTable, setAttributeTable] = useState([]); //Initally the attributes table is an empty array
     const [images, setImages] = useState(false);
+    const [isCreating, setIsCreating] = useState("");
+    const [createProductResponseState, setCreateProductResponseState] = useState({ message: "", error: "" })
 
 
     // Function: validation function when submit button is clicked
@@ -156,8 +158,10 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
                             <Form.Control type="file" multiple required onChange={(e) => uploadHandler(e.target.files)} />
+                            {isCreating}
                         </Form.Group>
                         <Button variant="primary" type="submit">Create</Button>
+                        {createProductResponseState.error ?? ""}
                     </Form>
                 </Col>
                 {/* Go Back to Admin Products button */}
