@@ -7,6 +7,8 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     // REACT local state variables:
     const [validated, setValidated] = useState(false);
     const [attributesTable, setAttributeTable] = useState([]); //Initally the attributes table is an empty array
+    const [images, setImages] = useState(false);
+
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -32,6 +34,12 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         }
         setValidated(true);
     };
+
+
+    // Image Upload Handler:
+    const uploadHandler = (images) => {
+        setImages(images);
+    }
 
     return (
         <Container className="justified-content-md-content mt-5">
@@ -147,7 +155,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                         {/* Product Image Upload */}
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
                             <Form.Label>Images</Form.Label>
-                            <Form.Control type="file" multiple required />
+                            <Form.Control type="file" multiple required onChange={(e) => uploadHandler(e.target.files)} />
                         </Form.Group>
                         <Button variant="primary" type="submit">Create</Button>
                     </Form>
