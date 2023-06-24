@@ -2,10 +2,11 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "re
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const CreateProductPageComponent = () => {
+const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest }) => {
 
+    // REACT local state variables:
     const [validated, setValidated] = useState(false);
-
+    const [attributesTable, setAttributeTable] = useState([]); //Initally the attributes table is an empty array
 
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -18,10 +19,16 @@ const CreateProductPageComponent = () => {
             count: form.count.value,
             price: form.price.value,
             category: form.category.value,
-            attributesTable: []
+            attributesTable: attributesTable
         }
         if (event.currentTarget.checkValidity() === true) {
-            console.log(formInputs);
+            createProductApiRequest(formInputs)
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(er => {
+                    console.log(er.response.data.message ? er.response.data.message : er.response.data);
+                })
         }
         setValidated(true);
     };
