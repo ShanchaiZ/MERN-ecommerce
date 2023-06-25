@@ -20,12 +20,12 @@ const uploadImagesApiRequest = async (images, productId) => {
 
 // Function: Upload images to the Cloud using Cloudinary Docs:
 const uploadImagesCloudinaryApiRequest = (images) => {
-    const url = "https://api.cloudinary.com/v1_1/<cloud name>/<resource_type>/upload"
+    const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`
     const formData = new FormData();
     for (let i = 0; i < images.length; i++) {
         let file = images[i];
         formData.append("file", file);
-        formData.append("upload_preset", "<EnterUploadPresetNameHere>");
+        formData.append("upload_preset", `${process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET}`);
         fetch(url, {
             method: "POST",
             body: formData
