@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "re
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest }) => {
+const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest }) => {
 
     // REACT local state variables:
     const [validated, setValidated] = useState(false);
@@ -31,9 +31,14 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
             createProductApiRequest(formInputs)
                 .then(data => {
                     if (images) {
-                        uploadImagesApiRequest(images, data.productId)
-                            .then(res => { })
-                            .catch((er) => setIsCreating(er.response.data.message ? er.response.data.message : er.response.data))
+
+                        if (process.env.NODE_ENV === "production") { // to do: not change to production. keep on dev!!
+                            uploadImagesApiRequest(images, data.productId)
+                                .then(res => { })
+                                .catch((er) => setIsCreating(er.response.data.message ? er.response.data.message : er.response.data))
+                        } else {
+                            uploadImagesCloudinaryApiRequest(images);
+                        }
                     }
                     if (data.message === "product created") navigate("/admin/products");
                 })
