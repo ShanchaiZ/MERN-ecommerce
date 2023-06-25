@@ -293,9 +293,21 @@ const adminUpload = async (req, res, next) => {
 
 // Delete Route: Deleting Product Image by the Admin:
 const adminDeleteProductImage = async (req, res, next) => {
+    const imagePath = decodeURIComponent(req.params.imagePath);
 
+    // If the image request is from cloudinary to remove the image:
+    if (req.query.cloudinary === "true") {
+        try {
+            await Product.findOneAndUpdate({ _id: req.params.productId }, { $pull: { images: { path: imagePath } } }).orFail();
+            return res.end();
+        } catch (er) {
+            next(er);
+        }
+        return;
+    }
+
+    // If the image request is from localhost to remove the image:
     try {
-        const imagePath = decodeURIComponent(req.params.imagePath);
 
         const path = require("path");
         const finalPath = path.resolve("../frontend/public") + imagePath

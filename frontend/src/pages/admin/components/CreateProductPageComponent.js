@@ -32,7 +32,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                 .then(data => {
                     if (images) {
 
-                        if (process.env.NODE_ENV === "production") { // to do: not change to production. keep on dev!!
+                        if (process.env.NODE_ENV === "production") { // to do: change to production. keep on dev!!
                             uploadImagesApiRequest(images, data.productId)
                                 .then(res => { })
                                 .catch((er) => setIsCreating(er.response.data.message ? er.response.data.message : er.response.data))
