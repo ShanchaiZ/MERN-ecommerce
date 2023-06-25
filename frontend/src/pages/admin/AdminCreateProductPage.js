@@ -19,7 +19,7 @@ const uploadImagesApiRequest = async (images, productId) => {
 
 
 // Function: Upload images to the Cloud using Cloudinary Docs:
-const uploadImagesCloudinaryApiRequest = (images) => {
+const uploadImagesCloudinaryApiRequest = (images, productId) => {
     const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`
     const formData = new FormData();
     for (let i = 0; i < images.length; i++) {
@@ -34,7 +34,7 @@ const uploadImagesCloudinaryApiRequest = (images) => {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                axios.post("/api/products/admin/upload?cloudinary=true&productId=" + productId, data);
             })
     }
 }

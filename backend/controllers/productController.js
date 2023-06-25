@@ -234,6 +234,16 @@ const adminUpdateProduct = async (req, res, next) => {
 
 // POST Route: Uploading Images when Creating new Product:
 const adminUpload = async (req, res, next) => {
+    if (req.query.cloudinary === "true") {
+        try {
+            let product = await Product.findById(req.query.productId).orFail();
+            product.images.push({ path: req.body.url });
+            await product.save();
+        } catch (err) {
+            next(err)
+        }
+        return;
+    }
     try {
         if (!req.files || !!req.files.images === false) {
             return res.status(400).send("No files were uploaded!");

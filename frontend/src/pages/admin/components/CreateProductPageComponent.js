@@ -37,10 +37,18 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 .then(res => { })
                                 .catch((er) => setIsCreating(er.response.data.message ? er.response.data.message : er.response.data))
                         } else {
-                            uploadImagesCloudinaryApiRequest(images);
+                            uploadImagesCloudinaryApiRequest(images, data.productId);
                         }
                     }
-                    if (data.message === "product created") navigate("/admin/products");
+                    return data;
+                })
+                // Product Creation after product form input entered:
+                .then(data => {
+                    setIsCreating("Product Creation in Progress...")
+                    setTimeout(() => {
+                        setIsCreating("");
+                        if (data.message === "product created") navigate("/admin/products");
+                    }, 2000)
                 })
                 .catch(er => {
                     setCreateProductResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })
