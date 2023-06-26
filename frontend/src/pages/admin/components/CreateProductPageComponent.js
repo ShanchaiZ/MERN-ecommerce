@@ -28,11 +28,15 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
             attributesTable: attributesTable
         }
         if (event.currentTarget.checkValidity() === true) {
+            if (images.length > 3) {
+                setIsCreating("Too Many files for upload!")
+                return;
+            }
             createProductApiRequest(formInputs)
                 .then(data => {
                     if (images) {
 
-                        if (process.env.NODE_ENV === "production") { // to do: change to production. keep on dev!!
+                        if (process.env.NODE_ENV !== "production") { // to do: change to !== production
                             uploadImagesApiRequest(images, data.productId)
                                 .then(res => { })
                                 .catch((er) => setIsCreating(er.response.data.message ? er.response.data.message : er.response.data))
@@ -40,15 +44,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                             uploadImagesCloudinaryApiRequest(images, data.productId);
                         }
                     }
-                    return data;
-                })
-                // Product Creation after product form input entered:
-                .then(data => {
-                    setIsCreating("Product Creation in Progress...")
-                    setTimeout(() => {
-                        setIsCreating("");
-                        if (data.message === "product created") navigate("/admin/products");
-                    }, 2000)
+                    if (data.message === "product created") navigate("/admin/products");
                 })
                 .catch(er => {
                     setCreateProductResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })

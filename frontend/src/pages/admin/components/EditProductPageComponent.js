@@ -12,7 +12,7 @@ const onHover = {
     transform: "scale(1.5)",
 }
 
-const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc, imageDeleteHandler, uploadHandler }) => {
+const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRequest, reduxDispatch, saveAttributeToCatDoc, imageDeleteHandler, uploadHandler, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest }) => {
 
     // Initial Local React State:
     const [validated, setValidated] = useState(false); // Initially The form validation is set to false = info not validated
@@ -342,15 +342,24 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                             {/* Image Upload attachment */}
                             <Form.Control required type="file" multiple onChange={e => {
                                 setIsUploading("File upload in progress ... ");
-                                uploadHandler(e.target.files, id)
-                                    .then(data => {
-                                        setIsUploading("File upload completed");
+                                if (process.env.NODE_ENV !== "production") {
+                                    // to do: change to !== production
+                                    uploadImagesApiRequest(e.target.files, id)
+                                        .then(data => {
+                                            setIsUploading("File upload completed");
+                                            setImageUploaded(!imageUploaded);
+                                        })
+                                        .catch((er) => setIsUploading(er.response.data.message ? er.response.data.message : er.message.data));
+                                } else {
+                                    uploadImagesCloudinaryApiRequest(e.target.files, id);
+                                    setIsUploading("File upload completed. Please wait for results to take effect. Refresh the page if necessary");
+                                    setTimeout(() =>{
                                         setImageUploaded(!imageUploaded);
-                                    })
-                                    .catch((er) => setIsUploading(er.response.data.message ? er.response.data.message : er.message.data));
+                                    }, 3000)
+                                }
                             }} />
                             {isUploading}
-                            
+
                         </Form.Group>
                         <Button variant="primary" type="submit">Update</Button>
                         {updateProductResponseState.error ?? ""}
