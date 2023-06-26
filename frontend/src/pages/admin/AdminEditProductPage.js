@@ -15,21 +15,10 @@ const fetchProduct = async (productId) => {
     return data;
 }
 
-
 // Put method: Update Product fields in the edit form
 const updateProductApiRequest = async (productId, formInputs) => {
     const { data } = await axios.put(`/api/products/admin/${productId}`, { ...formInputs });
     return data;
-}
-
-// POST method: Uploading images
-const uploadHandler = async (images, productId) => {
-    const formData = new FormData();
-
-    Array.from(images).forEach((image) => {
-        formData.append("images", image);
-    })
-    await axios.post("/api/products/admin/upload?productId=" + productId, formData);
 }
 
 const AdminEditProductPage = () => {
@@ -42,7 +31,7 @@ const AdminEditProductPage = () => {
     //Function: Image Delete Handler:
     const imageDeleteHandler = async (imagePath, productId) => {
         let encoded = encodeURIComponent(imagePath);
-        if (process.env.NODE_ENV === "production") {
+        if (process.env.NODE_ENV !== "production") {
             // to do: change to !== production
             await axios.delete(`/api/products/admin/image/${encoded}/${productId}`);
         } else {
@@ -58,7 +47,8 @@ const AdminEditProductPage = () => {
         reduxDispatch={reduxDispatch}
         saveAttributeToCatDoc={saveAttributeToCatDoc}
         imageDeleteHandler={imageDeleteHandler}
-        uploadHandler={uploadHandler}
+        uploadImagesApiRequest={uploadImagesApiRequest}
+        uploadImagesCloudinaryApiRequest={uploadImagesCloudinaryApiRequest}
     />
 };
 
