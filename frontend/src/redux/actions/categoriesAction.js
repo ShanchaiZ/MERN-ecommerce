@@ -23,7 +23,14 @@ export const saveAttributeToCatDoc = (key, val, categoryChosen) => async (dispat
     }
 }
 
-// Function: Inserting Custom Category:
+// Function: Inserting Custom Category to be displayed in the Category dropdown:
 export const newCategory = (category) => async (dispatch, getState) => {
-    console.log(category);
+    const cat = getState().getCategories.categories;
+    const { data } = await axios.post("/api/categories", { category });
+    if (data.categoryCreated) {
+        dispatch({
+            type: actionTypes.INSERT_CATEGORY,
+            payload: [...cat, data.categoryCreated]
+        })
+    }
 }
