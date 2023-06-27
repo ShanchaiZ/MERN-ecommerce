@@ -10,7 +10,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const [images, setImages] = useState(false);
     const [isCreating, setIsCreating] = useState("");
     const [createProductResponseState, setCreateProductResponseState] = useState({ message: "", error: "" })
-
+    const [categoryChosen, setCategoryChosen] = useState("Choose category"); //Initially the dropdown will display "Choose Category" option.
 
     const navigate = useNavigate();
 
@@ -63,6 +63,8 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const newCategoryHandler = (e) => {
         if (e.keyCode && e.keyCode === 13 && e.target.value) {
             reduxDispatch(newCategory(e.target.value));
+            setCategoryChosen(e.target.value);
+            e.target.value = "";
         }
     }
 
@@ -100,7 +102,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 <CloseButton />(<small>remove selected</small>)
                             </Form.Label>
                             <Form.Select required name="category" aria-label="productCategory">
-                                <option>Choose Category</option>
+                                <option value="Choose category">Choose a Category</option>
                                 {categories.map((category, idx) => (
                                     <option key={idx} value={category.name}>
                                         {category.name}
@@ -167,13 +169,13 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                                     <Form.Label>Create New Attribute</Form.Label>
-                                    <Form.Control disabled={false} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control disabled={categoryChosen === "Choose category"} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
                                     <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Control disabled={false} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control disabled={categoryChosen === "Choose category"} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
                                 </Form.Group>
                             </Col>
                         </Row>
