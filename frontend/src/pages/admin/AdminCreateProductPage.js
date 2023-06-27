@@ -4,7 +4,7 @@ import { uploadImagesApiRequest, uploadImagesCloudinaryApiRequest } from "./util
 import axios from "axios";
 
 import { useSelector } from "react-redux";
-import { newCategory } from "../../redux/actions/categoriesAction";
+import { newCategory, deleteCategory } from "../../redux/actions/categoriesAction";
 import { useDispatch } from "react-redux";
 
 
@@ -25,6 +25,7 @@ const AdminCreateProductPage = () => {
         categories={categories}
         reduxDispatch={dispatch}
         newCategory={newCategory}
+        deleteCategory={deleteCategory}
     />
 };
 

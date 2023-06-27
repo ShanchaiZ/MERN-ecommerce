@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "re
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory }) => {
+const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory, deleteCategory }) => {
 
     // REACT local state variables:
     const [validated, setValidated] = useState(false);
