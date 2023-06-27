@@ -59,6 +59,13 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         setImages(images);
     }
 
+    // Category Handler that Enters Custom Category on pressed "Enter" key: 
+    const newCategoryHandler = (e) => {
+        if (e.keyCode && e.keyCode === 13 && e.target.value) {
+            reduxDispatch(newCategory(e.target.value));
+        }
+    }
+
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
@@ -94,16 +101,18 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                             </Form.Label>
                             <Form.Select required name="category" aria-label="productCategory">
                                 <option>Choose Category</option>
-                                <option value="1">Books</option>
-                                <option value="2">Laptop</option>
-                                <option value="3">Games</option>
+                                {categories.map((category, idx) => (
+                                    <option key={idx} value={category.name}>
+                                        {category.name}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
 
                         {/* Add New Catagory */}
                         <Form.Group className="mb-3" controlId="formBasicNewCategory">
                             <Form.Label>or Create A New Category (for example: Computers/Intel/Home Appliances) {" "}</Form.Label>
-                            <Form.Control name="newCategory" type="text" />
+                            <Form.Control onKeyUp={newCategoryHandler} name="newCategory" type="text" />
                         </Form.Group>
                         <Row className="mt-5">
                             {/* Choose Category subdivision: Attribute  */}
