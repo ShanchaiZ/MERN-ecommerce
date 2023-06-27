@@ -2,11 +2,14 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "re
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { changeCategory } from "./utils/utils";
+
 const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory, deleteCategory }) => {
 
     // REACT local state variables:
     const [validated, setValidated] = useState(false);
     const [attributesTable, setAttributeTable] = useState([]); //Initally the attributes table is an empty array
+    const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally the attributes dropdown is an empty array
     const [images, setImages] = useState(false);
     const [isCreating, setIsCreating] = useState("");
     const [createProductResponseState, setCreateProductResponseState] = useState({ message: "", error: "" })
@@ -112,7 +115,13 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 Category
                                 <CloseButton onClick={deleteCategoryHandler} />(<small>remove selected</small>)
                             </Form.Label>
-                            <Form.Select id="cats" required name="category" aria-label="productCategory">
+                            <Form.Select
+                                id="cats"
+                                required
+                                name="category"
+                                aria-label="productCategory"
+                                onChange={(e) => changeCategory(e, categories, setAttributesFromDb, setCategoryChosen)}
+                            >
                                 <option value="Choose category">Choose a Category</option>
                                 {categories.map((category, idx) => (
                                     <option key={idx} value={category.name}>
