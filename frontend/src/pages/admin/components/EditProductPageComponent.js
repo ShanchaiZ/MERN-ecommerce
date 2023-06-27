@@ -4,6 +4,9 @@ import { useState, useEffect, Fragment, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import { changeCategory } from "./utils/utils";
+
+
 const onHover = {
     cursor: "pointer",
     position: "absolute",
@@ -105,18 +108,6 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     }, [product])
 
 
-    // Change Category Handler:
-    const changeCategory = (e) => {
-        const highLevelCategory = e.target.value.split("/")[0];
-        const highLevelCategoryAllData = categories.find((cat) => cat.name === highLevelCategory);
-        if (highLevelCategoryAllData && highLevelCategoryAllData.attrs) {
-            setAttributesFromDb(highLevelCategoryAllData.attrs);
-        } else {
-            setAttributesFromDb([]);
-        }
-        setCategoryChosen(e.target.value);
-    }
-
     // Change Attributes Value Handler:
     const attributeValueSelected = (e) => {
         if (e.target.value !== "Choose Attribute Value") {
@@ -215,7 +206,12 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                         {/* Product Category Dropdown */}
                         <Form.Group className="mb-3" controlId="formBasicCategory">
                             <Form.Label>Category</Form.Label>
-                            <Form.Select required name="category" aria-label="productCategory" onChange={changeCategory}>
+                            <Form.Select
+                                required
+                                name="category"
+                                aria-label="productCategory"
+                                onChange={(e) => changeCategory(e, categories, setAttributesFromDb, setCategoryChosen)}
+                            >
                                 <option value="Choose Category">Choose Category</option>
                                 {categories.map((category, idx) => {
                                     return product.category === category.name ? (
@@ -353,7 +349,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                 } else {
                                     uploadImagesCloudinaryApiRequest(e.target.files, id);
                                     setIsUploading("File upload completed. Please wait for results to take effect. Refresh the page if necessary");
-                                    setTimeout(() =>{
+                                    setTimeout(() => {
                                         setImageUploaded(!imageUploaded);
                                     }, 3000)
                                 }
