@@ -22,3 +22,8 @@ export const saveAttributeToCatDoc = (key, val, categoryChosen) => async (dispat
         })
     }
 }
+
+// Function: Inserting Custom Category:
+export const newCategory = (category) => async (dispatch, getState) => {
+    console.log(category);
+}
