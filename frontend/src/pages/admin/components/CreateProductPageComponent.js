@@ -122,7 +122,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 aria-label="productCategory"
                                 onChange={(e) => changeCategory(e, categories, setAttributesFromDb, setCategoryChosen)}
                             >
-                                <option value="Choose category">Choose a Category</option>
+                                <option value="">Choose a Category</option>
                                 {categories.map((category, idx) => (
                                     <option key={idx} value={category.name}>
                                         {category.name}
@@ -170,24 +170,28 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
 
                         {/* Table for Displaying Attribute, Value and Deletion */}
                         <Row>
-                            <Table hover>
-                                <thead>
-                                    <tr>
-                                        <th>Attribute</th>
-                                        <th>Value</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>attr key</td>
-                                        <td>attr value</td>
-                                        <td>
-                                            <CloseButton />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </Table>
+                            {attributesTable.length > 0 && (
+                                <Table hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Attribute</th>
+                                            <th>Value</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {attributesTable.map((item, idx) => (
+                                            <tr key={idx}>
+                                                <td>{item.key}</td>
+                                                <td>{item.value}</td>
+                                                <td>
+                                                    <CloseButton />
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            )}
                         </Row>
 
                         {/* Create new Attribute and Attribute Value */}
@@ -195,13 +199,13 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                                     <Form.Label>Create New Attribute</Form.Label>
-                                    <Form.Control disabled={categoryChosen === "Choose category"} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control disabled={["", "Choose category"].includes(categoryChosen)} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
                                     <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Control disabled={categoryChosen === "Choose category"} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control disabled={["", "Choose category"].includes(categoryChosen)} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
                                 </Form.Group>
                             </Col>
                         </Row>
