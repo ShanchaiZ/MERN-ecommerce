@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { changeCategory } from "./utils/utils";
 
@@ -136,31 +136,37 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                             <Form.Label>or Create A New Category (for example: Computers/Intel/Home Appliances) {" "}</Form.Label>
                             <Form.Control onKeyUp={newCategoryHandler} name="newCategory" type="text" />
                         </Form.Group>
-                        <Row className="mt-5">
-                            {/* Choose Category subdivision: Attribute  */}
-                            <Col md={6}>
-                                <Form.Group className="mb-3" controlId="formBasicAttributes">
-                                    <Form.Label>Choose Attribute and Set Values</Form.Label>
-                                    <Form.Select name="atrrKey" aria-label="productCategory">
-                                        <option>Choose Attribute</option>
-                                        <option value="color">Color</option>
-                                        <option value="shape">Shape</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                            {/* Choose Category subdivision: Attribute Value  */}
-                            <Col md={6}>
-                                <Form.Group className="mb-3" controlId="formBasicAttributeValue">
-                                    <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Select name="atrrKey" aria-label="productCategory">
-                                        <option>Choose Attribute Value</option>
-                                        <option value="1">Red</option>
-                                        <option value="2">Yellow</option>
-                                        <option value="3">Green</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                        </Row>
+
+                        {attributesFromDb.length > 0 && (
+                            <Row className="mt-5">
+                                {/* Choose Category subdivision: Attribute  */}
+                                <Col md={6}>
+                                    <Form.Group className="mb-3" controlId="formBasicAttributes">
+                                        <Form.Label>Choose Attribute and Set Values</Form.Label>
+                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                            <option>Choose Attribute</option>
+                                            {attributesFromDb.map((item, idx) => (
+                                                <React.Fragment key={idx}>
+                                                    <option value={item.key}>{item.key}</option>
+                                                </React.Fragment>
+                                            ))}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                {/* Choose Category subdivision: Attribute Value  */}
+                                <Col md={6}>
+                                    <Form.Group className="mb-3" controlId="formBasicAttributeValue">
+                                        <Form.Label>Attribute Value</Form.Label>
+                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                            <option>Choose Attribute Value</option>
+                                            <option value="1">Red</option>
+                                            <option value="2">Yellow</option>
+                                            <option value="3">Green</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                        )}
 
                         {/* Table for Displaying Attribute, Value and Deletion */}
                         <Row>
