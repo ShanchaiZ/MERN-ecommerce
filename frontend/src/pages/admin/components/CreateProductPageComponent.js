@@ -72,6 +72,13 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         }
     }
 
+    // Function: Delete Category on X click:
+    const deleteCategoryHandler = () => {
+        let element = document.getElementById("cats");
+        reduxDispatch(deleteCategory(element.value))
+        setCategoryChosen("Choose category");
+    }
+
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
@@ -103,7 +110,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                         <Form.Group className="mb-3" controlId="formBasicCategory">
                             <Form.Label>
                                 Category
-                                <CloseButton />(<small>remove selected</small>)
+                                <CloseButton onClick={deleteCategoryHandler} />(<small>remove selected</small>)
                             </Form.Label>
                             <Form.Select id="cats" required name="category" aria-label="productCategory">
                                 <option value="Choose category">Choose a Category</option>
