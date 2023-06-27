@@ -63,8 +63,12 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const newCategoryHandler = (e) => {
         if (e.keyCode && e.keyCode === 13 && e.target.value) {
             reduxDispatch(newCategory(e.target.value));
-            setCategoryChosen(e.target.value);
-            e.target.value = "";
+            setTimeout(() => {
+                let element = document.getElementById("cats");
+                element.value = e.target.value;
+                setCategoryChosen(e.target.value);
+                e.target.value = "";
+            }, 200);
         }
     }
 
@@ -101,7 +105,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 Category
                                 <CloseButton />(<small>remove selected</small>)
                             </Form.Label>
-                            <Form.Select required name="category" aria-label="productCategory">
+                            <Form.Select id="cats" required name="category" aria-label="productCategory">
                                 <option value="Choose category">Choose a Category</option>
                                 {categories.map((category, idx) => (
                                     <option key={idx} value={category.name}>
