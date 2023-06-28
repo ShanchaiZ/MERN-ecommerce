@@ -4,7 +4,7 @@ import { useState, useEffect, Fragment, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { changeCategory } from "./utils/utils";
+import { changeCategory, setValuesForAttrFromDbSelectForm } from "./utils/utils";
 
 
 const onHover = {
@@ -35,24 +35,6 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     const attrVal = useRef(null);
     const createNewAttrKey = useRef(null);
     const createNewAttrVal = useRef(null);
-
-    const setValuesForAttrFromDbSelectForm = (e) => {
-        if (e.target.value !== "Choose Attribute") {
-            var selectedAttr = attributesFromDb.find((item) => item.key === e.target.value);
-            let valuesForAttrKeys = attrVal.current;
-            if (selectedAttr && selectedAttr.value.length > 0) {
-                // clear all previous values to make space for new attribute values:
-                while (valuesForAttrKeys.options.length) {
-                    valuesForAttrKeys.remove(0);
-                }
-                valuesForAttrKeys.options.add(new Option("Choose Attribute Value"));
-                selectedAttr.value.map(item => {
-                    valuesForAttrKeys.add(new Option(item));
-                    return "";
-                })
-            }
-        }
-    }
 
 
     const { id } = useParams();
@@ -237,7 +219,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                             name="attrKey"
                                             aria-label="productCategory"
                                             ref={attrKey}
-                                            onChange={setValuesForAttrFromDbSelectForm}
+                                            onChange={(e) => setValuesForAttrFromDbSelectForm(e, attrVal, attributesFromDb)}
                                         >
                                             <option>Choose Attribute</option>
                                             {attributesFromDb.map((item, idx) => (
