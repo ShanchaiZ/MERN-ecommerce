@@ -4,8 +4,7 @@ import { useState, useEffect, Fragment, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { changeCategory, setValuesForAttrFromDbSelectForm } from "./utils/utils";
-
+import { changeCategory, setValuesForAttrFromDbSelectForm, setAttributesTableWrapper } from "./utils/utils";
 
 const onHover = {
     cursor: "pointer",
@@ -93,30 +92,8 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
     // Change Attributes Value Handler:
     const attributeValueSelected = (e) => {
         if (e.target.value !== "Choose Attribute Value") {
-            setAttributesTableWrapper(attrKey.current.value, e.target.value);
+            setAttributesTableWrapper(attrKey.current.value, e.target.value, setAttributesTable);
         }
-    }
-
-    // Function: Dynamically update and Save Attribute Value in Attributes Table: 
-    const setAttributesTableWrapper = (key, val) => {
-        setAttributesTable((attr) => {
-            if (attr.length !== 0) {
-                var keyExistsInOldTable = false;
-                let modifiedTable = attr.map(item => {
-                    if (item.key === key) {
-                        keyExistsInOldTable = true;
-                        item.value = val;
-                        return item;
-                    } else {
-                        return item;
-                    }
-                })
-                if (keyExistsInOldTable) return [...modifiedTable];
-                else return [...modifiedTable, { key: key, value: val }]
-            } else {
-                return [{ key: key, value: val }]
-            }
-        })
     }
 
     // Function: Delete Attribute from Table:
@@ -148,7 +125,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
         if (e.keyCode && e.keyCode === 13) {
             if (newAttrKey && newAttrValue) {
                 reduxDispatch(saveAttributeToCatDoc(newAttrKey, newAttrValue, categoryChosen));
-                setAttributesTableWrapper(newAttrKey, newAttrValue);
+                setAttributesTableWrapper(newAttrKey, newAttrValue, setAttributesTable);
                 e.target.value = "";
                 createNewAttrKey.current.value = "";
                 createNewAttrVal.current.value = "";
@@ -157,6 +134,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
             }
         }
     }
+
 
     return (
         <Container className="justified-content-md-content mt-5">
