@@ -1,8 +1,8 @@
 import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-import { changeCategory } from "./utils/utils";
+import { changeCategory, setValuesForAttrFromDbSelectForm } from "./utils/utils";
 
 const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory, deleteCategory }) => {
 
@@ -14,6 +14,9 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const [isCreating, setIsCreating] = useState("");
     const [createProductResponseState, setCreateProductResponseState] = useState({ message: "", error: "" })
     const [categoryChosen, setCategoryChosen] = useState("Choose category"); //Initially the dropdown will display "Choose Category" option.
+
+    const attrKey = useRef(null);
+    const attrVal = useRef(null);
 
     const navigate = useNavigate();
 
@@ -68,8 +71,8 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
             reduxDispatch(newCategory(e.target.value));
             setTimeout(() => {
                 let element = document.getElementById("cats");
-                element.value = e.target.value;
                 setCategoryChosen(e.target.value);
+                element.value = e.target.value;
                 e.target.value = "";
             }, 200);
         }
@@ -146,6 +149,8 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                         <Form.Select
                                             name="attrKey"
                                             aria-label="productCategory"
+                                            ref={attrKey}
+                                            onChange={(e) => setValuesForAttrFromDbSelectForm(e, attrVal, attributesFromDb)}
                                         >
                                             <option>Choose Attribute</option>
                                             {attributesFromDb.map((item, idx) => (
@@ -163,6 +168,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                         <Form.Select
                                             name="attrVal"
                                             aria-label="productCategory"
+                                            ref={attrVal}
                                         >
                                             <option>Choose Attribute Value</option>
                                         </Form.Select>
