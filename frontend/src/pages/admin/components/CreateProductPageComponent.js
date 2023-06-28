@@ -92,6 +92,12 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         }
     }
 
+    // Function: Delete Attribute from Table:
+    const deleteAttribute = (key) => {
+        setAttributesTable((table) => table.filter((item) => item.key !== key));
+    }
+
+
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
@@ -202,7 +208,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                                 <td>{item.key}</td>
                                                 <td>{item.value}</td>
                                                 <td>
-                                                    <CloseButton />
+                                                    <CloseButton onClick={() => deleteAttribute(item.key)} />
                                                 </td>
                                             </tr>
                                         ))}
