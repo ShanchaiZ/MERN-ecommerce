@@ -2,13 +2,13 @@ import { Container, Row, Col, Form, Button, CloseButton, Table, Alert } from "re
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useRef } from "react";
 
-import { changeCategory, setValuesForAttrFromDbSelectForm } from "./utils/utils";
+import { changeCategory, setValuesForAttrFromDbSelectForm, setAttributesTableWrapper } from "./utils/utils";
 
 const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory, deleteCategory }) => {
 
     // REACT local state variables:
     const [validated, setValidated] = useState(false);
-    const [attributesTable, setAttributeTable] = useState([]); //Initally the attributes table is an empty array
+    const [attributesTable, setAttributesTable] = useState([]); //Initally the attributes table is an empty array
     const [attributesFromDb, setAttributesFromDb] = useState([]); //Initally the attributes dropdown is an empty array
     const [images, setImages] = useState(false);
     const [isCreating, setIsCreating] = useState("");
@@ -83,6 +83,13 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         let element = document.getElementById("cats");
         reduxDispatch(deleteCategory(element.value))
         setCategoryChosen("Choose category");
+    }
+
+    // Change Attributes Value Handler:
+    const attributeValueSelected = (e) => {
+        if (e.target.value !== "Choose Attribute Value") {
+            setAttributesTableWrapper(attrKey.current.value, e.target.value, setAttributesTable);
+        }
     }
 
     return (
@@ -169,6 +176,7 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                             name="attrVal"
                                             aria-label="productCategory"
                                             ref={attrVal}
+                                            onChange={attributeValueSelected}
                                         >
                                             <option>Choose Attribute Value</option>
                                         </Form.Select>
