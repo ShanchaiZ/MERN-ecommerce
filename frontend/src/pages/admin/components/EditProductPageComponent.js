@@ -234,7 +234,7 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                     <Form.Group className="mb-3" controlId="formBasicAttributes">
                                         <Form.Label>Choose Attribute and Set Values</Form.Label>
                                         <Form.Select
-                                            name="atrrKey"
+                                            name="attrKey"
                                             aria-label="productCategory"
                                             ref={attrKey}
                                             onChange={setValuesForAttrFromDbSelectForm}
@@ -253,7 +253,11 @@ const EditProductPageComponent = ({ categories, fetchProduct, updateProductApiRe
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="formBasicAttributeValue">
                                         <Form.Label>Attribute Value</Form.Label>
-                                        <Form.Select name="atrrVal" aria-label="productCategory" ref={attrVal} onChange={attributeValueSelected}>
+                                        <Form.Select
+                                            name="attrVal"
+                                            aria-label="productCategory"
+                                            ref={attrVal}
+                                            onChange={attributeValueSelected}>
                                             <option>Choose Attribute Value</option>
                                         </Form.Select>
                                     </Form.Group>

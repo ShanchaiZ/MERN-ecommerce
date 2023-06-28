@@ -143,7 +143,10 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="formBasicAttributes">
                                         <Form.Label>Choose Attribute and Set Values</Form.Label>
-                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                        <Form.Select
+                                            name="attrKey"
+                                            aria-label="productCategory"
+                                        >
                                             <option>Choose Attribute</option>
                                             {attributesFromDb.map((item, idx) => (
                                                 <React.Fragment key={idx}>
@@ -157,11 +160,11 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="formBasicAttributeValue">
                                         <Form.Label>Attribute Value</Form.Label>
-                                        <Form.Select name="atrrKey" aria-label="productCategory">
+                                        <Form.Select
+                                            name="attrVal"
+                                            aria-label="productCategory"
+                                        >
                                             <option>Choose Attribute Value</option>
-                                            <option value="1">Red</option>
-                                            <option value="2">Yellow</option>
-                                            <option value="3">Green</option>
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
