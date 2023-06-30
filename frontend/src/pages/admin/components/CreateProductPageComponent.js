@@ -131,13 +131,18 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         }
     }
 
+    // Function: Prevent reloading the page when Pressing the "enter" key:
+    const checkKeyDown = (e) => {
+        if (e.code === "Enter") e.preventDefault();
+    }
+
     return (
         <Container className="justified-content-md-content mt-5">
             <Row>
                 {/* Create a New Product Form*/}
                 <Col md={6}>
                     <h1>Create a New Product</h1>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} onKeyDown={(e) => checkKeyDown(e)}>
                         {/* Name of Product */}
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name of Product</Form.Label>
