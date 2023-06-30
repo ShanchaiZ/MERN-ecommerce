@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 
 import { changeCategory, setValuesForAttrFromDbSelectForm, setAttributesTableWrapper } from "./utils/utils";
 
-const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory, deleteCategory }) => {
+const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRequest, uploadImagesCloudinaryApiRequest, categories, reduxDispatch, newCategory, deleteCategory, saveAttributeToCatDoc }) => {
 
     // REACT local state variables:
     const [validated, setValidated] = useState(false);
@@ -15,8 +15,14 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
     const [createProductResponseState, setCreateProductResponseState] = useState({ message: "", error: "" })
     const [categoryChosen, setCategoryChosen] = useState("Choose category"); //Initially the dropdown will display "Choose Category" option.
 
+    const [newAttrKey, setNewAttrKey] = useState(false);
+    const [newAttrValue, setNewAttrValue] = useState(false); //initally will be used to set the message for entering attribute
+
+
     const attrKey = useRef(null);
     const attrVal = useRef(null);
+    const createNewAttrKey = useRef(null);
+    const createNewAttrVal = useRef(null);
 
     const navigate = useNavigate();
 
@@ -97,6 +103,33 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
         setAttributesTable((table) => table.filter((item) => item.key !== key));
     }
 
+    // Function: Adding Attribute Key when "Enter" pressed:
+    const newAttrKeyHandler = (e) => {
+        e.preventDefault();
+        setNewAttrKey(e.target.value);
+        addNewAttributeManually(e);
+    }
+
+    // Function: Adding Attribute Value when "Enter" pressed:
+    const newAttrValueHandler = (e) => {
+        e.preventDefault();
+        setNewAttrValue(e.target.value);
+        addNewAttributeManually(e);
+    }
+
+    // Function: Adding New Attribute Key AND value when "Enter" Pressed
+    const addNewAttributeManually = (e) => {
+        if (e.keyCode & e.keyCode === 13) {
+            if (newAttrKey && newAttrValue) {
+                reduxDispatch(saveAttributeToCatDoc(newAttrKey, newAttrValue, categoryChosen));
+                e.target.value = "";
+                createNewAttrKey.current.value = "";
+                createNewAttrVal.current.value = "";
+                setNewAttrKey(false);
+                setNewAttrValue(false);
+            }
+        }
+    }
 
     return (
         <Container className="justified-content-md-content mt-5">
@@ -222,17 +255,17 @@ const CreateProductPageComponent = ({ createProductApiRequest, uploadImagesApiRe
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                                     <Form.Label>Create New Attribute</Form.Label>
-                                    <Form.Control disabled={["", "Choose category"].includes(categoryChosen)} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control ref={createNewAttrKey} disabled={["", "Choose category"].includes(categoryChosen)} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" onKeyUp={newAttrKeyHandler} />
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="formBasicNewAttributeValue">
                                     <Form.Label>Attribute Value</Form.Label>
-                                    <Form.Control disabled={["", "Choose category"].includes(categoryChosen)} required={true} placeholder="first choose or create category" name="newAttrValue" type="text" />
+                                    <Form.Control ref={createNewAttrVal} disabled={["", "Choose category"].includes(categoryChosen)} placeholder="first choose or create category" required={newAttrKey} name="newAttrValue" type="text" onKeyUp={newAttrValueHandler} />
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Alert variant="primary">After typing attribute key and value, please enter on one of the fields</Alert>
+                        <Alert show={newAttrKey && newAttrValue} variant="primary">After typing attribute key and value, please enter on one of the fields</Alert>
 
                         {/* Product Image Upload */}
                         <Form.Group className="mb-3 mt-3" controlId="formFileMultiple">
