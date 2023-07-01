@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const EditUserPageComponent = ({ updateUserApiRequest }) => {
+
     const [validated, setValidated] = useState(false);
-    // Function: validation function when submit button is clicked
+
+    // Function: form validation when submit button is clicked
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+        const form = event.currentTarget.elements;
+        const name = form.name.value;
+        const lastName = form.lastName.value;
+        const email = form.email.value;
+        const isAdmin = form.isAdmin.checked;
+        if (event.currentTarget.checkValidity() === true) {
+            updateUserApiRequest(name, lastName, email, isAdmin);
         }
         setValidated(true);
     };
