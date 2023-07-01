@@ -36,6 +36,7 @@ const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
                 setUser(data);
                 setIsAdmin(data.isAdmin);
             })
+            .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
     }, [id])
 
 
@@ -49,22 +50,22 @@ const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
                         {/* User First Name*/}
                         <Form.Group className="mb-3" controlId="formBasicFirstName">
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control name="name" type="text" required defaultValue="John" />
+                            <Form.Control name="name" type="text" required defaultValue={user.name} />
                         </Form.Group>
                         {/* User Last Name */}
                         <Form.Group className="mb-3" controlId="formBasicLastName">
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control name="lastName" type="text" required defaultValue="Doe" />
+                            <Form.Control name="lastName" type="text" required defaultValue={user.lastName} />
                         </Form.Group>
                         {/* User Email */}
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control name="email" type="email" required defaultValue="john@doe.com" />
+                            <Form.Control name="email" type="email" required defaultValue={user.email} />
                         </Form.Group>
 
                         {/* Is User an Admin? */}
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check name="isAdmin" type="checkbox" label="is admin" />
+                            <Form.Check name="isAdmin" type="checkbox" label="is admin" checked={isAdmin} />
                         </Form.Group>
 
                         <Button variant="primary" type="submit">Update User</Button>
