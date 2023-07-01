@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
 const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
 
     // React Local State Variable:
     const [validated, setValidated] = useState(false);
     const [user, setUser] = useState([]); //Initially list of user to edit is an empty array
-    const [isAdmin, setIsAdmin] = useState(false); //Initially User is not an admin and see if admin checkbox is checked.
+    const [isAdminState, setIsAdminState] = useState(false); //Initially User is not an admin and see if admin checkbox is checked.
+    const [updateUserResponseState, setUpdateUserResponseState] = useState({ message: "", error: "" }); //Initally the message and error is empty string
 
     const { id } = useParams(); //used to read id parameter in the url
-
+    const navigate = useNavigate();
 
     // Function: form validation when submit button is clicked
     const handleSubmit = (event) => {
@@ -23,7 +26,15 @@ const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
         const email = form.email.value;
         const isAdmin = form.isAdmin.checked;
         if (event.currentTarget.checkValidity() === true) {
-            updateUserApiRequest(name, lastName, email, isAdmin);
+            updateUserApiRequest(id, name, lastName, email, isAdmin)
+                .then(data => {
+                    if (data === "User profile updated") {
+                        navigate("/admin/users");
+                    }
+                })
+                .catch(er => {
+                    setUpdateUserResponseState({ error: er.response.data.message ? er.response.data.message : er.response.data })
+                })
         }
         setValidated(true);
     };
@@ -34,7 +45,7 @@ const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
         fetchUser(id)
             .then(data => {
                 setUser(data);
-                setIsAdmin(data.isAdmin);
+                setIsAdminState(data.isAdmin);
             })
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data));
     }, [id])
@@ -65,10 +76,11 @@ const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
 
                         {/* Is User an Admin? */}
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check name="isAdmin" type="checkbox" label="is admin" checked={isAdmin} />
+                            <Form.Check name="isAdmin" type="checkbox" label="is admin" checked={isAdminState} onChange={(e) => setIsAdminState(e.target.checked)} />
                         </Form.Group>
 
                         <Button variant="primary" type="submit">Update User</Button>
+                        {updateUserResponseState.error}
                     </Form>
                 </Col>
                 {/* Go Back to Admin Users Page */}
