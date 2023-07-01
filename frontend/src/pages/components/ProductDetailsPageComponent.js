@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";//Used to read id from url parameter 
 
-const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch }) => {
+const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getProductDetails }) => {
 
     const { id } = useParams();
 
