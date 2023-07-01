@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const EditUserPageComponent = () => {
+const EditUserPageComponent = ({ updateUserApiRequest }) => {
     const [validated, setValidated] = useState(false);
     // Function: validation function when submit button is clicked
     const handleSubmit = (event) => {
@@ -39,7 +39,7 @@ const EditUserPageComponent = () => {
 
                         {/* Is User an Admin? */}
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check name="isAdmin" type="checkbox" label="is admin" />
+                            <Form.Check name="isAdmin" type="checkbox" label="is admin" />
                         </Form.Group>
 
                         <Button variant="primary" type="submit">Update User</Button>
