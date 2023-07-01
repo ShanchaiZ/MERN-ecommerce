@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const EditUserPageComponent = ({ updateUserApiRequest }) => {
+const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
 
     const [validated, setValidated] = useState(false);
 
