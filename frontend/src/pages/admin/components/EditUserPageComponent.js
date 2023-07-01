@@ -1,10 +1,17 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
 
+    // React Local State Variable:
     const [validated, setValidated] = useState(false);
+    const [user, setUser] = useState([]); //Initially list of user to edit is an empty array
+    const [isAdmin, setIsAdmin] = useState(false); //Initially User is not an admin and see if admin checkbox is checked.
+
+    const { id } = useParams(); //used to read id parameter in the url
+
 
     // Function: form validation when submit button is clicked
     const handleSubmit = (event) => {
@@ -20,6 +27,17 @@ const EditUserPageComponent = ({ updateUserApiRequest, fetchUser }) => {
         }
         setValidated(true);
     };
+
+
+    //React UseEffect after browser load:
+    useEffect(() => {
+        fetchUser(id)
+            .then(data => {
+                setUser(data);
+                setIsAdmin(data.isAdmin);
+            })
+    }, [id])
+
 
     return (
         <Container className="justified-content-md-content mt-5">
