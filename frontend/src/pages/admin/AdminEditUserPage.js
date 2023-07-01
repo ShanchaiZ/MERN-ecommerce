@@ -9,9 +9,11 @@ const fetchUser = async (userId) => {
     return data;
 }
 
-// Update User info:
-const updateUserApiRequest = (name, lastName, email, isAdmin) => {
-    console.log(name, lastName, email, isAdmin);
+//Put method: Admin Update User Data for Edit
+const updateUserApiRequest = async (userId, name, lastName, email, isAdmin) => {
+    const { data } = await axios.put(`/api/users/${userId}`, { name, lastName, email, isAdmin });
+    return data;
+
 }
 
 const AdminEditUserPage = () => {
