@@ -123,12 +123,12 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                 <Col className="mt-5">
                                     <h5>Reviews</h5>
                                     <ListGroup variant="flush">
-                                        {Array.from({ length: 10 }).map((item, idx) => (
+                                        {product.reviews && product.reviews.map((review, idx) => (
                                             <ListGroup.Item key={idx}>
-                                                John Doe <br />
-                                                <Rating readonly size={20} initialValue={4} /> <br />
-                                                Date posted: March 29, 2023 <br />
-                                                Product Review: This Product is the best on the market. I use it all the time!
+                                                {review.user.name} <br />
+                                                <Rating readonly size={20} initialValue={review.rating} /> <br />
+                                                Date posted: {review.createdAt.substring(0, 10)} <br />
+                                                Product Review: {review.comment}
                                             </ListGroup.Item>
                                         ))}
                                     </ListGroup>
