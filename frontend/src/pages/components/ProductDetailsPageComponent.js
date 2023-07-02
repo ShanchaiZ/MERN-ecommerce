@@ -94,14 +94,14 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                 <Col md={8}>
                                     {/* Product name, Price, Description, and Rating Here */}
                                     <ListGroup variant="flush">
-                                        <ListGroup.Item><h1>Product Name</h1></ListGroup.Item>
+                                        <ListGroup.Item><h1>{product.name}</h1></ListGroup.Item>
                                         <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
                                         <ListGroup.Item>Morbi leo risus
-                                            <Rating readonly size={20} initialValue={4} /> (5)
+                                            <Rating readonly size={20} initialValue={product.rating} /> ({product.reviewsNumber})
                                         </ListGroup.Item>
-                                        <ListGroup.Item>Price <span className="fw-bold">$123</span></ListGroup.Item>
+                                        <ListGroup.Item>Price <span className="fw-bold">${product.price}</span></ListGroup.Item>
                                         <ListGroup.Item> Product Description:
-                                            Lorem ipsum dolor sit amet. Hic neque repudiandae rem galisum eaque et quaerat fugiat et eius debitis quo fuga voluptates. Et sapiente tenetur hic consequatur autem sed consequatur galisum est laudantium nihil et quia error qui maxime tenetur in quisquam dolores.
+                                            {product.description}
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
