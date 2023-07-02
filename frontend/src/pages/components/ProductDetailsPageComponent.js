@@ -102,10 +102,11 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                             <ListGroup.Item>Price: <span className="fw-bold">${product.price}</span> </ListGroup.Item>
                                             <ListGroup.Item> Quantity:
                                                 <Form.Select value={quantity} onChange={e => setQuantity(e.target.value)} size="lg" aria-label="Default select example">
-                                                    <option>Choose:</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
+                                                    {[...Array(product.count).keys()].map(x => (
+                                                        <option key={x + 1} value={x + 1}>
+                                                            {x + 1}
+                                                        </option>
+                                                    ))}
                                                 </Form.Select>
                                             </ListGroup.Item>
                                         </ListGroup.Item>
