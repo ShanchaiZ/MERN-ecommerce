@@ -68,25 +68,15 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                     <>
                         <Col style={{ zIndex: 1 }} md={4}>
                             {/* Product Images Here */}
-                            <div id="first">
-                                <Image crossOrigin="anonymous" fluid src="/images/category/tablets-category.jpg" />
-                            </div>
-                            <br />
+                            {product.images ? product.images.map((image, id) => (
+                                <div key={id}>
+                                    <div key={id} id="first">
+                                        <Image crossOrigin="anonymous" fluid src="/images/category/tablets-category.jpg" />
+                                        <br />
+                                    </div>
+                                </div>
+                            )) : null}
 
-                            <div id="second">
-                                <Image fluid src="/images/category/games-category.jpg" />
-                            </div>
-                            <br />
-
-                            <div id="third">
-                                <Image fluid src="/images/category/books-category.jpg" />
-                            </div>
-                            <br />
-
-                            <div id="fourth">
-                                <Image fluid src="/images/category/computers-category.jpg" />
-                            </div>
-                            <br />
                         </Col>
 
                         <Col md={8}>
@@ -96,12 +86,11 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                     <ListGroup variant="flush">
                                         <ListGroup.Item><h1>{product.name}</h1></ListGroup.Item>
                                         <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                        <ListGroup.Item>Morbi leo risus
+                                        <ListGroup.Item>Rating:
                                             <Rating readonly size={20} initialValue={product.rating} /> ({product.reviewsNumber})
                                         </ListGroup.Item>
                                         <ListGroup.Item>Price <span className="fw-bold">${product.price}</span></ListGroup.Item>
-                                        <ListGroup.Item> Product Description:
-                                            {product.description}
+                                        <ListGroup.Item> Product Description: {product.description}
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
