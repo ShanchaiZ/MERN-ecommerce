@@ -110,8 +110,8 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                     <ListGroup>
                                         {/* Product Quantity */}
                                         <ListGroup.Item>
-                                            <ListGroup.Item>Status: in stock</ListGroup.Item>
-                                            <ListGroup.Item>Price: <span className="fw-bold">$123</span> </ListGroup.Item>
+                                            <ListGroup.Item>Status: {product.count > 0 ? "in stock" : "out of stock"} </ListGroup.Item>
+                                            <ListGroup.Item>Price: <span className="fw-bold">${product.price}</span> </ListGroup.Item>
                                             <ListGroup.Item> Quantity:
                                                 <Form.Select value={quantity} onChange={e => setQuantity(e.target.value)} size="lg" aria-label="Default select example">
                                                     <option>Choose:</option>
