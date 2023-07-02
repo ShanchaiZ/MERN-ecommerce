@@ -16,6 +16,9 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
     // Initial State of React:
     const [quantity, setQuantity] = useState(1); //Initally quantity of product to add to cart is one.
     const [showCartMessage, setShowCartmessage] = useState(false); //Initially dont show the Cart messages.
+    const [product, setProduct] = useState([]); //Initially an array of empty products
+    const [loading, setLoading] = useState(true); //Initially loading message will display and be true
+    const [error, setError] = useState(false); //Initially error message will be not display = false.
 
     const addToCartHandler = () => {
         reduxDispatch(addToCartReduxAction(id, quantity));
@@ -39,6 +42,17 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
         new ImageZoom(document.getElementById("third"), options);
         new ImageZoom(document.getElementById("fourth"), options);
     })
+
+    // Display Product Details:
+    useEffect(() => {
+        getProductDetails(id)
+            .then(data => {
+                setProduct(data)
+                setLoading(false);
+            })
+            .catch((er) => setError(er.response.data.message ? er.response.data.message : er.response.data))
+    }, [])
+
     return (
         <Container>
             {<AddedToCartMessageComponent
