@@ -70,10 +70,10 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                             {/* Product Images Here */}
                             {product.images ? product.images.map((image, id) => (
                                 <div key={id}>
-                                    <div key={id} id="first">
-                                        <Image crossOrigin="anonymous" fluid src="/images/category/tablets-category.jpg" />
-                                        <br />
+                                    <div key={id} id={`imageId${id + 1}`}>
+                                        <Image crossOrigin="anonymous" fluid src={`${image.path ?? null}`} />
                                     </div>
+                                    <br />
                                 </div>
                             )) : null}
 
