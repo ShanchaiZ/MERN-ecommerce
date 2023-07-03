@@ -135,8 +135,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                 </Col>
                             </Row>
                             <hr />
-                            Submit Review Form
-                            <Alert variant="danger">Login to Write a Review</Alert>
+                            {!userInfo.name && <Alert variant="danger">Login to Write a Review</Alert>}
 
                             {/* Review Form */}
                             <Form>
