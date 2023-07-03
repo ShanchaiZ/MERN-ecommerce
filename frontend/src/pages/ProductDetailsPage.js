@@ -15,12 +15,19 @@ const getProductDetails = async (id) => {
     return data;
 }
 
+
+// Post method: Write a review for a particular product
+const writeReviewApiRequest = async (productId, formInput) =>{
+    const {data} = await axios.post(`/api/users/review/${productId}`, {...formInput});
+    return data;
+}
+
 const ProductDetailsPage = () => {
     const dispatch = useDispatch();
 
     const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
-    return <ProductDetailsPageComponent reduxDispatch={dispatch} addToCartReduxAction={addToCart} getProductDetails={getProductDetails} userInfo={userInfo} />
+    return <ProductDetailsPageComponent reduxDispatch={dispatch} addToCartReduxAction={addToCart} getProductDetails={getProductDetails} userInfo={userInfo} writeReviewApiRequest={writeReviewApiRequest} />
 };
 
 export default ProductDetailsPage;

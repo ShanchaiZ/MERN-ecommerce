@@ -64,7 +64,6 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
         if (e.currentTarget.checkValidity() === true) {
             console.log(product._id, formInputs);
         }
-
     }
 
     return (
