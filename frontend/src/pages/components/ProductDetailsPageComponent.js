@@ -5,7 +5,7 @@ import AddedToCartMessageComponent from "../../components/AddedToCartMessageComp
 
 // Image Display when Mouse Hover Effect:
 import ImageZoom from "js-image-zoom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useParams } from "react-router-dom";//Used to read id from url parameter 
 
@@ -20,6 +20,8 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
     const [loading, setLoading] = useState(true); //Initially loading message will display and be true
     const [error, setError] = useState(false); //Initially error message will be not display = false.
     const [productReviewed, setProductReviewed] = useState(false);
+
+    const messagesEndRef = useRef(null);
 
     const addToCartHandler = () => {
         reduxDispatch(addToCartReduxAction(id, quantity));
@@ -71,6 +73,16 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                 .catch((er) => setProductReviewed(er.response.data.message ? er.response.data.message : er.response.data))
         }
     }
+
+    // Function: Scroll down to the Last comment after writing review
+    useEffect(() => {
+        if (productReviewed) {
+            setTimeout(() => {
+                messagesEndRef.current.scrollIntoView({ behaviour: "smooth" });
+            }, 200)
+        }
+    }, [productReviewed])
+
 
     return (
         <Container>
@@ -151,6 +163,8 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                                 Product Review: {review.comment}
                                             </ListGroup.Item>
                                         ))}
+                                        {/* Scroll All the way down to last comment */}
+                                        <div ref={messagesEndRef} />
                                     </ListGroup>
                                 </Col>
                             </Row>
