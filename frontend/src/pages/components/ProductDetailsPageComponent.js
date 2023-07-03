@@ -142,19 +142,19 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                 {/* Email Addresss */}
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>Write a Review Here</Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
+                                    <Form.Control name="comment" required as="textarea" disabled={!userInfo.name} rows={3} />
                                 </Form.Group>
                                 {/* Submission */}
                                 <Form.Group>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Your Rating:</option>
+                                    <Form.Select name="rating" required disabled={!userInfo.name} aria-label="Default select example">
+                                        <option value="">Your Rating:</option>
                                         <option value="5">5 (Excellent)</option>
                                         <option value="4">4 (Very Good)</option>
                                         <option value="3">3 (Average)</option>
                                         <option value="2">2 (Bad)</option>
                                         <option value="1">1 (Terrible)</option>
                                     </Form.Select>
-                                    <Button className="mb-3 mt-3" variant="primary">Submit Review</Button>
+                                    <Button disabled={!userInfo.name} type="submit" className="mb-3 mt-3" variant="primary">Submit Review</Button>
                                 </Form.Group>
                             </Form>
                         </Col>
