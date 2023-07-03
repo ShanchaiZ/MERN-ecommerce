@@ -19,6 +19,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
     const [product, setProduct] = useState([]); //Initially an array of empty products
     const [loading, setLoading] = useState(true); //Initially loading message will display and be true
     const [error, setError] = useState(false); //Initially error message will be not display = false.
+    const [productReviewed, setProductReviewed] = useState(false);
 
     const addToCartHandler = () => {
         reduxDispatch(addToCartReduxAction(id, quantity));
@@ -51,6 +52,20 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
             })
             .catch((er) => setError(er.response.data.message ? er.response.data.message : er.response.data))
     }, [])
+
+    // Function: Review Handler when Submitted
+    const sendReviewHandler = (e) => {
+        e.preventDefault();
+        const form = e.currentTarget.elements;
+        const formInputs = {
+            comment: form.comment.value,
+            rating: form.rating.value,
+        }
+        if (e.currentTarget.checkValidity() === true) {
+            console.log(product._id, formInputs);
+        }
+
+    }
 
     return (
         <Container>
@@ -138,7 +153,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                             {!userInfo.name && <Alert variant="danger">Login to Write a Review</Alert>}
 
                             {/* Review Form */}
-                            <Form>
+                            <Form onSubmit={sendReviewHandler}>
                                 {/* Email Addresss */}
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>Write a Review Here</Form.Label>
@@ -155,6 +170,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                         <option value="1">1 (Terrible)</option>
                                     </Form.Select>
                                     <Button disabled={!userInfo.name} type="submit" className="mb-3 mt-3" variant="primary">Submit Review</Button>
+                                    {productReviewed}
                                 </Form.Group>
                             </Form>
                         </Col>
