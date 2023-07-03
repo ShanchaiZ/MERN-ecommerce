@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";//Used to read id from url parameter 
 
-const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getProductDetails, userInfo }) => {
+const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getProductDetails, userInfo, writeReviewApiRequest }) => {
 
     const { id } = useParams();
 
@@ -51,7 +51,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                 setLoading(false);
             })
             .catch((er) => setError(er.response.data.message ? er.response.data.message : er.response.data))
-    }, [])
+    }, [id, productReviewed])
 
     // Function: Review Handler when Submitted
     const sendReviewHandler = (e) => {
@@ -62,7 +62,13 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
             rating: form.rating.value,
         }
         if (e.currentTarget.checkValidity() === true) {
-            console.log(product._id, formInputs);
+            writeReviewApiRequest(product._id, formInputs)
+                .then(data => {
+                    if (data === "review created") {
+                        setProductReviewed("You successfully reviewed the product!")
+                    }
+                })
+                .catch((er) => setProductReviewed(er.response.data.message ? er.response.data.message : er.response.data))
         }
     }
 

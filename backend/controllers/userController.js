@@ -229,7 +229,7 @@ const writeReview = async (req, res, next) => {
         await session.commitTransaction(); // ENSURES BOTH database operations are performed
         session.endSession(); //Session and database transaction completed
 
-        return res.send("Review created!");
+        return res.send("review created!");
     } catch (error) {
         await session.abortTransaction(); //Abort database operations if any error to prevent desync database operations
         next(error);
