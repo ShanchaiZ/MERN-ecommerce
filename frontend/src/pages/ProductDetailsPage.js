@@ -3,7 +3,7 @@ import ProductDetailsPageComponent from "./components/ProductDetailsPageComponen
 // import { useEffect } from "react";
 
 // Redux:
-import { useDispatch } from "react-redux"; // Calling Actions done by Dispatch
+import { useDispatch, useSelector } from "react-redux"; // Calling Actions done by Dispatch
 import { addToCart } from "../redux/actions/cartActions"; //Calling the Action of adding to cart 
 
 import axios from "axios";
@@ -18,8 +18,9 @@ const getProductDetails = async (id) => {
 const ProductDetailsPage = () => {
     const dispatch = useDispatch();
 
+    const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
-    return <ProductDetailsPageComponent reduxDispatch={dispatch} addToCartReduxAction={addToCart} getProductDetails={getProductDetails} />
+    return <ProductDetailsPageComponent reduxDispatch={dispatch} addToCartReduxAction={addToCart} getProductDetails={getProductDetails} userInfo={userInfo} />
 };
 
 export default ProductDetailsPage;
