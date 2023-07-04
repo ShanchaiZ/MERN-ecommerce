@@ -13,7 +13,7 @@ const categories = [
         name: "Tablets",
         description:
             "Tablets - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-        image: "/images/tablets-category.jpg",
+        image: "/images/category/tablets-category.jpg",
         attrs: [
             { key: "RAM", value: ["1 TB", "2 TB", "4 TB"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
@@ -23,7 +23,7 @@ const categories = [
         name: "Videos",
         description:
             "Videos - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-        image: "/images/videos-category.jpg",
+        image: "/images/category/videos-category.jpg",
         attrs: [
             { key: "RAM", value: ["1 TB", "2 TB", "4 TB"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
@@ -33,7 +33,7 @@ const categories = [
         name: "Books",
         description:
             "Books - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-        image: "/images/books-category.jpg",
+        image: "/images/category/books-category.jpg",
         attrs: [
             { key: "genre", value: ["movie", "comedy", "thriller"] }
         ],
