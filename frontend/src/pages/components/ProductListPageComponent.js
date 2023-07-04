@@ -18,12 +18,20 @@ const ProductListPageComponent = ({ getProducts }) => {
 
     // Initial State of the data fields using React Hooks:
     const [products, setProducts] = useState([]); //Initially there will be no products rendered (" the empty array")
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
 
     useEffect(() => {
         getProducts()
-            .then(products => setProducts(products.products))
-            .catch((er) => console.log(er));
+            .then(products => {
+                setProducts(products.products)
+                setLoading(false);
+            })
+            .catch((er) => {
+                console.log(er)
+                setError(true);
+            });
     }, [])
 
     return (
@@ -46,18 +54,25 @@ const ProductListPageComponent = ({ getProducts }) => {
                 </Col>
                 {/* Main Product Listing */}
                 <Col md={9}>
-                    {products.map((product) => (
-                        <ProductForListComponent
-                            key={product._id}
-                            images={product.images}
-                            name={product.name}
-                            description={product.description}
-                            price={product.price}
-                            rating={product.rating}
-                            reviewsNumber={product.reviewsNumber}
-                            productId={product._id}
-                        />
-                    ))};
+                    {loading ? (
+                        <h1>Loading products ...</h1>
+                    ) : error ? (
+                        <h1>Error while loading products. Please Try Again Later!</h1>
+                    ) : (
+                        products.map((product) => (
+                            <ProductForListComponent
+                                key={product._id}
+                                images={product.images}
+                                name={product.name}
+                                description={product.description}
+                                price={product.price}
+                                rating={product.rating}
+                                reviewsNumber={product.reviewsNumber}
+                                productId={product._id}
+                            />
+                        ))
+                    )}
+                    
                     <PaginationComponent />
                 </Col>
             </Row>
