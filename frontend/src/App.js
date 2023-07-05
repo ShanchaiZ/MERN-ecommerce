@@ -46,6 +46,7 @@ function App() {
           {/* Public Routes: */}
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/product-list" element={<ProductListPage />} />
           <Route path="/product-list/category/:categoryName" element={<ProductListPage />} />
           <Route path="/product-details/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />

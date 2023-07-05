@@ -25,9 +25,8 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [attrsFromFilter, setAttrsFromFilter] = useState([]); //Initially attributes on left panel are an empty array
     const [showResetFiltersButton, setShowResetFiltersButton] = useState(false); //Initially set to dont show reset filter button
 
-
-
-    console.log(attrsFromFilter); // to see the output of clicks and unclicks on attributes in left panel
+    const [filters, setFilters] = useState({});
+    console.log(filters);
 
     const { categoryName } = useParams() || "";
 
@@ -62,11 +61,16 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     // Function: display the reset filter button:
     const handleFilters = () => {
         setShowResetFiltersButton(true);
+        setFilters({
+            attrs: attrsFromFilter
+        })
     }
 
     // Function: dont display reset filter button:
     const resetFilters = () => {
         setShowResetFiltersButton(false);
+        setFilters({});
+        window.location.href = "/product-list";
     }
 
     return (
