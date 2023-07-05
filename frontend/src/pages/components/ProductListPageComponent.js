@@ -21,12 +21,12 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [products, setProducts] = useState([]); //Initially there will be no products rendered (" the empty array")
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [attrsFilter, setAttrsFilter] = useState([]); //Initially attributes are an empty array
-    const [attrsFromFilter, setAttrsFromFilter] = useState([]); //Initially attributes on left panel are an empty array
+    const [attrsFilter, setAttrsFilter] = useState([]); //Initially attributes are an empty array. used to Collect Category Attributes from database and show on webpage.
+    const [attrsFromFilter, setAttrsFromFilter] = useState([]); //Initially attributes on left panel are an empty array.  Used to collect user Filters for category attributes.
     const [showResetFiltersButton, setShowResetFiltersButton] = useState(false); //Initially set to dont show reset filter button
 
-    const [filters, setFilters] = useState({});
-    console.log(filters);
+    const [filters, setFilters] = useState({}); //Initially Filters are set to an empty array. used to Collect ALL filters
+    const [price, setPrice] = useState(500); // Initally the Price is set to 500
 
     const { categoryName } = useParams() || "";
 
@@ -56,12 +56,14 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                 console.log(er)
                 setError(true);
             });
-    }, [])
+        console.log(filters);
+    }, [filters])
 
     // Function: display the reset filter button:
     const handleFilters = () => {
         setShowResetFiltersButton(true);
         setFilters({
+            price: price,
             attrs: attrsFromFilter
         })
     }
@@ -80,7 +82,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                     {/* Product Filter Query Features */}
                     <ListGroup variant="flush">
                         <ListGroup.Item className="mb-3 mt-3">{<SortOptionsComponent />}</ListGroup.Item>
-                        <ListGroup.Item>Filter: <br />{<PriceFilterComponent />}</ListGroup.Item>
+                        <ListGroup.Item>Filter: <br />{<PriceFilterComponent price={price} setPrice={setPrice} />}</ListGroup.Item>
                         <ListGroup.Item>{<RatingFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<CategoryFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} setAttrsFromFilter={setAttrsFromFilter} />}</ListGroup.Item>
