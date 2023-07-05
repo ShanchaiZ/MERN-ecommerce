@@ -22,6 +22,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [attrsFilter, setAttrsFilter] = useState([]); //Initially attributes are an empty array
+    const [attrsFromFilter, setAttrsFromFilter] = useState([]); //Initially attributes on left panel are an empty array
 
     const { categoryName } = useParams() || "";
 
@@ -63,7 +64,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                         <ListGroup.Item>Filter: <br />{<PriceFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<RatingFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<CategoryFilterComponent />}</ListGroup.Item>
-                        <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} />}</ListGroup.Item>
+                        <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} setAttrsFromFilter={setAttrsFromFilter} />}</ListGroup.Item>
                         {/* Filter Buttons */}
                         <ListGroup.Item>
                             <Button variant="primary">Filter</Button> {" "}
