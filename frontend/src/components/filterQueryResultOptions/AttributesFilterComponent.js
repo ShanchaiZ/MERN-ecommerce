@@ -1,6 +1,8 @@
 import { Form } from "react-bootstrap";
 
-const AttributesFilterComponent = () => {
+const AttributesFilterComponent = ({ attrsFilter }) => {
+    console.log(attrsFilter);
+    
     return (
         <>
             {[{ color: ["red", "blue", "green"] }, { ram: ["1 TB", "2 TB", "3 TB"] }].map((item, idx) => (

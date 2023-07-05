@@ -13,15 +13,34 @@ import RatingFilterComponent from "../../components/filterQueryResultOptions/Rat
 
 
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const ProductListPageComponent = ({ getProducts }) => {
+const ProductListPageComponent = ({ getProducts, categories }) => {
 
     // Initial State of the data fields using React Hooks:
     const [products, setProducts] = useState([]); //Initially there will be no products rendered (" the empty array")
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [attrsFilter, setAttrsFilter] = useState([]); //Initially attributes are an empty array
+
+    const { categoryName } = useParams() || "";
+
+    // Used to set attributes from category in db:
+    useEffect(() => {
+        if (categoryName) {
+            let categoryAllData = categories.find((item) => item.name === categoryName.replaceAll(",", "/"));
+            if (categoryAllData) {
+                let mainCategory = categoryAllData.name.split("/")[0];
+                let index = categories.findIndex((item) => item.name === mainCategory);
+                setAttrsFilter(categories[index].attrs);
+            }
+        } else {
+            setAttrsFilter([]);
+        }
+    }, [categoryName, categories])
 
 
+    // Render Products from database:
     useEffect(() => {
         getProducts()
             .then(products => {
@@ -44,7 +63,7 @@ const ProductListPageComponent = ({ getProducts }) => {
                         <ListGroup.Item>Filter: <br />{<PriceFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<RatingFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<CategoryFilterComponent />}</ListGroup.Item>
-                        <ListGroup.Item>{<AttributesFilterComponent />}</ListGroup.Item>
+                        <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} />}</ListGroup.Item>
                         {/* Filter Buttons */}
                         <ListGroup.Item>
                             <Button variant="primary">Filter</Button> {" "}
@@ -72,7 +91,7 @@ const ProductListPageComponent = ({ getProducts }) => {
                             />
                         ))
                     )}
-                    
+
                     <PaginationComponent />
                 </Col>
             </Row>
