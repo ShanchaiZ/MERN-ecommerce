@@ -24,6 +24,8 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [attrsFilter, setAttrsFilter] = useState([]); //Initially attributes are an empty array
     const [attrsFromFilter, setAttrsFromFilter] = useState([]); //Initially attributes on left panel are an empty array
 
+    console.log(attrsFromFilter); // to see the output of clicks and unclicks on attributes in left panel
+
     const { categoryName } = useParams() || "";
 
     // Used to set attributes from category in db:
