@@ -23,6 +23,9 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [error, setError] = useState(false);
     const [attrsFilter, setAttrsFilter] = useState([]); //Initially attributes are an empty array
     const [attrsFromFilter, setAttrsFromFilter] = useState([]); //Initially attributes on left panel are an empty array
+    const [showResetFiltersButton, setShowResetFiltersButton] = useState(false); //Initially set to dont show reset filter button
+
+
 
     console.log(attrsFromFilter); // to see the output of clicks and unclicks on attributes in left panel
 
@@ -56,6 +59,16 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
             });
     }, [])
 
+    // Function: display the reset filter button:
+    const handleFilters = () => {
+        setShowResetFiltersButton(true);
+    }
+
+    // Function: dont display reset filter button:
+    const resetFilters = () => {
+        setShowResetFiltersButton(false);
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -69,8 +82,10 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                         <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} setAttrsFromFilter={setAttrsFromFilter} />}</ListGroup.Item>
                         {/* Filter Buttons */}
                         <ListGroup.Item>
-                            <Button variant="primary">Filter</Button> {" "}
-                            <Button variant="danger">Reset Filter</Button>
+                            <Button variant="primary" onClick={handleFilters}>Filter</Button> {" "}
+                            {showResetFiltersButton && (
+                                <Button variant="danger" onClick={resetFilters}>Reset Filter</Button>
+                            )}
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
