@@ -10,6 +10,9 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
         setCategoriesFromFilter(items => {
             return { ...items, [category.name]: e.target.checked };
         })
+
+        var selectedMainCategory = category.name.split("/")[0];
+        console.log(selectedMainCategory)
     }
 
     return (
