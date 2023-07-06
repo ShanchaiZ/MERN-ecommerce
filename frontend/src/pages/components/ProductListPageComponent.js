@@ -27,6 +27,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
 
     const [filters, setFilters] = useState({}); //Initially Filters are set to an empty array. used to Collect ALL filters
     const [price, setPrice] = useState(500); // Initally the Price is set to 500
+    const [ratingsFromFilter, setRatingsFromFilter] = useState({}); //Initially ratings are empty object
 
     const { categoryName } = useParams() || "";
 
@@ -64,6 +65,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
         setShowResetFiltersButton(true);
         setFilters({
             price: price,
+            rating: ratingsFromFilter,
             attrs: attrsFromFilter
         })
     }
@@ -83,7 +85,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                     <ListGroup variant="flush">
                         <ListGroup.Item className="mb-3 mt-3">{<SortOptionsComponent />}</ListGroup.Item>
                         <ListGroup.Item>Filter: <br />{<PriceFilterComponent price={price} setPrice={setPrice} />}</ListGroup.Item>
-                        <ListGroup.Item>{<RatingFilterComponent />}</ListGroup.Item>
+                        <ListGroup.Item>{<RatingFilterComponent setRatingsFromFilter={setRatingsFromFilter} />}</ListGroup.Item>
                         <ListGroup.Item>{<CategoryFilterComponent />}</ListGroup.Item>
                         <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} setAttrsFromFilter={setAttrsFromFilter} />}</ListGroup.Item>
                         {/* Filter Buttons */}

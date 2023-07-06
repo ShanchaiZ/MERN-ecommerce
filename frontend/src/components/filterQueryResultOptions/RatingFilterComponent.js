@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Form } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 
-const RatingFilterComponent = () => {
+const RatingFilterComponent = ({ setRatingsFromFilter }) => {
     return (
         <>
             <span className="fw-bold">Rating</span>
