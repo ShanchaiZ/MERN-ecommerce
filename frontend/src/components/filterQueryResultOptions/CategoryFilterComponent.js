@@ -27,7 +27,7 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
         }, [])
         // If a Category attribute is checked then disable the other categories:
         if (e.target.checked) {
-            setSelectedCategories((old) => [...old, "cat"])
+            setSelectedCategories((old) => [...old, "cat"]);
             myRefs.current.map((_, idx) => {
                 if (!indexesOfMainCategory.includes(idx)) myRefs.current[idx].disabled = true;
                 return "";
@@ -41,6 +41,15 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
                     window.location.href = "/product-list";
                 }
                 return a;
+            })
+            // If Main Category is selected, then disable others but allow selection of subcategories:
+            myRefs.current.map((_, idx2) => {
+                if (allCategories.length === 1) {
+                    if (idx2 !== idx) myRefs.current[idx2].disabled = false;
+                } else {
+                    if (selectedCategories.length === 1) myRefs.current[idx2].disabled = false;
+                }
+                return "";
             })
         }
     };
