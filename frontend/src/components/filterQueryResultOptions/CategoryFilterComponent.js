@@ -1,10 +1,11 @@
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
 
     const { categories } = useSelector((state) => state.getCategories);
+    const [selectedCategories, setSelectedCategories] = useState([]); //Inital state is empty array of Selected Categories
     const myRefs = useRef([]);
 
     // Function: checked category box will return the checked value
@@ -26,12 +27,21 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
         }, [])
         // If a Category attribute is checked then disable the other categories:
         if (e.target.checked) {
+            setSelectedCategories((old) => [...old, "cat"])
             myRefs.current.map((_, idx) => {
                 if (!indexesOfMainCategory.includes(idx)) myRefs.current[idx].disabled = true;
                 return "";
             })
         } else {
-            
+            //Otherwise: there is no products to be filtered and all products are found on /product-list page:
+            setSelectedCategories((old) => {
+                var a = [...old];
+                a.pop();
+                if (a.length === 0) {
+                    window.location.href = "/product-list";
+                }
+                return a;
+            })
         }
     };
 
