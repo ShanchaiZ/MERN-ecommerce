@@ -24,8 +24,16 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
             }
             return acc;
         }, [])
-        console.log(indexesOfMainCategory);
-    }
+        // If a Category attribute is checked then disable the other categories:
+        if (e.target.checked) {
+            myRefs.current.map((_, idx) => {
+                if (!indexesOfMainCategory.includes(idx)) myRefs.current[idx].disabled = true;
+                return "";
+            })
+        } else {
+            
+        }
+    };
 
     return (
         <>
