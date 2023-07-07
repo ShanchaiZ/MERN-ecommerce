@@ -47,6 +47,27 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     }, [categoryName, categories])
 
 
+    // Fetching Attributes associated with Main Categories and displaying it on page:
+    useEffect(() => {
+        if (Object.entries(categoriesFromFilter).length > 0) {
+            setAttrsFilter([]);
+            var cat = [];
+            var count;
+            Object.entries(categoriesFromFilter).forEach(([category, checked]) => {
+                if (checked) {
+                    var name = category.split("/")[0];
+                    cat.push(name);
+                    count = cat.filter((x) => x === name).length;
+                    if (count === 1) {
+                        var index = categories.findIndex((item) => item.name === name);
+                        setAttrsFilter((attrs) => [...attrs, ...categories[index].attrs]);
+                    }
+                }
+            })
+        }
+    }, [categoriesFromFilter, categories])
+
+
     // Render Products from database:
     useEffect(() => {
         getProducts()
