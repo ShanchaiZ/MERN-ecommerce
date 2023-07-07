@@ -13,7 +13,7 @@ import RatingFilterComponent from "../../components/filterQueryResultOptions/Rat
 
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 const ProductListPageComponent = ({ getProducts, categories }) => {
 
@@ -31,6 +31,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [categoriesFromFilter, setCategoriesFromFilter] = useState({}); //initially category attributes are empty object
 
     const { categoryName } = useParams() || "";
+    const location = useLocation();
 
     // Used to set attributes from category in db:
     useEffect(() => {
@@ -109,7 +110,9 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                         <ListGroup.Item className="mb-3 mt-3">{<SortOptionsComponent />}</ListGroup.Item>
                         <ListGroup.Item>Filter: <br />{<PriceFilterComponent price={price} setPrice={setPrice} />}</ListGroup.Item>
                         <ListGroup.Item>{<RatingFilterComponent setRatingsFromFilter={setRatingsFromFilter} />}</ListGroup.Item>
-                        <ListGroup.Item>{<CategoryFilterComponent setCategoriesFromFilter={setCategoriesFromFilter} />}</ListGroup.Item>
+                        {!location.pathname.match(/\/category/) && (
+                            <ListGroup.Item>{<CategoryFilterComponent setCategoriesFromFilter={setCategoriesFromFilter} />}</ListGroup.Item>
+                        )}
                         <ListGroup.Item>{<AttributesFilterComponent attrsFilter={attrsFilter} setAttrsFromFilter={setAttrsFromFilter} />}</ListGroup.Item>
                         {/* Filter Buttons */}
                         <ListGroup.Item>
