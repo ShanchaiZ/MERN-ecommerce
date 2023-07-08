@@ -29,8 +29,12 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const [price, setPrice] = useState(500); // Initally the Price is set to 500
     const [ratingsFromFilter, setRatingsFromFilter] = useState({}); //Initially ratings are empty object
     const [categoriesFromFilter, setCategoriesFromFilter] = useState({}); //initially category attributes are empty object
+    const [sortOption, setSortOption] = useState("");
 
     const { categoryName } = useParams() || "";
+    const { pageNumParam } = useParams() || "";
+    const { searchQuery } = useParams() || "";
+
     const location = useLocation();
 
     // Used to set attributes from category in db:
@@ -71,7 +75,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
 
     // Render Products from database:
     useEffect(() => {
-        getProducts()
+        getProducts(categoryName, pageNumParam, searchQuery, filters, sortOption)
             .then(products => {
                 setProducts(products.products)
                 setLoading(false);
@@ -80,8 +84,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                 console.log(er)
                 setError(true);
             });
-        console.log(filters);
-    }, [filters])
+    }, [categoryName, pageNumParam, searchQuery, filters, sortOption])
 
     // Function: display the reset filter button:
     const handleFilters = () => {
@@ -107,7 +110,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                 <Col md={3}>
                     {/* Product Filter Query Features */}
                     <ListGroup variant="flush">
-                        <ListGroup.Item className="mb-3 mt-3">{<SortOptionsComponent />}</ListGroup.Item>
+                        <ListGroup.Item className="mb-3 mt-3">{<SortOptionsComponent setSortOption={setSortOption} />}</ListGroup.Item>
                         <ListGroup.Item>Filter: <br />{<PriceFilterComponent price={price} setPrice={setPrice} />}</ListGroup.Item>
                         <ListGroup.Item>{<RatingFilterComponent setRatingsFromFilter={setRatingsFromFilter} />}</ListGroup.Item>
                         {!location.pathname.match(/\/category/) && (

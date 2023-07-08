@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 
 // Get List of ALL Products:
-const getProducts = async () => {
+const getProducts = async (categoryName = "", pageNumParam = null, searchQuery = "", filters = {}, sortOption = "") => {
     const { data } = await axios.get("/api/products");
     return data;
 }
