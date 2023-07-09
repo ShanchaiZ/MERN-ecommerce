@@ -76,7 +76,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     }, [categoriesFromFilter, categories])
 
 
-    // Render List of Products from database:
+    // Render List of Products from database/ Product Listing used in Pagination:
     useEffect(() => {
         getProducts(categoryName, pageNumParam, searchQuery, filters, sortOption)
             .then(products => {
