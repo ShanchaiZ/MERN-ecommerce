@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 let filtersUrl = "";
 
-// Get List of ALL Products:
+// Get List of ALL Products in database + update along with pagination and pageNumber Display:
 const getProducts = async (categoryName = "", pageNumParam = null, searchQuery = "", filters = {}, sortOption = "") => {
     filtersUrl = "";
     console.log(filters);
