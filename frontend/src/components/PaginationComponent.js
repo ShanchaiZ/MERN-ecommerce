@@ -14,16 +14,17 @@ const PaginationComponent = ({ categoryName, searchQuery, paginationLinksNumber,
         <Pagination.Prev disabled={pageNum === 1} />
       </LinkContainer>
 
-      <Pagination.Item>{1}</Pagination.Item>
+      {/* Dynamic Pagination */}
+      {[...Array(paginationLinksNumber).keys()].map((x) => (
+        <LinkContainer key={x + 1} to={`${url}${x + 1}`}>
+          <Pagination.Item active={x + 1 === pageNum}>{x + 1}</Pagination.Item>
+        </LinkContainer>
+      ))}
 
-      <Pagination.Item>{10}</Pagination.Item>
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-      <Pagination.Item>{14}</Pagination.Item>
-
-      <Pagination.Item>{20}</Pagination.Item>
-      <Pagination.Next />
+      {/* Next/ Last Page Link */}
+      <LinkContainer disabled={pageNum === paginationLinksNumber} to={`${url}${pageNum + 1}`}>
+        <Pagination.Next />
+      </LinkContainer>
     </Pagination>
   );
 };
