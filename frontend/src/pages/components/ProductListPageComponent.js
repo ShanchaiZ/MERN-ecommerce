@@ -13,7 +13,7 @@ import RatingFilterComponent from "../../components/filterQueryResultOptions/Rat
 
 
 import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 const ProductListPageComponent = ({ getProducts, categories }) => {
 
@@ -38,6 +38,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     const { searchQuery } = useParams() || "";
 
     const location = useLocation();
+    const navigate = useNavigate();
 
     // Used to set attributes from category in db:
     useEffect(() => {
@@ -92,6 +93,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
 
     // Function: display the reset filter button:
     const handleFilters = () => {
+        navigate(location.pathname.replace(/\/[0-9]+$/, ""));
         setShowResetFiltersButton(true);
         setFilters({
             price: price,
