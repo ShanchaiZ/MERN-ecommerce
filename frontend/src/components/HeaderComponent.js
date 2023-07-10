@@ -19,7 +19,7 @@ import { Link } from "react-router-dom"; //Link as a JS object
 import { useDispatch, useSelector } from "react-redux"; //Used to call Redux actions
 import { logout } from "../redux/actions/userActions"; //Used to call defined logout actions:
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoriesAction";
 
 const HeaderComponent = () => {
@@ -30,6 +30,8 @@ const HeaderComponent = () => {
     const itemsCount = useSelector((state) => state.cart.itemsCount);
 
     const { categories } = useSelector((state) => state.getCategories);
+
+    const [searchCategoryToggle, setSearchCategoryToggle] = useState("All"); //Initially set to "All" in the blue category dropdown 
 
     // Fetching all Categories for the header dropdown:
     useEffect(() => {
@@ -50,9 +52,10 @@ const HeaderComponent = () => {
                     <Nav className="me-auto">
                         <InputGroup>
                             {/* DropDown Button for Product Categories */}
-                            <DropdownButton id="dropdown-basic-button" title="All">
+                            <DropdownButton id="dropdown-basic-button" title={searchCategoryToggle}>
+                                <Dropdown.Item onClick={() => setSearchCategoryToggle("All")}>All</Dropdown.Item>
                                 {categories.map((category, id) => (
-                                    <Dropdown.Item key={id}>{category.name}</Dropdown.Item>
+                                    <Dropdown.Item key={id} onClick={() => setSearchCategoryToggle(category.name)}>{category.name}</Dropdown.Item>
                                 ))}
 
                             </DropdownButton>
