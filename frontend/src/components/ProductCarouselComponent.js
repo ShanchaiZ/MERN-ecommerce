@@ -2,10 +2,12 @@ import { Carousel } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 
-const ProductCarouselComponent = () => {
+const ProductCarouselComponent = ({ bestSellers }) => {
     const cursorP = {
         cursor: "pointer"
     }
+
+    console.log(bestSellers);
 
     return (
         <Carousel>
