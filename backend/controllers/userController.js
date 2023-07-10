@@ -221,7 +221,8 @@ const writeReview = async (req, res, next) => {
         } else {
             product.reviewsNumber = product.reviews.length;
             // used to calculate the average rating:
-            product.rating = prc.map((item) => Number(item.rating)).reduce((sum, item) => sum + item, 0) / product.reviews.length;
+            let ratingCalc = prc.map((item) => Number(item.rating)).reduce((sum, item) => sum + item, 0) / product.reviews.length;
+            product.rating = Math.round(ratingCalc);
         }
         await product.save(); //Second database transaction: Save Review in Database
 
