@@ -31,13 +31,20 @@ const HeaderComponent = () => {
 
     const { categories } = useSelector((state) => state.getCategories);
 
-    const [searchCategoryToggle, setSearchCategoryToggle] = useState("All"); //Initially set to "All" in the blue category dropdown 
+    const [searchCategoryToggle, setSearchCategoryToggle] = useState("All"); //Initially set to "All" in the blue category dropdown
+    const [searchQuery, setSearchQuery] = useState(""); //Initially the search bar query is empty string for user to write their search 
 
     // Fetching all Categories for the header dropdown:
     useEffect(() => {
         dispatch(getCategories());
     }, [dispatch])
 
+    // Function: submit search request on header search bar by pressing button/ "Enter"
+    const submitHandler = (e) => {
+        if (e.keyCode && e.keyCode !== 13) return;
+        e.preventDefault();
+        console.log(searchQuery);
+    }
 
     return (
         // NavBar from Bootstrap Docs
@@ -60,9 +67,9 @@ const HeaderComponent = () => {
 
                             </DropdownButton>
                             {/* Search Bar for Product */}
-                            <Form.Control type="text" placeholder="Search Products Here ..." />
+                            <Form.Control onKeyUp={submitHandler} onChange={(e) => setSearchQuery(e.target.value)} type="text" placeholder="Search Products Here ..." />
                             {/* Search Button */}
-                            <Button variant="warning">
+                            <Button onClick={submitHandler} variant="warning">
                                 <i className="bi bi-search text-dark"></i>
                             </Button>
                         </InputGroup>
