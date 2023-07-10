@@ -13,6 +13,17 @@ const AnalyticsPageComponent = () => {
     previousDay.setDate(previousDay.getDate() - 1);
     const [secondDateToCompare, setSecondDateToCompare] = useState(new Date(previousDay).toISOString().substring(0, 10));
 
+
+    // First Date Handler:
+    const firstDateHandler = (e) => {
+        setFirstDateToCompare(e.target.value);
+    }
+
+    // Second Date Handler:
+    const secondDateHandler = (e) => {
+        setSecondDateToCompare(e.target.value);
+    }
+
     // ReCharts Sample data:
     const data = [
         {
@@ -64,16 +75,16 @@ const AnalyticsPageComponent = () => {
             </Col>
             {/* Analytics Chart */}
             <Col md={10}>
-                <h1>Christmas Sale on Friday Afternoon</h1>
+                <h1>Christmas Sale from {firstDateToCompare} to {secondDateToCompare}</h1>
                 {/* Date Range to Compare Sales Revenue */}
                 <Form.Group controlId="firstDateToCompare">
                     <Form.Label>Select First Date to Compare</Form.Label>
-                    <Form.Control type="date" name="firstDateToCompare" placeholder="First Date to Compare" />
+                    <Form.Control onChange={firstDateHandler} type="date" name="firstDateToCompare" placeholder="First Date to Compare" defaultValue={firstDateToCompare} />
                 </Form.Group>
                 <br />
                 <Form.Group controlId="secondDateToCompare">
                     <Form.Label>Select Second Date to Compare</Form.Label>
-                    <Form.Control type="date" name="secondDateToCompare" placeholder="Second Date to Compare" />
+                    <Form.Control onChange={secondDateHandler} type="date" name="secondDateToCompare" placeholder="Second Date to Compare" defaultValue={secondDateToCompare} />
                 </Form.Group>
                 {/* Chart Functionalities: */}
                 <ResponsiveContainer width="100%" height={500}>
