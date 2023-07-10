@@ -13,7 +13,7 @@ import {
     from "react-bootstrap";
 
 import { LinkContainer } from "react-router-bootstrap"; //Used to link containers to different routes
-import { Link } from "react-router-dom"; //Link as a JS object
+import { Link, useNavigate } from "react-router-dom"; //Link as a JS object
 
 // Redux Logout:
 import { useDispatch, useSelector } from "react-redux"; //Used to call Redux actions
@@ -34,6 +34,9 @@ const HeaderComponent = () => {
     const [searchCategoryToggle, setSearchCategoryToggle] = useState("All"); //Initially set to "All" in the blue category dropdown
     const [searchQuery, setSearchQuery] = useState(""); //Initially the search bar query is empty string for user to write their search 
 
+    const navigate = useNavigate();
+
+
     // Fetching all Categories for the header dropdown:
     useEffect(() => {
         dispatch(getCategories());
@@ -43,7 +46,22 @@ const HeaderComponent = () => {
     const submitHandler = (e) => {
         if (e.keyCode && e.keyCode !== 13) return;
         e.preventDefault();
-        console.log(searchQuery);
+        if (searchQuery.trim()) {
+            // If Searching by No filtering and no user Search Query:
+            if (searchCategoryToggle === "All") {
+                navigate(`/product-list/search/${searchQuery}`);
+            } else {
+                // If Searching DropDown Category + User Search Query with subcateory:
+                navigate(`/product-list/category/${searchCategoryToggle.replaceAll("/", ",")}/search/${searchQuery}`);
+            }
+        }
+        // If Searching DropDown Category:
+        else if (searchCategoryToggle !== "All") {
+            navigate(`/product-list/category/${searchCategoryToggle.replaceAll("/", ",")}`);
+        } else {
+            // Otherwise, Show all products:
+            navigate("/product-list");
+        }
     }
 
     return (
