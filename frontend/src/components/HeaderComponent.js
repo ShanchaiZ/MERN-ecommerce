@@ -29,6 +29,8 @@ const HeaderComponent = () => {
 
     const itemsCount = useSelector((state) => state.cart.itemsCount);
 
+    const { categories } = useSelector((state) => state.getCategories);
+
     // Fetching all Categories for the header dropdown:
     useEffect(() => {
         dispatch(getCategories());
@@ -49,9 +51,10 @@ const HeaderComponent = () => {
                         <InputGroup>
                             {/* DropDown Button for Product Categories */}
                             <DropdownButton id="dropdown-basic-button" title="All">
-                                <Dropdown.Item>Electronics</Dropdown.Item>
-                                <Dropdown.Item>Cars</Dropdown.Item>
-                                <Dropdown.Item>Books</Dropdown.Item>
+                                {categories.map((category, id) => (
+                                    <Dropdown.Item key={id}>{category.name}</Dropdown.Item>
+                                ))}
+
                             </DropdownButton>
                             {/* Search Bar for Product */}
                             <Form.Control type="text" placeholder="Search Products Here ..." />
