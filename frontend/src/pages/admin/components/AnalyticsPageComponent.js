@@ -14,7 +14,7 @@ const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondD
     const [secondDateToCompare, setSecondDateToCompare] = useState(new Date(previousDay).toISOString().substring(0, 10));
 
 
-    // Fetch User Order data between two dates when dates are entered:
+    //UseEffect: Fetch Orders Data between two dates:
     useEffect(() => {
         const abctrl = new AbortController();
         fetchOrdersForFirstDate(abctrl, firstDateToCompare)
