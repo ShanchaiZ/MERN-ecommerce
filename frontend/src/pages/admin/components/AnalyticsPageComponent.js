@@ -3,15 +3,31 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
 // Recharts Import:
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const AnalyticsPageComponent = () => {
+const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondDate }) => {
 
     // React Initial State:
     const [firstDateToCompare, setFirstDateToCompare] = useState(new Date().toISOString().substring(0, 10));
     var previousDay = new Date();
     previousDay.setDate(previousDay.getDate() - 1);
     const [secondDateToCompare, setSecondDateToCompare] = useState(new Date(previousDay).toISOString().substring(0, 10));
+
+
+    // Fetch User Order data between two dates when dates are entered:
+    useEffect(() => {
+        const abctrl = new AbortController();
+        fetchOrdersForFirstDate(abctrl, firstDateToCompare)
+            .then((data) => console.log(data))
+            // .catch((er) => er)
+            .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data))
+
+        fetchOrdersForSecondDate(abctrl, secondDateToCompare)
+            .then((data) => console.log(data))
+            // .catch((er) => er)
+            .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data))
+            // return () =>abctrl.abort();
+    }, [firstDateToCompare, secondDateToCompare])
 
 
     // First Date Handler:
