@@ -26,7 +26,7 @@ const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondD
             .then((data) => console.log(data))
             // .catch((er) => er)
             .catch((er) => console.log(er.response.data.message ? er.response.data.message : er.response.data))
-            // return () =>abctrl.abort();
+            return () =>abctrl.abort();
     }, [firstDateToCompare, secondDateToCompare])
 
 

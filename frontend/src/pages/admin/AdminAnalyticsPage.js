@@ -19,9 +19,10 @@ const fetchOrdersForSecondDate = async (abctrl, secondDateToCompare) => {
 
 const AdminAnalyticsPage = () => {
 
-    return <AnalyticsPageComponent 
-    fetchOrdersForFirstDate={fetchOrdersForFirstDate} 
-    fetchOrdersForSecondDate={fetchOrdersForSecondDate} />;
+    return <AnalyticsPageComponent
+        fetchOrdersForFirstDate={fetchOrdersForFirstDate}
+        fetchOrdersForSecondDate={fetchOrdersForSecondDate}
+    />;
 };
 
 export default AdminAnalyticsPage;
