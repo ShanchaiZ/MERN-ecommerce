@@ -1,7 +1,25 @@
 const ObjectId = require("mongodb").ObjectId;
 
 const orders = Array.from({ length: 20 }).map((_, idx) => {
-    let day = 20;
+    const currentDate = new Date();
+    // Defining Month:
+    let month;
+    let monthNumber = (currentDate.getMonth() + 1).toString();
+    if (monthNumber.length === 1) {
+        month = "0" + monthNumber;
+    } else {
+        month = monthNumber;
+    }
+
+    // Defining Day:
+    let day;
+    let dayNumber= currentDate.getDate().toString();
+    if (dayNumber.length === 1){
+        day = "0" + dayNumber
+    } else {
+        day = dayNumber;
+    }
+
     if (idx < 10) {
         var hour = "0" + idx;
         var subtotal = 100;
@@ -30,7 +48,7 @@ const orders = Array.from({ length: 20 }).map((_, idx) => {
         paymentMethod: "PayPal",
         isPaid: "false",
         isDelivered: "false",
-        createdAt: `2023-03-${day}T${hour}:12:34.490+00:00`
+        createdAt: `2023-${month}-${day}T${hour}:12:34.490+00:00`
     }
 })
 
