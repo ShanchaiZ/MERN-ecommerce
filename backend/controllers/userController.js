@@ -194,7 +194,7 @@ const writeReview = async (req, res, next) => {
                 _id: reviewId,
                 comment: comment,
                 rating: Number(rating),
-                user: { _id: req.user._id, name: req.user.name + " " + req.user.lastName },
+                user: { _id: req.user._id, name: req.user.name + " " + req.user.lastname },
             }
         ], { session: session });
 
