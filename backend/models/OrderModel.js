@@ -55,5 +55,11 @@ const orderSchema = mongoose.Schema({
 
 // Product Model Creation:
 const Order = mongoose.model("Order", orderSchema);
+Order.watch().on("change", (data) => {
+    console.log(data);
+    if (data.operationType === "insert"){
+        io.emit("newOrder", data.fullDocument);
+    }
+})
 
 module.exports = Order;
