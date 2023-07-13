@@ -6,7 +6,7 @@ const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const app = express();
 
-// Create Server with Socket.IO for 
+// Create Server with Socket.IO for Realtime Client Server Communication:
 const httpServer = createServer(app);
 global.io = new Server(httpServer);
 
@@ -22,6 +22,13 @@ connectDB();
 app.use(express.json()); //used to parse json object for express to read from each request
 app.use(cookieParser()); //used to parse cookies for authentication and session logins
 app.use(fileUpload()); //used for uploading files
+
+// Real Time Chatting using Socket IO:
+io.on("connection", (socket) => {
+    socket.on("client sends message", (msg) => {
+        console.log(msg)
+    })
+})
 
 app.use("/api", apiRoutes);
 
