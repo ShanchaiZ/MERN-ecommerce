@@ -1,9 +1,14 @@
 //Installed Dependencies:
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const app = express();
-const port = 5000;
+
+// Create Server with Socket.IO for 
+const httpServer = createServer(app);
+global.io = new Server(httpServer);
 
 const apiRoutes = require("./routes/apiRoutes");
 
@@ -51,6 +56,8 @@ app.use((error, req, res, next) => {
 
 // App is listening on port:
 //======================================================================
-app.listen(port, () => {
-    console.log(`App is listening on ${port}`);
-})
+const PORT = process.env.PORT || 5000;
+
+httpServer.listen(PORT, () =>
+    console.log(`App is listening on ${PORT}`)
+);
