@@ -5,7 +5,7 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from "react";
 
-const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondDate }) => {
+const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondDate, socketIOClient }) => {
 
     // React Initial State:
     const [firstDateToCompare, setFirstDateToCompare] = useState(new Date().toISOString().substring(0, 10));
@@ -15,6 +15,13 @@ const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondD
 
     const [dataForFirstSet, setDataForFirstSet] = useState([]); //Initially data for first chart line is empty array
     const [dataForSecondSet, setDataForSecondSet] = useState([]); //Initially data for first chart line is empty array
+
+
+    // Real Time update to the Charts using Socket Io Client
+    useEffect(() => {
+        const socket = socketIOClient();
+        socket.on("newOrder", (data) => console.log(data));
+    }, [setDataForFirstSet, setDataForSecondSet, firstDateToCompare, secondDateToCompare])
 
 
     //UseEffect: Fetch Orders Data between two dates:
