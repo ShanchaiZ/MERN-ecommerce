@@ -21,13 +21,43 @@ const AnalyticsPageComponent = ({ fetchOrdersForFirstDate, fetchOrdersForSecondD
     useEffect(() => {
         const socket = socketIOClient();
         let today = new Date().toDateString();
+        // Handler that creates an Order date using the properties below:
         const handler = (newOrder) => {
+            var orderDate = new Date(newOrder.createdAt).toLocaleString("en-US", {
+                hour: "numeric", hour12: true, timeZone: "UTC"
+            });
+            // If the Date of order is created TODAY using the first data set:
             if (new Date(newOrder.createdAt).toDateString() === today) {
                 if (today === new Date(firstDateToCompare).toDateString()) {
-                    
+                    setDataForFirstSet((prev) => {
+                        if (prev.length === 0) {
+                            return [{ name: orderDate, [firstDateToCompare]: newOrder.orderTotal.cartSubtotal }];
+                        }
+                        const length = prev.length;
+                        if (prev[length - 1].name === orderDate) {
+                            prev[length - 1][firstDateToCompare] += newOrder.orderTotal.cartSubtotal;
+                            return [...prev];
+                        } else {
+                            var lastElem = { name: orderDate, [firstDateToCompare]: prev[length - 1][firstDateToCompare] + newOrder.orderTotal.cartSubtotal };
+                            return [...prev, lastElem];
+                        }
+                    })
                 }
-                else if (today === new Date(secondDateToCompare).toDateString()) {
 
+                else if (today === new Date(secondDateToCompare).toDateString()) {
+                    setDataForSecondSet((prev) => {
+                        if (prev.length === 0) {
+                            return [{ name: orderDate, [secondDateToCompare]: newOrder.orderTotal.cartSubtotal }];
+                        }
+                        const length = prev.length;
+                        if (prev[length - 1].name === orderDate) {
+                            prev[length - 1][secondDateToCompare] += newOrder.orderTotal.cartSubtotal;
+                            return [...prev];
+                        } else {
+                            var lastElem = { name: orderDate, [secondDateToCompare]: prev[length - 1][secondDateToCompare] + newOrder.orderTotal.cartSubtotal };
+                            return [...prev, lastElem];
+                        }
+                    })
                 }
             }
         }
