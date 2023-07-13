@@ -1,6 +1,26 @@
 import "../../chats.css";
+import { useEffect, useState } from "react";
+import socketIOClient from "socket.io-client";
 
 const UserChatComponent = () => {
+
+    // Initial state of Socket IO for chatting as a regular user:
+    const [socket, setSocket] = useState(false);
+
+    useEffect(() => {
+        const socket = socketIOClient();
+        setSocket(socket);
+        return () => socket.disconnect(); //socket disconnects when page closes
+    }, []);
+
+    // Function: User Chat Submit button Handler:
+    const clientSubmitChatMsg = (e) => {
+        if (e.keyCode && e.keyCode !== 13) {
+            return
+        }
+        socket.emit("client sends message", "message from client");
+    }
+
     return (
         <>
             <input type="checkbox" id="check" />
@@ -31,9 +51,9 @@ const UserChatComponent = () => {
                         ))}
                     </div>
                     {/* Chatbot Text Area */}
-                    <textarea id="clientChatMsg" className="form-control" placeholder="Enter Your Message Here!"></textarea>
+                    <textarea onKeyUp={(e) => clientSubmitChatMsg(e)} id="clientChatMsg" className="form-control" placeholder="Enter Your Message Here!"></textarea>
                     {/* Chat Submit Button */}
-                    <button className="btn btn-primary btn-block">Submit</button>
+                    <button onClick={(e) => clientSubmitChatMsg(e)} className="btn btn-primary btn-block">Submit</button>
                 </div>
             </div>
         </>
