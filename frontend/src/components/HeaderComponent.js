@@ -22,6 +22,8 @@ import { logout } from "../redux/actions/userActions"; //Used to call defined lo
 import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoriesAction";
 
+import socketIOClient from "socket.io-client";
+
 const HeaderComponent = () => {
 
     const dispatch = useDispatch();
@@ -64,6 +66,15 @@ const HeaderComponent = () => {
         }
     }
 
+    // Socket Io chat for admin initialized:
+    useEffect(() => {
+        if (userInfo.isAdmin) {
+            const socket = socketIOClient();
+            socket.on("server sends message from client to admin", ({ message }) => { console.log(message) })
+        }
+    }, [userInfo.isAdmin])
+
+    
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
