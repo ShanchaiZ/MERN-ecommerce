@@ -1,24 +1,47 @@
 import "../../chats.css";
 import { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
+import { useSelector } from "react-redux";
+
 
 const UserChatComponent = () => {
 
+
+
     // Initial state of Socket IO for chatting as a regular user:
     const [socket, setSocket] = useState(false);
+    // let chat = [
+    //     {"client" : "msg"},
+    //     {"client" : "msg"},
+    //     {"admin" : "msg"},
+    // ]
+    const [chat, setChat] = useState([]);
 
+    const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
+
+    // Socket Io chat for regular user initialized:
     useEffect(() => {
-        const socket = socketIOClient();
-        setSocket(socket);
-        return () => socket.disconnect(); //socket disconnects when page closes
-    }, []);
+        if (!userInfo.isAdmin) {
+            const socket = socketIOClient();
+            setSocket(socket);
+            return () => socket.disconnect(); //socket disconnects when page closes
+        }
+    }, [userInfo.isAdmin]);
 
     // Function: User Chat Submit button Handler:
     const clientSubmitChatMsg = (e) => {
         if (e.keyCode && e.keyCode !== 13) {
             return
         }
-        socket.emit("client sends message", "message from client");
+        const msg = document.getElementById("clientChatMsg");
+        let v = msg.value.trim();
+        if (v === "" || v === "null" || v === false || !v) {
+            return;
+        }
+        socket.emit("client sends message", v);
+        setChat((chat) => {
+            return [...chat, { client: v }]
+        });
     }
 
     return (
