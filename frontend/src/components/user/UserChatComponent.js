@@ -42,9 +42,16 @@ const UserChatComponent = () => {
         setChat((chat) => {
             return [...chat, { client: v }]
         });
+        // Clears textbox input after Submitting message:
+        msg.focus();
+        setTimeout(() => {
+            msg.value = "";
+            const chatMessages = document.querySelector(".cht-msg");
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 200);
     }
 
-    return (
+    return !userInfo.isAdmin ? (
         <>
             <input type="checkbox" id="check" />
             <label className="chat-btn" htmlFor="check">
@@ -62,14 +69,18 @@ const UserChatComponent = () => {
                     {/* Chat History */}
                     <div className="cht-msg">
                         {/* JSX function that logs chat history between User and Admin */}
-                        {Array.from({ length: 20 }).map((_, id) => (
+                        {chat.map((item, id) => (
                             <div key={id}>
-                                <p>
-                                    <b>You wrote:</b> This is a test Message!!
-                                </p>
-                                <p className="bg-primary p-3 ms-4 text-light rounded-pill">
-                                    <b>Admin Response:</b> Support Not Available! Please try again!
-                                </p>
+                                {item.client && (
+                                    <p>
+                                        <b>You wrote:</b> {item.client}
+                                    </p>
+                                )}
+                                {item.admin && (
+                                    <p className="bg-primary p-3 ms-4 text-light rounded-pill">
+                                        <b>Admin Response:</b> {item.admin}
+                                    </p>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -80,7 +91,7 @@ const UserChatComponent = () => {
                 </div>
             </div>
         </>
-    )
+    ) : null;
 };
 
 export default UserChatComponent;
