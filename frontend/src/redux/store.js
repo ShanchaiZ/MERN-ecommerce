@@ -6,11 +6,13 @@ import thunk from "redux-thunk";
 import { cartReducer } from "./reducers/cartReducers"; //Used in incrementing items in a cart
 import { userRegisterLoginReducer } from "./reducers/userReducers"; //Used in displaying User Name when successful login
 import { getCategoriesReducer } from "./reducers/categoryReducers";// Used to fetch Categories for the state
+import { adminChatReducer } from "./reducers/adminChatReducers";//Used for setting initial chatRoom state 
 
 const reducer = combineReducers({
     cart: cartReducer,
     userRegisterLogin: userRegisterLoginReducer,
-    getCategories: getCategoriesReducer
+    getCategories: getCategoriesReducer,
+    adminChat: adminChatReducer
 })
 
 // CartItems in Local Storage: 
