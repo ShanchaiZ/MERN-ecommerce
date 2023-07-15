@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Toast, Form, Button } from "react-bootstrap";
 
-const AdminChatRoomComponent = () => {
+const AdminChatRoomComponent = ({ chatRoom }) => {
 
     // Toast Dismissible Function:
     const [toast1, closeToast1] = useState(true);
@@ -9,6 +9,7 @@ const AdminChatRoomComponent = () => {
 
     const [toast2, closeToast2] = useState(true);
     const close2 = () => closeToast2(false);
+    console.log(chatRoom);
 
     return (
         <>

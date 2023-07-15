@@ -5,13 +5,24 @@ const CHAT_INITIAL_STATE = {
     chatRooms: {}
 }
 
-
+// State of ChatRooms Communication between User and admin:
 export const adminChatReducer = (state = CHAT_INITIAL_STATE, action) => {
     switch (action.type) {
         case actionTypes.SET_CHATROOMS:
-            return {
-                ...state,
-                chatRooms: { "to do:": "chatrooms for admin", [action.payload.user]: action.payload.message },
+            let currentState = { ...state };
+            // if existing chatroom with user then add more messages in the chatroom:
+            if (state.chatRooms[action.payload.user]) {
+                currentState.chatRooms[action.payload.user].push({ client: action.payload.message });
+                return {
+                    ...state,
+                    chatRooms: { ...currentState.chatRooms }
+                }
+                // Otherwise: open new chatroom with user:
+            } else {
+                return {
+                    ...state,
+                    chatRooms: { ...currentState.chatRooms, [action.payload.user]: [{ client: action.payload.message }] }
+                }
             }
         default:
             return state;
