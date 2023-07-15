@@ -23,6 +23,8 @@ import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoriesAction";
 
 import socketIOClient from "socket.io-client";
+import { setChatRooms } from "../redux/actions/chatActions";
+
 
 const HeaderComponent = () => {
 
@@ -70,11 +72,12 @@ const HeaderComponent = () => {
     useEffect(() => {
         if (userInfo.isAdmin) {
             const socket = socketIOClient();
-            socket.on("server sends message from client to admin", ({ message }) => { console.log(message) })
+            socket.on("server sends message from client to admin", ({ message }) => {
+                dispatch(setChatRooms("exampleUser", message));
+            })
         }
     }, [userInfo.isAdmin])
 
-    
     return (
         // NavBar from Bootstrap Docs
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

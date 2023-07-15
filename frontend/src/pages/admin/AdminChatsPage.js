@@ -3,7 +3,11 @@ import { Row, Col } from "react-bootstrap";
 import AdminLinksComponent from "../../components/admin/AdminLinksComponent";
 import AdminChatRoomComponent from "../../components/admin/AdminChatRoomComponent";
 
+import { useSelector } from "react-redux";
+
 const AdminChatsPage = () => {
+    const { chatRooms } = useSelector((state) => state.adminChat);
+    console.log(chatRooms);
     return (
         <Row className="m-5">
             <Col md={2}>
