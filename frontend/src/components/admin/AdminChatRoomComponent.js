@@ -5,9 +5,25 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socketUser }) => {
 
     // Initial React Hooks:
     [window["toast" + roomIndex], window["closeToast" + roomIndex]] = useState(true); //Chat Box close
+    const [rerender, setRerender] = useState(false); //refreshing page when admin submits button
 
     const close = () => {
         window["closeToast" + roomIndex](false);
+    }
+
+    // Function: admin submit button chat box
+    const adminSubmitChatMsg = (e, elem) => {
+        e.preventDefault();
+        if (e.keyCode && e.keyCode !== 13) {
+            return;
+        }
+        const msg = document.getElementById(elem);
+        let v = msg.value.trim();
+        if (v === "" || v === null || v === false || !v) {
+            return;
+        }
+        chatRoom[1].push({ admin: msg.value });
+        setRerender(!rerender);
     }
 
     return (
@@ -18,7 +34,7 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socketUser }) => {
                     <strong className="me-auto">Chat with User</strong>
                 </Toast.Header>
                 <Toast.Body>
-                    <div style={{ maxHeight: "300px", overflow: "auto" }}>
+                    <div className={`cht-msg${socketUser}`} style={{ maxHeight: "300px", overflow: "auto" }}>
 
                         {chatRoom[1].map((msg, idx) => (
                             <Fragment key={idx}>
@@ -40,10 +56,10 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socketUser }) => {
                     </div>
                     {/* Chat Form */}
                     <Form>
-                        <Form.Group className="mb-3" controlId="ControlTextarea">
+                        <Form.Group className="mb-3" controlId={`adminChatMsg${roomIndex}`}>
                             <Form.Label>Write A Message</Form.Label>
-                            <Form.Control as="textarea" rows={3}></Form.Control>
-                            <Button className="btn btn-success" type="submit">Submit</Button>
+                            <Form.Control onKeyUp={(e) => adminSubmitChatMsg(e, `adminChatMsg${roomIndex}`)} as="textarea" rows={3}></Form.Control>
+                            <Button onClick={(e) => adminSubmitChatMsg(e, `adminChatMsg${roomIndex}`)} className="btn btn-success" type="submit">Submit</Button>
                         </Form.Group>
                     </Form>
                 </Toast.Body>
