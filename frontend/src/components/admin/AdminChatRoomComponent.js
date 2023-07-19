@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Toast, Form, Button } from "react-bootstrap";
 
 const AdminChatRoomComponent = ({ chatRoom, roomIndex, socketUser }) => {
@@ -24,7 +24,19 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socketUser }) => {
         }
         chatRoom[1].push({ admin: msg.value });
         setRerender(!rerender);
+        msg.focus();
+        setTimeout(() => {
+            msg.value = "";
+            const chatMessages = document.querySelector(`.cht-msg${socketUser}`);
+            if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 200)
     }
+
+    //Scroll down chatbox in focus after refresh:
+    useEffect(() => {
+        const chatMessages = document.querySelector(`.cht-msg${socketUser}`);
+        if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, [])
 
     return (
         <>
