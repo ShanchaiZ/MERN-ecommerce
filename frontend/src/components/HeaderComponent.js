@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoriesAction";
 
 import socketIOClient from "socket.io-client";
-import { setChatRooms } from "../redux/actions/chatActions";
+import { setChatRooms, setSocket } from "../redux/actions/chatActions";
 
 
 const HeaderComponent = () => {
@@ -73,6 +73,7 @@ const HeaderComponent = () => {
         if (userInfo.isAdmin) {
             const socket = socketIOClient();
             socket.on("server sends message from client to admin", ({ message }) => {
+                dispatch(setSocket(socket));
                 dispatch(setChatRooms("exampleUser", message));
             })
         }
