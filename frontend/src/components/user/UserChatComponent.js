@@ -10,11 +10,6 @@ const UserChatComponent = () => {
 
     // Initial state of Socket IO for chatting as a regular user:
     const [socket, setSocket] = useState(false);
-    // let chat = [
-    //     {"client" : "msg"},
-    //     {"client" : "msg"},
-    //     {"admin" : "msg"},
-    // ]
     const [chat, setChat] = useState([]);
 
     const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
@@ -24,6 +19,13 @@ const UserChatComponent = () => {
         if (!userInfo.isAdmin) {
             const socket = socketIOClient();
             setSocket(socket);
+            socket.on("server sends message from admin to client", (msg) => {
+                setChat((chat) => {
+                    return [...chat, { admin: msg }];
+                })
+                const chatMessages = document.querySelector(".cht-msg");
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
             return () => socket.disconnect(); //socket disconnects when page closes
         }
     }, [userInfo.isAdmin]);

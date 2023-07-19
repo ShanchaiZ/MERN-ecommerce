@@ -10,3 +10,13 @@ export const setChatRooms = (user, message) => async (dispatch) => {
         }
     })
 }
+
+//Function: set Socket
+export const setSocket = (socket) => async (dispatch) => {
+    dispatch({
+        type: actionTypes.SET_SOCKET,
+        payload: {
+            socket: socket,
+        }
+    })
+}
