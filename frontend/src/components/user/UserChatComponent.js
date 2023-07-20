@@ -1,6 +1,6 @@
 import "../../chats.css";
 import { useEffect, useState } from "react";
-import socketIOClient from "socket.io-client";
+import socketIOClient, { Socket } from "socket.io-client";
 import { useSelector } from "react-redux";
 
 
@@ -18,7 +18,11 @@ const UserChatComponent = () => {
         if (!userInfo.isAdmin) {
             var audio = new Audio("/audio/chat-msg.mp3");
             const socket = socketIOClient();
-            setSocket(socket);
+            socket.on("no admin", (msg) => { //User Receives message if there is no admin
+                setChat((chat) => {
+                    return [...chat, { admin: "No Admin Present. Please try again later!" }]
+                })
+            })
             socket.on("server sends message from admin to client", (msg) => {
                 setChat((chat) => {
                     return [...chat, { admin: msg }];
@@ -28,6 +32,7 @@ const UserChatComponent = () => {
                 const chatMessages = document.querySelector(".cht-msg");
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             });
+            setSocket(socket);
             return () => socket.disconnect(); //socket disconnects when page closes
         }
     }, [userInfo.isAdmin]);

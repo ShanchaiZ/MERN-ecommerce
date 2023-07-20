@@ -23,16 +23,37 @@ app.use(express.json()); //used to parse json object for express to read from ea
 app.use(cookieParser()); //used to parse cookies for authentication and session logins
 app.use(fileUpload()); //used for uploading files
 
+const admins = [];
+
 // Real Time Chatting using Socket IO:
 io.on("connection", (socket) => {
+    socket.on("admin connected to server", (adminName) => {
+        admins.push({ id: socket.id, admin: adminName });
+        console.log(admins);
+    })
+    // Client Sends message to Socket server
     socket.on("client sends message", (msg) => {
-        socket.broadcast.emit("server sends message from client to admin", {
-            message: msg,
-        })
+        if (admins.length === 0) {
+            socket.emit("no admin", "");
+        } else {
+            // Socket Server sends message from client to admin:
+            socket.broadcast.emit("server sends message from client to admin", {
+                message: msg,
+            })
+        }
     })
 
+    // Admin sends message to client using Socket Server:
     socket.on("admin sends message", ({ message }) => {
         socket.broadcast.emit("server sends message from admin to client", message);
+    })
+
+    socket.on("disconnect", (reason) => {
+        // admin disconnected
+        const removeIndex = admins.findIndex((item) => item.id === socket.id);
+        if (removeIndex !== -1) {
+            admins.splice(removeIndex, 1);
+        }
     })
 })
 
