@@ -3,7 +3,8 @@ import * as actionTypes from "../constants/chatConstants";
 // Default Initial State of the ChatRooms:
 const CHAT_INITIAL_STATE = {
     socket: false,
-    chatRooms: {}
+    chatRooms: {},
+    messageReceived: false,
 }
 
 // State of ChatRooms Communication between User and admin:
