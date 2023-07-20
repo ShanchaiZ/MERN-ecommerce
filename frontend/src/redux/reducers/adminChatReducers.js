@@ -25,11 +25,16 @@ export const adminChatReducer = (state = CHAT_INITIAL_STATE, action) => {
                     chatRooms: { ...currentState.chatRooms, [action.payload.user]: [{ client: action.payload.message }] }
                 }
             }
-            case actionTypes.SET_SOCKET:
-                return{
-                    ...state,
-                    socket: action.payload.socket,
-                }
+        case actionTypes.SET_SOCKET:
+            return {
+                ...state,
+                socket: action.payload.socket,
+            }
+        case actionTypes.MESSAGE_RECEIVED:
+            return {
+                ...state,
+                messageReceived: action.payload.value,
+            }
         default:
             return state;
     }
