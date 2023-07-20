@@ -23,13 +23,13 @@ app.use(express.json()); //used to parse json object for express to read from ea
 app.use(cookieParser()); //used to parse cookies for authentication and session logins
 app.use(fileUpload()); //used for uploading files
 
-const admins = [];
+const admins = []; //Initial storage of logged in administrators
+let activeChats = []; //Initial storage of active chats
 
 // Real Time Chatting using Socket IO:
 io.on("connection", (socket) => {
     socket.on("admin connected to server", (adminName) => {
         admins.push({ id: socket.id, admin: adminName });
-        console.log(admins);
     })
     // Client Sends message to Socket server
     socket.on("client sends message", (msg) => {
