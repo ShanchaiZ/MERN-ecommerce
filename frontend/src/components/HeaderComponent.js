@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoriesAction";
 
 import socketIOClient from "socket.io-client";
-import { setChatRooms, setSocket } from "../redux/actions/chatActions";
+import { setChatRooms, setSocket, setMessageReceived } from "../redux/actions/chatActions";
 
 
 const HeaderComponent = () => {
@@ -34,6 +34,7 @@ const HeaderComponent = () => {
     const itemsCount = useSelector((state) => state.cart.itemsCount);
 
     const { categories } = useSelector((state) => state.getCategories);
+    const { messageReceived } = useSelector((state) => state.adminChat);
 
     const [searchCategoryToggle, setSearchCategoryToggle] = useState("All"); //Initially set to "All" in the blue category dropdown
     const [searchQuery, setSearchQuery] = useState(""); //Initially the search bar query is empty string for user to write their search 
@@ -75,6 +76,7 @@ const HeaderComponent = () => {
             socket.on("server sends message from client to admin", ({ message }) => {
                 dispatch(setSocket(socket));
                 dispatch(setChatRooms("exampleUser", message));
+                dispatch(setMessageReceived(true));
             })
         }
     }, [userInfo.isAdmin])
@@ -115,7 +117,7 @@ const HeaderComponent = () => {
                             <LinkContainer to="/admin/orders">
                                 <Nav.Link>
                                     Admin
-                                    <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+                                    {messageReceived && <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>}
                                 </Nav.Link>
                             </LinkContainer>
 
