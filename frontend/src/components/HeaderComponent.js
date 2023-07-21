@@ -75,9 +75,9 @@ const HeaderComponent = () => {
             var audio = new Audio("/audio/chat-msg.mp3");
             const socket = socketIOClient();
             socket.emit("admin connected to server", "Admin" + Math.floor(Math.random() * 1000000000000));
-            socket.on("server sends message from client to admin", ({ message }) => {
+            socket.on("server sends message from client to admin", ({ user, message }) => {
                 dispatch(setSocket(socket));
-                dispatch(setChatRooms("exampleUser", message));
+                dispatch(setChatRooms(user, message));
                 dispatch(setMessageReceived(true));
                 audio.play();
             })

@@ -26,6 +26,12 @@ app.use(fileUpload()); //used for uploading files
 const admins = []; //Initial storage of logged in administrators
 let activeChats = []; //Initial storage of active chats
 
+
+// function: get random admins for chat
+function get_random(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 // Real Time Chatting using Socket IO:
 io.on("connection", (socket) => {
     socket.on("admin connected to server", (adminName) => {
@@ -36,16 +42,26 @@ io.on("connection", (socket) => {
         if (admins.length === 0) {
             socket.emit("no admin", "");
         } else {
+            let client = activeChats.find((client) => client.clientId === socket.id);
+            let targetAdminId;
+            if (client) {
+                targetAdminId = client.adminId;
+            } else {
+                let admin = get_random(admins);
+                activeChats.push({ clientId: socket.id, adminId: admin.id });
+                targetAdminId = admin.id;
+            }
             // Socket Server sends message from client to admin:
-            socket.broadcast.emit("server sends message from client to admin", {
+            socket.broadcast.to(targetAdminId).emit("server sends message from client to admin", {
+                user: socket.id,
                 message: msg,
             })
         }
     })
 
     // Admin sends message to client using Socket Server:
-    socket.on("admin sends message", ({ message }) => {
-        socket.broadcast.emit("server sends message from admin to client", message);
+    socket.on("admin sends message", ({ user, message }) => {
+        socket.broadcast.to(user).emit("server sends message from admin to client", message);
     })
 
     socket.on("disconnect", (reason) => {
