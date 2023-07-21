@@ -65,11 +65,19 @@ io.on("connection", (socket) => {
     })
 
     socket.on("disconnect", (reason) => {
-        // admin disconnected
+        // Admin Disconnected:
         const removeIndex = admins.findIndex((item) => item.id === socket.id);
         if (removeIndex !== -1) {
             admins.splice(removeIndex, 1);
         }
+        activeChats = activeChats.filter((item) => item.adminId !== socket.id);
+
+        // Client Disconnected:
+        const removeIndexClient = activeChats.findIndex((item) => item.clientId === socket.id);
+        if (removeIndexClient !== -1) {
+            activeChats.splice(removeIndexClient, 1);
+        }
+        socket.broadcast.emit("disconnected", { reason: reason, socketId: socket.id })
     })
 })
 
