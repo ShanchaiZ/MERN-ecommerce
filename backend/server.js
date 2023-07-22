@@ -1,10 +1,15 @@
 //Installed Dependencies:
+require("dotenv").config();
+var helmet = require("helmet");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const app = express();
+
+// Helmet Security 
+app.use(helmet());
 
 // Create Server with Socket.IO for Realtime Client Server Communication:
 const httpServer = createServer(app);

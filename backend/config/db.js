@@ -1,7 +1,6 @@
 // Installed Dependencies
-require("dotenv").config();
-const mongoose = require("mongoose");
 
+const mongoose = require("mongoose");
 
 //Process of Connecting mongodb server to mongoose: 
 const connectDB = async () => {
