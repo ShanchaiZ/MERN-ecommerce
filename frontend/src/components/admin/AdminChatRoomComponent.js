@@ -11,8 +11,9 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socket, socketUser }) => 
     [window["toast" + roomIndex], window["closeToast" + roomIndex]] = useState(true); //Chat Box close
     const [rerender, setRerender] = useState(false); //refreshing page when admin submits button
 
-    const close = () => {
+    const close = (socketId) => {
         window["closeToast" + roomIndex](false);
+        socket.emit("admin closes chat", socketId);
     }
 
     // Function: admin submit button chat box
@@ -50,7 +51,11 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socket, socketUser }) => 
     return (
         <>
             {/* User Admin Chat Toast*/}
-            <Toast show={window["toast" + roomIndex]} onClose={() => close()} className="ms-4 mb-5">
+            <Toast
+                show={"toast" + roomIndex}
+                onClose={() => close(chatRoom[0])}
+                className="ms-4 mb-5"
+            >
                 <Toast.Header>
                     <strong className="me-auto">Chat with User</strong>
                 </Toast.Header>

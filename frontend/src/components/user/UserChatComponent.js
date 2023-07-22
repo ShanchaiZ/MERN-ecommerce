@@ -10,12 +10,15 @@ const UserChatComponent = () => {
     const [socket, setSocket] = useState(false);
     const [chat, setChat] = useState([]);
     const [messageReceived, setMessageReceived] = useState(false);
+    const [chatConnectionInfo, setChatConnectionInfo] = useState(false);
+    const [reconnect, setReconnect] = useState(false);
 
     const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
     // Socket Io chat for regular user initialized:
     useEffect(() => {
         if (!userInfo.isAdmin) {
+            setReconnect(false);
             var audio = new Audio("/audio/chat-msg.mp3");
             const socket = socketIOClient();
             socket.on("no admin", (msg) => { //User Receives message if there is no admin
@@ -33,15 +36,21 @@ const UserChatComponent = () => {
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             });
             setSocket(socket);
+            socket.on("admin closed chat", () => {
+                setChat([]);
+                setChatConnectionInfo("Admin Closed Chat. Please Type and Submit to Reconnect");
+                setReconnect(true);
+            });
             return () => socket.disconnect(); //socket disconnects when page closes
         }
-    }, [userInfo.isAdmin]);
+    }, [userInfo.isAdmin, reconnect]);
 
     // Function: User Chat Submit button Handler:
     const clientSubmitChatMsg = (e) => {
         if (e.keyCode && e.keyCode !== 13) {
             return
         }
+        setChatConnectionInfo("");
         setMessageReceived(false);
         const msg = document.getElementById("clientChatMsg");
         let v = msg.value.trim();
@@ -78,6 +87,7 @@ const UserChatComponent = () => {
                 <div className="chat-form">
                     {/* Chat History */}
                     <div className="cht-msg">
+                        <p>{chatConnectionInfo}</p>
                         {/* JSX function that logs chat history between User and Admin */}
                         {chat.map((item, id) => (
                             <div key={id}>
