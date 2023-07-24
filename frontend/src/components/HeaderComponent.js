@@ -57,12 +57,12 @@ const HeaderComponent = () => {
                 navigate(`/product-list/search/${searchQuery}`);
             } else {
                 // If Searching DropDown Category + User Search Query with subcateory:
-                navigate(`/product-list/category/${searchCategoryToggle.replaceAll("/", ",")}/search/${searchQuery}`);
+                navigate(`/product-list/category/${searchCategoryToggle.replace(/\//g, ",")}/search/${searchQuery}`);
             }
         }
         // If Searching DropDown Category:
         else if (searchCategoryToggle !== "All") {
-            navigate(`/product-list/category/${searchCategoryToggle.replaceAll("/", ",")}`);
+            navigate(`/product-list/category/${searchCategoryToggle.replace(/\//g, ",")}`);
         } else {
             // Otherwise, Show all products:
             navigate("/product-list");

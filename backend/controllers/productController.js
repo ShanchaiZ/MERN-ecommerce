@@ -29,7 +29,7 @@ const getProducts = async (req, res, next) => {
         const categoryName = req.params.categoryName || "";
         if (categoryName) {
             queryCondition = true;
-            let a = categoryName.replaceAll(",", "/");
+            let a = categoryName.replace(/, /g, "/");
             var regEx = new RegExp("^" + a); // this expression created forward slashes with regExp in the slash => /^a/ and carrot sign => begining of string
             categoryQueryCondition = { category: regEx }
         }
