@@ -13,7 +13,7 @@ const categories = [
         name: "Laptops",
         description:
             "Laptop Oasis - Unleash your potential with our curated lineup of laptops. From compact companions for on-the-go productivity to high-performance beasts for intensive tasks, find the perfect blend of power and portability that fits your digital lifestyle.",
-        image: "/images/category/computers-category.jpg",
+        image: "/images/category/laptops-category.jpg",
         attrs: [
             { key: "RAM", value: ["1 TB", "2 TB", "4 TB"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
