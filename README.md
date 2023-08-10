@@ -1,8 +1,18 @@
+![banner](./shoptimizeScreenshots/Shoptimize.jpg)
 # Shoptimize: MERN-ecommerce App
 
-
+<!-- Badges -->
 ![Static Badge](https://img.shields.io/badge/Language%20-%20JavaScript-blue)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+![Static Badge](https://img.shields.io/badge/Framework%20-%20MERN-grass)
+![Static Badge](https://img.shields.io/badge/Frontend%20-%20React.js-lime)
+![Static Badge](https://img.shields.io/badge/State%20Management-%20Redux-%20purple)
+![Static Badge](https://img.shields.io/badge/Payment%20API%20-%20Paypal%20-%20orange)
+![Static Badge](https://img.shields.io/badge/Image%20Storage%20API-%20Cloudinary%20-%20blue)
+![Static Badge](https://img.shields.io/badge/Deployment-%20Render.com%20-%20skyblue)
+![Static Badge](https://img.shields.io/badge/Version%20Control-%20Github-%20black)
+
+
 
 ## Description
 
@@ -24,12 +34,18 @@ Admin Users can:
 - Real-Time Live Chat with multiple users and Edit User Authorization
 - Create/Edit/Delete and Sort products with Image Upload
 
+> Github Repository Link: [https://github.com/ShanchaiZ/MERN-ecommerce](https://github.com/ShanchaiZ/MERN-ecommerce)
+
+> Deployed App (Render.com) Link: [Click here to begin Shoptimizing!](https://shoptimize-eqxp.onrender.com)
+
 ## Table of Contents
 
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Technologies Used](#technologies-used)
 4. [Examples](#examples)
+    - [Standard Users](#store-features-for-standard-users)
+    - [Admin Users](#store-features-for-admin-users)
 5. [License](#license)
 6. [Contributions/Questions](#contributionsquestions)
 
@@ -91,9 +107,57 @@ Frontend Tools and tech:
 
 ## Examples
 
+### Store Features for Standard Users:
+
+Home Page:
+![homePage](./shoptimizeScreenshots/homePage.jpg)
+
+Registration Page:
+![registrationPage](./shoptimizeScreenshots/registerPage.jpg)
+
+Category Listing Page:
+![categoryPage](./shoptimizeScreenshots/categoryPage.jpg)
+
+Product Details Page:
+![productPage](./shoptimizeScreenshots/productPage.jpg)
+
+Product Listing Page with Image Zoom and Chat:
+![productZoomChatPage](./shoptimizeScreenshots/productPageZoomChat.jpg)
+
+Add to Shopping Cart:
+![addtoCart](./shoptimizeScreenshots/addToCartPage.jpg)
+
+User Order Details Page:
+![userOrderDetailsPage](./shoptimizeScreenshots/orderDetailsPage.jpg)
+
+Customer Review for Product:
+![reviewPage](./shoptimizeScreenshots/productReview.jpg)
+
+
+### Store Features for Admin Users:
+
+Admin Order Page:
+![adminOrderPage](./shoptimizeScreenshots/adminOrdersPage.jpg)
+
+Admin Product Listing:
+![adminProductListing](./shoptimizeScreenshots/adminProductListPage.jpg)
+
+Admin Chat with Customer Page:
+![adminChatPage](./shoptimizeScreenshots/adminChatsPage.jpg)
+
+Admin Analytics of Customer Shopping Trends (DEMO):
+![adminAnalytics](./shoptimizeScreenshots/adminAnalyticsPage.jpg)
+
+![adminAnalytics2](./shoptimizeScreenshots/adminAnalyticsPage2.jpg)
+
 ## Testing
 
 ## License
 This project is under the MIT License.
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 ## Contribution/Questions
+
+Shanchai Zahid (Github: [ShanchaiZ](https://github.com/ShanchaiZ), Email: shanchai.zahid@gmail.com).
+<br>
