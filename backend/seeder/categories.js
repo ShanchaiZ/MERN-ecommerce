@@ -23,7 +23,7 @@ const categories = [
         name: "Sports and Outdoors",
         description:
             "Atheletics Collection - Embrace an active lifestyle with our curated selection of sports equipment and outdoor essentials.",
-        image: "/images/category/computers-category.jpg",
+        image: "/images/category/sportsOutdoors-category.jpg",
         attrs: [
             { key: "Gear", value: ["indoors", "camping", "recreational"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
@@ -43,7 +43,7 @@ const categories = [
         name: "Appliances",
         description:
             "Appliance Emporium - From kitchen marvels that transform cooking to smart home solutions that simplify everyday tasks, discover a collection that enhances comfort and convenience in every corner of your home.",
-        image: "/images/category/videos-category.jpg",
+        image: "/images/category/homeAppliances-category.jpg",
         attrs: [
             { key: "Warranty", value: ["1 year", "2 year", "3 year"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
@@ -102,7 +102,7 @@ const categories = [
         name: "Health & Personal Care",
         description:
             "Wellness Corner: Nurture your wellbeing and Explore a curated selection of items designed to support your self-care journey, from skincare essentials that radiate confidence to wellness products that prioritize your vitality.",
-        image: "/images/category/computers-category.jpg",
+        image: "/images/category/healthPersonalCare-category.jpg",
         attrs: [
             { key: "Relaxation", value: ["Aromatherapy", "Message Tools"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
@@ -112,7 +112,7 @@ const categories = [
         name: "Office Products",
         description:
             "Office Oasis - From our collection of ergonomic furniture and essential stationery to high-tech gadgets, discover everything you need to optimize efficiency and inspire creativity in your office environment.",
-        image: "/images/category/computers-category.jpg",
+        image: "/images/category/officeProducts-category.jpg",
         attrs: [
             { key: "Eco-friendly", value: ["Made with recycled products", "Energy Efficient", "Fair Trade"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
