@@ -119,7 +119,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                         {/* Product name, Price, Description, and Rating Here */}
                                         <ListGroup variant="flush">
                                             <ListGroup.Item><h1>{product.name}</h1></ListGroup.Item>
-                                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                                            {/* <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item> */}
                                             <ListGroup.Item>Rating:
                                                 <Rating readonly size={20} initialValue={product.rating} /> ({product.reviewsNumber})
                                             </ListGroup.Item>

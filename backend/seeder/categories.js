@@ -25,7 +25,7 @@ const categories = [
             "Atheletics Collection - Embrace an active lifestyle with our curated selection of sports equipment and outdoor essentials.",
         image: "/images/category/sportsOutdoors-category.jpg",
         attrs: [
-            { key: "Gear", value: ["indoors", "camping", "recreational"] },
+            { key: "gear", value: ["indoors", "camping", "recreational"] },
             { key: "color", value: ["blue", "red", "green", "black"] },
         ],
     },

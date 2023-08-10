@@ -18,7 +18,7 @@ const products = [
         ]
     },
     {
-        name: "Picture of Dorian Gray",
+        name: "The Picture of Dorian Gray",
         description: "In The Picture of Dorian Gray by Oscar Wilde, a young man named Dorian Gray becomes obsessed with pleasure and beauty in 19th-century London. He makes a wish that a portrait of him ages instead of him, allowing him to live without facing the consequences of his actions. As he indulges in a reckless life, his portrait reflects his inner decay. This thought-provoking story explores the price of vanity and the impact of our choices.",
         count: 5,
         price: 15,
@@ -69,6 +69,120 @@ const products = [
         attrs: [
             { key: "color", value: "black" },
             { key: "Screen size", value: "24inch" },
+        ]
+    },
+    {
+        name: "Alienware Gaming Computer",
+        description: "Immerse yourself in the world of gaming like never before with the Alienware Gaming Computer. Engineered for unrivaled performance, this powerhouse is your ticket to seamless, action-packed gameplay. Its sleek, aggressive design not only catches the eye but also maintains optimal cooling for those marathon gaming sessions. Elevate your gaming experience to new heights with the Alienware Computer and embrace a new standard of precision and exhilaration.",
+        count: 1,
+        price: 900,
+        category: "Computers",
+        images: [
+            { path: "/images/products/alienwareGaming1.jpg" },
+            { path: "/images/products/alienwareGaming2.jpg" },
+            { path: "/images/products/alienwareGaming3.jpg" },
+        ],
+        rating: 5,
+        reviewsNumber: 30,
+        reviews: [],
+        attrs: [
+            { key: "color", value: "black" },
+            { key: "Screen size", value: "27inch" },
+        ]
+    },
+    {
+        name: "Samsung Gaming Computer",
+        description: "Unleash the power of gaming with the Samsung Gaming Computer. Engineered for peak performance, this cutting-edge machine is your gateway to immersive gameplay like never before. Equipped with advanced graphics and processing capabilities, it effortlessly handles the most demanding titles with stunning visuals and seamless frame rates. The sleek design not only exudes gaming sophistication but also incorporates efficient cooling mechanisms to keep your system running at its best. Dominate the competition and experience gaming at its finest with this powerhouse of technology.",
+        count: 1,
+        price: 900,
+        category: "Computers",
+        images: [
+            { path: "/images/products/samsungGaming1.jpg" },
+            { path: "/images/products/samsungGaming2.jpg" },
+            { path: "/images/products/samsungGaming3.jpg" },
+        ],
+        rating: 5,
+        reviewsNumber: 30,
+        reviews: [],
+        attrs: [
+            { key: "color", value: "black" },
+            { key: "Screen size", value: "24inch" },
+        ]
+    },
+    {
+        name: "Basketball",
+        description: "Experience the thrill of the game with our premium basketball. Designed for precision and performance, this basketball's superior grip and responsive bounce ensure you dominate the court. Whether you're practicing your shots or competing in intense matches, this basketball is your essential tool for achieving new heights in the world of basketball.",
+        count: 5,
+        price: 50,
+        category: "Sports and Outdoors",
+        images: [
+            { path: "/images/products/basketball1.jpg" },
+            { path: "/images/products/basketball2.jpg" },
+            { path: "/images/products/basketball3.jpg" },
+        ],
+        rating: 4,
+        reviewsNumber: 10,
+        reviews: [],
+        attrs: [
+            { key: "color", value: "orange" },
+            { key: "gear", value: "recreational" },
+        ]
+    },
+    {
+        name: "Tennis Ball",
+        description: "Elevate your tennis game with our high-performance tennis ball. Engineered for consistent bounce and durability, this ball is designed to withstand rigorous play and deliver optimal performance on any court surface. Whether you're honing your skills or engaging in intense matches, our tennis ball is your essential partner for a dynamic and exhilarating tennis experience.",
+        count: 10,
+        price: 5,
+        category: "Sports and Outdoors",
+        images: [
+            { path: "/images/products/tennisball1.jpg" },
+            { path: "/images/products/tennisball2.jpg" },
+            { path: "/images/products/tennisball3.jpg" },
+        ],
+        rating: 3,
+        reviewsNumber: 20,
+        reviews: [],
+        attrs: [
+            { key: "color", value: "green" },
+            { key: "gear", value: "recreational" },
+        ]
+    },
+    {
+        name: "Ancient Tea Pot",
+        description: "Indulge in the art of tea brewing with our exquisite teapot. Crafted with precision and elegance, this teapot effortlessly combines form and function. Its ergonomic handle, seamless pour, and heat-retaining design create the perfect tea-drinking experience, making it a must-have addition to your daily ritual.",
+        count: 5,
+        price: 45,
+        category: "Appliances",
+        images: [
+            { path: "/images/products/teapot1.jpg" },
+            { path: "/images/products/teapot2.jpg" },
+            { path: "/images/products/teapot3.jpg" },
+        ],
+        rating: 5,
+        reviewsNumber: 17,
+        reviews: [],
+        attrs: [
+            { key: "color", value: "black" },
+            { key: "warranty", value: "2 year" },
+        ]
+    },
+    {
+        name: "Ancient Tea Cups",
+        description: "Immerse yourself in centuries of tradition with our Ancient Tea Cup Set. Inspired by the elegance of bygone eras, each cup is meticulously crafted to reflect the rich heritage of tea culture. Sip your favorite brew from these exquisite cups, designed to enhance the flavors and aromas, and embark on a sensory journey that transcends time. Elevate your tea-drinking experience with this captivating and beautifully curated set.",
+        count: 10,
+        price: 25,
+        category: "Appliances",
+        images: [
+            { path: "/images/products/teacups1.jpg" },
+            { path: "/images/products/teacups2.jpg" },
+            { path: "/images/products/teacups3.jpg" },
+        ],
+        rating: 5,
+        reviewsNumber: 17,
+        reviews: [],
+        attrs: [
+            { key: "color", value: "white" },
+            { key: "warranty", value: "2 year" },
         ]
     },
 ]
