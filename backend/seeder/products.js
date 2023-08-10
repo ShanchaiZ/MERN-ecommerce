@@ -1,20 +1,20 @@
 const products = [
     {
         name: "Toshiba Laptop",
-        description: "Laptop product 1 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
-        count: 5,
-        price: 5,
-        category: "Computers",
+        description: "Introducing the Toshiba Laptop – a sleek and powerful computing companion designed to elevate your productivity and entertainment experience. With cutting-edge performance, vibrant visuals, and seamless connectivity, this laptop offers a perfect blend of style and functionality. Whether you're tackling work tasks, enjoying multimedia, or staying connected on the go, the Toshiba Laptop delivers exceptional performance and reliability in a compact and elegant package.",
+        count: 3,
+        price: 300,
+        category: "Laptops",
         images: [
-            { path: "/images/category/computers-category.jpg" },
-            { path: "/images/category/computers-category.jpg" },
-            { path: "/images/category/computers-category.jpg" },
+            { path: "/images/products/toshibaLaptop1.jpg" },
+            { path: "/images/products/toshibaLaptop2.jpg" },
+            { path: "/images/products/toshibaLaptop3.jpg" },
         ],
         rating: 5,
         reviewsNumber: 10,
         reviews: [],
         attrs:[
-            {key:"color", value: "red"}
+            {key:"color", value: "black"}
         ]
     },
     {
