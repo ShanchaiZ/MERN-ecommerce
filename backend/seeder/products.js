@@ -13,63 +13,62 @@ const products = [
         rating: 5,
         reviewsNumber: 10,
         reviews: [],
-        attrs:[
-            {key:"color", value: "black"}
+        attrs: [
+            { key: "color", value: "black" }
         ]
     },
     {
         name: "Picture of Dorian Gray",
-        description: "Book 2 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
+        description: "In The Picture of Dorian Gray by Oscar Wilde, a young man named Dorian Gray becomes obsessed with pleasure and beauty in 19th-century London. He makes a wish that a portrait of him ages instead of him, allowing him to live without facing the consequences of his actions. As he indulges in a reckless life, his portrait reflects his inner decay. This thought-provoking story explores the price of vanity and the impact of our choices.",
         count: 5,
-        price: 2,
+        price: 15,
         category: "Books",
         images: [
-            { path: "/images/category/books-category.jpg" },
-            { path: "/images/category/books-category.jpg" },
-            { path: "/images/category/books-category.jpg" },
+            { path: "/images/products/dorianGray1.jpg" },
+            { path: "/images/products/dorianGray2.jpg" },
+            { path: "/images/products/dorianGray3.jpg" },
         ],
         rating: 5,
         reviewsNumber: 20,
         reviews: [],
-        attrs:[
-            {key:"genre", value: "Suspense"}
+        attrs: [
+            { key: "genre", value: "Suspense" }
         ]
     },
     {
         name: "Tom Tom GPS",
-        description: " TOM TOM GPS 3 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
+        description: "Introducing the TomTom GPS Navigator, your ultimate travel companion for seamless journeys. Navigating unfamiliar roads with confidence is now effortless, thanks to its user-friendly interface and advanced mapping technology. Whether you're embarking on a road trip or simply commuting through the city, the TomTom GPS ensures you reach your destination efficiently. Real-time traffic updates and alternate route suggestions keep you ahead of congestion, while its crystal-clear display and voice-guided directions provide stress-free navigation. With a sleek design that fits perfectly in any vehicle, the TomTom GPS is the essential tool for unlocking a world of hassle-free exploration and smooth travels.",
         count: 2,
-        price: 200,
-        category: "electronics",
+        price: 300,
+        category: "Electronics",
         images: [
-            { path: "/images/category/electronics-category.jpg" },
-            { path: "/images/category/electronics-category.jpg" },
-            { path: "/images/category/electronics-category.jpg" },
+            { path: "/images/products/tomtomgps1.jpg" },
+            { path: "/images/products/tomtomgps2.jpg" },
         ],
-        rating: 4,
-        reviewsNumber: 10,
+        rating: 5,
+        reviewsNumber: 20,
         reviews: [],
-        attrs:[
-            {key:"color", value: "blue"}
+        attrs: [
+            { key: "color", value: "silver" }
         ]
     },
     {
         name: "Lenovo Monitor",
-        description: " Monitor 3 - Lorem ipsum dolor sit amet. Cum nulla dolorem ut dolorem esse sed fugiat deleniti ad facilis inventore sit unde itaque 33 sequi numquam. Non mollitia laudantium et mollitia placeat hic velit inventore eos iste neque aut expedita quis!",
+        description: "Elevate your visual experience with the Lenovo Monitor. Immerse yourself in stunning clarity and vibrant colors on its sleek display. Whether you're working, gaming, or streaming your favorite content, the Lenovo Monitor delivers crisp images and smooth performance. With adjustable settings and ergonomic design, it ensures optimal comfort for prolonged use. Bring your digital world to life and redefine your workspace with the exceptional quality and modern design of the Lenovo Monitor.",
         count: 2,
-        price: 200,
-        category: "electronics",
+        price: 250,
+        category: "Monitors",
         images: [
-            { path: "/images/category/monitors-category.jpg" },
-            { path: "/images/category/monitors-category.jpg" },
-            { path: "/images/category/monitors-category.jpg" },
+            { path: "/images/products/lenovoMonitor1.jpg" },
+            { path: "/images/products/lenovoMonitor2.jpg" },
+            { path: "/images/products/lenovoMonitor3.jpg" },
         ],
         rating: 5,
         reviewsNumber: 16,
         reviews: [],
-        attrs:[
-            {key:"color", value: "black"},
-            {key:"RAM", value: "1 TB"},
+        attrs: [
+            { key: "color", value: "black" },
+            { key: "Screen size", value: "24inch" },
         ]
     },
 ]
