@@ -26,7 +26,6 @@ const products = [
         images: [
             { path: "/images/products/dorianGray1.jpg" },
             { path: "/images/products/dorianGray2.jpg" },
-            { path: "/images/products/dorianGray3.jpg" },
         ],
         rating: 5,
         reviewsNumber: 20,
@@ -37,7 +36,7 @@ const products = [
     },
     {
         name: "Tom Tom GPS",
-        description: "Introducing the TomTom GPS Navigator, your ultimate travel companion for seamless journeys. Navigating unfamiliar roads with confidence is now effortless, thanks to its user-friendly interface and advanced mapping technology. Whether you're embarking on a road trip or simply commuting through the city, the TomTom GPS ensures you reach your destination efficiently. Real-time traffic updates and alternate route suggestions keep you ahead of congestion, while its crystal-clear display and voice-guided directions provide stress-free navigation. With a sleek design that fits perfectly in any vehicle, the TomTom GPS is the essential tool for unlocking a world of hassle-free exploration and smooth travels.",
+        description: "Introducing the TomTom GPS Navigator, your ultimate travel companion for seamless journeys. Navigating unfamiliar roads with confidence is now effortless, thanks to its user-friendly interface and advanced mapping technology. Real-time traffic updates and alternate route suggestions keep you ahead of congestion, while its crystal-clear display and voice-guided directions provide stress-free navigation.",
         count: 2,
         price: 300,
         category: "Electronics",
@@ -73,7 +72,7 @@ const products = [
     },
     {
         name: "Alienware Gaming Computer",
-        description: "Immerse yourself in the world of gaming like never before with the Alienware Gaming Computer. Engineered for unrivaled performance, this powerhouse is your ticket to seamless, action-packed gameplay. Its sleek, aggressive design not only catches the eye but also maintains optimal cooling for those marathon gaming sessions. Elevate your gaming experience to new heights with the Alienware Computer and embrace a new standard of precision and exhilaration.",
+        description: "Immerse yourself in the world of gaming like never before with the Alienware Gaming Computer. Engineered for unrivaled performance, this powerhouse is your ticket to seamless, action-packed gameplay. Its sleek, aggressive design not only catches the eye but also maintains optimal cooling for those marathon gaming sessions. Elevate your gaming experience to new heights!",
         count: 1,
         price: 900,
         category: "Computers",
@@ -92,7 +91,7 @@ const products = [
     },
     {
         name: "Samsung Gaming Computer",
-        description: "Unleash the power of gaming with the Samsung Gaming Computer. Engineered for peak performance, this cutting-edge machine is your gateway to immersive gameplay like never before. Equipped with advanced graphics and processing capabilities, it effortlessly handles the most demanding titles with stunning visuals and seamless frame rates. The sleek design not only exudes gaming sophistication but also incorporates efficient cooling mechanisms to keep your system running at its best. Dominate the competition and experience gaming at its finest with this powerhouse of technology.",
+        description: "Unleash the power of gaming with the Samsung Gaming Computer. Engineered for peak performance, this cutting-edge machine is your gateway to immersive gameplay like never before. Equipped with advanced graphics and processing capabilities, it effortlessly handles the most demanding titles with stunning visuals and seamless frame rates. The sleek design not only exudes gaming sophistication but also incorporates efficient cooling mechanisms to keep your system running at its best. Dominate the competition!",
         count: 1,
         price: 900,
         category: "Computers",
