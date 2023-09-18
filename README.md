@@ -90,7 +90,6 @@ Backend Tools and tech:
 * socket.io - Real time communication between client and server
 * Helmet - Web Security
 * Cloudinary - Image Cloud Storage API
-* Jest - Testing React Components
 ```
 
 ```
@@ -103,6 +102,7 @@ Frontend Tools and tech:
 * Js-image-zoom - image zoom for products
 * Recharts - Allows use of charts in React
 * Paypal/paypal-js - Payment/Checkout solution
+* Jest - Testing React Components
 ```
 
 ## Examples
